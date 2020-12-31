@@ -86,6 +86,105 @@ public class WritePanel extends JPanel {
         south.add(start);
         south.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-100,50));
         this.add(south,BorderLayout.SOUTH);
+        //中部面板的创建和设置布局
+        centerJPanel = new JPanel();
+        centerJPanel.setLayout(new BorderLayout());
+        //centerJPanel.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-200,600));
+        //中部的北面面板的设置
+        cnorthPanel = new JPanel();
+        cnorthPanel.setLayout(new FlowLayout(0));
+        //cnorthPanel.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-60,100));
+        final JTextArea summaryJtextArea = new JTextArea();
+        summaryJtextArea.setFont(new Font("宋体",Font.PLAIN,20));
+        summaryJtextArea.setLineWrap(true);//设置为自动换行
+        summaryJtextArea.setBackground(Color.WHITE);
+        summaryJtextArea.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-80,80));
+        cnorthPanel.add(summaryJtextArea);
+        summaryJtextArea.append("在此输入概述");
+        summaryJtextArea.setForeground(Color.LIGHT_GRAY);
+        summaryJtextArea.setFont(new Font("宋体",Font.PLAIN,25));
+        summaryJtextArea.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if(summaryJtextArea.getText().trim().equals("在此输入概述")){
+                    summaryJtextArea.setText("");
+                    summaryJtextArea.setFont(new Font("宋体",Font.PLAIN,20));
+                    summaryJtextArea.setForeground(Color.black);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if(summaryJtextArea.getText().equals("")){
+                    summaryJtextArea.setForeground(Color.LIGHT_GRAY);
+                    summaryJtextArea.setFont(new Font("宋体",Font.PLAIN,25));
+                    summaryJtextArea.append("在此输入概述");
+                }
+            }
+        });
+        centerJPanel.add(cnorthPanel,BorderLayout.NORTH);
+
+        //中部的中面面板的设置
+        ccenterJPanel = new JPanel();
+        ccenterJPanel.setLayout(new FlowLayout(0));//设置中部的中面面板为流式布局
+        fileJpanel = new MemberPanel4("图标:","文件");
+        pictureJPanel = new MemberPanel4("图标:","图片");
+        expressionJPanel = new MemberPanel4("图标:","表情");
+        mp4JPanel = new MemberPanel4("图标:","视频");
+
+        fileJpanel.setPreferredSize(new Dimension(100,40));
+        pictureJPanel.setPreferredSize(new Dimension(100,40));
+        expressionJPanel.setPreferredSize(new Dimension(100,40));
+        mp4JPanel.setPreferredSize(new Dimension(100,40));
+
+        ccenterJPanel.add(fileJpanel);
+        ccenterJPanel.add(pictureJPanel);
+        ccenterJPanel.add(expressionJPanel);
+        ccenterJPanel.add(mp4JPanel);
+
+        ccenterJPanel.setPreferredSize(new Dimension(GetWH.getWidth()*3/5,45));
+        centerJPanel.add(ccenterJPanel,BorderLayout.CENTER);
+        centerJPanel.add(cnorthPanel,BorderLayout.NORTH);
+
+        //中部的南面正文面板的设置
+        csouthPanel = new JPanel();
+        csouthPanel.setLayout(new FlowLayout(0));
+        //csouthPanel.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-60,400));
+        final JTextPane textJTextPane = new JTextPane();
+        textJTextPane.setFont(new Font("宋体",Font.PLAIN,18));
+        textJTextPane.replaceSelection("\n\n"+"             "+ "     请在此输入正文");
+        textJTextPane.setFont(new Font("宋体",Font.PLAIN,45));
+        textJTextPane.setForeground(Color.LIGHT_GRAY);
+        textJTextPane.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if(textJTextPane.getText().trim().equals("请在此输入正文")){
+                    textJTextPane.setText(null);
+                    textJTextPane.setFont(new Font("宋体",Font.PLAIN,25));
+                    textJTextPane.setForeground(Color.black);
+                }else{
+                    textJTextPane.setForeground(Color.black);
+                }
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if(textJTextPane.getText().equals("")){
+                    textJTextPane.setForeground(Color.LIGHT_GRAY);
+                    textJTextPane.setFont(new Font("宋体",Font.PLAIN,45));
+                    textJTextPane.replaceSelection("\n\n"+"             "+ "     请在此输入正文");
+                }
+
+            }
+        });
+        //textJTextPane
+        JScrollPane textJScrollPane = new JScrollPane(textJTextPane);
+        textJScrollPane.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-80,380));
+        csouthPanel.add(textJScrollPane);
+        centerJPanel.add(csouthPanel,BorderLayout.SOUTH);
+
+        add(centerJPanel,BorderLayout.CENTER);
 
     }
 }
