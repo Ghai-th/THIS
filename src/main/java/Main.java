@@ -1,2 +1,21 @@
-public class Main {
+import conf.IndexConf;
+import frame.Login;
+
+import javax.swing.*;
+
+public class Main implements IndexConf {
+
+    public static void main(String[] args) {
+
+        JFrame jFrame = new JFrame("test");
+        jFrame.setSize(WIDE, HIGH);
+//        Login index = new Login(jFrame);
+//        jFrame.add(index);
+        Index index = new Index();
+        jFrame.add(index);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        jFrame.setResizable(false);
+        jFrame.setVisible(true);
+    }
 }
