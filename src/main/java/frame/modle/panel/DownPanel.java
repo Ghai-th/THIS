@@ -17,7 +17,6 @@ public class DownPanel extends TranslucenceJPanel {
     Jlabel j3 = new Jlabel();
     Jlabel j4 = new Jlabel();
     Jlabel j5 = new Jlabel();
-    private JTextPane jTextPane ;
     public DownPanel(){
         this.setOpaque(false);
         this.setTransparent(0.01f);
