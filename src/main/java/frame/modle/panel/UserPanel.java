@@ -1,6 +1,6 @@
-package test;
-import test.db.GetWH;
-import exjpanel.TranslucenceJPanel;
+package frame.modle.panel;
+import frame.modle.panel.GetWH;
+import frame.modle.panel.TranslucenceJPanel;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;

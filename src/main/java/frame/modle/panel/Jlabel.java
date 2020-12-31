@@ -1,4 +1,4 @@
-package test;
+package frame.modle.panel;
 
 import javax.swing.*;
 import java.awt.*;

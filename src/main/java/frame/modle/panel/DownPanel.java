@@ -1,7 +1,7 @@
-package test;
+package frame.modle.panel;
 
-import test.db.GetWH;
-import exjpanel.TranslucenceJPanel;
+import frame.modle.panel.GetWH;
+import frame.modle.panel.TranslucenceJPanel;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -43,7 +43,7 @@ public class DownPanel extends TranslucenceJPanel {
         a5 = j5.init("邮箱：861789352@qq.com");
         up.add(a5);
         this.add(up,BorderLayout.NORTH);
-        JTextArea text =new JTextArea();
+        final JTextArea text =new JTextArea();
         text.append("  感谢使用THIS论坛，孔夫子曾言，知之者不如好之者，好之者不如乐之者。看来对于鲸鱼一行一道者，最高的境界应该是乐之，" +
                 "乐从何来，欧翁有醉翁之言，或许可以借鉴，乐人之乐是为其乐。埋头断案，愁思不得，忽然解惑，" +
                 "如醍醐灌顶，茅塞顿开，是技术人员的常乐。偶有所得，为人解惑，则变为以人为乐为己乐。同有所惑，论之而解，有人乐更有己乐" +

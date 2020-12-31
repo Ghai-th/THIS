@@ -1,7 +1,7 @@
-package test;
+package frame.modle.panel;
 
-import test.db.GetWH;
-
+import frame.modle.panel.GetWH;
+import frame.modle.panel.AllPanel;
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,8 +14,7 @@ public class testframe extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocation(0,0);
 
-        TestPanel panel = new TestPanel();
-        UserPanel userPanel = new UserPanel();
+
         AllPanel allPanel = new AllPanel();
         add(allPanel);
         setVisible(true);

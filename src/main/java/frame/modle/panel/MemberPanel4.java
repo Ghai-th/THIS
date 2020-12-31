@@ -1,6 +1,4 @@
-package test.JPanel;
-
-import test.MemberPanel1;
+package frame.modle.panel;
 
 import javax.swing.*;
 import java.awt.*;

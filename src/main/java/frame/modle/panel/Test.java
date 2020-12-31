@@ -1,7 +1,7 @@
-package test;
+package frame.modle.panel;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import test.db.GetWH;
+import frame.modle.panel.GetWH;
 
 import javax.swing.*;
 import java.awt.*;

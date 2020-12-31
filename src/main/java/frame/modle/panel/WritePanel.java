@@ -1,7 +1,7 @@
-package test;
+package frame.modle.panel;
 
-import test.db.GetWH;
-import test.JPanel.MemberPanel4;
+import frame.modle.panel.GetWH;
+import frame.modle.panel.MemberPanel4;
 
 import javax.swing.*;
 import java.awt.*;

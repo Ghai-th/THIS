@@ -1,6 +1,6 @@
-package test;
+package frame.modle.panel;
 
-import exjpanel.TranslucenceJPanel;
+import frame.modle.panel.TranslucenceJPanel;
 
 import javax.swing.*;
 import java.awt.*;

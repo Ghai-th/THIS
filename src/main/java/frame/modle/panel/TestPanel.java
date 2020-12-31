@@ -1,7 +1,7 @@
-package test;
+package frame.modle.panel;
 
-import exjpanel.TranslucenceJPanel;
-import test.db.GetWH;
+import frame.modle.panel.TranslucenceJPanel;
+import frame.modle.panel.GetWH;
 
 import javax.swing.*;
 import java.awt.*;
