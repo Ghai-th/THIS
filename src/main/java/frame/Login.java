@@ -220,7 +220,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         textJTextPane.setParagraphAttributes(a,false);
         textJTextPane.setOpaque(false);
         randomJPanel.add(textJTextPane);
-        bkgJLabel = new JLabel(new ImageIcon("src/main/java/img/bkg.png"));
+        bkgJLabel = new JLabel(new ImageIcon("src/main/resources/bkg.png"));
         bkgJLabel.setBounds(0,0,1920,950);
         //初始化信息窗体
         initInfo();
@@ -236,7 +236,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         infoJPanel.setBounds(950,150,450,500);
         centerJPanel.add(infoJPanel);
         //初始化登陆界面组件
-        idJLabel = new JLabel(new ImageIcon("src/main/java/img/用户.png"));
+        idJLabel = new JLabel(new ImageIcon("src/main/resources/用户.png"));
         idJTextField = new JTextField();
         idJTextField.setCaretColor(Color.orange);
         idJTextField.setBounds(145,65,200,50);
@@ -245,7 +245,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         idJTextField.setText("账号");
         idJTextField.setFont(new Font("楷体",Font.ITALIC,23));
         idJTextField.setForeground(Color.gray);
-        passwordJLabel = new JLabel(new ImageIcon("src/main/java/img/密码.png"));
+        passwordJLabel = new JLabel(new ImageIcon("src/main/resources/密码.png"));
         passwordJPasswordField = new JPasswordField();
         registerJLabel = new JLabel("注册帐号");
         forgetJLabel = new JLabel("忘记密码");
@@ -262,7 +262,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 idJTextField.setFont(new Font("黑体",Font.PLAIN,23));
                 idJTextField.setForeground(Color.black);
                 infoJPanel.remove(idJLabel);
-                idJLabel = new JLabel(new ImageIcon("src/main/java/img/用户1.png"));
+                idJLabel = new JLabel(new ImageIcon("src/main/resources/用户1.png"));
                 idJLabel.setBounds(90,62,50,65);
                 infoJPanel.add(idJLabel);
                 infoJPanel.repaint();
@@ -276,7 +276,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                     idJTextField.setText("账号");
                 }
                 infoJPanel.remove(idJLabel);
-                idJLabel = new JLabel(new ImageIcon("src/main/java/img/用户.png"));
+                idJLabel = new JLabel(new ImageIcon("src/main/resources/用户.png"));
                 idJLabel.setBounds(90,62,50,65);
                 infoJPanel.add(idJLabel);
                 infoJPanel.repaint();
@@ -303,7 +303,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 passwordJPasswordField.setFont(new Font("黑体",Font.PLAIN,23));
                 passwordJPasswordField.setForeground(Color.black);
                 infoJPanel.remove(passwordJLabel);
-                passwordJLabel = new JLabel(new ImageIcon("src/main/java/img/密码1.png"));
+                passwordJLabel = new JLabel(new ImageIcon("src/main/resources/密码1.png"));
                 passwordJLabel.setBounds(90,156,50,65);
                 infoJPanel.add(passwordJLabel);
                 infoJPanel.repaint();
@@ -318,7 +318,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                     passwordJPasswordField.setEchoChar((char)0);
                 }
                 infoJPanel.remove(passwordJLabel);
-                passwordJLabel = new JLabel(new ImageIcon("src/main/java/img/密码.png"));
+                passwordJLabel = new JLabel(new ImageIcon("src/main/resources/密码.png"));
                 passwordJLabel.setBounds(90,156,50,65);
                 infoJPanel.add(passwordJLabel);
                 infoJPanel.repaint();
