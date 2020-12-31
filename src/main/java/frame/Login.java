@@ -320,5 +320,5 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-    }
+            }
 }

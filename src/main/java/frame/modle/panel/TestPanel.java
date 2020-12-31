@@ -10,13 +10,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class TestPanel extends JPanel {
-    JButton testJButton;//测试按钮
     JButton chatJbutton;//放入私信按钮
     JButton attentionJbutton;//放入私聊按钮
 
     JLabel southJlabel;//设置背面空JLabel
     JLabel northJlabel;//设置南面空JLbale
-    JLabel test = new JLabel("666");
 
     JPanel centerJPanel;//放入总面板中部的JPanel
     TranslucenceJPanel userJPanel;//显示用户信息
@@ -24,6 +22,13 @@ public class TestPanel extends JPanel {
     TranslucenceJPanel userJPanel2;//放入第二行的JPanel
     TranslucenceJPanel userJPanel3;//放入第三行的JPanel
     TranslucenceJPanel buttonJPanel;//放入两个按钮的JPanel
+    JPanel textPanel;//放在用户信息透明图的下方的热门文章推荐
+    MemberPanel5 textRowone;//放在热门文章推荐的第一行
+    MemberPanel5 textRowtwo;//放在热门文章推荐的第二行
+    MemberPanel5 textRowthree;//放在热门文章推荐的第三行
+    MemberPanel5 textRowfour;//放在热门文章推荐的第四行
+    MemberPanel5 textRowfive;//放在热门文章推荐的第五行
+    MemberPanel5 textRowsix;//放在热门文章推荐的第六行
 
     MemberPanel1 imagMemberPanel1,signMemberPanel1;
     MemberPanel2 originalMemberPanel2, rankMemberPanel2, visitMemberPanel2, gradeMemberPanel2;
@@ -53,6 +58,16 @@ public class TestPanel extends JPanel {
         userJPanel2 = new TranslucenceJPanel();
         userJPanel3 = new TranslucenceJPanel();
         buttonJPanel = new TranslucenceJPanel();
+        textPanel = new JPanel();
+        textRowone = new MemberPanel5("热门");
+        textRowtwo = new MemberPanel5("走进java重写");
+        textRowthree = new MemberPanel5("走进java重写");
+        textRowfour = new MemberPanel5("走进java重写");
+        textRowfive = new MemberPanel5("走进java重写");
+        textRowsix = new MemberPanel5("走进java重写");
+
+
+        textRowone.setForeground(Color.lightGray);
 
         chatJbutton = new JButton("私信");
         attentionJbutton = new JButton("关注");
@@ -188,14 +203,17 @@ public class TestPanel extends JPanel {
         userJPanel2.setLayout(new GridLayout(1,4));//用户面板的第二行
         userJPanel3.setLayout(new GridLayout(1,2));//用户面板的第三行
         buttonJPanel.setLayout(null);
+        textPanel.setLayout(new GridLayout(6,1));
     }
     //成员变量的添加以及设置布局位置大小
     public void init3(){
         add(centerJPanel,BorderLayout.CENTER);//将中部面板添加到中部
         add(northJlabel,BorderLayout.NORTH);
         centerJPanel.setPreferredSize(new Dimension(width, height*4/5));
-        userJPanel.setBounds(30,130,width/5,height*2/5+40);//设置用用户面板在中部的位置以及大小
+        userJPanel.setBounds(30,0,width/5,height*2/5+40);//设置用用户面板在中部的位置以及大小
+        textPanel.setBounds(30,height*2/5+70,width/5,height*2/5-80);
         centerJPanel.add(userJPanel);
+        centerJPanel.add(textPanel);
         northJlabel.setPreferredSize(new Dimension(width, height/5));
 
         //用户面板的第一行添加
@@ -222,6 +240,14 @@ public class TestPanel extends JPanel {
 
         //将按钮面板加入到用户面板的第四行
         userJPanel.add(buttonJPanel);
+
+        //热门文章的添加
+        textPanel.add(textRowone);
+        textPanel.add(textRowtwo);
+        textPanel.add(textRowthree);
+        textPanel.add(textRowfour);
+        textPanel.add(textRowfive);
+        textPanel.add(textRowsix);
     }
     //各种颜色以及透明度的设置
     public void init4(){
@@ -247,5 +273,8 @@ public class TestPanel extends JPanel {
     }
     public JPanel getUserJPanel(){
         return userJPanel;
+    }
+    public JPanel getTextPanel(){
+        return textPanel;
     }
 }
