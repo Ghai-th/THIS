@@ -1,5 +1,6 @@
 import conf.IndexConf;
-import frame.Login;
+import frame.Index;
+//import frame.Login;
 
 import javax.swing.*;
 
