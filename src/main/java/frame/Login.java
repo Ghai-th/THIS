@@ -297,19 +297,28 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         passwordJPasswordField.setEchoChar((char)0);
         passwordJPasswordField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
-                if(new String(passwordJPasswordField.getPassword()).equals("密码"))
+                if (new String(passwordJPasswordField.getPassword()).equals("密码"))
                     passwordJPasswordField.setText("");
                 passwordJPasswordField.setEchoChar('*');
-                passwordJPasswordField.setFont(new Font("黑体",Font.PLAIN,23));
+                passwordJPasswordField.setFont(new Font("黑体", Font.PLAIN, 23));
                 passwordJPasswordField.setForeground(Color.black);
                 infoJPanel.remove(passwordJLabel);
                 passwordJLabel = new JLabel(new ImageIcon("src/main/resources/密码1.png"));
-                passwordJLabel.setBounds(90,156,50,65);
+                passwordJLabel.setBounds(90, 156, 50, 65);
                 infoJPanel.add(passwordJLabel);
                 infoJPanel.repaint();
-                passwordJPasswordField.setBorder(BorderFactory.createMatteBorder(0,0,1,0,new Color(18,183,245)));
+                passwordJPasswordField.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(18, 183, 245)));
             }
 
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 }
