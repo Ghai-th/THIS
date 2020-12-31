@@ -3,6 +3,8 @@ import frame.modle.panel.GetWH;
 import frame.modle.panel.TranslucenceJPanel;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -47,6 +49,12 @@ public class UserPanel extends TranslucenceJPanel {
         b_return.setBackground(Color.white);
         b_return.setBounds(1500, 30, 100, 30);
         b_return.setFont(new Font("宋体",Font.PLAIN,15));
+        b_return.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeAll();
+            }
+        });
         b_guanli = new JButton("管理个人信息");
         b_guanli.setForeground(Color.black);
         b_guanli.setBackground(Color.white);

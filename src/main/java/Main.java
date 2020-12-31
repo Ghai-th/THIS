@@ -8,7 +8,7 @@ public class Main implements IndexConf {
     public static void main(String[] args) {
 
         JFrame jFrame = new JFrame("test");
-        jFrame.setSize(WIDE, HIGH);
+        jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Login index = new Login(jFrame);
         jFrame.add(index);
 //        Index index = new Index();
