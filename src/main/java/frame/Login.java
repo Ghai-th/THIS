@@ -13,7 +13,6 @@ import java.awt.event.*;
 
 public class Login extends JPanel implements ActionListener, IndexConf {
     //登录
-    JFrame jFrame;
     JLabel idJLabel,passwordJLabel,registerJLabel,forgetJLabel,bkgJLabel,titleJLabel;
     JTextField idJTextField;
     JLabel loginJLabel;
@@ -36,9 +35,10 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     //定时器监听的鼠标监听时间
     MouseListener loginJLabelListener = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
-            jFrame.remove(Login.this);
-            jFrame.add(new Index());
-            jFrame.setVisible(true);
+            index.removeAll();
+            index.setVisible(false);
+            index.add(new Index());
+            index.setVisible(true);
         }
         public void mousePressed(MouseEvent e) {
             loginJLabel.setBackground(new Color(30,150,230));
@@ -172,9 +172,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     boolean isChange2 = false;
     Timer timer = new Timer(200,this);
     //构造函数，调用扁平化风格，初始化总界面的布局方式及标题等
-    public Login(JFrame jFrame,Index index) {
+    public Login(Index index) {
         this.index = index;
-        this.jFrame = jFrame;
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
