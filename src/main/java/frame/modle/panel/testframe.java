@@ -1,5 +1,6 @@
 package frame.modle.panel;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import frame.modle.panel.GetWH;
 import frame.modle.panel.AllPanel;
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class testframe extends JFrame {
     }
 
     public static void main(String[] args) {
-        //FlatLightLaf.install();
+        FlatLightLaf.install();
         new testframe();
     }
 }
