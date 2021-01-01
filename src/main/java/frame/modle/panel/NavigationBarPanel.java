@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class NavigationBarPanel extends JPanel implements IndexConf {
 
-    public final  String[] personAction = new String[]{"收藏", "消息", "发表文章"};
+    public final String[] personAction = new String[]{"收藏", "消息", "发表文章"};
     public JTextField searchTextField;
     public JLabel searchLabel;
     public JLabel headImage;
@@ -89,6 +89,15 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // 数据库模糊查询
+                ArrayList<Article> articles = new ArrayList<Article>();
+                for (int i = 0; i < 10; i++) {
+                    articles.add(Article.initArticle());
+                }
+                ////////////////////////////
+
+                index.mainPanel.removeAll();
+                index.mainPanel.add(new ArticleListPanel(articles, index), BorderLayout.CENTER); /// 新建出 文章列表面板
+                updateUI();
                 String searchText = null;
                 super.mouseClicked(e);
                 try {
@@ -96,7 +105,7 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                 } catch (Exception ex) {
                     System.out.println("不可为空");
                 }
-                System.out.println( "点击搜索" + searchText);
+                System.out.println("点击搜索" + searchText);
             }
         });
         searchPanel.add(searchLabel);

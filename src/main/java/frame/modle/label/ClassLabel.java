@@ -82,7 +82,7 @@ public class ClassLabel extends JLabel {
                     arrayList.add(Article.initArticle());
                 }
 
-                index.mainPanel.add(new ArticleListPanel(arrayList), BorderLayout.CENTER); /// 新建出 文章列表面板
+                index.mainPanel.add(new ArticleListPanel(arrayList,index), BorderLayout.CENTER); /// 新建出 文章列表面板
 //                index.mainPanel.setVisible(true);
                 updateUI();
             }

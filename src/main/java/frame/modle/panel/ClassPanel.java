@@ -75,7 +75,7 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
 
         //// 此处改为数据库拉取对应的信息
         for (int i = 0; i < 8; i++) {
-            articleTittleLabel = new ArticleTittleLabel(Article.initArticle());
+            articleTittleLabel = new ArticleTittleLabel(Article.initArticle(),index);
             articleLists.add(articleTittleLabel);
             articleTittleLabel.addMouseListener(articleTittleLabel);
             center.add(articleTittleLabel);
@@ -107,7 +107,7 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
             arrayList.add(Article.initArticle());
         }
 
-        index.mainPanel.add(new ArticleListPanel(arrayList), BorderLayout.CENTER); /// 新建出 文章列表面板
+        index.mainPanel.add(new ArticleListPanel(arrayList,index), BorderLayout.CENTER); /// 新建出 文章列表面板
         index.mainPanel.setVisible(true);
     }
 

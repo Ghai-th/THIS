@@ -1,5 +1,9 @@
 package frame.modle.label;
 
+import entity.Article;
+import frame.Index;
+import frame.modle.panel.ArticleDetailsPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -10,13 +14,19 @@ import java.awt.event.MouseListener;
  * 实现鼠标监听接口
  */
 public class RankLabel extends JLabel implements MouseListener {
+    public Index index;
+
 
     public void mouseClicked(MouseEvent e) {
-
+        index.mainPanel.removeAll();
+        JPanel borderLimit = new JPanel(new BorderLayout());
+        borderLimit.add(new ArticleDetailsPanel(Article.initArticle(),index),BorderLayout.CENTER);
+        index.mainPanel.add(borderLimit,BorderLayout.CENTER);
+        updateUI();
     }
 
     public void mousePressed(MouseEvent e) {
-        System.out.println("文章详情");
+
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -51,7 +61,8 @@ public class RankLabel extends JLabel implements MouseListener {
         super(text, icon, horizontalAlignment);
     }
 
-    public RankLabel(String text, int horizontalAlignment) {
+    public RankLabel(String text, int horizontalAlignment,Index index) {
         super(text, horizontalAlignment);
+        this.index = index;
     }
 }

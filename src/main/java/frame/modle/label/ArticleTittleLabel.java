@@ -1,6 +1,9 @@
 package frame.modle.label;
 
 import entity.Article;
+import frame.Index;
+import frame.modle.panel.ArticleDetailsPanel;
+import frame.modle.panel.ArticleSynopsisPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +17,10 @@ import java.awt.event.MouseListener;
 public class ArticleTittleLabel extends JLabel implements MouseListener {
 
     private Article article; // 此标题表示的文章的对象，方便查看详细信息
+    public Index index;
 
-    public ArticleTittleLabel(Article article) {
+    public ArticleTittleLabel(Article article, Index index) {
+        this.index = index;
         this.article = article;
         init();
     }
@@ -29,7 +34,11 @@ public class ArticleTittleLabel extends JLabel implements MouseListener {
 
 
     public void mouseClicked(MouseEvent e) {
-        System.out.println("文章详情");
+        index.mainPanel.removeAll();
+        JPanel borderLimit = new JPanel(new BorderLayout());
+        borderLimit.add(new ArticleDetailsPanel(Article.initArticle(),index),BorderLayout.CENTER);
+        index.mainPanel.add(borderLimit,BorderLayout.CENTER);
+        updateUI();
     }
 
     public void mousePressed(MouseEvent e) {

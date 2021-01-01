@@ -47,11 +47,11 @@ public class Index extends JPanel implements IndexConf {
         JPanel rankingListPerson = new JPanel(new GridLayout(11, 1));
         rankingListPerson.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
         RankLabel person;
-        person = new RankLabel("用户活跃度排行", JLabel.CENTER);
+        person = new RankLabel("用户活跃度排行", JLabel.CENTER,this);
         person.setFont(new Font("宋体", Font.BOLD, 20));
         rankingListPerson.add(person);
         for (int i = 1; i <= 10; i++) {
-            person = new RankLabel(i + "  " + "这里写活跃排行需要从数据库选取", JLabel.CENTER);
+            person = new RankLabel(i + "  " + "这里写活跃排行需要从数据库选取", JLabel.CENTER,this);
             person.setOpaque(true);
             person.addMouseListener(person);
             person.setFont(new Font("宋体", Font.BOLD, 15));
@@ -61,11 +61,11 @@ public class Index extends JPanel implements IndexConf {
         JPanel rankingListArticle = new JPanel(new GridLayout(11, 1));
         rankingListArticle.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
         RankLabel article;
-        article = new RankLabel("热门文章排行", JLabel.CENTER);
+        article = new RankLabel("热门文章排行", JLabel.CENTER, this);
         article.setFont(new Font("宋体", Font.BOLD, 20));
         rankingListArticle.add(article);
         for (int i = 1; i <= 10; i++) {
-            article = new RankLabel(i + "    " + "这里写文章需要从数据库选取", JLabel.CENTER);
+            article = new RankLabel(i + "    " + "这里写文章需要从数据库选取", JLabel.CENTER,this);
             article.setOpaque(true);
             article.addMouseListener(article);
             article.setFont(new Font("宋体", Font.BOLD, 15));

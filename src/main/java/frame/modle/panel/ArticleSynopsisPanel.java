@@ -2,6 +2,7 @@ package frame.modle.panel;
 
 import entity.Article;
 import entity.User;
+import frame.Index;
 import frame.modle.label.ArticleTittleLabel;
 
 import javax.swing.*;
@@ -15,10 +16,12 @@ public class ArticleSynopsisPanel extends JPanel implements MouseListener {
     public Article article;
     public User user;
     public ArticleTittleLabel tittleLabel;
+    public Index index;
 
-    public ArticleSynopsisPanel(Article article) {
+    public ArticleSynopsisPanel(Article article, Index index) {
         super();
         this.article = article;
+        this.index = index;
         /////添加数据库连接时 注释以下
         this.article = Article.initArticle();
         init();
@@ -28,7 +31,7 @@ public class ArticleSynopsisPanel extends JPanel implements MouseListener {
         this.setLayout(new BorderLayout());
 
         upPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        tittleLabel = new ArticleTittleLabel(article);
+        tittleLabel = new ArticleTittleLabel(article,index);
         tittleLabel.setFont(new Font("宋体", Font.BOLD, 25));
         upPanel.add(tittleLabel);
 
@@ -99,7 +102,11 @@ public class ArticleSynopsisPanel extends JPanel implements MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-        System.out.println("进入文章主页");
+        index.mainPanel.removeAll();
+        JPanel borderLimit = new JPanel(new BorderLayout());
+        borderLimit.add(new ArticleDetailsPanel(Article.initArticle(),index),BorderLayout.CENTER);
+        index.mainPanel.add(borderLimit,BorderLayout.CENTER);
+        updateUI();
     }
 
     public void mousePressed(MouseEvent e) {
