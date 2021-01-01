@@ -3,10 +3,7 @@ import frame.modle.panel.GetWH;
 import frame.modle.panel.TranslucenceJPanel;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 import javax.swing.*;
 
@@ -22,7 +19,9 @@ public class UserPanel extends TranslucenceJPanel {
     JScrollPane jScrollPane;
     WritePanel writePanel = new WritePanel();
     TranslucenceJPanel centerc = new TranslucenceJPanel();
-
+    ImageIcon Imageone,Imagetwo,Imagethree,imagefour;
+    JLabel imageJLabelone,imageJLabeltwo,imageJLabelthree,imageJLabelfour;
+    JPanel imageJPanelone,imageJPaneltwo,imageJPanelthree,imageJPanelfour;
     public UserPanel() {
         setBounds(0,0,1920,1080);
         init();
@@ -222,10 +221,195 @@ public class UserPanel extends TranslucenceJPanel {
         center.setBounds(GetWH.getWidth()/5+190,0, GetWH.getWidth()*3/5, 740);
         center.add(centerup,BorderLayout.NORTH);
         center.add(jScrollPane,BorderLayout.CENTER);
+
+        Imageone=new ImageIcon("src/main/resources/闹钟.png");
+        imageJLabelone = new JLabel(Imageone);
+        imageJPanelone = new JPanel();
+        imageJPanelone.setOpaque(false);
+        imageJPanelone.add(imageJLabelone);
+        imageJPanelone.setBounds(GetWH.getWidth()*4/5+210,100,120,86);
+
+        imageJPanelone.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                imageJPanelone.remove(imageJLabelone);
+                Imageone = new ImageIcon("src/main/resources/闹钟text.png");
+                imageJLabelone = new JLabel(Imageone);
+                imageJPanelone.add(imageJLabelone);
+                imageJPanelone.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
+                imageJPanelone.validate();
+                //System.out.println("ssss");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                imageJPanelone.remove(imageJLabelone);
+                Imageone = new ImageIcon("src/main/resources/闹钟.png");
+                imageJLabelone = new JLabel(Imageone);
+                imageJPanelone.add(imageJLabelone);
+                imageJPanelone.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
+                imageJPanelone.validate();
+                //System.out.println("ssss");
+            }
+        });
+
+        ImageIcon Imagetwo=new ImageIcon("src/main/resources/电脑.png");
+        imageJLabeltwo = new JLabel(Imagetwo);
+        imageJPaneltwo = new JPanel();
+        imageJPaneltwo.add(imageJLabeltwo);
+        imageJPaneltwo.setOpaque(false);
+        imageJPaneltwo.setBounds(GetWH.getWidth()*4/5+210,190,120,86);
+        imageJPaneltwo.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                imageJPaneltwo.remove(imageJLabeltwo);
+                Imageone = new ImageIcon("src/main/resources/电脑text.png");
+                imageJLabeltwo = new JLabel(Imageone);
+                imageJPaneltwo.add(imageJLabeltwo);
+                imageJPaneltwo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
+                imageJPaneltwo.validate();
+                //System.out.println("111");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                imageJPaneltwo.remove(imageJLabeltwo);
+                Imageone = new ImageIcon("src/main/resources/电脑.png");
+                imageJLabeltwo = new JLabel(Imageone);
+                imageJPaneltwo.add(imageJLabeltwo);
+                imageJPaneltwo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
+                imageJPaneltwo.validate();
+                //System.out.println("111");
+            }
+        });
+        Imageone=new ImageIcon("src/main/resources/耳机.png");
+        imageJLabelthree = new JLabel(Imageone);
+        imageJPanelthree = new JPanel();
+        imageJPanelthree.setOpaque(false);
+        imageJPanelthree.add(imageJLabelthree);
+        imageJPanelthree.setBounds(GetWH.getWidth()*4/5+210,270,120,86);
+        imageJPanelthree.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                imageJPanelthree.remove(imageJLabelthree);
+                Imageone = new ImageIcon("src/main/resources/耳机text.png");
+                imageJLabelthree = new JLabel(Imageone);
+                imageJPanelthree.add(imageJLabelthree);
+                imageJPanelthree.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
+                imageJPanelthree.validate();
+                //System.out.println("111");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                imageJPanelthree.remove(imageJLabelthree);
+                Imageone = new ImageIcon("src/main/resources/耳机.png");
+                imageJLabelthree = new JLabel(Imageone);
+                imageJPanelthree.add(imageJLabelthree);
+                imageJPanelthree.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
+                imageJPanelthree.validate();
+                //System.out.println("111");
+            }
+        });
+        Imageone=new ImageIcon("src/main/resources/刷新.png");
+        imageJLabelfour = new JLabel(Imageone);
+        imageJPanelfour = new JPanel();
+        imageJPanelfour.setOpaque(false);
+        imageJPanelfour.add(imageJLabelfour);
+        imageJPanelfour.setBounds(GetWH.getWidth()*4/5+210,360,120,86);
+        imageJPanelfour.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                imageJPanelfour.remove(imageJLabelfour);
+                Imageone = new ImageIcon("src/main/resources/刷新text.png");
+                imageJLabelfour = new JLabel(Imageone);
+                imageJPanelfour.add(imageJLabelfour);
+                imageJPanelfour.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
+                imageJPanelfour.validate();
+                //System.out.println("111");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                imageJPanelfour.remove(imageJLabelfour);
+                Imageone = new ImageIcon("src/main/resources/刷新.png");
+                imageJLabelfour = new JLabel(Imageone);
+                imageJPanelfour.add(imageJLabelfour);
+                imageJPanelfour.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
+                imageJPanelfour.validate();
+                //System.out.println("111");
+            }
+        });
+
+
         down = new DownPanel();
 
         Big = new TranslucenceJPanel();
         Big.setOpaque(false);
+        Big.add(imageJPanelone);
+        Big.add(imageJPaneltwo);
+        Big.add(imageJPanelthree);
+        Big.add(imageJPanelfour);
         Big.setTransparent(0.01f);
         Big.setPreferredSize(new Dimension(GetWH.width, GetWH.height*4/5));
         Big.setLayout(null);
