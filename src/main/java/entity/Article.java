@@ -29,7 +29,7 @@ public class Article {
         String cid = "1";
         String tittle = "PHP是世界上最好的语言没有之一";
         String synopsis = "jk";
-        String text = "#include <stdio.h> int  main(){ int num; printf(\"please input a num\\n\");scanf(\"\",&num); while(num>10){";
+        String text = "    ashj\nkl\nasaiusdfaisdfoaiudfaiudfaisdhflakjdshflakjdhflakjdfhlakjdfhalkjdhflakdjhflakjdfhaiydgfi auygdfagfkahdfgakjfgadsfgakjfgajfgkajfgakjdf\nghjkl;";
         int visitorNum = 10;
         int likeNum = 10;
         int collect = 10;
