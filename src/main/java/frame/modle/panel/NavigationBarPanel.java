@@ -3,6 +3,7 @@ package frame.modle.panel;
 import conf.IndexConf;
 import entity.Article;
 import frame.Index;
+import frame.Login;
 import frame.modle.label.ClassLabel;
 
 import javax.swing.*;
@@ -107,7 +108,8 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                System.out.println("个人中心");
+                index.removeAll();
+                index.add(new Login(index));
             }
 
             // 下面俩实现弹窗

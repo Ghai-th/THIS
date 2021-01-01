@@ -13,7 +13,6 @@ import java.awt.event.*;
 
 public class Login extends JPanel implements ActionListener, IndexConf {
     //登录
-    JFrame jFrame;
     JLabel idJLabel,passwordJLabel,registerJLabel,forgetJLabel,bkgJLabel,titleJLabel;
     JTextField idJTextField;
     JLabel loginJLabel;
@@ -34,11 +33,12 @@ public class Login extends JPanel implements ActionListener, IndexConf {
 
     Index index;
     //定时器监听的鼠标监听时间
-    MouseListener a = new MouseListener() {
+    MouseListener loginJLabelListener = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
-            jFrame.remove(Login.this);
-            jFrame.add(new Index());
-            jFrame.setVisible(true);
+            index.removeAll();
+            index.setVisible(false);
+            index.add(new Index());
+            index.setVisible(true);
         }
         public void mousePressed(MouseEvent e) {
             loginJLabel.setBackground(new Color(30,150,230));
@@ -56,7 +56,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             loginJLabel.setBackground(new Color(30,196,252));
         }
     };
-    MouseListener b = new MouseListener() {
+    MouseListener okJLabelListener = new MouseListener() {
 
         public void mouseClicked(MouseEvent e) {
 
@@ -78,7 +78,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             okJLabel.setBackground(new Color(30,196,252));
         }
     };
-    MouseListener c = new MouseListener() {
+    MouseListener findJLabelListener = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
         }
         public void mousePressed(MouseEvent e) {
@@ -99,7 +99,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             findJLabel.setBackground(new Color(30,196,252));
         }
     };
-    MouseAdapter d = new MouseAdapter() {
+    MouseAdapter messageJLabelListener = new MouseAdapter() {
         @Override
         public void mouseEntered(MouseEvent e) {
             super.mouseEntered(e);
@@ -112,7 +112,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             messageJLabel.setForeground(new Color(155,155,155));
         }
     };
-    MouseAdapter e = new MouseAdapter() {
+    MouseAdapter message1JLabelListener = new MouseAdapter() {
         @Override
         public void mouseEntered(MouseEvent e) {
             super.mouseEntered(e);
@@ -125,7 +125,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             message1JLabel.setForeground(new Color(155,155,155));
         }
     };
-    FocusListener f = new FocusListener() {
+    FocusListener password3JPasswordListener = new FocusListener() {
         @Override
         public void focusGained(FocusEvent e) {
             password3JPassword.setBorder(whiteBorder);
@@ -136,7 +136,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             password3JPassword.setBorder(grayBorder);
         }
     };
-    FocusListener g = new FocusListener() {
+    FocusListener password4JPasswordListener = new FocusListener() {
         @Override
         public void focusGained(FocusEvent e) {
             password4JPassword.setBorder(whiteBorder);
@@ -147,7 +147,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             password4JPassword.setBorder(grayBorder);
         }
     };
-    FocusListener h = new FocusListener() {
+    FocusListener findidJTextFieldListener = new FocusListener() {
         @Override
         public void focusGained(FocusEvent e) {
             findidJTextField.setBorder(whiteBorder);
@@ -157,7 +157,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         public void focusLost(FocusEvent e) {
             findidJTextField.setBorder(grayBorder);        }
     };
-    FocusListener i = new FocusListener() {
+    FocusListener checkJTextFieldListener = new FocusListener() {
         @Override
         public void focusGained(FocusEvent e) {
             checkJTextField.setBorder(whiteBorder);
@@ -172,9 +172,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     boolean isChange2 = false;
     Timer timer = new Timer(200,this);
     //构造函数，调用扁平化风格，初始化总界面的布局方式及标题等
-    public Login(JFrame jFrame,Index index) {
+    public Login(Index index) {
         this.index = index;
-        this.jFrame = jFrame;
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
@@ -453,10 +452,10 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         //注册界面组件初始化
         messageJLabel = new JLabel("？");
         setMessageJLabel(messageJLabel,"账号格式");
-        messageJLabel.addMouseListener(d);
+        messageJLabel.addMouseListener(messageJLabelListener);
         message1JLabel = new JLabel("？");
         setMessageJLabel(message1JLabel,"密码格式");
-        message1JLabel.addMouseListener(e);
+        message1JLabel.addMouseListener(message1JLabelListener);
         helloJLabel = new JLabel("欢迎注册");
         helloJLabel.setFont(new Font("微软雅黑",Font.BOLD,40));
         helloJLabel.setForeground(Color.BLACK);
@@ -517,11 +516,11 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         password1JLabel = new JLabel("密码");
         password3JPassword = new JPasswordField();
         changePassword1(password1JLabel,password3JPassword);
-        password3JPassword.addFocusListener(f);
+        password3JPassword.addFocusListener(password3JPasswordListener);
         password2JLabel = new JLabel("确认");
         password4JPassword = new JPasswordField();
         changePassword1(password2JLabel,password4JPassword);
-        password4JPassword.addFocusListener(g);
+        password4JPassword.addFocusListener(password4JPasswordListener);
         okJLabel = new JLabel("注册", JLabel.CENTER);
         okJLabel.setBackground(new Color(189,206,252));
         okJLabel.setOpaque(true);
@@ -533,18 +532,18 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         changeJLabel(findidJLabel);
         findidJTextField = new JTextField();
         setJTextField(findidJTextField);
-        findidJTextField.addFocusListener(h);
+        findidJTextField.addFocusListener(findidJTextFieldListener);
         checkJLabel = new JLabel("验证");
         changeJLabel(checkJLabel);
         checkJTextField = new JTextField();
         setJTextField(checkJTextField);
-        checkJTextField.addFocusListener(i);
+        checkJTextField.addFocusListener(checkJTextFieldListener);
         findJLabel = new JLabel("找回",JLabel.CENTER);
         findJLabel.setOpaque(true);
         findJLabel.setBackground(new Color(30,196,252));
         findJLabel.setForeground(Color.white);
         findJLabel.setFont(new Font("楷体",Font.PLAIN,27));
-        findJLabel.addMouseListener(c);
+        findJLabel.addMouseListener(findJLabelListener);
         returnJLabel = new JLabel("返回", JLabel.CENTER);
         returnJLabel.setOpaque(true);
         returnJLabel.setBackground(new Color(30,196,252));
@@ -633,7 +632,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             if(!isChange1){
                 loginJLabel.setBackground(new Color(30,196,252));
                 loginJLabel.setBorder(null);
-                loginJLabel.addMouseListener(a);
+                loginJLabel.addMouseListener(loginJLabelListener);
                 isChange1 = true;
             }
         }
@@ -643,7 +642,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             if(!isChange1){
                 loginJLabel.setBackground(new Color(189,206,252));
                 loginJLabel.setBorder(grayBorder);
-                loginJLabel.removeMouseListener(a);
+                loginJLabel.removeMouseListener(loginJLabelListener);
                 loginJLabel.setCursor(Cursor.getDefaultCursor());
                 isChange1 = false;
             }
@@ -653,7 +652,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             if(!isChange2 ){
                 okJLabel.setBackground(new Color(30,196,252));
                 okJLabel.setBorder(null);
-                okJLabel.addMouseListener(b);
+                okJLabel.addMouseListener(okJLabelListener);
                 isChange2 = true;
             }
         }
@@ -661,7 +660,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 new String(password4JPassword.getPassword()).equals("")){
             if(!isChange2){
                 okJLabel.setBackground(new Color(189,206,252));
-                okJLabel.removeMouseListener(c);
+                okJLabel.removeMouseListener(findJLabelListener);
                 okJLabel.setBorder(grayBorder);
                 okJLabel.setCursor(Cursor.getDefaultCursor());
                 isChange2 = false;
