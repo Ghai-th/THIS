@@ -41,7 +41,7 @@ public class DownPanel extends TranslucenceJPanel {
         a5 = j5.init("邮箱：861789352@qq.com  ");
         up.add(a5);
         this.add(up,BorderLayout.NORTH);
-        final JTextArea text =new JTextArea();
+        final TranslucenceJTextArea text =new TranslucenceJTextArea();
         text.append("  感谢使用THIS论坛，孔夫子曾言，知之者不如好之者，好之者不如乐之者。看来对于鲸鱼一行一道者，最高的境界应该是乐之，" +
                 "乐从何来，欧翁有醉翁之言，或许可以借鉴，乐人之乐是为其乐。埋头断案，愁思不得，忽然解惑，" +
                 "如醍醐灌顶，茅塞顿开，是技术人员的常乐。偶有所得，为人解惑，则变为以人为乐为己乐。同有所惑，论之而解，有人乐更有己乐" +
@@ -51,8 +51,10 @@ public class DownPanel extends TranslucenceJPanel {
         text.setFont(new Font("宋体",Font.PLAIN,20));
         text.setPreferredSize(new Dimension(GetWH.getWidth()*3/5,140));
         text.setEditable(false);
-        text.setBackground(new Color(1.0F, 1.0F, 1.0F, 0.45F));
+        text.setOpaque(false);
+        text.setTransparent(0.5f);
 
+        text.setForeground(Color.white);
         text.addMouseListener(new   MouseAdapter()   {
             public   void   mouseEntered(MouseEvent mouseEvent)   {
                 text.setCursor(new   Cursor(Cursor.TEXT_CURSOR));   //鼠标进入Text区后变为文本输入指针
