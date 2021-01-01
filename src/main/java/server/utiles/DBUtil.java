@@ -161,7 +161,7 @@ public class DBUtil {
     public static void closeResources(Connection conn, Statement stat, ResultSet set) {
         if (set != null) {
             try {
-                set.close();
+                set.close();int x;
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -169,6 +169,7 @@ public class DBUtil {
         }
         if (stat != null) {
             try {
+                int y;
                 stat.close();
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
