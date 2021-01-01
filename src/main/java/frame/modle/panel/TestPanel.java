@@ -210,8 +210,8 @@ public class TestPanel extends JPanel {
         add(centerJPanel,BorderLayout.CENTER);//将中部面板添加到中部
         add(northJlabel,BorderLayout.NORTH);
         centerJPanel.setPreferredSize(new Dimension(width, height*4/5));
-        userJPanel.setBounds(30,0,width/5,height*2/5+40);//设置用用户面板在中部的位置以及大小
-        textPanel.setBounds(30,height*2/5+70,width/5,height*2/5-80);
+        userJPanel.setBounds(130,0,width/5,height*2/5+40);//设置用用户面板在中部的位置以及大小
+        textPanel.setBounds(130,height*2/5+70,width/5,height*2/5-80);
         centerJPanel.add(userJPanel);
         centerJPanel.add(textPanel);
         northJlabel.setPreferredSize(new Dimension(width, height/5));

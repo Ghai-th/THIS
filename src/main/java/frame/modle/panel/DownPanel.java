@@ -1,7 +1,6 @@
 package frame.modle.panel;
 
-import frame.modle.panel.GetWH;
-import frame.modle.panel.TranslucenceJPanel;
+import frame.modle.label.DownJlabel;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -12,15 +11,15 @@ import java.awt.event.MouseEvent;
 
 public class DownPanel extends TranslucenceJPanel {
     private JLabel a1,a2,a3,a4,a5;
-    Jlabel j1 = new Jlabel();
-    Jlabel j2 = new Jlabel();
-    Jlabel j3 = new Jlabel();
-    Jlabel j4 = new Jlabel();
-    Jlabel j5 = new Jlabel();
+    DownJlabel j1 = new DownJlabel();
+    DownJlabel j2 = new DownJlabel();
+    DownJlabel j3 = new DownJlabel();
+    DownJlabel j4 = new DownJlabel();
+    DownJlabel j5 = new DownJlabel();
     public DownPanel(){
         this.setOpaque(false);
         this.setTransparent(0.01f);
-        this.setBounds(GetWH.getWidth()/5+90,745, GetWH.getWidth()*3/5, 155);
+        this.setBounds(GetWH.getWidth()/5+190,745, GetWH.getWidth()*3/5, 155);
         init();
     }
     public void init(){
@@ -31,15 +30,15 @@ public class DownPanel extends TranslucenceJPanel {
         up.setOpaque(false);
         up.setTransparent(0.5f);
         up.setBackground(new Color(0xFDFFFB));
-        a1 = j1.init("关于我们");
+        a1 = j1.init("关于我们   ");
         up.add(a1);
-        a2 = j2.init("招贤纳士");
+        a2 = j2.init("招贤纳士   ");
         up.add(a2);
-        a3 = j3.init("联系我们");
+        a3 = j3.init("联系我们   ");
         up.add(a3);
-        a4 = j4.init("THIS简介");
+        a4 = j4.init("THIS简介   ");
         up.add(a4);
-        a5 = j5.init("邮箱：861789352@qq.com");
+        a5 = j5.init("邮箱：861789352@qq.com  ");
         up.add(a5);
         this.add(up,BorderLayout.NORTH);
         final JTextArea text =new JTextArea();
