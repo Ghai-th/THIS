@@ -1,4 +1,4 @@
-package frame.modle.panel;
+package frame.modle.label;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class Jlabel  {
+public class DownJlabel {
     public JLabel x;
 
     public JLabel init(String m){

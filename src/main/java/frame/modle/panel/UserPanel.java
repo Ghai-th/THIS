@@ -171,6 +171,10 @@ public class UserPanel extends TranslucenceJPanel {
                 // TODO Auto-generated method stub
                 clear();
                 topic.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
+                centerc.removeAll();
+                centerc.add(new CollectPanel());
+                centerc.updateUI();
+                repaint();
             }
             @Override
             public void mouseEntered(MouseEvent e) {

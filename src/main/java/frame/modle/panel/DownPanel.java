@@ -1,7 +1,6 @@
 package frame.modle.panel;
 
-import frame.modle.panel.GetWH;
-import frame.modle.panel.TranslucenceJPanel;
+import frame.modle.label.DownJlabel;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -12,11 +11,11 @@ import java.awt.event.MouseEvent;
 
 public class DownPanel extends TranslucenceJPanel {
     private JLabel a1,a2,a3,a4,a5;
-    Jlabel j1 = new Jlabel();
-    Jlabel j2 = new Jlabel();
-    Jlabel j3 = new Jlabel();
-    Jlabel j4 = new Jlabel();
-    Jlabel j5 = new Jlabel();
+    DownJlabel j1 = new DownJlabel();
+    DownJlabel j2 = new DownJlabel();
+    DownJlabel j3 = new DownJlabel();
+    DownJlabel j4 = new DownJlabel();
+    DownJlabel j5 = new DownJlabel();
     public DownPanel(){
         this.setOpaque(false);
         this.setTransparent(0.01f);
