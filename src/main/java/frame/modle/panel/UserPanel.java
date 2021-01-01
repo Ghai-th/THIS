@@ -103,6 +103,7 @@ public class UserPanel extends TranslucenceJPanel {
         myCenterc.add(artical1);
         myCenterc.add(artical2);
         centerc.add(myCenterc);
+
         MouseAdapter adapter1 = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
@@ -160,6 +161,7 @@ public class UserPanel extends TranslucenceJPanel {
         centerup.add(resource);
         topic = new JLabel("我的收藏("+cnum+")",JLabel.CENTER);
         topic.setFont(new Font("宋体",Font.PLAIN,30));
+
         MouseAdapter adapter3 = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
@@ -183,9 +185,8 @@ public class UserPanel extends TranslucenceJPanel {
         topic.addMouseMotionListener(adapter3);
         centerup.add(topic);
         answer = new JLabel("我的评论("+dnum+")",JLabel.CENTER);
-
-//		answer.setBounds(430, 20, 100, 20);
         answer=setFontLabel(answer);
+
         MouseAdapter adapter4 = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
@@ -197,6 +198,11 @@ public class UserPanel extends TranslucenceJPanel {
                 // TODO Auto-generated method stub
                 clear();
                 answer.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
+                CommentPanel commentPanel = new CommentPanel();
+                centerc.removeAll();
+                centerc.add(commentPanel);
+                centerc.updateUI();
+                repaint();
             }
             @Override
             public void mouseEntered(MouseEvent e) {
