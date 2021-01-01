@@ -33,7 +33,7 @@ public class Index extends JPanel implements IndexConf {
     }
 
     public  void initNorth() {
-        NavigationBarPanel navigationBarPanel = new NavigationBarPanel();
+        NavigationBarPanel navigationBarPanel = new NavigationBarPanel(this);
         this.add(navigationBarPanel,BorderLayout.NORTH);
     }
 
