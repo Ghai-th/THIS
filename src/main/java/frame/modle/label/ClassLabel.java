@@ -74,7 +74,7 @@ public class ClassLabel extends JLabel {
                         break;
                 }
 
-                index.mainPanel.setVisible(false);
+//                index.mainPanel.setVisible(false);
                 index.mainPanel.removeAll();
                 //// 从数据库拉取文章列表
                 ArrayList<Article> arrayList = new ArrayList<Article>();
@@ -83,8 +83,8 @@ public class ClassLabel extends JLabel {
                 }
 
                 index.mainPanel.add(new ArticleListPanel(arrayList), BorderLayout.CENTER); /// 新建出 文章列表面板
-                index.mainPanel.setVisible(true);
-
+//                index.mainPanel.setVisible(true);
+                updateUI();
             }
 
             public void mousePressed(MouseEvent e) {
