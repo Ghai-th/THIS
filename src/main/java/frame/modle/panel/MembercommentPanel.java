@@ -21,6 +21,7 @@ public class MembercommentPanel extends JPanel {
         setPreferredSize(new Dimension(800,200));
         add(topicJLabel);
         add(mainJTextArea);
-        setBorder(BorderFactory.createLineBorder(Color.black));
+        //setBorder(BorderFactory.createLineBorder(Color.black));
+        setBorder(BorderFactory.createMatteBorder(1,0,0,0,Color.black));
     }
 }
