@@ -185,6 +185,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         this.setVisible(true);
         timer.start();
     }
+
+
     //初始化north与center
     public void init () {
         initNorth();
