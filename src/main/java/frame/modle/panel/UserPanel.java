@@ -233,6 +233,7 @@ public class UserPanel extends TranslucenceJPanel {
         Big.setPreferredSize(new Dimension(GetWH.width, GetWH.height*4/5));
         Big.setLayout(null);
         Big.add(testPanel.getUserJPanel());
+        Big.add(testPanel.getTextPanel());
         Big.add(center);
         Big.add(down);
         //Big.setBackground(Color.lightGray);
