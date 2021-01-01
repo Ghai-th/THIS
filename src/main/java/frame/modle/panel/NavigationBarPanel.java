@@ -1,6 +1,7 @@
 package frame.modle.panel;
 
 import conf.IndexConf;
+import entity.Article;
 import frame.Index;
 import frame.modle.label.ClassLabel;
 
@@ -8,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class NavigationBarPanel extends JPanel implements IndexConf {
 
@@ -15,6 +18,7 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
     public JTextField searchTextField;
     public JLabel searchLabel;
     public JLabel headImage;
+    public Index index;
 
     public NavigationBarPanel(LayoutManager layout, boolean isDoubleBuffered) {
         super(layout, isDoubleBuffered);
@@ -28,7 +32,8 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         super(isDoubleBuffered);
     }
 
-    public NavigationBarPanel() {
+    public NavigationBarPanel(Index index) {
+        this.index = index;
         init();
     }
 
@@ -37,13 +42,22 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 10));
 
-        ClassLabel iconClassLabel = new ClassLabel();
-        iconClassLabel.setText("图片THIS");
-        this.add(iconClassLabel);
+        final JLabel iconLabel = new JLabel();
+        iconLabel.setText("图片THIS");
+        iconLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                index.removeAll();
+                index.setVisible(false);
+                index.add(new Index());
+                index.setVisible(true);
+            }
+        });
+        this.add(iconLabel);
 
         ClassLabel classLabel;
         for (String string : Index.classification) {
-            classLabel = new ClassLabel();
+            classLabel = new ClassLabel(index);
             classLabel.setText(string);
             this.add(classLabel);
         }
@@ -69,6 +83,19 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
             public void mouseExited(MouseEvent e) {
                 searchLabel.setBackground(new Color(188, 16, 3, 240));
                 super.mouseExited(e);
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // 数据库模糊查询
+                String searchText = null;
+                super.mouseClicked(e);
+                try {
+                    searchText = searchTextField.getText();
+                } catch (Exception ex) {
+                    System.out.println("不可为空");
+                }
+                System.out.println( "点击搜索" + searchText);
             }
         });
         searchPanel.add(searchLabel);
@@ -98,9 +125,10 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         this.add(headImage);
 
         for (String string : personAction) {
-            classLabel = new ClassLabel();
+            classLabel = new ClassLabel(index);
             classLabel.setText(string);
             this.add(classLabel);
         }
     }
+
 }

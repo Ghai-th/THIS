@@ -31,6 +31,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     //找回密码
     JLabel findidJLabel,checkJLabel,findJLabel,returnJLabel;
     JTextField findidJTextField,checkJTextField;
+
+    Index index;
     //定时器监听的鼠标监听时间
     MouseListener a = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
@@ -170,7 +172,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     boolean isChange2 = false;
     Timer timer = new Timer(200,this);
     //构造函数，调用扁平化风格，初始化总界面的布局方式及标题等
-    public Login(JFrame jFrame) {
+    public Login(JFrame jFrame,Index index) {
+        this.index = index;
         this.jFrame = jFrame;
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -189,7 +192,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     }
     //初始化north
     public void initNorth(){
-        NavigationBarPanel navigationBarPanel = new NavigationBarPanel();
+        NavigationBarPanel navigationBarPanel = new NavigationBarPanel(index);
         this.add(navigationBarPanel, BorderLayout.NORTH);
     }
 

@@ -1,5 +1,6 @@
 package frame.modle.panel;
 
+import conf.IndexConf;
 import entity.Article;
 import entity.User;
 import frame.modle.label.ArticleTittleLabel;
@@ -7,7 +8,7 @@ import frame.modle.label.ArticleTittleLabel;
 import javax.swing.*;
 import java.awt.*;
 
-public class ArticleDetailsPanel extends JPanel {
+public class ArticleDetailsPanel extends JPanel implements IndexConf {
 
     public JPanel upPanel, downPanel;
     public Article article;
