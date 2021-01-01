@@ -20,9 +20,10 @@ public class User {
     private Date create;
     private Date update;
     private String synopsis;
+    private Boolean state;
 
     public User(String uid, String name, Integer level, String password, Integer gender, Byte[] image,
-                Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis) {
+                Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis, Boolean state) {
         this.uid = uid;
         this.name = name;
         this.level = level;
@@ -36,6 +37,7 @@ public class User {
         this.create = new Date();
         this.update = new Date();
         this.synopsis = synopsis;
+        this.state = state;
     }
 
     public User() {
@@ -53,6 +55,15 @@ public class User {
         user.setUid("1001");
         user.setPassword("123");
         user.setVisitorNum(1);
+        user.setState(true);
+    }
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
     }
 
     public String getUid() {
