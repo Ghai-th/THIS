@@ -20,7 +20,7 @@ public class DownPanel extends TranslucenceJPanel {
     public DownPanel(){
         this.setOpaque(false);
         this.setTransparent(0.01f);
-        this.setBounds(GetWH.getWidth()/5+90,745, GetWH.getWidth()*3/5, 155);
+        this.setBounds(GetWH.getWidth()/5+190,745, GetWH.getWidth()*3/5, 155);
         init();
     }
     public void init(){
@@ -31,15 +31,15 @@ public class DownPanel extends TranslucenceJPanel {
         up.setOpaque(false);
         up.setTransparent(0.5f);
         up.setBackground(new Color(0xFDFFFB));
-        a1 = j1.init("关于我们");
+        a1 = j1.init("关于我们   ");
         up.add(a1);
-        a2 = j2.init("招贤纳士");
+        a2 = j2.init("招贤纳士   ");
         up.add(a2);
-        a3 = j3.init("联系我们");
+        a3 = j3.init("联系我们   ");
         up.add(a3);
-        a4 = j4.init("THIS简介");
+        a4 = j4.init("THIS简介   ");
         up.add(a4);
-        a5 = j5.init("邮箱：861789352@qq.com");
+        a5 = j5.init("邮箱：861789352@qq.com  ");
         up.add(a5);
         this.add(up,BorderLayout.NORTH);
         final JTextArea text =new JTextArea();

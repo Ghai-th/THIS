@@ -16,7 +16,7 @@ public class UserPanel extends TranslucenceJPanel {
     TranslucenceJPanel up,down;
     private JLabel userId,text,resource,topic,answer,j;
     private JButton b_return,b_guanli;
-    private int a,b,c,d;
+    public int anum,bnum,cnum,dnum;
     public TranslucenceJPanel Big;
     TestPanel testPanel;
     JScrollPane jScrollPane;
@@ -29,7 +29,7 @@ public class UserPanel extends TranslucenceJPanel {
 
     }
     public void init() {
-        centerc.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-5,500));
+        centerc.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-50,1000));
 //        centerc.setOpaque(false);
 //        centerc.setTransparent(0.3f);
         this.setOpaque(false);
@@ -75,7 +75,7 @@ public class UserPanel extends TranslucenceJPanel {
         JPanel centerup = new JPanel();
         centerup.setLayout(new GridLayout(1,8));
         center.setLayout(new BorderLayout());
-        text = new JLabel("我的文章("+a+")",JLabel.CENTER);
+        text = new JLabel("我的文章("+anum+")",JLabel.CENTER);
         text.setFont(new Font("宋体",Font.PLAIN,30));
         //中中布局
         final TranslucenceJPanel myCenterc = new TranslucenceJPanel();
@@ -83,39 +83,38 @@ public class UserPanel extends TranslucenceJPanel {
         myCenterc.setTransparent(0.1f);
         centerup.setBackground(Color.WHITE);
         myCenterc.setBackground(new Color(240,255,255));
-        myCenterc.setLayout(new GridLayout(5,1));
+        myCenterc.setLayout(new FlowLayout());
+        myCenterc.setPreferredSize(new Dimension(800,800));
         jScrollPane = new JScrollPane(centerc);
         jScrollPane.setOpaque(false);
         jScrollPane.getViewport().setOpaque(false);
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        JLabel tl= new JLabel("gdisahodhaoishdoahsodhaoishfihfidoshhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhowwwwwwwwwwwwwwwwwww");
+        JLabel tl= new JLabel("Spring Boot整合EasyExcel（完整版包含上传解析excel和下载模板）");
         tl.setFont(new Font("宋体",Font.PLAIN,20));
         JPanel artical1 = new JPanel();
         artical1.setBackground(new Color(240,248,255));
-        //artical1.setPreferredSize(new Dimension(800,200));
+        artical1.setPreferredSize(new Dimension(800,200));
         artical1.add(tl,JPanel.LEFT_ALIGNMENT);
         artical1.setBorder(BorderFactory.createLineBorder(Color.black));
         JPanel artical2 = new JPanel();
-        artical2.add(tl);
+        artical2.add(tl,JPanel.LEFT_ALIGNMENT);
         artical2.setBackground(new Color(240,248,255));
         artical2.setPreferredSize(new Dimension(800,200));
         myCenterc.add(artical1);
         myCenterc.add(artical2);
         centerc.add(myCenterc);
+
         MouseAdapter adapter1 = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 // TODO Auto-generated method stub
                 text.setForeground(Color.black);
-                //text.setBorder(null);
+
             }
             @Override
             public void mouseClicked(MouseEvent e) {
                 // TODO Auto-generated method stub
-                resource.setBorder(null);
-                text.setBorder(null);
-                topic.setBorder(null);
-                answer.setBorder(null);
+                clear();
                 text.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
                 centerc.removeAll();
                 centerc.add(myCenterc);
@@ -131,8 +130,8 @@ public class UserPanel extends TranslucenceJPanel {
         };
         text.addMouseListener(adapter1);
         centerup.add(text);
-        resource = new JLabel("写文章("+b+")",JLabel.CENTER);
-        resource.setFont(new Font("宋体",Font.PLAIN,30));
+        resource = new JLabel("写文章("+bnum+")",JLabel.CENTER);
+        resource=setFontLabel(resource);
 
         MouseAdapter adapter2 = new MouseAdapter() {
             //            @Override
@@ -144,10 +143,7 @@ public class UserPanel extends TranslucenceJPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // TODO Auto-generated method stub
-                resource.setBorder(null);
-                text.setBorder(null);
-                topic.setBorder(null);
-                answer.setBorder(null);
+                clear();
                 resource.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
                 centerc.removeAll();
                 centerc.add(new WritePanel());
@@ -163,23 +159,19 @@ public class UserPanel extends TranslucenceJPanel {
         };
         resource.addMouseListener(adapter2);
         centerup.add(resource);
-        topic = new JLabel("论坛("+c+")",JLabel.CENTER);
-//		topic.setBounds(310, 20, 100, 20);
+        topic = new JLabel("我的收藏("+cnum+")",JLabel.CENTER);
         topic.setFont(new Font("宋体",Font.PLAIN,30));
+
         MouseAdapter adapter3 = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 // TODO Auto-generated method stub
-
                 topic.setForeground(Color.black);
             }
             @Override
             public void mouseClicked(MouseEvent e) {
                 // TODO Auto-generated method stub
-                resource.setBorder(null);
-                text.setBorder(null);
-                topic.setBorder(null);
-                answer.setBorder(null);
+                clear();
                 topic.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
             }
             @Override
@@ -192,10 +184,9 @@ public class UserPanel extends TranslucenceJPanel {
         topic.addMouseListener(adapter3);
         topic.addMouseMotionListener(adapter3);
         centerup.add(topic);
-        answer = new JLabel("问答("+d+")",JLabel.CENTER);
+        answer = new JLabel("我的评论("+dnum+")",JLabel.CENTER);
+        answer=setFontLabel(answer);
 
-//		answer.setBounds(430, 20, 100, 20);
-        answer.setFont(new Font("宋体",Font.PLAIN,30));
         MouseAdapter adapter4 = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
@@ -205,11 +196,13 @@ public class UserPanel extends TranslucenceJPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // TODO Auto-generated method stub
-                resource.setBorder(null);
-                text.setBorder(null);
-                topic.setBorder(null);
-                answer.setBorder(null);
+                clear();
                 answer.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
+                CommentPanel commentPanel = new CommentPanel();
+                centerc.removeAll();
+                centerc.add(commentPanel);
+                centerc.updateUI();
+                repaint();
             }
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -222,7 +215,7 @@ public class UserPanel extends TranslucenceJPanel {
         centerup.add(answer);
 
         //center.setBackground(new Color(250,235,215));
-        center.setBounds(GetWH.getWidth()/5+90,0, GetWH.getWidth()*3/5, 740);
+        center.setBounds(GetWH.getWidth()/5+190,0, GetWH.getWidth()*3/5, 740);
         center.add(centerup,BorderLayout.NORTH);
         center.add(jScrollPane,BorderLayout.CENTER);
         down = new DownPanel();
@@ -239,6 +232,17 @@ public class UserPanel extends TranslucenceJPanel {
         //Big.setBackground(Color.lightGray);
         this.add(Big,BorderLayout.CENTER);
 
+
+    }
+    public void clear(){
+        resource.setBorder(null);
+        text.setBorder(null);
+        topic.setBorder(null);
+        answer.setBorder(null);
+    }
+    public JLabel setFontLabel(JLabel jlabel){
+        jlabel.setFont(new Font("宋体",Font.PLAIN,30));
+        return jlabel;
     }
 
 }
