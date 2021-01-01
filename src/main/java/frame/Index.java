@@ -1,15 +1,12 @@
 package frame;
 
 import conf.IndexConf;
-import frame.modle.label.ClassLabel;
 import frame.modle.label.RankLabel;
 import frame.modle.panel.ClassPanel;
 import frame.modle.panel.NavigationBarPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * 论坛首页界面
@@ -18,13 +15,9 @@ import java.awt.event.MouseEvent;
 
 public class Index extends JPanel implements IndexConf {
 
-    public JPanel northPanel, centerPanel, westPanel; // 三个大边界板块
+    public JPanel  centerPanel, westPanel; // 三个大边界板块
     public static final  String[] classification = new String[] //首页分类 整体从数据库获取
             {"C语言", "数据结构", "C++", "数据库", "Java", "Golang", "linux", "区块链", "人工智能", "软件安全"};
-    public final  String[] personAction = new String[]{"收藏", "消息", "发表文章"};
-    public JTextField searchTextField;
-    public JLabel searchLabel;
-    public JLabel headImage;
     public JPanel mainPanel;
     public JScrollPane scrollPane;
     public JPanel CCPanel;
