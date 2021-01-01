@@ -1,14 +1,19 @@
 package frame.modle.panel;
 
+import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
 import conf.IndexConf;
 import entity.Article;
+import entity.Comment;
 import entity.User;
+import frame.Index;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ArticleDetailsPanel extends JPanel implements IndexConf {
@@ -16,14 +21,18 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
     public Article article;
     public User author; // 作者信息
     public JPanel articleDetailNorthPanel, articleDetailCenterPanel, articleDetailSouthPanel;
+    public JTextPane writeCommentPane;
+    public JLabel publishLabel;
+    public Index index;
 
 
     public void init() {
         this.setLayout(new BorderLayout());
-        this.setPreferredSize(new Dimension(1200, 900));
+        this.setPreferredSize(new Dimension(1200, 2600));
         initAuthor();
         initNorth();
         initCenter();
+        initSouth();
     }
 
 
@@ -53,8 +62,8 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         initLabel(collectionLabel);
         initLabel(classLabel);
 
-        writeTimeLabel.setPreferredSize(new Dimension(240,50));
-        authorNameLabel.setFont(new Font("宋体",Font.BOLD,22));
+        writeTimeLabel.setPreferredSize(new Dimension(240, 50));
+        authorNameLabel.setFont(new Font("宋体", Font.BOLD, 22));
         authorNameLabel.setForeground(new Color(121, 86, 102));
         authorNameLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -96,38 +105,98 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
 
     public void initCenter() {
         JPanel textSynopsisPanel, textPortPanel;
-        JLabel textSynopsisImageLabel,textSynopsisLabel;
+        JLabel textSynopsisImageLabel, textSynopsisLabel;
         JTextPane textPortPane;
 
         articleDetailCenterPanel = new JPanel(new BorderLayout());
 
         textSynopsisPanel = new JPanel(new BorderLayout());
-        textSynopsisPanel.setPreferredSize(new Dimension(1200,225));
-        textSynopsisPanel.setBorder(BorderFactory.createMatteBorder(1,1,1,1,Color.BLACK));
+        textSynopsisPanel.setPreferredSize(new Dimension(1200, 225));
+        textSynopsisPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         textSynopsisImageLabel = new JLabel("图片");
         textSynopsisLabel = new JLabel("简介");
-        textSynopsisImageLabel.setPreferredSize(new Dimension(400,225));
-        textSynopsisLabel.setPreferredSize(new Dimension(800,225));
-        textSynopsisLabel.setBorder(BorderFactory.createMatteBorder(0,0,0,1,Color.BLACK));
-        textSynopsisPanel.add(textSynopsisLabel,BorderLayout.WEST);
-        textSynopsisPanel.add(textSynopsisImageLabel,BorderLayout.EAST);
+        textSynopsisImageLabel.setPreferredSize(new Dimension(400, 225));
+        textSynopsisLabel.setPreferredSize(new Dimension(800, 225));
+        textSynopsisLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+        textSynopsisPanel.add(textSynopsisLabel, BorderLayout.WEST);
+        textSynopsisPanel.add(textSynopsisImageLabel, BorderLayout.EAST);
 
         textPortPanel = new JPanel();
-        textPortPanel.setPreferredSize(new Dimension(1200,500));
+        textPortPanel.setPreferredSize(new Dimension(1200, 500));
         textPortPane = new JTextPane();
         textPortPane.setText(article.getText());
-        textPortPane.setPreferredSize(new Dimension(1200,500));
+        textPortPane.setPreferredSize(new Dimension(1200, 500));
         textPortPane.setEditable(false);
         textPortPane.setBackground(new Color(238, 238, 238));
-        textPortPane.setFont(new Font("宋体",Font.BOLD,22));
+        textPortPane.setFont(new Font("宋体", Font.BOLD, 22));
 
-        textPortPane.setBorder(BorderFactory.createMatteBorder(0,1,0,1,Color.BLACK));
-        textPortPanel.setBorder(BorderFactory.createMatteBorder(1,1,1,1,Color.BLACK));
-        textPortPanel.add(textPortPane,BorderLayout.CENTER);
+        textPortPane.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, Color.BLACK));
+        textPortPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+        textPortPanel.add(textPortPane, BorderLayout.CENTER);
 
         articleDetailCenterPanel.add(textSynopsisPanel, BorderLayout.NORTH);
         articleDetailCenterPanel.add(textPortPanel, BorderLayout.CENTER);
         this.add(articleDetailCenterPanel, BorderLayout.CENTER);
+    }
+
+    public void initSouth() {
+        /**
+         * 数据库拉取 评论区列表
+         */
+        ////////////////////////////////
+        ArrayList<Comment> list = new ArrayList<Comment>();
+        for (int i = 0;i < 10;i++) {
+            list.add(Comment.initComment());
+        }
+        ////////////////////////////////
+
+        articleDetailSouthPanel = new JPanel(new BorderLayout());
+
+        writeCommentPane = new JTextPane();
+        writeCommentPane.setFont(new Font("宋体", Font.BOLD, 22));
+
+        publishLabel = new JLabel("发表");
+        publishLabel.setOpaque(true);
+        publishLabel.setFont(new Font("宋体", Font.BOLD, 22));
+        publishLabel.setBackground(new Color(255, 77, 77));
+        publishLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("BB赖赖");
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                publishLabel.setBackground(new Color(252, 19, 0));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                publishLabel.setBackground(new Color(255, 77, 77));
+            }
+        });
+
+        writeCommentPane.setPreferredSize(new Dimension(800, 120));
+        publishLabel.setPreferredSize(new Dimension(100, 150));
+
+        JPanel writePanel = new JPanel(new BorderLayout());
+
+
+        writePanel.add(writeCommentPane, BorderLayout.CENTER);
+        writePanel.add(publishLabel, BorderLayout.EAST);
+        articleDetailSouthPanel.add(writePanel,BorderLayout.NORTH);
+
+        JPanel commentListPanel = new JPanel(new GridLayout(10,1));
+        commentListPanel.setPreferredSize(new Dimension(1200,list.size() * 105));
+
+        for (Comment comment : list) {
+            ArticleDetailsCommentPanel articleDetailsCommentPanel = new ArticleDetailsCommentPanel(comment);
+            commentListPanel.add(articleDetailsCommentPanel);
+        }
+
+        articleDetailSouthPanel.add(commentListPanel,BorderLayout.CENTER);
+        this.add(articleDetailSouthPanel, BorderLayout.SOUTH);
+
     }
 
     public void initAuthor() {
@@ -142,7 +211,8 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         label.setPreferredSize(new Dimension(100, 50));
     }
 
-    public ArticleDetailsPanel(Article article) {
+    public ArticleDetailsPanel(Article article, Index index) {
+        this.index = index;
         this.article = article;
         init();
     }
@@ -163,14 +233,5 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         init();
     }
 
-    public static void main(String[] args) {
-        JFrame jFrame = new JFrame("test");
-        jFrame.setLayout(new FlowLayout());
-        jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        jFrame.add(new ArticleDetailsPanel(Article.initArticle()));
-        jFrame.setLocationRelativeTo(null);
-        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jFrame.setVisible(true);
-    }
 
 }
