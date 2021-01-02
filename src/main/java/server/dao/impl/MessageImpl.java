@@ -17,7 +17,7 @@ public class MessageImpl implements IMessageDao {
         preparedStatement.setString(2,message.getAcceptId());
         preparedStatement.setString(3,message.getText());
         preparedStatement.setDate(4, (Date) message.getTime());
-        preparedStatement.setInt(5,message.getState());
+        preparedStatement.setBoolean(5,message.getState());
         preparedStatement.executeUpdate();
         preparedStatement.close();
         connection.close();

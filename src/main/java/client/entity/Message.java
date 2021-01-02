@@ -61,7 +61,7 @@ public class Message implements java.io.Serializable{
         this.time = time;
     }
 
-    public int getState() {
+    public boolean getState() {
         return state;
     }
 
