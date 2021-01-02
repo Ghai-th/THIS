@@ -13,7 +13,6 @@ public interface IUserDao {
     void updateUserName(String name);
     void updateUserPassword(String password);
     void updateUserGender(Integer gender);
-    void updateUserImage(Byte[]image);
     void updateUserFansNum(Integer fansNum);
     void updateUserAttentionnum(Integer attentionNum);
     void updateUserVisitorNum(Integer visitorNum);
@@ -22,6 +21,7 @@ public interface IUserDao {
     void updateUserUpdate(Date update);
     void updateUserSynopsis(String synopsis);
     void updateUserActive(Integer active);
+    void updateUserKey(Integer key);
 
     List<User> selectUsers();
 }
