@@ -2,11 +2,13 @@ package client.util;
 
 import client.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import data.Operate;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * 向服务器传送单指令、指令加对象
@@ -14,15 +16,22 @@ import java.util.List;
  */
 public class ClientUtil {
 
+    public static int port;
+    public static String host;
     public static Socket socket;
     public static OutputStream outputStream;
     public static ObjectOutputStream objectOutputStream;
     public static InputStream inputStream;
     public static ObjectInputStream objectInputStream;
 
+
     static {
         try {
-            socket = new Socket("localhost",2222);
+            Properties properties = new Properties();
+            properties.load(new FileInputStream(new File("db.properties")));
+            port = Integer.parseInt(properties.getProperty("server.port"));
+            host = properties.getProperty("server.host");
+            socket = new Socket(host,port);
             outputStream = socket.getOutputStream();
             inputStream = socket.getInputStream();
             objectOutputStream = new ObjectOutputStream(outputStream);
@@ -61,6 +70,18 @@ public class ClientUtil {
     }
 
     /**
+     * 向服务器发送单指令
+     * @param operate 指令对象
+     */
+    public static void sendOperate(Operate operate) {
+        try {
+            objectOutputStream.writeObject(operate);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 获取服务器返回的信息
      * @return 返回信息的list
      */
@@ -88,11 +109,6 @@ public class ClientUtil {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println(ClientUtil.acceptInfo(User.class));
     }
 
 }
