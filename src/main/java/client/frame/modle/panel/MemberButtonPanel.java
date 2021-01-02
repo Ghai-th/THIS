@@ -5,10 +5,10 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class MemberPanel4 extends JPanel {
+public class MemberButtonPanel extends JPanel {
     JLabel imagJLabel;
     JLabel textJLabel;
-    public MemberPanel4(String imag,String text){
+    public MemberButtonPanel(String imag, String text){
         setLayout(new GridLayout(1,2));
         imagJLabel = new JLabel(imag);
         textJLabel = new JLabel(text);

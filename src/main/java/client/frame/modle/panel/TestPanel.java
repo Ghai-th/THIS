@@ -20,16 +20,16 @@ public class TestPanel extends JPanel {
     TranslucenceJPanel userJPanel3;//放入第三行的JPanel
     TranslucenceJPanel buttonJPanel;//放入两个按钮的JPanel
     JPanel textPanel;//放在用户信息透明图的下方的热门文章推荐
-    MemberPanel5 textRowone;//放在热门文章推荐的第一行
-    MemberPanel5 textRowtwo;//放在热门文章推荐的第二行
-    MemberPanel5 textRowthree;//放在热门文章推荐的第三行
-    MemberPanel5 textRowfour;//放在热门文章推荐的第四行
-    MemberPanel5 textRowfive;//放在热门文章推荐的第五行
-    MemberPanel5 textRowsix;//放在热门文章推荐的第六行
+    MemberArticlePanel textRowone;//放在热门文章推荐的第一行
+    MemberArticlePanel textRowtwo;//放在热门文章推荐的第二行
+    MemberArticlePanel textRowthree;//放在热门文章推荐的第三行
+    MemberArticlePanel textRowfour;//放在热门文章推荐的第四行
+    MemberArticlePanel textRowfive;//放在热门文章推荐的第五行
+    MemberArticlePanel textRowsix;//放在热门文章推荐的第六行
 
-    MemberPanel1 imagMemberPanel1,signMemberPanel1;
-    MemberPanel2 originalMemberPanel2, rankMemberPanel2, visitMemberPanel2, gradeMemberPanel2;
-    MemberPanel3 fansMemberPanel3,attentionMemberPanel3;
+    MemberImagPanel imagMemberPanel1,signMemberPanel1;
+    MemberColorPanel originalMemberPanel2, rankMemberPanel2, visitMemberPanel2, gradeMemberPanel2;
+    MemberNoColorPanel fansMemberPanel3,attentionMemberPanel3;
 
 
     int width = GetWH.getWidth();//得到宽
@@ -56,12 +56,12 @@ public class TestPanel extends JPanel {
         userJPanel3 = new TranslucenceJPanel();
         buttonJPanel = new TranslucenceJPanel();
         textPanel = new JPanel();
-        textRowone = new MemberPanel5("热门");
-        textRowtwo = new MemberPanel5("走进java重写");
-        textRowthree = new MemberPanel5("走进java重写");
-        textRowfour = new MemberPanel5("走进java重写");
-        textRowfive = new MemberPanel5("走进java重写");
-        textRowsix = new MemberPanel5("走进java重写");
+        textRowone = new MemberArticlePanel("热门");
+        textRowtwo = new MemberArticlePanel("走进java重写");
+        textRowthree = new MemberArticlePanel("走进java重写");
+        textRowfour = new MemberArticlePanel("走进java重写");
+        textRowfive = new MemberArticlePanel("走进java重写");
+        textRowsix = new MemberArticlePanel("走进java重写");
 
 
         textRowone.setForeground(Color.lightGray);
@@ -155,37 +155,37 @@ public class TestPanel extends JPanel {
             }
         });
 
-        imagMemberPanel1  = new MemberPanel1("头像","666");
+        imagMemberPanel1  = new MemberImagPanel("头像","666");
         imagMemberPanel1.setOpaque(false);//设置全透明
         imagMemberPanel1.setTransparent(0.1f);//设置透明度
         //imagMemberPanel1.setBorder(BorderFactory.createEtchedBorder());
 
-        originalMemberPanel2 = new MemberPanel2("0","原创");
+        originalMemberPanel2 = new MemberColorPanel("0","原创");
         originalMemberPanel2.setOpaque(false);//设置全透明
         originalMemberPanel2.setTransparent(0.1f);//设置透明度
        // originalMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        rankMemberPanel2 = new MemberPanel2("0","排名");
+        rankMemberPanel2 = new MemberColorPanel("0","排名");
         rankMemberPanel2.setOpaque(false);//设置全透明
         rankMemberPanel2.setTransparent(0.1f);//设置透明度
        // rankMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        gradeMemberPanel2 = new MemberPanel2("1","等级");
+        gradeMemberPanel2 = new MemberColorPanel("1","等级");
         gradeMemberPanel2.setOpaque(false);//设置全透明
         gradeMemberPanel2.setTransparent(0.1f);//设置透明度
         //gradeMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        visitMemberPanel2 = new MemberPanel2("0","访客");
+        visitMemberPanel2 = new MemberColorPanel("0","访客");
         visitMemberPanel2.setOpaque(false);//设置全透明
         visitMemberPanel2.setTransparent(0.1f);//设置透明度
         //visitMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        fansMemberPanel3 = new MemberPanel3("0","粉丝");
+        fansMemberPanel3 = new MemberNoColorPanel("0","粉丝");
         fansMemberPanel3.setOpaque(false);//设置全透明
         fansMemberPanel3.setTransparent(0.1f);//设置透明度
         //fansMemberPanel3.setBorder(BorderFactory.createEtchedBorder());
 
-        attentionMemberPanel3 = new MemberPanel3("0","关注");
+        attentionMemberPanel3 = new MemberNoColorPanel("0","关注");
         attentionMemberPanel3.setOpaque(false);//设置全透明
         attentionMemberPanel3.setTransparent(0.1f);//设置透明度
         ///attentionMemberPanel3.setBorder(BorderFactory.createEtchedBorder());
