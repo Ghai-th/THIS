@@ -1,4 +1,4 @@
-package server.utiles;
+package server.util;
 
 import java.io.File;
 import java.io.FileInputStream;
