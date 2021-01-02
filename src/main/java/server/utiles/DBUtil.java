@@ -153,13 +153,14 @@ public class DBUtil {
     public static void closeResources(Connection conn, Statement stat, ResultSet set) {
         if (set != null) {
             try {
-                set.close();
+                set.close();int x;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         if (stat != null) {
             try {
+                int y;
                 stat.close();
             } catch (SQLException e) {
                 e.printStackTrace();
