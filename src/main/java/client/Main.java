@@ -16,6 +16,7 @@ public class Main implements IndexConf {
         Index index = new Index();
         jFrame.add(index);
         jFrame.setLocationRelativeTo(null);
+
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 //        jFrame.setResizable(false);
         jFrame.setVisible(true);
