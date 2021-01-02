@@ -9,10 +9,10 @@ import java.awt.event.MouseListener;
  * 封装用户面板中的第二行用的JPanel
  */
 
-public class MemberPanel2 extends TranslucenceJPanel {
+public class MemberColorPanel extends TranslucenceJPanel {
     JLabel upJLabel;//上部label
     JLabel downJLabel;//下部label
-    public MemberPanel2(String up, String down){
+    public MemberColorPanel(String up, String down){
         upJLabel = new JLabel(up,JLabel.CENTER);
         downJLabel = new JLabel(down,JLabel.CENTER);
         downJLabel.setFont(new Font("宋体",Font.PLAIN,20));

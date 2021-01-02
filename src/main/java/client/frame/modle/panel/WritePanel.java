@@ -11,7 +11,7 @@ public class WritePanel extends JPanel {
     JPanel ccenterJPanel;//中部的中面面板
     JPanel csouthPanel;//中部的南面面板
 
-    MemberPanel4 fileJpanel,pictureJPanel,expressionJPanel,mp4JPanel;
+    MemberButtonPanel fileJpanel,pictureJPanel,expressionJPanel,mp4JPanel;
     private JPanel up,down;
     private JLabel l_title,l_yueshu;
     private JTextField t_title;
@@ -124,10 +124,10 @@ public class WritePanel extends JPanel {
         //中部的中面面板的设置
         ccenterJPanel = new JPanel();
         ccenterJPanel.setLayout(new FlowLayout(0));//设置中部的中面面板为流式布局
-        fileJpanel = new MemberPanel4("图标:","文件");
-        pictureJPanel = new MemberPanel4("图标:","图片");
-        expressionJPanel = new MemberPanel4("图标:","表情");
-        mp4JPanel = new MemberPanel4("图标:","视频");
+        fileJpanel = new MemberButtonPanel("图标:","文件");
+        pictureJPanel = new MemberButtonPanel("图标:","图片");
+        expressionJPanel = new MemberButtonPanel("图标:","表情");
+        mp4JPanel = new MemberButtonPanel("图标:","视频");
 
         fileJpanel.setPreferredSize(new Dimension(100,40));
         pictureJPanel.setPreferredSize(new Dimension(100,40));

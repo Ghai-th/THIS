@@ -5,9 +5,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class MemberPanel5 extends JPanel {
+public class MemberArticlePanel extends JPanel {
     JLabel textJLabel;
-    public MemberPanel5(final String text){
+    public MemberArticlePanel(final String text){
         textJLabel = new JLabel(text);
         setLayout(new GridLayout(1,1));
         textJLabel.setFont(new Font("宋体",Font.BOLD,20));
