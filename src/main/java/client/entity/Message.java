@@ -18,6 +18,10 @@ public class Message {
         this.time = new Date();
     }
 
+    public Message(String acceptId){
+        this.acceptId = acceptId;
+    }
+
     public Message() {
     }
 
@@ -53,7 +57,7 @@ public class Message {
         this.time = time;
     }
 
-    public Boolean getState() {
+    public int getState() {
         return state;
     }
 
