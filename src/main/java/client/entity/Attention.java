@@ -1,6 +1,6 @@
 package client.entity;
 
-public class Attention {
+public class Attention implements java.io.Serializable{
     private String uid;
     private String fansId;
 

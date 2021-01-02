@@ -3,7 +3,7 @@ package client.entity;
 /**
  * 分类实体类
  */
-public class Class {
+public class Class implements java.io.Serializable{
     private String name;
     private String cid;
     private String synopsis;

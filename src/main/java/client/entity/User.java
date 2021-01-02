@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * 用户实体类
  */
-public class User {
+public class User implements java.io.Serializable{
     private String uid;
     private String name;
     private Integer level;

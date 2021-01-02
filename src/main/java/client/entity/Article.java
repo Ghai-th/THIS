@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * 文章实体类
  */
-public class Article {
+public class Article implements java.io.Serializable{
     private String aid;
     private String uid;
     private String cid;

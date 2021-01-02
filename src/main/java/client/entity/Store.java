@@ -2,7 +2,7 @@ package client.entity;
 
 import java.util.Date;
 
-public class Store {
+public class Store implements java.io.Serializable{
     private String uid;
     private String aid;
     private Date time;

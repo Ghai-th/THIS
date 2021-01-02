@@ -2,7 +2,7 @@ package client.entity;
 
 import java.util.Date;
 
-public class Comment {
+public class Comment implements java.io.Serializable{
     private String cid;
     private String uid;
     private String aid;

@@ -4,7 +4,7 @@ package client.entity;
 
 import java.util.Date;
 
-public class Message {
+public class Message implements java.io.Serializable{
     private String sendId;
     private String acceptId;
     private String text;
