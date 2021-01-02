@@ -1,4 +1,5 @@
 package server.dao;
 
-public class ArticleDao {
+public interface ArticleDao {
+
 }
