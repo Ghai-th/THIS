@@ -1,6 +1,7 @@
 package client.entity;
 
 
+
 import java.util.Date;
 
 public class Message {
@@ -8,9 +9,9 @@ public class Message {
     private String acceptId;
     private String text;
     private Date time;
-    private Boolean state;
+    private Integer state;
 
-    public Message(String sendId, String acceptId, String text, Boolean state) {
+    public Message(String sendId, String acceptId, String text, Integer state) {
         this.sendId = sendId;
         this.acceptId = acceptId;
         this.text = text;
@@ -61,7 +62,7 @@ public class Message {
         return state;
     }
 
-    public void setState(Boolean state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
