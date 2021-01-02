@@ -46,9 +46,8 @@ public class DBUtil {
 
     /**
      * 获取执行sql对象的方法
-     *
-     * @return
-     * @throws SQLException
+     * @return 返回连接对象
+     * @throws SQLException 异常
      */
     public static Statement getStatement(Connection conn) throws SQLException {
         return conn.createStatement();
@@ -56,10 +55,9 @@ public class DBUtil {
 
     /**
      * 通用DML操作工具方法
-     *
-     * @param stat
-     * @param sql
-     * @return
+     * @param stat 查询对象
+     * @param sql sql
+     * @return 返回 查询集合
      */
     public static int executeChange(Statement stat, String sql) {
         int executeUpdate = 0;
@@ -74,12 +72,11 @@ public class DBUtil {
 
     /**
      * 通用DQL操作工具方法 查询单条
-     *
-     * @param <T>
-     * @param stat
-     * @param sql
-     * @param clz
-     * @return
+     * @param <T> 泛型
+     * @param stat 查寻界面
+     * @param sql 语句
+     * @param clz class对象
+     * @return 查询结果
      */
     public static <T> T executeGetData(Statement stat, String sql, Class<T> clz) {
         try {
@@ -101,7 +98,6 @@ public class DBUtil {
                 }
                 return t;
             }
-
             return null;
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -113,13 +109,12 @@ public class DBUtil {
     }
 
     /**
-     * 通用DQL操作工具方法 查询多条数据
-     *
-     * @param <T>
-     * @param stat
-     * @param sql
-     * @param clz
-     * @return
+     * 通用DQL操作工具方法 查询多条数
+     * @param <T> 泛型
+     * @param stat 查询对象
+     * @param sql sql
+     * @param clz class对象
+     * @return 返回查询集合
      */
     public static <T> List<T> executeGetMoreData(Statement stat, String sql, Class<T> clz) {
         List<T> list = new ArrayList<T>();
@@ -144,26 +139,22 @@ public class DBUtil {
             }
             return list;
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return list;
     }
 
 
     /**
      * 关闭SQL操作类型的有关资源
-     *
-     * @param conn
-     * @param stat
+     * @param conn 连接对象
+     * @param stat 查询对象
      */
     public static void closeResources(Connection conn, Statement stat, ResultSet set) {
         if (set != null) {
             try {
                 set.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -171,7 +162,6 @@ public class DBUtil {
             try {
                 stat.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -179,7 +169,6 @@ public class DBUtil {
             try {
                 conn.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -189,8 +178,8 @@ public class DBUtil {
     /**
      * 关闭SQL操作类型的有关资源
      *
-     * @param conn
-     * @param stat
+     * @param conn 连接对象
+     * @param stat 查询对象
      */
     public static void closeResources(Connection conn, Statement stat) {
         if (stat != null) {
