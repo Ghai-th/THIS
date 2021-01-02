@@ -20,9 +20,10 @@ public class User {
     private Date create;
     private Date update;
     private String synopsis;
+    private Integer active;
 
     public User(String uid, String name, Integer level, String password, Integer gender, Byte[] image,
-                Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis) {
+                Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis, Integer active) {
         this.uid = uid;
         this.name = name;
         this.level = level;
@@ -36,6 +37,7 @@ public class User {
         this.create = new Date();
         this.update = new Date();
         this.synopsis = synopsis;
+        this.active = active;
     }
 
     public User() {
@@ -53,6 +55,15 @@ public class User {
         user.setUid("1001");
         user.setPassword("123");
         user.setVisitorNum(1);
+        user.setActive(1);
+    }
+
+    public Integer getActive() {
+        return active;
+    }
+
+    public void setActive(Integer active) {
+        this.active = active;
     }
 
     public String getUid() {
