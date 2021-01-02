@@ -4,7 +4,7 @@ import client.entity.Comment;
 
 import java.util.List;
 
-public interface CommentService {
+public interface ICommentService {
 
     boolean addComment(Comment comment);
 

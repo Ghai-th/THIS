@@ -4,10 +4,11 @@ import client.entity.Comment;
 
 import java.util.List;
 
-public interface CommentDao {
-
-
-    int i = 1;
+public interface ICommentDao {
+    /**
+     *
+     * @param comment
+     */
     void addComment(Comment comment);
 
     void deleteComment(Comment comment);

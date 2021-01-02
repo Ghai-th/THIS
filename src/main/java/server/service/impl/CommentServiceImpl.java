@@ -1,15 +1,15 @@
 package server.service.impl;
 
 import client.entity.Comment;
-import server.dao.CommentDao;
+import server.dao.ICommentDao;
 import server.dao.impl.CommentDaoImpl;
-import server.service.CommentService;
+import server.service.ICommentService;
 
 import java.util.List;
 
-public class CommentServiceImpl implements CommentService {
+public class CommentServiceImpl implements ICommentService {
 
-    CommentDao commentDao = new CommentDaoImpl();
+    ICommentDao commentDao = new CommentDaoImpl();
 
     @Override
     public boolean addComment(Comment comment) {

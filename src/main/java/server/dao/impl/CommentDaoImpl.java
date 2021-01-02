@@ -1,13 +1,13 @@
 package server.dao.impl;
 
 import client.entity.Comment;
-import server.dao.CommentDao;
+import server.dao.ICommentDao;
 import server.util.DBUtil;
 
 import java.sql.*;
 import java.util.List;
 
-public class CommentDaoImpl implements CommentDao {
+public class CommentDaoImpl implements ICommentDao {
 
     Connection conn = null;
     Statement stmt = null;
