@@ -21,9 +21,11 @@ public class User {
     private Date update;
     private String synopsis;
     private Integer active;
+    private Integer key;
 
     public User(String uid, String name, Integer level, String password, Integer gender, Byte[] image,
-                Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis, Integer active) {
+                Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis,
+                Integer active,Integer key) {
         this.uid = uid;
         this.name = name;
         this.level = level;
@@ -38,6 +40,15 @@ public class User {
         this.update = new Date();
         this.synopsis = synopsis;
         this.active = active;
+        this.key = key;
+    }
+    public User(String uid,String password){
+        this.uid = uid;
+        this.password = password;
+    }
+    public User(String uid, Integer key){
+        this.uid = uid;
+        this.key = key;
     }
 
     public User() {
@@ -56,6 +67,7 @@ public class User {
         user.setPassword("123");
         user.setVisitorNum(1);
         user.setActive(1);
+        user.setKey(1);
     }
 
     public Integer getActive() {
@@ -170,6 +182,14 @@ public class User {
         this.synopsis = synopsis;
     }
 
+    public Integer getKey(){
+        return key;
+    }
+
+    public void setKey(Integer key){
+        this.key = key;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -186,6 +206,8 @@ public class User {
                 ", create=" + create +
                 ", update=" + update +
                 ", synopsis='" + synopsis + '\'' +
+                ", active=" + active +
+                ", key='" + key + '\'' +
                 '}';
     }
 }

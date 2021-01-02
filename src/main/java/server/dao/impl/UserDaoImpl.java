@@ -84,19 +84,6 @@ public class UserDaoImpl implements IUserDao {
         }
     }
 
-    @Override
-    public void updateUserImage(Byte[] image) {
-        String sql = "update User set image = '" + image + "'";
-        try {
-            Connection connection = DBUtil.getConnection();
-            Statement statement = connection.createStatement();
-            DBUtil.executeChange(statement,sql);
-            connection.close();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void updateUserFansNum(Integer fansNum) {
@@ -211,12 +198,28 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
+    public void updateUserKey(Integer key) {
+        String sql = "update User set key = '" + key + "'";
+        try {
+            Connection connection = DBUtil.getConnection();
+            Statement statement = connection.createStatement();
+            DBUtil.executeChange(statement,sql);
+            connection.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public List<User> selectUsers() {
         String sql = "select * form User";
         try {
             Connection connection = DBUtil.getConnection();
             Statement statement = connection.createStatement();
             List<User> users = DBUtil.executeGetMoreData(statement,sql,User.class);
+            connection.close();
+            statement.close();
             return users;
         } catch (SQLException e) {
             e.printStackTrace();
