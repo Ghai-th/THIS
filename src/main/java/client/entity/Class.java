@@ -4,6 +4,9 @@ package client.entity;
  * 分类实体类
  */
 public class Class implements java.io.Serializable{
+
+    private static final long serialVersionUID = 1111002L;
+
     private String name;
     private String cid;
     private String synopsis;

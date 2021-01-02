@@ -3,6 +3,9 @@ package client.entity;
 import java.util.Date;
 
 public class Store implements java.io.Serializable{
+
+    private static final long serialVersionUID = 1111005L;
+
     private String uid;
     private String aid;
     private Date time;

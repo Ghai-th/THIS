@@ -7,6 +7,9 @@ import java.util.Date;
  * 文章实体类
  */
 public class Article implements java.io.Serializable{
+
+    private static final long serialVersionUID = 1111000L;
+
     private String aid;
     private String uid;
     private String cid;

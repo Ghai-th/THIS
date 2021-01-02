@@ -3,6 +3,9 @@ package client.entity;
 import java.util.Date;
 
 public class Comment implements java.io.Serializable{
+
+    private static final long serialVersionUID = 1111003L;
+
     private String cid;
     private String uid;
     private String aid;

@@ -5,6 +5,9 @@ package client.entity;
 import java.util.Date;
 
 public class Message implements java.io.Serializable{
+
+    private static final long serialVersionUID = 1111004L;
+
     private String sendId;
     private String acceptId;
     private String text;
