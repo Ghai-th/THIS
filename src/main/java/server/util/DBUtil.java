@@ -80,20 +80,17 @@ public class DBUtil {
      */
     public static <T> T executeGetData(Statement stat, String sql, Class<T> clz) {
         try {
-            // 拿到当前JavaBean对象的所有属性
             Field[] fields = clz.getDeclaredFields();
-            // 查询数据库数据
             ResultSet set = stat.executeQuery(sql);
-            // 根据数据库数据设置值
             if (set.next()) {
-                // 通过反射构建JavaBean对象
                 T t = clz.newInstance();
                 for (int i = 0; i < fields.length; i++) {
                     Field field = fields[i];
-//                    System.out.println(field.getName());
                     field.setAccessible(true);
+                    if (field.getName().equals("operate")) {
+                        continue;
+                    }
                     Object object = set.getObject(field.getName());
-//                    System.out.println(object);
                     field.set(t, object);
                 }
                 return t;
@@ -119,17 +116,13 @@ public class DBUtil {
     public static <T> List<T> executeGetMoreData(Statement stat, String sql, Class<T> clz) {
         List<T> list = new ArrayList<T>();
         try {
-            // 拿到当前JavaBean对象的所有属性
             Field[] fields = clz.getDeclaredFields();
-            // 查询数据库数据
             ResultSet set = stat.executeQuery(sql);
-            // 根据数据库数据设置值
             while (set.next()) {
-                // 通过反射构建JavaBean对象
                 T t = clz.newInstance();
                 for (int i = 0; i < fields.length; i++) {
                     Field field = fields[i];
-                    if (field.getName().equals("cart")) {
+                    if (field.getName().equals("operate")) {
                         continue;
                     }
                     field.setAccessible(true);

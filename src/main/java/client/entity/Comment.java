@@ -1,8 +1,10 @@
 package client.entity;
 
+import data.Operate;
+
 import java.util.Date;
 
-public class Comment implements java.io.Serializable{
+public class Comment extends Operate implements java.io.Serializable{
 
     private static final long serialVersionUID = 1111003L;
 

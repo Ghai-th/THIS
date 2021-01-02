@@ -1,4 +1,6 @@
 import client.entity.Article;
+import client.entity.User;
+import client.util.ClientUtil;
 import org.junit.Test;
 import server.dao.IArticleDao;
 import server.dao.impl.ArticleDaoImpl;

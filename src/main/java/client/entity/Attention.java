@@ -1,6 +1,8 @@
 package client.entity;
 
-public class Attention implements java.io.Serializable{
+import data.Operate;
+
+public class Attention extends Operate implements java.io.Serializable{
 
     private static final long serialVersionUID = 1111001L;
 

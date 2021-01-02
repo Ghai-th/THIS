@@ -1,12 +1,14 @@
 package client.entity;
 
+import data.Operate;
+
 import java.sql.Blob;
 import java.util.Date;
 
 /**
  * 文章实体类
  */
-public class Article implements java.io.Serializable{
+public class Article extends Operate implements java.io.Serializable{
 
     private static final long serialVersionUID = 1111000L;
 

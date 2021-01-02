@@ -1,9 +1,11 @@
 package client.entity;
 
+import data.Operate;
+
 /**
  * 分类实体类
  */
-public class Class implements java.io.Serializable{
+public class Class extends Operate implements java.io.Serializable{
 
     private static final long serialVersionUID = 1111002L;
 

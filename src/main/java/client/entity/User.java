@@ -1,12 +1,17 @@
 package client.entity;
 
+import data.Operate;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.util.Arrays;
 import java.util.Date;
 
 /**
  * 用户实体类
  */
-public class User implements java.io.Serializable{
+public class User extends Operate implements java.io.Serializable{
 
     private static final long serialVersionUID = 1111006L;
 
