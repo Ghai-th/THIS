@@ -16,7 +16,7 @@ public class CommentServiceImpl implements ICommentService {
         //某人评论
         List<Comment> commentList = commentDao.queryAllCommentByAid(comment.getAid());
         for(Comment demo : commentList) {
-            if(demo.getUid() == comment.getUid()){
+            if(demo.getUid().equals(comment.getUid())){
                 return false;
             }
         }
@@ -29,7 +29,7 @@ public class CommentServiceImpl implements ICommentService {
         //某人删除自己的评论
         List<Comment> commentList = commentDao.queryAllCommentByUid(comment.getUid());
         for(Comment demo : commentList) {
-            if(demo.getAid() == comment.getAid()){
+            if(demo.getAid().equals(comment.getAid())){
                 commentDao.deleteComment(comment);
                 return true;
             }
