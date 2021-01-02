@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
+import java.util.List;
 
 
 public class UserDaoImpl implements IUserDao {
@@ -197,11 +198,11 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public void updateUserActive(Integer active) {
-        //String sql = "update User set attentionNum = '" + attentionNum + "'";
+        String sql = "update User set active = '" + active + "'";
         try {
             Connection connection = DBUtil.getConnection();
             Statement statement = connection.createStatement();
-           // DBUtil.executeChange(statement,sql);
+            DBUtil.executeChange(statement,sql);
             connection.close();
             statement.close();
         } catch (SQLException e) {
@@ -210,7 +211,17 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
-    public void selectUser(User user) {
+    public List<User> selectUsers() {
+        String sql = "select * form User";
+        try {
+            Connection connection = DBUtil.getConnection();
+            Statement statement = connection.createStatement();
+            List<User> users = DBUtil.executeGetMoreData(statement,sql,User.class);
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 }

@@ -3,6 +3,7 @@ package server.dao;
 import client.entity.User;
 
 import java.util.Date;
+import java.util.List;
 
 public interface IUserDao {
     void addUser(User user);
@@ -22,5 +23,5 @@ public interface IUserDao {
     void updateUserSynopsis(String synopsis);
     void updateUserActive(Integer active);
 
-    void selectUser(User user);
+    List<User> selectUsers();
 }
