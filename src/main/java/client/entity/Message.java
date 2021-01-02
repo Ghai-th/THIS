@@ -63,7 +63,7 @@ public class Message extends Operate implements java.io.Serializable{
         this.time = time;
     }
 
-    public boolean getState() {
+    public Integer getState() {
         return state;
     }
 
