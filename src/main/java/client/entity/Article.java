@@ -1,5 +1,6 @@
 package client.entity;
 
+import java.sql.Blob;
 import java.util.Date;
 
 /**
@@ -17,8 +18,7 @@ public class Article {
     private Integer visitorNum;
     private Integer likeNum;
     private Integer collectNum;
-    private Byte[] image;
-
+    private Blob image;
 
     public Article() {
     }
@@ -37,7 +37,7 @@ public class Article {
     }
 
     public Article(String aid, String uid, String cid, String tittle, String synopsis,
-                   String text, int visitorNum, int likeNum, int collect, Byte[] image) {
+                   String text, int visitorNum, int likeNum, int collect, Blob image) {
         this.aid = aid;
         this.uid = uid;
         this.cid = cid;
@@ -116,28 +116,36 @@ public class Article {
         this.update = update;
     }
 
-    public int getVisitorNum() {
+    public Integer getVisitorNum() {
         return visitorNum;
     }
 
-    public void setVisitorNum(int visitorNum) {
+    public void setVisitorNum(Integer visitorNum) {
         this.visitorNum = visitorNum;
     }
 
-    public int getLikeNum() {
+    public Integer getLikeNum() {
         return likeNum;
     }
 
-    public void setLikeNum(int likeNum) {
+    public void setLikeNum(Integer likeNum) {
         this.likeNum = likeNum;
     }
 
-    public int getCollectNum() {
+    public Integer getCollectNum() {
         return collectNum;
     }
 
-    public void setCollectNum(int collectNum) {
+    public void setCollectNum(Integer collectNum) {
         this.collectNum = collectNum;
+    }
+
+    public Blob getImage() {
+        return  image;
+    }
+
+    public void setImage(Blob image) {
+        this.image = image;
     }
 
     @Override
