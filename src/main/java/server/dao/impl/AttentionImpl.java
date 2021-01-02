@@ -12,18 +12,18 @@ import java.sql.Statement;
 import java.util.List;
 
 public class AttentionImpl implements IAttentionDao {
-
+    //点击关注后，我被加入别人的粉丝中
     @Override
-    public void addAttention(User user, String fansid) throws Exception{
+    public void addAttention(User user, String id) throws Exception{
         Connection connection = DBUtil.getConnection();
         Statement statement = DBUtil.getStatement(connection);
-        String sql = "insert into attention values ('"+user.getUid()+"','"+fansid+"')";
+        String sql = "insert into attention values ('"+id+"','"+user.getUid()+"')";
         System.out.println(sql);
         statement.executeUpdate(sql);
         statement.close();
         connection.close();
     }
-
+    //取消关注
     @Override
     public boolean deleteAttention(User user, String id) throws Exception {
         Connection connection = DBUtil.getConnection();
@@ -35,7 +35,7 @@ public class AttentionImpl implements IAttentionDao {
         preparedStatement.close();
         return false;
     }
-
+    //查询我的粉丝
     @Override
     public List<Attention> searchAttention(User user) throws Exception{
         Connection connection = DBUtil.getConnection();
@@ -45,6 +45,17 @@ public class AttentionImpl implements IAttentionDao {
         preparedStatement.close();
         connection.close();
         return DBUtil.executeGetMoreData(preparedStatement,sql,Attention.class);
-
     }
+    //查询我的关注
+    @Override
+    public List<Attention> selectAttention(User user) throws Exception {
+        Connection connection = DBUtil.getConnection();
+        String sql = "select uid from attention where fansid = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,user.getUid());
+        preparedStatement.close();
+        connection.close();
+        return DBUtil.executeGetMoreData(preparedStatement,sql,Attention.class);
+    }
+
 }
