@@ -1,0 +1,13 @@
+package server.service.impl;
+
+import server.dao.IClassDao;
+import server.dao.impl.ClassDaoImpl;
+import server.service.IClassService;
+
+public class ClassServiceImpl implements IClassService {
+    @Override
+    public Class selectClassById(String cid){
+        IClassDao classDao = new ClassDaoImpl();
+        return classDao.selectClassById(cid);
+    }
+}

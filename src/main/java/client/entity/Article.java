@@ -14,7 +14,7 @@ public class Article {
     private String synopsis;
     private String text;
     private Date create;
-    private Date update;
+    private Date renewal;
     private Integer visitorNum;
     private Integer likeNum;
     private Integer collectNum;
@@ -29,7 +29,7 @@ public class Article {
         String cid = "1";
         String tittle = "PHP是世界上最好的语言没有之一";
         String synopsis = "jk";
-        String text = "    ashj\nkl\nasaiusdfaisdfoaiudfaiudfaisdhflakjdshflakjdhflakjdfhlakjdfhalkjdhflakdjhflakjdfhaiydgfi auygdfagfkahdfgakjfgadsfgakjfgajfgkajfgakjdf\nghjkl;";
+        String text = "java是世界上最好的语言";
         int visitorNum = 10;
         int likeNum = 10;
         int collect = 10;
@@ -45,7 +45,7 @@ public class Article {
         this.synopsis = synopsis;
         this.text = text;
         this.create = new Date();
-        this.update = new Date();
+        this.renewal = new Date();
         this.visitorNum = visitorNum;
         this.likeNum = likeNum;
         this.collectNum = collect;
@@ -108,12 +108,12 @@ public class Article {
         this.create = create;
     }
 
-    public Date getUpdate() {
-        return update;
+    public Date getRenewal() {
+        return renewal;
     }
 
-    public void setUpdate(Date update) {
-        this.update = update;
+    public void setRenewal(Date renewal) {
+        this.renewal = renewal;
     }
 
     public Integer getVisitorNum() {
@@ -158,7 +158,7 @@ public class Article {
                 ", synopsis='" + synopsis + '\'' +
                 ", text='" + text + '\'' +
                 ", create=" + create +
-                ", update=" + update +
+                ", update=" + renewal +
                 ", visitorNum=" + visitorNum +
                 ", likeNum=" + likeNum +
                 ", collect=" + collectNum +
