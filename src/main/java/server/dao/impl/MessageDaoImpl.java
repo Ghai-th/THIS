@@ -7,7 +7,7 @@ import server.util.DBUtil;
 import java.sql.*;
 import java.util.List;
 
-public class MessageImpl implements IMessageDao {
+public class MessageDaoImpl implements IMessageDao {
     @Override
     public void addMessage(Message message) throws SQLException {
         Connection connection = DBUtil.getConnection();
@@ -17,7 +17,7 @@ public class MessageImpl implements IMessageDao {
         preparedStatement.setString(2,message.getAcceptId());
         preparedStatement.setString(3,message.getText());
         preparedStatement.setDate(4, (Date) message.getTime());
-        preparedStatement.setBoolean(5,message.getState());
+        preparedStatement.setInt(5,message.getState());
         preparedStatement.executeUpdate();
         preparedStatement.close();
         connection.close();

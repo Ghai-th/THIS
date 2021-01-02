@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
-public class AttentionImpl implements IAttentionDao {
+public class AttentionDaoImpl implements IAttentionDao {
     //点击关注后，我被加入别人的粉丝中
     @Override
     public void addAttention(User user, String id) throws Exception{
