@@ -1,13 +1,13 @@
 package client.entity;
 
-public class collect {
+public class Collect {
     private String uid;
     private String fansId;
 
-    public collect() {
+    public Collect() {
     }
 
-    public collect(String uid, String fansId) {
+    public Collect(String uid, String fansId) {
         this.uid = uid;
         this.fansId = fansId;
     }
