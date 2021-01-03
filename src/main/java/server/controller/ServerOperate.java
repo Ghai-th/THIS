@@ -53,6 +53,10 @@ public interface ServerOperate {
     int UPDATE_USER = 200013;
     int SELECT_USER = 200014;
 
+    /**
+     * message表对应的操作
+     */
+
 
 
 
