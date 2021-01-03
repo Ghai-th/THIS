@@ -61,7 +61,7 @@ public class UserServiceImpl implements IUserService {
     public boolean isFind(User user) {
         List<User> users = dao.selectUsers();
         for(User u:users){
-            if(u.getUid().equals(user.getUid())&&u.getKey().equals(user.getKey())){
+            if(u.getUid().equals(user.getUid())&&u.getMyKey().equals(user.getMyKey())){
                 return true;
             }
         }
@@ -80,63 +80,63 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void updateUserName(String name) {
-        dao.updateUserName(name);
+    public void updateUserName(String uid,String name) {
+        dao.updateUserName(uid,name);
     }
 
     @Override
-    public void updateUserPassword(String password) {
-        dao.updateUserPassword(password);
+    public void updateUserlevel(String uid) {
+        dao.updateUserlevel(uid);
     }
 
     @Override
-    public void updateUserGender(Integer gender) {
-        dao.updateUserGender(gender);
+    public void updateUserPassword(String uid,String password) {
+        dao.updateUserPassword(uid,password);
     }
 
     @Override
-    public void updateUserFansNum(Integer fansNum) {
-        dao.updateUserFansNum(fansNum);
+    public void updateUserGender(String uid,Integer gender) {
+        dao.updateUserGender(uid,gender);
     }
 
     @Override
-    public void updateUserAttentionnum(Integer attentionNum) {
-        dao.updateUserAttentionnum(attentionNum);
+    public void updateUserFansNum(String uid,Integer fansNum) {
+        dao.updateUserFansNum(uid,fansNum);
     }
 
     @Override
-    public void updateUserVisitorNum(Integer visitorNum) {
-        dao.updateUserVisitorNum(visitorNum);
+    public void updateUserAttentionnum(String uid,Integer attentionNum) {
+        dao.updateUserAttentionnum(uid,attentionNum);
     }
 
     @Override
-    public void updateUserArticleNum(Integer articleNum) {
-        dao.updateUserArticleNum(articleNum);
+    public void updateUserVisitorNum(String uid,Integer visitorNum) {
+        dao.updateUserVisitorNum(uid,visitorNum);
     }
 
     @Override
-    public void updateUserCreate(Date create) {
-        dao.updateUserCreate(create);
+    public void updateUserArticleNum(String uid,Integer articleNum) {
+        dao.updateUserArticleNum(uid,articleNum);
     }
 
     @Override
-    public void updateUserUpdate(Date update) {
-        dao.updateUserUpdate(update);
+    public void updateUserLastLogin(String uid) {
+        dao.updateUserLastLogin(uid);
     }
 
     @Override
-    public void updateUserSynopsis(String synopsis) {
-        dao.updateUserSynopsis(synopsis);
+    public void updateUserSynopsis(String uid,String synopsis) {
+        dao.updateUserSynopsis(uid,synopsis);
     }
 
     @Override
-    public void updateUserActive(Integer active) {
-        dao.updateUserActive(active);
+    public void updateUserActive(String uid,Integer active) {
+        dao.updateUserActive(uid,active);
     }
 
     @Override
-    public void updateUserKey(Integer key) {
-        dao.updateUserKey(key);
+    public void updateUserMyKey(String uid,Integer mykey) {
+        dao.updateUserMyKey(uid,mykey);
     }
 
     @Override

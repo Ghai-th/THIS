@@ -26,14 +26,14 @@ public class User extends Operate implements java.io.Serializable{
     private Integer visitorNum;
     private Integer articleNum;
     private Date create;
-    private Date update;
+    private Date lastlogin;
     private String synopsis;
     private Integer active;
-    private Integer key;
+    private Integer mykey;
 
     public User(String uid, String name, Integer level, String password, Integer gender, Byte[] image,
                 Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis,
-                Integer active,Integer key) {
+                Integer active,Integer mykey) {
         this.uid = uid;
         this.name = name;
         this.level = level;
@@ -45,18 +45,19 @@ public class User extends Operate implements java.io.Serializable{
         this.visitorNum = visitorNum;
         this.articleNum = articleNum;
         this.create = new Date();
-        this.update = new Date();
+        this.lastlogin = new Date();
         this.synopsis = synopsis;
         this.active = active;
-        this.key = key;
+        this.mykey = mykey;
     }
     public User(String uid,String password){
         this.uid = uid;
         this.password = password;
+        create = new Date();
     }
-    public User(String uid, Integer key){
+    public User(String uid, Integer mykey){
         this.uid = uid;
-        this.key = key;
+        this.mykey = mykey;
     }
 
     public User() {
@@ -75,7 +76,7 @@ public class User extends Operate implements java.io.Serializable{
         user.setPassword("123");
         user.setVisitorNum(1);
         user.setActive(1);
-        user.setKey(1);
+        user.setMyKey(1);
     }
 
     public Integer getActive() {
@@ -174,12 +175,12 @@ public class User extends Operate implements java.io.Serializable{
         this.create = create;
     }
 
-    public Date getUpdate() {
-        return update;
+    public Date getLastlogin() {
+        return lastlogin;
     }
 
-    public void setUpdate(Date update) {
-        this.update = update;
+    public void setLastlogin(Date update) {
+        this.lastlogin = update;
     }
 
     public String getSynopsis() {
@@ -190,12 +191,12 @@ public class User extends Operate implements java.io.Serializable{
         this.synopsis = synopsis;
     }
 
-    public Integer getKey(){
-        return key;
+    public Integer getMyKey(){
+        return mykey;
     }
 
-    public void setKey(Integer key){
-        this.key = key;
+    public void setMyKey(Integer mykey){
+        this.mykey = mykey;
     }
 
     @Override
@@ -212,10 +213,10 @@ public class User extends Operate implements java.io.Serializable{
                 ", visitorNum=" + visitorNum +
                 ", articleNum=" + articleNum +
                 ", create=" + create +
-                ", update=" + update +
+                ", lastlogin=" + lastlogin +
                 ", synopsis='" + synopsis + '\'' +
                 ", active=" + active +
-                ", key='" + key + '\'' +
+                ", mykey='" + mykey + '\'' +
                 '}';
     }
 }
