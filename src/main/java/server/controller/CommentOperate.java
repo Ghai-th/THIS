@@ -28,59 +28,67 @@ public class CommentOperate {
         this.commentOperate = commentOperate;
     }
 
-    public void executeCommentOperate() throws IOException {
+    public void executeCommentOperate() {
         switch(commentOperate.operate) {
             case ServerOperate.ADD_COMMENT :
-                clientAddComment(comment);
+                clientAddComment();
                 break;
             case ServerOperate.DELETE_COMMENT:
-                clientDeleteComment(comment);
+                clientDeleteComment();
                 break;
             case ServerOperate.DELETE_COMMENT_BY_UID:
-                clientDeleteCommentByUid(comment.getUid());
+                clientDeleteCommentByUid();
                 break;
             case ServerOperate.DELETE_COMMENT_BY_AID:
-                clientDeleteCommentByAid(comment.getAid());
+                clientDeleteCommentByAid();
                 break;
             case ServerOperate.UPDATE_COMMENT:
-                clientUpdateComment(comment);
+                clientUpdateComment();
                 break;
             case ServerOperate.QUERY_ALL_COMMENT_BY_UID:
-                clientQueryAllCommentByUid(comment.getUid());
+                clientQueryAllCommentByUid();
                 break;
             case ServerOperate.QUERY_ALL_COMMENT_BY_AID:
-                clientQueryAllCommentByAid(comment.getAid());
+                clientQueryAllCommentByAid();
                 break;
         }
     }
 
-    public void clientAddComment(Comment comment){
+    public void clientAddComment(){
         commentServiceImpl.addComment(comment);
     }
 
-    public void clientDeleteComment(Comment comment){
+    public void clientDeleteComment(){
         commentServiceImpl.addComment(comment);
     }
 
-    public void clientDeleteCommentByUid(String uid){
-        commentServiceImpl.deleteCommentByUid(uid);
+    public void clientDeleteCommentByUid(){
+        commentServiceImpl.deleteCommentByUid(comment.getUid());
     }
 
-    public void clientDeleteCommentByAid(String aid){
-        commentServiceImpl.deleteCommentByAid(aid);
+    public void clientDeleteCommentByAid(){
+        commentServiceImpl.deleteCommentByAid(comment.getAid());
     }
 
-    public void clientUpdateComment(Comment comment){
+    public void clientUpdateComment(){
         commentServiceImpl.updateComment(comment);
     }
 
-    public void clientQueryAllCommentByUid(String uid) throws IOException {
-        List allComment = commentServiceImpl.queryAllCommentByUid(uid);
-        sendInfoList(allComment);
+    public void clientQueryAllCommentByUid() {
+        List allComment = commentServiceImpl.queryAllCommentByUid(comment.getUid());
+        try {
+            sendInfoList(allComment);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void clientQueryAllCommentByAid(String aid) throws IOException {
-        List allComment = commentServiceImpl.queryAllCommentByUid(aid);
-        sendInfoList(allComment);
+    public void clientQueryAllCommentByAid() {
+        List allComment = commentServiceImpl.queryAllCommentByAid(comment.getAid());
+        try {
+            sendInfoList(allComment);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
