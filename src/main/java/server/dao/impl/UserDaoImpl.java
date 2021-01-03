@@ -19,7 +19,7 @@ public class UserDaoImpl implements IUserDao {
     PreparedStatement preparedStatement = null;
     List<User> users;
     @Override
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         String sql = "insert into user values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             connection = DBUtil.getConnection();
@@ -39,124 +39,142 @@ public class UserDaoImpl implements IUserDao {
             preparedStatement.setString(13,user.getSynopsis());
             preparedStatement.setInt(14,user.getActive());
             preparedStatement.setInt(15,user.getMyKey());
-            DBUtil.closeResources(connection,preparedStatement);
-            preparedStatement.close();
+            return preparedStatement.executeUpdate()!=0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+        }finally {
+            DBUtil.closeResources(connection,preparedStatement);
         }
 
     }
 
     @Override
-    public void deleteUser(User user) {
-        String sql = "delete from user where uid = '"+user.getUid()+"'";
+    public boolean deleteUser(User user) {
+        String sql = "delete from user where uid = '" + user.getUid() + "'";
         try {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();
-            DBUtil.executeChange(statement,sql);
-            DBUtil.closeResources(connection,statement);
+            return DBUtil.executeChange(statement, sql) != 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+        } finally {
+            DBUtil.closeResources(connection, statement);
         }
 
     }
 
     @Override
-    public void updateUserlevel(User user) {
+    public boolean updateUserlevel(User user) {
         try {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();
             int level =( user.getActive()+user.getArticleNum()+user.getAttentionNum()+user.getFansNum()+user.getVisitorNum())/5;
             String sql = "update user set level = '"+level+"'where uid = '"+user.getUid()+"'";
-            DBUtil.executeChange(statement,sql);
-            DBUtil.closeResources(connection,statement);
+            return DBUtil.executeChange(statement,sql) != 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+        }finally {
+            DBUtil.closeResources(connection,statement);
         }
     }
 
     @Override
-    public void updateUserFansNum(User user) {
+    public boolean updateUserFansNum(User user) {
         try {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();
             String sql = "update user set fansnum = '"+(user.getFansNum()+1)+"' where uid = '"+user.getUid() +"'";
-            DBUtil.executeChange(statement,sql);
-            DBUtil.closeResources(connection,statement);
+            return DBUtil.executeChange(statement,sql) != 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+        }finally {
+            DBUtil.closeResources(connection,statement);
         }
     }
 
     @Override
-    public void updateUserAttentionnum(User user) {
+    public boolean updateUserAttentionnum(User user) {
         try {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();
             String sql = "update user set attentionnum = '"+(user.getAttentionNum()+1)+"' where uid = '"+user.getUid()+"'";
-            DBUtil.executeChange(statement,sql);
-            DBUtil.closeResources(connection,statement);
+            return DBUtil.executeChange(statement,sql) != 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+        }finally {
+            DBUtil.closeResources(connection,statement);
         }
     }
 
     @Override
-    public void updateUserVisitorNum(User user) {
+    public boolean updateUserVisitorNum(User user) {
         try {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();
-            String sql1 = "update user set visitornum = '"+(user.getVisitorNum()+1)+"' where uid = '"+user.getUid()+"'";
-            DBUtil.executeChange(statement,sql1);
-            DBUtil.closeResources(connection,statement);
+            String sql = "update user set visitornum = '"+(user.getVisitorNum()+1)+"' where uid = '"+user.getUid()+"'";
+            return DBUtil.executeChange(statement,sql) != 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return  false;
+        }finally {
+            DBUtil.closeResources(connection,statement);
         }
     }
 
     @Override
-    public void updateUserArticleNum(User user) {
+    public boolean updateUserArticleNum(User user) {
         try {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();
-            String sql1 = "update user set articlenum = '"+(user.getArticleNum()+1)+"' where uid = '"+user.getUid()+"'";
-            DBUtil.executeChange(statement,sql1);
-            DBUtil.closeResources(connection,statement);
+            String sql = "update user set articlenum = '"+(user.getArticleNum()+1)+"' where uid = '"+user.getUid()+"'";
+            return DBUtil.executeChange(statement,sql) != 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+        }finally {
+            DBUtil.closeResources(connection,statement);
         }
     }
 
     @Override
-    public void updateUserLastLogin(User user) {
+    public boolean updateUserLastLogin(User user) {
         String sql = "update user set lastlogin = ? where uid = ?";
         try {
             connection = DBUtil.getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             preparedStatement.setString(2,user.getUid());
-            preparedStatement.executeUpdate();
-            DBUtil.closeResources(connection,preparedStatement);
+            return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+        }finally {
+            DBUtil.closeResources(connection,preparedStatement);
         }
     }
 
     @Override
-    public void updateUserActive(User user) {
+    public boolean updateUserActive(User user) {
         try {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();
             String sql = "update user set active = '"+(user.getActive()+1)+"' where uid = '"+user.getUid()+"'";
-            DBUtil.executeChange(statement,sql);
-            DBUtil.closeResources(connection,statement);
+            return DBUtil.executeChange(statement,sql) != 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+        }finally {
+            DBUtil.closeResources(connection,statement);
         }
     }
 
     @Override
-    public void updateUser(User user) {
+    public boolean updateUser(User user) {
         String sql = "update user set name = ?,password = ?,gender = ?,synopsis = ?,mykey = ? where uid = ?";
         try {
             connection = DBUtil.getConnection();
@@ -167,10 +185,12 @@ public class UserDaoImpl implements IUserDao {
             preparedStatement.setString(4,user.getSynopsis());
             preparedStatement.setInt(5,user.getMyKey());
             preparedStatement.setString(6,user.getUid());
-            preparedStatement.executeUpdate();
-            DBUtil.closeResources(connection,preparedStatement);
+            return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+        }finally {
+            DBUtil.closeResources(connection,preparedStatement);
         }
     }
 
