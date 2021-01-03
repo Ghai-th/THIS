@@ -6,26 +6,77 @@ import java.util.Date;
 import java.util.List;
 
 public interface IUserService {
+    /**
+     * 判断注册是否合法
+     * @param user 用户注册信息
+     * @return true为合法，false为不合法
+     */
     boolean register(User user);
+    /**
+     * 判断登录是否合法
+     * @param user 用户登录信息
+     * @return true为合法，false为不合法
+     */
     boolean isValidUser(User user);
+    /**
+     * 判断找回密码是否合法
+     * @param user 找回密码信息
+     * @return true为合法，false为不合法
+     */
     boolean isFind(User user);
-
+    /**
+     * 注册成功增加User用户
+     * @param user 用户
+     */
     void addUser(User user);
-
-    void deleteUser(String uid);
-
-    void updateUserName(String uid,String name);
-    void updateUserlevel(String uid);
-    void updateUserPassword(String uid,String password);
-    void updateUserGender(String uid,Integer gender);
-    void updateUserFansNum(String uid);
-    void updateUserAttentionnum(String uid);
-    void updateUserVisitorNum(String uid);
-    void updateUserArticleNum(String uid);
-    void updateUserLastLogin(String uid);
-    void updateUserSynopsis(String uid,String synopsis);
-    void updateUserActive(String uid);
-    void updateUserMyKey(String uid,Integer mykey);
-
+    /**
+     * 删除用户
+     * @param user 被删除的用户
+     */
+    void deleteUser(User user);
+    /**
+     * 更新用户等级
+     * @param user 更新的用户
+     */
+    void updateUserlevel(User user);
+    /**
+     * 更新用户粉丝数量
+     * @param user 更新的用户
+     */
+    void updateUserFansNum(User user);
+    /**
+     * 更新用户关注数量
+     * @param user 更新的用户
+     */
+    void updateUserAttentionnum(User user);
+    /**
+     * 更新用户访客数量
+     * @param user 更新的用户
+     */
+    void updateUserVisitorNum(User user);
+    /**
+     * 更新用户发表文章的数量
+     * @param user 更新的用户
+     */
+    void updateUserArticleNum(User user);
+    /**
+     * 更新用户最后登录的时间
+     * @param user 更新的用户
+     */
+    void updateUserLastLogin(User user);
+    /**
+     * 更新用户活跃度
+     * @param user 更新的用户
+     */
+    void updateUserActive(User user);
+    /**
+     * 更新用户基本信息
+     * @param user
+     */
+    void updateUser(User user);
+    /**
+     * 返回所有用户user的集合
+     * @return 用户user的集合
+     */
     List<User> selectUsers();
 }

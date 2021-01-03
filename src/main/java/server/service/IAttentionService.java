@@ -1,12 +1,28 @@
 package server.service;
 
-import client.entity.User;
+import client.entity.Attention;
 
 public interface IAttentionService {
-    //点击关注按钮后，输入该用户的类对象以及所要关注的人的id
-    boolean addAttention(User user,String id);
-    //输入该用户的类对象以及所要取消关注的用户id
-    boolean deleteAttention(User user,String id);
-    boolean searchAttention(User user);
+    /**
+     * 点击关注按钮后，输入该用户的类对象以及所要关注的人的id
+     * @param attention 关注类型对象
+     * @return 执行结果
+     */
+    boolean addAttention(Attention attention);
+
+
+    /**
+     * 删除对象中表示的关注关系
+     * @param attention 关注对象
+     * @return 执行结果
+     */
+    boolean deleteAttention(Attention attention);
+
+    /**
+     * 查询某个用户对应的粉丝
+     * @param attention 关注对象
+     * @return 执行结果
+     */
+    boolean searchAttention(Attention attention);
 
 }

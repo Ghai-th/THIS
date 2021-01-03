@@ -52,72 +52,53 @@ public class TestSql {
             System.out.println(article);
         }
     }
+    User u = new User("3","555",3,"66",0,null,20,30,40,30,"555",6,99);
     @Test
     public void testAddUser(){
         IUserService userService = new UserServiceImpl();
-        User u = new User("123","555");
         userService.addUser(u);
     }
     @Test
     public void testDeleteUser(){
         IUserService userService = new UserServiceImpl();
-        userService.deleteUser("123");
-    }
-    @Test
-    public void testUpdateUserName(){
-        IUserService userService = new UserServiceImpl();
-        userService.updateUserName("123","666");
-    }
-    @Test
-    public void testUpdateUserPassword(){
-        IUserService userService = new UserServiceImpl();
-        userService.updateUserPassword("123","888");
-    }
-    @Test
-    public void testUpdateUserGender(){
-        IUserService userService = new UserServiceImpl();
-        userService.updateUserGender("123",0);
+        userService.deleteUser(u);
     }
     @Test
     public void testUpdateUserFansNum(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserFansNum("123");
+        userService.updateUserFansNum(u);
     }
     @Test
     public void testUpdateUserAttentionnum(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserAttentionnum("123");
+        userService.updateUserAttentionnum(u);
     }
     @Test
     public void testUpdateUserVisitorNum(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserVisitorNum("123");
+        userService.updateUserVisitorNum(u);
     }
     @Test
     public void testUpdateUserArticleNum(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserArticleNum("123");
+        userService.updateUserArticleNum(u);
     }
-    @Test
-    public void testUpdateUserSynopsis(){
-        IUserService userService = new UserServiceImpl();
-        userService.updateUserSynopsis("123","789789");
-    }
+
     @Test
     public void testUpdateUserActive(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserActive("123");
+        userService.updateUserActive(u);
     }
     @Test
-    public void testUpdateUserKey(){
+    public void testUpdateUser(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserMyKey("123",13);
+        userService.updateUser(u);
     }
-    @Test
-    public void testUpdateUserLastLogin(){
-        IUserService userService = new UserServiceImpl();
-        userService.updateUserLastLogin("123");
-    }
+//    @Test
+//    public void testUpdateUserLastLogin(){
+//        IUserService userService = new UserServiceImpl();
+//        userService.updateUserLastLogin("123");
+//    }
     @Test
     public void testSelectUsers(){
         IUserService userService = new UserServiceImpl();
@@ -125,11 +106,11 @@ public class TestSql {
             System.out.println(u);
         }
     }
-    @Test
-    public void testUpdateUserlevel(){
-        IUserService userService = new UserServiceImpl();
-        userService.updateUserlevel("123");
-    }
+//    @Test
+//    public void testUpdateUserlevel(){
+//        IUserService userService = new UserServiceImpl();
+//        userService.updateUserlevel("123");
+//    }
 
     @Test
     public void testInsertMessage() throws SQLException {

@@ -20,7 +20,7 @@ public class User extends Operate implements java.io.Serializable{
     private Integer level;
     private String password;
     private Integer gender;
-    private Byte[] image;
+    private byte[] image;
     private Integer fansNum;
     private Integer attentionNum;
     private Integer visitorNum;
@@ -31,7 +31,7 @@ public class User extends Operate implements java.io.Serializable{
     private Integer active;
     private Integer mykey;
 
-    public User(String uid, String name, Integer level, String password, Integer gender, Byte[] image,
+    public User(String uid, String name, Integer level, String password, Integer gender, byte[] image,
                 Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis,
                 Integer active,Integer mykey) {
         super();
@@ -131,11 +131,11 @@ public class User extends Operate implements java.io.Serializable{
         this.gender = gender;
     }
 
-    public Byte[] getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(Byte[] image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
