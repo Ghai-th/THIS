@@ -34,6 +34,7 @@ public class User extends Operate implements java.io.Serializable{
     public User(String uid, String name, Integer level, String password, Integer gender, Byte[] image,
                 Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis,
                 Integer active,Integer mykey) {
+        super();
         this.uid = uid;
         this.name = name;
         this.level = level;
@@ -51,16 +52,19 @@ public class User extends Operate implements java.io.Serializable{
         this.mykey = mykey;
     }
     public User(String uid,String password){
+        super();
         this.uid = uid;
         this.password = password;
         create = new Date();
     }
     public User(String uid, Integer mykey){
+        super();
         this.uid = uid;
         this.mykey = mykey;
     }
 
     public User() {
+        super();
     }
 
     public static void initUser(User user) {

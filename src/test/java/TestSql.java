@@ -66,52 +66,52 @@ public class TestSql {
     @Test
     public void testUpdateUserName(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserName("123","ahhaha");
+        userService.updateUserName("123","666");
     }
     @Test
     public void testUpdateUserPassword(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserPassword("123","666");
+        userService.updateUserPassword("123","888");
     }
     @Test
     public void testUpdateUserGender(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserGender("123",5);
+        userService.updateUserGender("123",0);
     }
     @Test
     public void testUpdateUserFansNum(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserFansNum("123",15);
+        userService.updateUserFansNum("123");
     }
     @Test
     public void testUpdateUserAttentionnum(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserAttentionnum("123",20);
+        userService.updateUserAttentionnum("123");
     }
     @Test
     public void testUpdateUserVisitorNum(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserVisitorNum("123",25);
+        userService.updateUserVisitorNum("123");
     }
     @Test
     public void testUpdateUserArticleNum(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserArticleNum("123",30);
+        userService.updateUserArticleNum("123");
     }
     @Test
     public void testUpdateUserSynopsis(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserSynopsis("123","啦啦啦");
+        userService.updateUserSynopsis("123","789789");
     }
     @Test
     public void testUpdateUserActive(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserActive("123",15);
+        userService.updateUserActive("123");
     }
     @Test
     public void testUpdateUserKey(){
         IUserService userService = new UserServiceImpl();
-        userService.updateUserMyKey("123",12);
+        userService.updateUserMyKey("123",13);
     }
     @Test
     public void testUpdateUserLastLogin(){
