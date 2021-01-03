@@ -68,9 +68,8 @@ public class Comment extends Operate implements java.io.Serializable{
 
     public String getCreate() {
         create = new Date();
-        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String time = dateformat.format(create);
-        return time;
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return date.format(create);
     }
 
     @Override
