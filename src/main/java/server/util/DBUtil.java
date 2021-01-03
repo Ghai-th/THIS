@@ -90,6 +90,9 @@ public class DBUtil {
                     if (field.getName().equals("operate")) {
                         continue;
                     }
+                    if (field.getName().equals("serialVersionUID")) {
+                        continue;
+                    }
                     Object object = set.getObject(field.getName());
                     field.set(t, object);
                 }
@@ -123,6 +126,9 @@ public class DBUtil {
                 for (int i = 0; i < fields.length; i++) {
                     Field field = fields[i];
                     if (field.getName().equals("operate")) {
+                        continue;
+                    }
+                    if (field.getName().equals("serialVersionUID")) {
                         continue;
                     }
                     field.setAccessible(true);
@@ -180,7 +186,6 @@ public class DBUtil {
             try {
                 stat.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -188,7 +193,6 @@ public class DBUtil {
             try {
                 conn.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
