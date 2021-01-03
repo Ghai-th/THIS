@@ -12,7 +12,7 @@ public class Execute<T> extends Thread {
     public void run() {
         try {
             serverUtil = new ServerUtil();
-            new Thread(new Listener<Article>(serverUtil)).start();
+            new Thread(new Listener<>(serverUtil)).start();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,11 +31,13 @@ class Listener<T> implements Runnable {
 
     @Override
     public void run() {
-        try {
-            T t = (T) serverUtil.objectInputStream.readObject();
-            selectClass();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+        while (true) {
+            try {
+                t = (T) serverUtil.objectInputStream.readObject();
+                selectClass();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 

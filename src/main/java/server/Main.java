@@ -10,8 +10,6 @@ import java.lang.Class;
 
 public class Main {
 
-
-
     public static <T> void main(String[] args) throws IOException {
         while (true) {
             new Execute<>().start();
