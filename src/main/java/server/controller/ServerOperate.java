@@ -22,5 +22,32 @@ public interface ServerOperate {
     int GET_ALL_ARTICLE = 100008;
 
 
+    /**
+     * User表对应的操作
+     */
+    int REGISTER_USER = 200001;
+    int ISVALID_USER = 200002;
+    int ISFIND_USER = 200003;
+    int ADD_USER_BY = 200004;
+    int DELETE_USER_BY_ID = 200005;
+    int UPDATE_NAME_BY_ID = 200006;
+    int UPDATE_LEVEL_BY_ID = 200007;
+    int UPDATE_PASSWORD_BY_ID = 200008;
+    int UPDATE_GENDER_BY_ID = 200009;
+    int UPDATE_FANSNUM_BY_ID = 200010;
+    int UPDATE_ATTENTIONNUM_BY_ID = 200011;
+    int UPDATE_VISITORNUM_BY_ID = 200012;
+    int UPDATE_ARTICLENUM_BY_ID = 200013;
+    int UPDATE_LASTLOGIN_BY_ID = 200014;
+    int UPDATE_SYNOPSIS_BY_ID = 200015;
+    int UPDATE_ACTIVE_BY_ID = 200016;
+    int UPDATE_MYKEY_BY_ID = 200017;
+
+
+
+
+
+
+
 
 };
