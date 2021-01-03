@@ -13,10 +13,12 @@ import java.util.List;
 public class ArticleOperate {
 
     public Article article;
+    public ServerUtil serverUtil;
     private IArticleService articleService = new ArticleServiceImpl();
 
-    public ArticleOperate(Article article) {
+    public ArticleOperate(Article article, ServerUtil serverUtil) {
         this.article = article;
+        this.serverUtil = serverUtil;
     }
 
     public ArticleOperate() {
@@ -64,7 +66,7 @@ public class ArticleOperate {
         success = articleService.addArticle(article);
         if (!success) {
             try {
-                ServerUtil.sendOperate(new Operate(ServerOperate.ERROR));
+                serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -79,7 +81,7 @@ public class ArticleOperate {
         success = articleService.deleteArticle(this.article.getAid());
         if (!success) {
             try {
-                ServerUtil.sendOperate(new Operate(ServerOperate.ERROR));
+                serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -94,7 +96,7 @@ public class ArticleOperate {
         success = articleService.updateArticle(this.article);
         if (!success) {
             try {
-                ServerUtil.sendOperate(new Operate(ServerOperate.ERROR));
+                serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -108,7 +110,7 @@ public class ArticleOperate {
         article = articleService.selectArticleByAid(article.getAid());
         article.operate = ServerOperate.GET_ARTICLE_BY_AID;
         try {
-            ServerUtil.sendInfo(article,Article.class);
+            serverUtil.sendInfo(article,Article.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -121,7 +123,7 @@ public class ArticleOperate {
         List articles = articleService.selectArticleByCid(article.getCid());
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_BY_CID;
         try {
-            ServerUtil.sendInfoList(articles);
+            serverUtil.sendInfoList(articles);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -134,7 +136,7 @@ public class ArticleOperate {
         List articles = articleService.selectArticleByTittle(article.getTitle());
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_BY_TITTLE;
         try {
-            ServerUtil.sendInfoList(articles);
+            serverUtil.sendInfoList(articles);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -147,7 +149,7 @@ public class ArticleOperate {
         List articles = articleService.selectArticleByUid(article.getUid());
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_BY_UID;
         try {
-            ServerUtil.sendInfoList(articles);
+            serverUtil.sendInfoList(articles);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -160,7 +162,7 @@ public class ArticleOperate {
         List articles = articleService.selectTopTenArticle();
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_TOP_TEN;
         try {
-            ServerUtil.sendInfoList(articles);
+            serverUtil.sendInfoList(articles);
         } catch (IOException e) {
             e.printStackTrace();
         }
