@@ -81,7 +81,7 @@ public class ServerUtil {
      * @return 返回搜索字符串
      */
     public static String acceptSearchInfo() throws IOException, ClassNotFoundException {
-            return (String) objectInputStream.readObject();
+        return (String) objectInputStream.readObject();
     }
 
     /**
