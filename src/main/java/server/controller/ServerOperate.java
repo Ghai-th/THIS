@@ -57,6 +57,10 @@ public interface ServerOperate {
     int UPDATE_MYKEY_BY_ID = 200017;
 
 
+    /**
+     * message表对应的操作
+     */
+
 
 
 
