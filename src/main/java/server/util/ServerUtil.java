@@ -7,12 +7,15 @@ import data.Operate;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 public class ServerUtil {
 
-    public static int port;
+    public static Integer port;
+    public static String host;
+    public static ServerSocket serverSocket;
     public static Socket socket;
     public static OutputStream outputStream;
     public static ObjectOutputStream objectOutputStream;
@@ -21,15 +24,18 @@ public class ServerUtil {
 
 
     static {
+        Properties properties = new Properties();
         try {
-            Properties properties = new Properties();
             properties.load(new FileInputStream(new File("db.properties")));
-            port = Integer.parseInt(properties.getProperty("sever.port"));
-            socket = new Socket("localhost",port);
+            port = Integer.parseInt(properties.getProperty("server.port"));
+            host = properties.getProperty("server.host");
+            serverSocket = new ServerSocket(port);
+            socket = serverSocket.accept();
             outputStream = socket.getOutputStream();
             inputStream = socket.getInputStream();
             objectOutputStream = new ObjectOutputStream(outputStream);
             objectInputStream = new ObjectInputStream(inputStream);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
