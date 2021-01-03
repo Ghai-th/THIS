@@ -5,6 +5,12 @@ package server.controller;
  * 所有操作命名全部大写字母加下划线
  */
 public interface ServerOperate {
+
+    /**
+     * 系统级 返回指令
+     */
+    int ERROR = 999999;
+
     /**
      * 评论功能对应操作
      */

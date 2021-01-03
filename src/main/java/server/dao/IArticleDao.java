@@ -30,8 +30,8 @@ public interface IArticleDao {
 
     /**
      * 根据aid查询文章
-     * @param aid
-     * @return
+     * @param aid 用户id
+     * @return 返回文章列表
      */
     Article selectArticleByAid(String aid);
 

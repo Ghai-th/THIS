@@ -92,4 +92,12 @@ public class ServerUtil {
         return (Operate) objectInputStream.readObject();
     }
 
+    /**
+     * 向客户发送单指令
+     * @param operate 指令对象
+     */
+    public static void sendOperate(Operate operate) throws IOException {
+        objectOutputStream.writeObject(operate);
+    }
+
 }
