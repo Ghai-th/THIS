@@ -15,7 +15,11 @@ public class CommentOperate {
     public ServerUtil serverUtil;
 
     public CommentOperate(Comment comment) {
-        serverUtil = new ServerUtil();
+        try {
+            serverUtil = new ServerUtil();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.comment = comment;
     }
 
