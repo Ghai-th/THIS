@@ -3,16 +3,16 @@ package server.controller;
 import client.entity.Comment;
 import data.Operate;
 import server.service.impl.CommentServiceImpl;
+import server.util.ServerUtil;
 
 import java.io.IOException;
 import java.util.List;
-
-import static server.util.ServerUtil.sendInfoList;
 
 public class CommentOperate {
 
     public CommentServiceImpl commentServiceImpl;
     public Comment comment;
+    public ServerUtil serverUtil = new ServerUtil();
 
     public CommentOperate(Comment comment) {
         this.comment = comment;
@@ -88,7 +88,7 @@ public class CommentOperate {
     public void clientQueryAllCommentByUid() {
         List allComment = commentServiceImpl.queryAllCommentByUid(comment.getUid());
         try {
-            sendInfoList(allComment);
+            serverUtil.sendInfoList(allComment);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,7 +100,7 @@ public class CommentOperate {
     public void clientQueryAllCommentByAid() {
         List allComment = commentServiceImpl.queryAllCommentByAid(comment.getAid());
         try {
-            sendInfoList(allComment);
+            serverUtil.sendInfoList(allComment);
         } catch (IOException e) {
             e.printStackTrace();
         }
