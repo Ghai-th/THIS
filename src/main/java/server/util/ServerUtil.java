@@ -102,4 +102,12 @@ public class ServerUtil {
         objectOutputStream.writeObject(operate);
     }
 
+    public void closeResource() throws Exception {
+        this.socket.close();
+        this.outputStream.close();
+        this.inputStream.close();
+        this.objectInputStream.close();
+        this.objectInputStream.close();
+    }
+
 }
