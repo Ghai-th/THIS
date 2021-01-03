@@ -13,7 +13,7 @@ public class ServerUtil {
 
     public static Integer port;
     public static String host;
-    public ServerSocket serverSocket;
+    public static ServerSocket serverSocket;
     public Socket socket;
     public OutputStream outputStream;
     public ObjectOutputStream objectOutputStream;
@@ -27,14 +27,13 @@ public class ServerUtil {
             properties.load(new FileInputStream(new File("db.properties")));
             port = Integer.parseInt(properties.getProperty("server.port"));
             host = properties.getProperty("server.host");
-
+            serverSocket = new ServerSocket(port);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void init() throws IOException {
-        serverSocket = new ServerSocket(port);
         socket = serverSocket.accept();
         outputStream = socket.getOutputStream();
         inputStream = socket.getInputStream();

@@ -2,18 +2,17 @@ package server;
 
 import client.entity.*;
 import server.controller.ArticleOperate;
-import server.controller.ServerOperate;
-import server.service.IArticleService;
-import server.service.impl.ArticleServiceImpl;
 import server.util.ServerUtil;
 
 import java.io.IOException;
 import java.lang.Class;
-import java.util.ArrayList;
 
 public class Main {
+
+
+
     public static <T> void main(String[] args) throws IOException {
-        while (true) {
+//        while (true) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -43,6 +42,6 @@ public class Main {
                     }
                 }
             }).start();
-        }
+//        }
     }
 }

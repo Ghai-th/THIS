@@ -7,7 +7,7 @@ package server.controller;
 public interface ServerOperate {
 
     /**
-     * 系统级 返回指令
+     * 系统级 指令
      */
     int ERROR = 999999;
 

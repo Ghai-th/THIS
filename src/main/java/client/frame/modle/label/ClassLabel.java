@@ -4,6 +4,8 @@ import client.entity.Article;
 import client.frame.Index;
 import client.frame.modle.panel.ArticleListPanel;
 import client.util.ClientUtil;
+import data.Operate;
+import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +37,7 @@ public class ClassLabel extends JLabel {
 
         this.addMouseListener(new MouseListener() {
             // 发送对应的请求 更新文章列表
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent mouseEvent) {
 
                 switch (getText()) {
                     case "收藏":
@@ -76,29 +78,20 @@ public class ClassLabel extends JLabel {
                         break;
                     case "软件安全":
                         System.out.println("软件安全");
-                        ///////////////
                         arrayList = new ArrayList();
+                        Article article = new Article();
+                        article.setCid("1009");
                         try {
-                            arrayList.addAll ( ClientUtil.acceptList());
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        } catch (ClassNotFoundException ex) {
-                            ex.printStackTrace();
+                            ClientUtil.sendInfo(article,Article.class);
+                            arrayList.addAll(ClientUtil.acceptList());
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                        ///////////////////
                         break;
                 }
 
-//                index.mainPanel.setVisible(false);
                 index.mainPanel.removeAll();
-                //// 从数据库拉取文章列表
-//                ArrayList<Article> arrayList = new ArrayList<Article>();
-//                for (int i = 0; i < 10; i++) {
-//                    arrayList.add(Article.initArticle());
-//                }
-
                 index.mainPanel.add(new ArticleListPanel(arrayList,index), BorderLayout.CENTER); /// 新建出 文章列表面板
-//                index.mainPanel.setVisible(true);
                 updateUI();
             }
 
