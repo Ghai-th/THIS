@@ -118,4 +118,10 @@ public class CommentDaoImpl implements ICommentDao {
         return null;
     }
 
+    public static void main(String[] args) {
+        CommentDaoImpl commentDaoImpl = new CommentDaoImpl();
+        Comment comment = Comment.initComment();
+        commentDaoImpl.addComment(comment);
+    }
+
 }
