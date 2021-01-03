@@ -12,76 +12,50 @@ public interface IUserDao {
      */
     void addUser(User user);
     /**
-     * 通过uid删除用户
-     * @param uid 用户id
+     * 删除用户
+     * @param user 被删除的用户
      */
-    void deleteUser(String uid);
+    void deleteUser(User user);
     /**
-     * 通过uid更新用户姓名
-     * @param uid 用户id
-     * @param name 更新的姓名
+     * 更新用户等级
+     * @param user 更新的用户
      */
-    void updateUserName(String uid,String name);
-
+    void updateUserlevel(User user);
     /**
-     * 通过uid更新用户等级
-     * @param uid 用户id
+     * 更新用户粉丝数量
+     * @param user 更新的用户
      */
-    void updateUserlevel(String uid);
+    void updateUserFansNum(User user);
     /**
-     * 通过uid修改用户密码
-     * @param uid 用户id
-     * @param password 更新的密码
+     * 更新用户关注数量
+     * @param user 更新的用户
      */
-    void updateUserPassword(String uid,String password);
+    void updateUserAttentionnum(User user);
     /**
-     * 通过uid更新性别
-     * @param uid 用户id
-     * @param gender 更新的性别
+     * 更新用户访客数量
+     * @param user 更新的用户
      */
-    void updateUserGender(String uid,Integer gender);
+    void updateUserVisitorNum(User user);
     /**
-     * 通过uid更新粉丝数
-     * @param uid 用户id
+     * 更新用户发表文章的数量
+     * @param user 更新的用户
      */
-    void updateUserFansNum(String uid);
+    void updateUserArticleNum(User user);
     /**
-     * 通过uid更新关注数量
-     * @param uid 用户id
+     * 更新用户最后登录的时间
+     * @param user 更新的用户
      */
-    void updateUserAttentionnum(String uid);
+    void updateUserLastLogin(User user);
     /**
-     * 通过uid更新访客数量
-     * @param uid
+     * 更新用户活跃度
+     * @param user 更新的用户
      */
-    void updateUserVisitorNum(String uid);
+    void updateUserActive(User user);
     /**
-     * 通过uid更新发表文章的数量
-     * @param uid 用户id
+     * 更新用户基本信息
+     * @param user
      */
-    void updateUserArticleNum(String uid);
-    /**
-     * 通过uid更新用户最后登录的时间
-     * @param uid 用户id
-     */
-    void updateUserLastLogin(String uid);
-    /**
-     * 通过uid更新用户简介
-     * @param uid 用户id
-     * @param synopsis 更新的简介
-     */
-    void updateUserSynopsis(String uid,String synopsis);
-    /**
-     * 通过uid更新用户活跃度
-     * @param uid 用户id
-     */
-    void updateUserActive(String uid);
-    /**
-     * 通过uid更新用户的密钥
-     * @param uid 用户id
-     * @param mykey 更新的密钥
-     */
-    void updateUserMyKey(String uid,Integer mykey);
+    void updateUser(User user);
     /**
      * 返回所有用户user的集合
      * @return 用户user的集合

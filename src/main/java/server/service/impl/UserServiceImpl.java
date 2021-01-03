@@ -68,75 +68,54 @@ public class UserServiceImpl implements IUserService {
         return false;
     }
 
-    //增删改查
     @Override
     public void addUser(User user) {
         dao.addUser(user);
     }
 
     @Override
-    public void deleteUser(String uid) {
-        dao.deleteUser(uid);
+    public void deleteUser(User user) {
+        dao.deleteUser(user);
     }
 
     @Override
-    public void updateUserName(String uid,String name) {
-        dao.updateUserName(uid,name);
+    public void updateUserlevel(User user) {
+        dao.updateUserlevel(user);
     }
 
     @Override
-    public void updateUserlevel(String uid) {
-        dao.updateUserlevel(uid);
+    public void updateUserFansNum(User user) {
+        dao.updateUserFansNum(user);
     }
 
     @Override
-    public void updateUserPassword(String uid,String password) {
-        dao.updateUserPassword(uid,password);
+    public void updateUserAttentionnum(User user) {
+        dao.updateUserAttentionnum(user);
     }
 
     @Override
-    public void updateUserGender(String uid,Integer gender) {
-        dao.updateUserGender(uid,gender);
+    public void updateUserVisitorNum(User user) {
+        dao.updateUserVisitorNum(user);
     }
 
     @Override
-    public void updateUserFansNum(String uid) {
-        dao.updateUserFansNum(uid);
+    public void updateUserArticleNum(User user) {
+        dao.updateUserArticleNum(user);
     }
 
     @Override
-    public void updateUserAttentionnum(String uid) {
-        dao.updateUserAttentionnum(uid);
+    public void updateUserLastLogin(User user) {
+        dao.updateUserLastLogin(user);
     }
 
     @Override
-    public void updateUserVisitorNum(String uid) {
-        dao.updateUserVisitorNum(uid);
+    public void updateUserActive(User user) {
+        dao.updateUserActive(user);
     }
 
     @Override
-    public void updateUserArticleNum(String uid) {
-        dao.updateUserArticleNum(uid);
-    }
-
-    @Override
-    public void updateUserLastLogin(String uid) {
-        dao.updateUserLastLogin(uid);
-    }
-
-    @Override
-    public void updateUserSynopsis(String uid,String synopsis) {
-        dao.updateUserSynopsis(uid,synopsis);
-    }
-
-    @Override
-    public void updateUserActive(String uid) {
-        dao.updateUserActive(uid);
-    }
-
-    @Override
-    public void updateUserMyKey(String uid,Integer mykey) {
-        dao.updateUserMyKey(uid,mykey);
+    public void updateUser(User user) {
+        dao.updateUser(user);
     }
 
     @Override

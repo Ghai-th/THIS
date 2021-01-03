@@ -41,7 +41,7 @@ public interface ServerOperate {
     int REGISTER_USER = 200001;
     int IS_VALID_USER = 200002;
     int IS_FIND_USER = 200003;
-    int ADD_USER_BY = 200004;
+    int ADD_USER = 200004;
     int DELETE_USER_BY_ID = 200005;
     int UPDATE_NAME_BY_ID = 200006;
     int UPDATE_LEVEL_BY_ID = 200007;
