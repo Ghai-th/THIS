@@ -159,14 +159,16 @@ public class Article extends Operate implements java.io.Serializable{
                 "aid='" + aid + '\'' +
                 ", uid='" + uid + '\'' +
                 ", cid='" + cid + '\'' +
-                ", tittle='" + title + '\'' +
+                ", title='" + title + '\'' +
                 ", synopsis='" + synopsis + '\'' +
                 ", text='" + text + '\'' +
                 ", create=" + create +
-                ", update=" + renewal +
+                ", renewal=" + renewal +
                 ", visitorNum=" + visitorNum +
                 ", likeNum=" + likeNum +
-                ", collect=" + collectNum +
+                ", collectNum=" + collectNum +
+                ", image=" + image +
+                ", operate=" + operate +
                 '}';
     }
 }

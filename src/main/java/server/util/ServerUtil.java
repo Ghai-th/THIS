@@ -33,7 +33,9 @@ public class ServerUtil {
         }
     }
 
-    public void init() throws IOException {
+
+
+    public  ServerUtil() throws IOException {
         socket = serverSocket.accept();
         outputStream = socket.getOutputStream();
         inputStream = socket.getInputStream();
