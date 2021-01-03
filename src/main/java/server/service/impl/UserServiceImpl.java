@@ -69,53 +69,53 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void addUser(User user) {
-        dao.addUser(user);
+    public boolean addUser(User user) {
+        return dao.addUser(user);
     }
 
     @Override
-    public void deleteUser(User user) {
-        dao.deleteUser(user);
+    public boolean deleteUser(User user) {
+        return dao.deleteUser(user);
     }
 
     @Override
-    public void updateUserlevel(User user) {
-        dao.updateUserlevel(user);
+    public boolean updateUserlevel(User user) {
+        return dao.updateUserlevel(user);
     }
 
     @Override
-    public void updateUserFansNum(User user) {
-        dao.updateUserFansNum(user);
+    public boolean updateUserFansNum(User user) {
+       return dao.updateUserFansNum(user);
     }
 
     @Override
-    public void updateUserAttentionnum(User user) {
-        dao.updateUserAttentionnum(user);
+    public boolean updateUserAttentionnum(User user) {
+        return dao.updateUserAttentionnum(user);
     }
 
     @Override
-    public void updateUserVisitorNum(User user) {
-        dao.updateUserVisitorNum(user);
+    public boolean updateUserVisitorNum(User user) {
+        return dao.updateUserVisitorNum(user);
     }
 
     @Override
-    public void updateUserArticleNum(User user) {
-        dao.updateUserArticleNum(user);
+    public boolean updateUserArticleNum(User user) {
+        return dao.updateUserArticleNum(user);
     }
 
     @Override
-    public void updateUserLastLogin(User user) {
-        dao.updateUserLastLogin(user);
+    public boolean updateUserLastLogin(User user) {
+        return dao.updateUserLastLogin(user);
     }
 
     @Override
-    public void updateUserActive(User user) {
-        dao.updateUserActive(user);
+    public boolean updateUserActive(User user) {
+        return dao.updateUserActive(user);
     }
 
     @Override
-    public void updateUser(User user) {
-        dao.updateUser(user);
+    public boolean updateUser(User user) {
+        return dao.updateUser(user);
     }
 
     @Override
