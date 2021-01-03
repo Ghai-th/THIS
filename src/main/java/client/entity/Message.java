@@ -31,6 +31,8 @@ public class Message extends Operate implements java.io.Serializable{
     public Message() {
     }
 
+
+
     public String getSendId() {
         return sendId;
     }
