@@ -4,11 +4,20 @@ import client.entity.Comment;
 import data.Operate;
 import server.service.impl.CommentServiceImpl;
 
+import java.io.IOException;
+import java.util.List;
+
+import static server.util.ServerUtil.sendInfoList;
+
 public class CommentOperate {
+
     private Operate commentOperate;
     public CommentServiceImpl commentServiceImpl;
-    public CommentOperate(Operate commentOperate) {
+    public Comment comment;
+
+    public CommentOperate(Operate commentOperate, Comment comment) {
         this.commentOperate = commentOperate;
+        this.comment = comment;
     }
 
     public Operate getCommentOperate() {
@@ -19,31 +28,59 @@ public class CommentOperate {
         this.commentOperate = commentOperate;
     }
 
-    public void executeCommentOperate() {
+    public void executeCommentOperate() throws IOException {
         switch(commentOperate.operate) {
             case ServerOperate.ADD_COMMENT :
-                commentServiceImpl.addComment((Comment) commentOperate);
+                clientAddComment(comment);
                 break;
             case ServerOperate.DELETE_COMMENT:
-                commentServiceImpl.deleteComment((Comment) commentOperate);
+                clientDeleteComment(comment);
                 break;
             case ServerOperate.DELETE_COMMENT_BY_UID:
-                commentServiceImpl.deleteCommentByUid("1");
+                clientDeleteCommentByUid(comment.getUid());
                 break;
             case ServerOperate.DELETE_COMMENT_BY_AID:
-                commentServiceImpl.deleteCommentByAid("1");
+                clientDeleteCommentByAid(comment.getAid());
                 break;
             case ServerOperate.UPDATE_COMMENT:
-                commentServiceImpl.updateComment((Comment) commentOperate);
+                clientUpdateComment(comment);
                 break;
             case ServerOperate.QUERY_ALL_COMMENT_BY_UID:
-                commentServiceImpl.queryAllCommentByUid("1");
+                clientQueryAllCommentByUid(comment.getUid());
                 break;
             case ServerOperate.QUERY_ALL_COMMENT_BY_AID:
-                commentServiceImpl.queryAllCommentByAid("1");
+                clientQueryAllCommentByAid(comment.getAid());
                 break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + this.commentOperate);
         }
+    }
+
+    public void clientAddComment(Comment comment){
+        commentServiceImpl.addComment(comment);
+    }
+
+    public void clientDeleteComment(Comment comment){
+        commentServiceImpl.addComment(comment);
+    }
+
+    public void clientDeleteCommentByUid(String uid){
+        commentServiceImpl.deleteCommentByUid(uid);
+    }
+
+    public void clientDeleteCommentByAid(String aid){
+        commentServiceImpl.deleteCommentByAid(aid);
+    }
+
+    public void clientUpdateComment(Comment comment){
+        commentServiceImpl.updateComment(comment);
+    }
+
+    public void clientQueryAllCommentByUid(String uid) throws IOException {
+        List allComment = commentServiceImpl.queryAllCommentByUid(uid);
+        sendInfoList(allComment);
+    }
+
+    public void clientQueryAllCommentByAid(String aid) throws IOException {
+        List allComment = commentServiceImpl.queryAllCommentByUid(aid);
+        sendInfoList(allComment);
     }
 }
