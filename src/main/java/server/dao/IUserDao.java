@@ -10,18 +10,18 @@ public interface IUserDao {
 
     void deleteUser(String uid);
 
-    void updateUserName(String name);
-    void updateUserPassword(String password);
-    void updateUserGender(Integer gender);
-    void updateUserFansNum(Integer fansNum);
-    void updateUserAttentionnum(Integer attentionNum);
-    void updateUserVisitorNum(Integer visitorNum);
-    void updateUserArticleNum(Integer articleNum);
-    void updateUserCreate(Date create);
-    void updateUserUpdate(Date update);
-    void updateUserSynopsis(String synopsis);
-    void updateUserActive(Integer active);
-    void updateUserKey(Integer key);
+    void updateUserName(String uid,String name);
+    void updateUserlevel(String uid);
+    void updateUserPassword(String uid,String password);
+    void updateUserGender(String uid,Integer gender);
+    void updateUserFansNum(String uid,Integer fansNum);
+    void updateUserAttentionnum(String uid,Integer attentionNum);
+    void updateUserVisitorNum(String uid,Integer visitorNum);
+    void updateUserArticleNum(String uid,Integer articleNum);
+    void updateUserLastLogin(String uid);
+    void updateUserSynopsis(String uid,String synopsis);
+    void updateUserActive(String uid,Integer active);
+    void updateUserMyKey(String uid,Integer mykey);
 
     List<User> selectUsers();
 }
