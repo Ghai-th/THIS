@@ -23,7 +23,7 @@ public class ArticleSynopsisPanel extends JPanel implements MouseListener {
         this.article = article;
         this.index = index;
         /////添加数据库连接时 注释以下
-        this.article = Article.initArticle();
+//        this.article = Article.initArticle();
         init();
     }
 
@@ -104,7 +104,7 @@ public class ArticleSynopsisPanel extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         index.mainPanel.removeAll();
         JPanel borderLimit = new JPanel(new BorderLayout());
-        borderLimit.add(new ArticleDetailsPanel(Article.initArticle(),index),BorderLayout.CENTER);
+        borderLimit.add(new ArticleDetailsPanel(article,index),BorderLayout.CENTER);
         index.mainPanel.add(borderLimit,BorderLayout.CENTER);
         updateUI();
     }

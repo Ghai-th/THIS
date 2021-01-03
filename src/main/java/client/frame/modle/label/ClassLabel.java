@@ -3,12 +3,15 @@ package client.frame.modle.label;
 import client.entity.Article;
 import client.frame.Index;
 import client.frame.modle.panel.ArticleListPanel;
+import client.util.ClientUtil;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * 大分类的label 封装
@@ -16,6 +19,7 @@ import java.util.ArrayList;
  */
 public class ClassLabel extends JLabel {
     public Index index;
+    public ArrayList arrayList;
 
     public ClassLabel(Index index) {
         super();
@@ -71,16 +75,20 @@ public class ClassLabel extends JLabel {
                         break;
                     case "软件安全":
                         System.out.println("软件安全");
+                        ///////////////
+                        arrayList = new ArrayList();
+                        arrayList.addAll ( ClientUtil.acceptList());
+                        ///////////////////
                         break;
                 }
 
 //                index.mainPanel.setVisible(false);
                 index.mainPanel.removeAll();
                 //// 从数据库拉取文章列表
-                ArrayList<Article> arrayList = new ArrayList<Article>();
-                for (int i = 0; i < 10; i++) {
-                    arrayList.add(Article.initArticle());
-                }
+//                ArrayList<Article> arrayList = new ArrayList<Article>();
+//                for (int i = 0; i < 10; i++) {
+//                    arrayList.add(Article.initArticle());
+//                }
 
                 index.mainPanel.add(new ArticleListPanel(arrayList,index), BorderLayout.CENTER); /// 新建出 文章列表面板
 //                index.mainPanel.setVisible(true);

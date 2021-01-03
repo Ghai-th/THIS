@@ -2,6 +2,7 @@ package client.entity;
 
 import data.Operate;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Comment extends Operate implements java.io.Serializable{
@@ -65,8 +66,10 @@ public class Comment extends Operate implements java.io.Serializable{
         return text;
     }
 
-    public Date getCreate() {
-        return create;
+    public String getCreate() {
+        create = new Date();
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return date.format(create);
     }
 
     @Override

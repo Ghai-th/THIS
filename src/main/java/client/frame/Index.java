@@ -1,12 +1,18 @@
 package client.frame;
 
 import client.conf.IndexConf;
+import client.entity.Class;
 import client.frame.modle.label.RankLabel;
 import client.frame.modle.panel.ClassPanel;
 import client.frame.modle.panel.NavigationBarPanel;
+import client.util.ClientUtil;
+import server.service.IArticleService;
+import server.service.impl.ArticleServiceImpl;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * 论坛首页界面
@@ -15,8 +21,8 @@ import java.awt.*;
 
 public class Index extends JPanel implements IndexConf {
 
-    public JPanel  centerPanel, westPanel; // 三个大边界板块
-    public static final  String[] classification = new String[] //首页分类 整体从数据库获取
+    public JPanel centerPanel, westPanel; // 三个大边界板块
+    public static final String[] classification = new String[] //首页分类 整体从数据库获取
             {"C语言", "数据结构", "C++", "数据库", "Java", "Golang", "linux", "区块链", "人工智能", "软件安全"};
     public JPanel mainPanel;
     public JScrollPane scrollPane;
@@ -32,9 +38,9 @@ public class Index extends JPanel implements IndexConf {
         initCenter();
     }
 
-    public  void initNorth() {
+    public void initNorth() {
         NavigationBarPanel navigationBarPanel = new NavigationBarPanel(this);
-        this.add(navigationBarPanel,BorderLayout.NORTH);
+        this.add(navigationBarPanel, BorderLayout.NORTH);
     }
 
     /**
@@ -47,11 +53,11 @@ public class Index extends JPanel implements IndexConf {
         JPanel rankingListPerson = new JPanel(new GridLayout(11, 1));
         rankingListPerson.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
         RankLabel person;
-        person = new RankLabel("用户活跃度排行", JLabel.CENTER,this);
+        person = new RankLabel("用户活跃度排行", JLabel.CENTER, this);
         person.setFont(new Font("宋体", Font.BOLD, 20));
         rankingListPerson.add(person);
         for (int i = 1; i <= 10; i++) {
-            person = new RankLabel(i + "  " + "这里写活跃排行需要从数据库选取", JLabel.CENTER,this);
+            person = new RankLabel(i + "  " + "这里写活跃排行需要从数据库选取", JLabel.CENTER, this);
             person.setOpaque(true);
             person.addMouseListener(person);
             person.setFont(new Font("宋体", Font.BOLD, 15));
@@ -65,7 +71,7 @@ public class Index extends JPanel implements IndexConf {
         article.setFont(new Font("宋体", Font.BOLD, 20));
         rankingListArticle.add(article);
         for (int i = 1; i <= 10; i++) {
-            article = new RankLabel(i + "    " + "这里写文章需要从数据库选取", JLabel.CENTER,this);
+            article = new RankLabel(i + "    " + "这里写文章需要从数据库选取", JLabel.CENTER, this);
             article.setOpaque(true);
             article.addMouseListener(article);
             article.setFont(new Font("宋体", Font.BOLD, 15));
@@ -117,6 +123,14 @@ public class Index extends JPanel implements IndexConf {
             center.add(classPanel);
         }
         ////
+
+
+//        IArticleService articleService = new ArticleServiceImpl();
+//        ArrayList list = (ArrayList) ClientUtil.acceptList();
+//        ClassPanel classPanel = new ClassPanel(list, new Class());
+//        classPanel.addMouseListener(classPanel);
+//        center.add(classPanel);
+
 
         CCPanel.add(center, BorderLayout.CENTER);
         mainPanel.add(CCPanel, BorderLayout.CENTER);

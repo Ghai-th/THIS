@@ -25,7 +25,7 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
     public ArticleTittleLabel articleTittleLabel;
     public Index index;
 
-    public ClassPanel(ArrayList<Article> articleLists, Class className) {
+    public ClassPanel(ArrayList articleLists, Class className) {
         this.articleLists = articleLists;
         this.className = className;
         init();
@@ -39,13 +39,13 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
     public void init() {
 
 
-        // 添加数据库操作后注释掉这部分
+//         添加数据库操作后注释掉这部分
         articleLists = new ArrayList<ArticleTittleLabel>();
         className = new Class();
         className.setCid("001");
         className.setName("C++");
         className.setSynopsis("c语言是世界上最好的语言");
-        ////
+        //
 
         this.setOpaque(true);
         this.setLayout(new BorderLayout());
@@ -82,9 +82,10 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
     }
         ////
 
-//        // 使用 自定义构造方法是取消注释
+        // 使用 自定义构造方法是取消注释
+
 //        for (Object articleList : articleLists) {
-//            articleTittleLabel = new ArticleTittleLabel((Article) articleList);
+//            articleTittleLabel = new ArticleTittleLabel((Article) articleList,index);
 //            articleTittleLabel.addMouseListener(articleTittleLabel);
 //            center.add(articleTittleLabel);
 //        }
