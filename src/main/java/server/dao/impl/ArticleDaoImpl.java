@@ -100,7 +100,7 @@ public class ArticleDaoImpl implements IArticleDao {
     @Override
     public List<Article> selectArticleByCid(String cid) {
         try {
-            String sql = "select * from article where cid" + cid;
+            String sql = "select * from article where cid = " + cid;
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
             return  DBUtil.executeGetMoreData(statement,sql,Article.class);

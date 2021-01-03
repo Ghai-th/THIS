@@ -1,6 +1,6 @@
 package data;
 
-public class Operate {
+public class Operate implements java.io.Serializable{
     public int operate;
 
     public Operate(int operate) {
