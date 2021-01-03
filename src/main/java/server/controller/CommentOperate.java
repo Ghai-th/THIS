@@ -11,25 +11,18 @@ import static server.util.ServerUtil.sendInfoList;
 
 public class CommentOperate {
 
-    private Operate commentOperate;
     public CommentServiceImpl commentServiceImpl;
     public Comment comment;
 
-    public CommentOperate(Operate commentOperate, Comment comment) {
-        this.commentOperate = commentOperate;
+    public CommentOperate(Comment comment) {
         this.comment = comment;
     }
 
-    public Operate getCommentOperate() {
-        return commentOperate;
-    }
-
-    public void setCommentOperate(Operate commentOperate) {
-        this.commentOperate = commentOperate;
-    }
-
+    /**
+     * 执行操作
+     */
     public void executeCommentOperate() {
-        switch(commentOperate.operate) {
+        switch(comment.operate) {
             case ServerOperate.ADD_COMMENT :
                 clientAddComment();
                 break;
@@ -54,26 +47,44 @@ public class CommentOperate {
         }
     }
 
+    /**
+     * 添加评论
+     */
     public void clientAddComment(){
         commentServiceImpl.addComment(comment);
     }
 
+    /**
+     * 删除评论
+     */
     public void clientDeleteComment(){
         commentServiceImpl.addComment(comment);
     }
 
+    /**
+     * 管理员删除某用户的评论
+     */
     public void clientDeleteCommentByUid(){
         commentServiceImpl.deleteCommentByUid(comment.getUid());
     }
 
+    /**
+     * 管理员删除某文章的评论
+     */
     public void clientDeleteCommentByAid(){
         commentServiceImpl.deleteCommentByAid(comment.getAid());
     }
 
+    /**
+     * 更新评论
+     */
     public void clientUpdateComment(){
         commentServiceImpl.updateComment(comment);
     }
 
+    /**
+     * 向服务端发送某用户全部评论列表
+     */
     public void clientQueryAllCommentByUid() {
         List allComment = commentServiceImpl.queryAllCommentByUid(comment.getUid());
         try {
@@ -83,6 +94,9 @@ public class CommentOperate {
         }
     }
 
+    /**
+     * 向服务器发送某文章全部评论列表
+     */
     public void clientQueryAllCommentByAid() {
         List allComment = commentServiceImpl.queryAllCommentByAid(comment.getAid());
         try {
