@@ -14,4 +14,7 @@ public enum ServerOperate {
      * 文章对应操作
      */
     GET_ALL_ARTICLE
+
+
+
 };
