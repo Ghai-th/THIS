@@ -25,7 +25,14 @@ public interface ServerOperate {
     /**
      * 文章对应操作
      */
-    int GET_ALL_ARTICLE = 100008;
+    int ADD_ARTICLE = 300001;
+    int DELETE_ARTICLE = 300002;
+    int UPDATE_ARTICLE = 300003;
+    int GET_ARTICLE_BY_AID = 300004;
+    int GET_ARTICLE_BY_CID = 300005;
+    int GET_ARTICLE_BY_UID = 300006;
+    int GET_ARTICLE_BY_TITTLE = 300007;
+    int GET_ARTICLE_TOP_TEN = 300008;
 
 
     /**
