@@ -103,7 +103,6 @@ public class CommentOperate {
             serverUtil.sendInfoList(allComment);
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
 }
