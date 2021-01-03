@@ -11,25 +11,15 @@ import static server.util.ServerUtil.sendInfoList;
 
 public class CommentOperate {
 
-    private Operate commentOperate;
     public CommentServiceImpl commentServiceImpl;
     public Comment comment;
 
-    public CommentOperate(Operate commentOperate, Comment comment) {
-        this.commentOperate = commentOperate;
+    public CommentOperate(Comment comment) {
         this.comment = comment;
     }
 
-    public Operate getCommentOperate() {
-        return commentOperate;
-    }
-
-    public void setCommentOperate(Operate commentOperate) {
-        this.commentOperate = commentOperate;
-    }
-
     public void executeCommentOperate() {
-        switch(commentOperate.operate) {
+        switch(comment.operate) {
             case ServerOperate.ADD_COMMENT :
                 clientAddComment();
                 break;
