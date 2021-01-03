@@ -1,12 +1,13 @@
-package server.controller;
+package server.ServerThread;
 
 import client.entity.*;
+import server.controller.ArticleOperate;
 import server.util.ServerUtil;
 
 import java.io.IOException;
 import java.lang.Class;
 
-public class Execute<T> extends Thread {
+class Execute<T> extends Thread {
     T t = null;
     ServerUtil serverUtil = null;
 
@@ -64,6 +65,20 @@ class Listener<T> implements Runnable {
         } else if (t instanceof Store) {
 
         } else if (t instanceof User) {
+        }
+    }
+}
+
+ public class ServerApplicationStart<T> {
+    public ServerApplicationStart() {
+        while (true) {
+            ServerUtil serverUtil = null;
+            try {
+                serverUtil = new ServerUtil();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            new Execute<>(serverUtil).start();
         }
     }
 }
