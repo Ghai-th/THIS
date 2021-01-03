@@ -12,7 +12,7 @@ public class Main {
 
 
     public static <T> void main(String[] args) throws IOException {
-//        while (true) {
+        while (true) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -40,8 +40,15 @@ public class Main {
                     } else if (t instanceof User) {
 
                     }
+                    while (true) {
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }).start();
-//        }
+        }
     }
 }
