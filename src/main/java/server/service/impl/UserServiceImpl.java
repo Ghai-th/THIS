@@ -100,23 +100,23 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void updateUserFansNum(String uid,Integer fansNum) {
-        dao.updateUserFansNum(uid,fansNum);
+    public void updateUserFansNum(String uid) {
+        dao.updateUserFansNum(uid);
     }
 
     @Override
-    public void updateUserAttentionnum(String uid,Integer attentionNum) {
-        dao.updateUserAttentionnum(uid,attentionNum);
+    public void updateUserAttentionnum(String uid) {
+        dao.updateUserAttentionnum(uid);
     }
 
     @Override
-    public void updateUserVisitorNum(String uid,Integer visitorNum) {
-        dao.updateUserVisitorNum(uid,visitorNum);
+    public void updateUserVisitorNum(String uid) {
+        dao.updateUserVisitorNum(uid);
     }
 
     @Override
-    public void updateUserArticleNum(String uid,Integer articleNum) {
-        dao.updateUserArticleNum(uid,articleNum);
+    public void updateUserArticleNum(String uid) {
+        dao.updateUserArticleNum(uid);
     }
 
     @Override
@@ -130,8 +130,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void updateUserActive(String uid,Integer active) {
-        dao.updateUserActive(uid,active);
+    public void updateUserActive(String uid) {
+        dao.updateUserActive(uid);
     }
 
     @Override

@@ -18,13 +18,13 @@ public interface IUserService {
     void updateUserlevel(String uid);
     void updateUserPassword(String uid,String password);
     void updateUserGender(String uid,Integer gender);
-    void updateUserFansNum(String uid,Integer fansNum);
-    void updateUserAttentionnum(String uid,Integer attentionNum);
-    void updateUserVisitorNum(String uid,Integer visitorNum);
-    void updateUserArticleNum(String uid,Integer articleNum);
+    void updateUserFansNum(String uid);
+    void updateUserAttentionnum(String uid);
+    void updateUserVisitorNum(String uid);
+    void updateUserArticleNum(String uid);
     void updateUserLastLogin(String uid);
     void updateUserSynopsis(String uid,String synopsis);
-    void updateUserActive(String uid,Integer active);
+    void updateUserActive(String uid);
     void updateUserMyKey(String uid,Integer mykey);
 
     List<User> selectUsers();
