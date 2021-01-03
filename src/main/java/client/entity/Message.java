@@ -17,6 +17,7 @@ public class Message extends Operate implements java.io.Serializable{
     private String state;
 
     public Message(String sendId, String acceptId, String text, String state) {
+        super();
         this.sendId = sendId;
         this.acceptId = acceptId;
         this.text = text;
