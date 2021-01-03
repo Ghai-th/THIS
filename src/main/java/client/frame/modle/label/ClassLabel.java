@@ -108,7 +108,7 @@ public class ClassLabel extends JLabel {
             }
 
             public void mouseExited(MouseEvent e) {
-                setBackground(new Color(242, 242, 242));
+                setBackground(new Color(238, 238, 238));
             }
         });
 
