@@ -7,6 +7,10 @@ public class Operate {
         this.operate = operate;
     }
 
+    public Operate() {
+
+    }
+
     public int getOperate() {
         return operate;
     }
