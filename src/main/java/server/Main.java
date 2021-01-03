@@ -12,15 +12,16 @@ public class Main {
 
 
     public static <T> void main(String[] args) throws IOException {
-        while (true) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+//        while (true) {
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
                     ServerUtil serverUtil = new ServerUtil();
                     T t = null;
                     try {
                         serverUtil.init();
                         t = (T) serverUtil.objectInputStream.readObject();
+                        System.out.println(t);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -48,7 +49,7 @@ public class Main {
                         }
                     }
                 }
-            }).start();
-        }
-    }
+//            }).start();
+//        }
+//    }
 }

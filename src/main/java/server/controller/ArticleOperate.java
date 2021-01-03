@@ -19,6 +19,7 @@ public class ArticleOperate {
     public ArticleOperate(Article article, ServerUtil serverUtil) {
         this.article = article;
         this.serverUtil = serverUtil;
+        selectOperate();
     }
 
     public ArticleOperate() {
@@ -29,6 +30,7 @@ public class ArticleOperate {
      * 执行对应操作
      */
     public void selectOperate() {
+        System.out.println(article.operate);
         switch (article.operate) {
             case ServerOperate.ADD_ARTICLE:
                 addArticle();
@@ -43,6 +45,7 @@ public class ArticleOperate {
                 selectArticleByAid();
                 break;
             case ServerOperate.GET_ARTICLE_BY_CID:
+                System.out.println("cid");
                 selectArticleByCid();
                 break;
             case ServerOperate.GET_ARTICLE_BY_UID:

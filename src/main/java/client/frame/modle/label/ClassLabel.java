@@ -81,6 +81,7 @@ public class ClassLabel extends JLabel {
                         arrayList = new ArrayList();
                         Article article = new Article();
                         article.setCid("1009");
+                        article.setOperate(ServerOperate.GET_ARTICLE_BY_CID);
                         try {
                             ClientUtil.sendInfo(article,Article.class);
                             arrayList.addAll(ClientUtil.acceptList());
