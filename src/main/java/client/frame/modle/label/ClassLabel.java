@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -77,7 +78,13 @@ public class ClassLabel extends JLabel {
                         System.out.println("软件安全");
                         ///////////////
                         arrayList = new ArrayList();
-                        arrayList.addAll ( ClientUtil.acceptList());
+                        try {
+                            arrayList.addAll ( ClientUtil.acceptList());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        } catch (ClassNotFoundException ex) {
+                            ex.printStackTrace();
+                        }
                         ///////////////////
                         break;
                 }
