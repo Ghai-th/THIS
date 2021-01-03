@@ -14,9 +14,9 @@ public class Message extends Operate implements java.io.Serializable{
     private String acceptId;
     private String text;
     private Date time;
-    private Integer state;
+    private String state;
 
-    public Message(String sendId, String acceptId, String text, Integer state) {
+    public Message(String sendId, String acceptId, String text, String state) {
         this.sendId = sendId;
         this.acceptId = acceptId;
         this.text = text;
@@ -65,11 +65,11 @@ public class Message extends Operate implements java.io.Serializable{
         this.time = time;
     }
 
-    public Integer getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(Integer state) {
+    public void setState(String state) {
         this.state = state;
     }
 

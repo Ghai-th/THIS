@@ -10,4 +10,7 @@ public interface IMessageDao {
     void deleteMessage(Message message) throws SQLException;
     void updateMessage(Message message) throws SQLException;
     List<Message> selectMessage(Message message) throws SQLException;
+    Message selectOneMessage(Message message) throws SQLException;
+    Boolean emptyMessage(Message message) throws SQLException;
+    void updateMessageState(Message message,String n) throws SQLException;
 }

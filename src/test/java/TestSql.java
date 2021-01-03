@@ -16,6 +16,8 @@ import server.dao.impl.MessageDaoImpl;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class TestSql {
@@ -131,9 +133,20 @@ public class TestSql {
 
     @Test
     public void testInsertMessage() throws SQLException {
-        Message message = new Message("4","2","1",1);
+        Message message = new Message("张三","李四","cnm","1");
         IMessageDao iMessageDao = new MessageDaoImpl();
-        iMessageDao.addMessage(message);
+        if(iMessageDao.emptyMessage(message)){
+            iMessageDao.addMessage(message);
+        }else{
+            System.out.println("不为空");
+            iMessageDao.updateMessage(message);
+        }
+        List<Message> messageList = iMessageDao.selectMessage(message);
+        Iterator<Message> iterator = messageList.iterator();
+        while(iterator.hasNext()){
+            Message message1 = iterator.next();
+            System.out.println(message1.getSendId()+"对"+message1.getAcceptId()+"说"+message1.getText()+"...."+message1.getState());
+        }
     }
 
 }
