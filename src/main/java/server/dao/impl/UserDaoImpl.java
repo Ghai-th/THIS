@@ -20,13 +20,27 @@ public class UserDaoImpl implements IUserDao {
     List<User> users;
     @Override
     public void addUser(User user) {
-        String sql = "insert into user(uid,password) values('"+user.getUid()+"','"+user.getPassword()+"')";
+        String sql = "insert into user values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             connection = DBUtil.getConnection();
-            statement = connection.createStatement();
-            DBUtil.executeChange(statement,sql);
-            connection.close();
-            statement.close();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,user.getUid());
+            preparedStatement.setString(2,user.getName());
+            preparedStatement.setInt(3,user.getLevel());
+            preparedStatement.setString(4,user.getPassword());
+            preparedStatement.setInt(5,user.getGender());
+            preparedStatement.setBytes(6,user.getImage());
+            preparedStatement.setInt(7,user.getFansNum());
+            preparedStatement.setInt(8,user.getAttentionNum());
+            preparedStatement.setInt(9,user.getVisitorNum());
+            preparedStatement.setInt(10,user.getArticleNum());
+            preparedStatement.setString(11,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getCreate()));
+            preparedStatement.setString(12,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getLastlogin()));
+            preparedStatement.setString(13,user.getSynopsis());
+            preparedStatement.setInt(14,user.getActive());
+            preparedStatement.setInt(15,user.getMyKey());
+            DBUtil.closeResources(connection,preparedStatement);
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -40,8 +54,7 @@ public class UserDaoImpl implements IUserDao {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();
             DBUtil.executeChange(statement,sql);
-            connection.close();
-            statement.close();
+            DBUtil.closeResources(connection,statement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,8 +69,7 @@ public class UserDaoImpl implements IUserDao {
             int level =( user.getActive()+user.getArticleNum()+user.getAttentionNum()+user.getFansNum()+user.getVisitorNum())/5;
             String sql = "update user set level = '"+level+"'where uid = '"+user.getUid()+"'";
             DBUtil.executeChange(statement,sql);
-            connection.close();
-            statement.close();
+            DBUtil.closeResources(connection,statement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,8 +82,7 @@ public class UserDaoImpl implements IUserDao {
             statement = connection.createStatement();
             String sql = "update user set fansnum = '"+(user.getFansNum()+1)+"' where uid = '"+user.getUid() +"'";
             DBUtil.executeChange(statement,sql);
-            connection.close();
-            statement.close();
+            DBUtil.closeResources(connection,statement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -84,8 +95,7 @@ public class UserDaoImpl implements IUserDao {
             statement = connection.createStatement();
             String sql = "update user set attentionnum = '"+(user.getAttentionNum()+1)+"' where uid = '"+user.getUid()+"'";
             DBUtil.executeChange(statement,sql);
-            connection.close();
-            statement.close();
+            DBUtil.closeResources(connection,statement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -98,8 +108,7 @@ public class UserDaoImpl implements IUserDao {
             statement = connection.createStatement();
             String sql1 = "update user set visitornum = '"+(user.getVisitorNum()+1)+"' where uid = '"+user.getUid()+"'";
             DBUtil.executeChange(statement,sql1);
-            connection.close();
-            statement.close();
+            DBUtil.closeResources(connection,statement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -112,8 +121,7 @@ public class UserDaoImpl implements IUserDao {
             statement = connection.createStatement();
             String sql1 = "update user set articlenum = '"+(user.getArticleNum()+1)+"' where uid = '"+user.getUid()+"'";
             DBUtil.executeChange(statement,sql1);
-            connection.close();
-            statement.close();
+            DBUtil.closeResources(connection,statement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -128,8 +136,7 @@ public class UserDaoImpl implements IUserDao {
             preparedStatement.setString(1,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             preparedStatement.setString(2,user.getUid());
             preparedStatement.executeUpdate();
-            connection.close();
-            preparedStatement.close();
+            DBUtil.closeResources(connection,preparedStatement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -142,8 +149,7 @@ public class UserDaoImpl implements IUserDao {
             statement = connection.createStatement();
             String sql = "update user set active = '"+(user.getActive()+1)+"' where uid = '"+user.getUid()+"'";
             DBUtil.executeChange(statement,sql);
-            connection.close();
-            statement.close();
+            DBUtil.closeResources(connection,statement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -162,8 +168,7 @@ public class UserDaoImpl implements IUserDao {
             preparedStatement.setInt(5,user.getMyKey());
             preparedStatement.setString(6,user.getUid());
             preparedStatement.executeUpdate();
-            connection.close();
-            preparedStatement.close();
+            DBUtil.closeResources(connection,preparedStatement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -176,8 +181,7 @@ public class UserDaoImpl implements IUserDao {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();
             users = DBUtil.executeGetMoreData(statement,sql,User.class);
-            connection.close();
-            statement.close();
+            DBUtil.closeResources(connection,statement);
             return users;
         } catch (SQLException e) {
             e.printStackTrace();
