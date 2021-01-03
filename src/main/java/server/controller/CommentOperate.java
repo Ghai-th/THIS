@@ -12,9 +12,10 @@ public class CommentOperate {
 
     public CommentServiceImpl commentServiceImpl;
     public Comment comment;
-    public ServerUtil serverUtil = new ServerUtil();
+    public ServerUtil serverUtil;
 
     public CommentOperate(Comment comment) {
+        serverUtil = new ServerUtil();
         this.comment = comment;
     }
 
