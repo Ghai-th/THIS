@@ -24,7 +24,7 @@ public class CollectPanel extends JPanel {
         this.setLayout(new FlowLayout());
         this.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-100,800));
         for(int i=0;i<3;i++){
-            MemberCollectPanel a = new MemberCollectPanel();
+            MemberCollectPanel a = new MemberCollectPanel(myUser);
             list.add(a);
         }
         System.out.println(list.size());
