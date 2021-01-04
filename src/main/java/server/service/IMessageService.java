@@ -41,6 +41,22 @@ public interface IMessageService {
      * @param message
      */
     public boolean updateMessageState(Message message,String n,int judge);
+
+    /**
+     * 更新message表中的sendnotice元素
+     * @param message
+     * @param n
+     * @return
+     */
+    public boolean updateMessageSendNotice(Message message,String n);
+
+    /**
+     * 更新message表中的accpetnotice元素
+     * @param message
+     * @param n
+     * @return
+     */
+    public boolean updateMessageAcceptNotice(Message message,String n);
     /**
      *
      * @param message 传入一个信息发送对象，判断message表中是否存在这个对象

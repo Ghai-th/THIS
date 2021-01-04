@@ -60,6 +60,8 @@ public interface ServerOperate {
     int SEND_MESSAGE = 400001;
     int ACCEPT_MESSAGE = 400002;
     int DELETE_MESSAGE = 400003;
+    int NOTCIE_MESSAGE = 400004;
+    int CLOSE_NOTICE_MESSAGE = 400005;
 
     /**
      * attention表对应的操作
