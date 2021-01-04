@@ -141,28 +141,19 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
     }
 
     public void initSouth() {
-        /**
-         * 数据库拉取 评论区列表
-         */
-        ////////////////////////////////
         ArrayList<Comment> commentArrayList = new ArrayList<>();
-        Comment comment1 = new Comment();
-        comment1.setAid(article.getAid());
-        comment1.operate = ServerOperate.QUERY_ALL_COMMENT_BY_AID;
+        Comment comment = new Comment();
+        comment.setAid(article.getAid());
+        comment.operate = ServerOperate.QUERY_ALL_COMMENT_BY_AID;
         try {
-            ClientUtil.sendInfo(comment1, Comment.class);
+            ClientUtil.sendInfo(comment, Comment.class);
             commentArrayList.addAll(ClientUtil.acceptList());
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        ////////////////////////////////
-
         articleDetailSouthPanel = new JPanel(new BorderLayout());
-
         writeCommentPane = new JTextPane();
         writeCommentPane.setFont(new Font("宋体", Font.BOLD, 22));
-
         publishLabel = new JLabel("发表");
         publishLabel.setOpaque(true);
         publishLabel.setFont(new Font("宋体", Font.BOLD, 22));
@@ -183,30 +174,22 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
                 publishLabel.setBackground(new Color(255, 77, 77));
             }
         });
-
         writeCommentPane.setPreferredSize(new Dimension(800, 120));
         publishLabel.setPreferredSize(new Dimension(100, 150));
-
         JPanel writePanel = new JPanel(new BorderLayout());
-
-
         writePanel.add(writeCommentPane, BorderLayout.CENTER);
         writePanel.add(publishLabel, BorderLayout.EAST);
         articleDetailSouthPanel.add(writePanel,BorderLayout.NORTH);
 
-        JPanel commentListPanel = new JPanel(new GridLayout(10,1));
-        commentListPanel.setPreferredSize(new Dimension(1200,commentArrayList.size() * 145));
-
-        for (Comment comment : commentArrayList) {
-            ArticleDetailsCommentPanel articleDetailsCommentPanel = new ArticleDetailsCommentPanel(comment);
+        JPanel commentListPanel = new JPanel(new GridLayout(commentArrayList.size(),1));
+        commentListPanel.setPreferredSize(new Dimension(1200,commentArrayList.size() * 105));
+        for (Comment comments : commentArrayList) {
+            System.out.println(comments);
+            ArticleDetailsCommentPanel articleDetailsCommentPanel = new ArticleDetailsCommentPanel(comments);
             commentListPanel.add(articleDetailsCommentPanel);
         }
-
-        updateUI();
-
         articleDetailSouthPanel.add(commentListPanel,BorderLayout.CENTER);
         this.add(articleDetailSouthPanel, BorderLayout.SOUTH);
-
     }
 
     public void initAuthor() {
