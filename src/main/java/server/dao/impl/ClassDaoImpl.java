@@ -1,5 +1,6 @@
 package server.dao.impl;
 
+import client.entity.Class;
 import server.dao.IClassDao;
 import server.util.DBUtil;
 
