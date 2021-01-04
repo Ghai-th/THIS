@@ -4,6 +4,7 @@ import client.entity.Comment;
 import client.entity.User;
 import com.mysql.fabric.Server;
 import data.Operate;
+import server.Thread.UserSocketGather;
 import server.service.IUserService;
 import server.service.impl.CommentServiceImpl;
 import server.service.impl.UserServiceImpl;
@@ -107,6 +108,7 @@ public class UserOperate {
         if(success){
             try {
                 serverUtil.sendInfo(user,User.class);
+                UserSocketGather.addUserServerUtilMap(user,serverUtil);
             } catch (IOException e) {
                 e.printStackTrace();
             }
