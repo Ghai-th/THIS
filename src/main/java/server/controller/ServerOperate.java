@@ -60,6 +60,13 @@ public interface ServerOperate {
     int ACCEPT_MESSAGE = 400002;
     int DELETE_MESSAGE = 400003;
 
+    /**
+     * attention表对应的操作
+     */
+    int ADD_ATTENTION = 500001;
+    int DELETE_ATTENTION = 500002;
+    int SEARCH_ATTENTION_FANS = 500003;
+    int SELECT_ATTENTION_IDOL = 500004;
 
     /**
      * class表对应的操作

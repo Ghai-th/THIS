@@ -175,4 +175,6 @@ public class ArticleDaoImpl implements IArticleDao {
             DBUtil.closeResources(connection,statement);
         }
     }
+
+
 }

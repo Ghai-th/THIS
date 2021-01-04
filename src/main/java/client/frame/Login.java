@@ -1,15 +1,21 @@
 package client.frame;
 
+import client.entity.User;
+import client.frame.modle.panel.UserPanel;
+import client.util.ClientUtil;
 import com.formdev.flatlaf.FlatLightLaf;
 import client.conf.IndexConf;
 import client.frame.modle.border.RoundBorder;
 import client.frame.modle.panel.NavigationBarPanel;
 import client.frame.modle.panel.TranslucenceJPanel;
+import server.controller.ServerOperate;
+
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class Login extends JPanel implements ActionListener, IndexConf {
     //登录
@@ -59,7 +65,21 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     MouseListener okJLabelListener = new MouseListener() {
 
         public void mouseClicked(MouseEvent e) {
-
+            if(new String(password3JPassword.getPassword()).equals(new String(password4JPassword.getPassword()))){
+                User u = new User(id1JTextField.getText(),new String(password4JPassword.getPassword()));
+                u.setOperate(ServerOperate.REGISTER_USER);
+                try {
+                    ClientUtil.sendInfo(u,User.class);
+                    System.out.print(456456);
+                    if((ClientUtil.acceptInfo(User.class)).operate != ServerOperate.ERROR){
+                        System.out.print(666);
+                    }else{
+                        System.out.print(123456);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
 
         public void mousePressed(MouseEvent e) {
