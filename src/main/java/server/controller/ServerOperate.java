@@ -34,6 +34,7 @@ public interface ServerOperate {
     int GET_ARTICLE_BY_TITTLE = 300007;
     int GET_ARTICLE_TOP_TEN = 300008;
     int GET_CLASS_HOT_ARTICLE_TOP_EIGHT = 300009;
+    int ARTICLE_NOT_ANY_COMMENT = 300010;
 
     /**
      * User表对应的操作
