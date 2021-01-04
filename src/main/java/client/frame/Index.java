@@ -73,12 +73,25 @@ public class Index extends JPanel implements IndexConf {
         article = new RankLabel("热门文章排行", JLabel.CENTER, this);
         article.setFont(new Font("宋体", Font.BOLD, 20));
         rankingListArticle.add(article);
-        for (int i = 1; i <= 10; i++) {
-            article = new RankLabel(i + "    " + "这里写文章需要从数据库选取", JLabel.CENTER, this);
+
+        ArrayList<Article> articleTopTenArrayList = new ArrayList<>();
+
+        Article articleTopTen = new Article();
+        articleTopTen.operate = ServerOperate.GET_ARTICLE_TOP_TEN;
+        try {
+            ClientUtil.sendInfo(articleTopTen, Article.class);
+            articleTopTenArrayList.addAll(ClientUtil.acceptList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        int i = 1;
+        for(Article articleTop : articleTopTenArrayList) {
+            article = new RankLabel(i + "    " + articleTop.getTitle(), JLabel.CENTER, this);
             article.setOpaque(true);
             article.addMouseListener(article);
             article.setFont(new Font("宋体", Font.BOLD, 15));
             rankingListArticle.add(article);
+            i++;
         }
 
         westPanel.add(rankingListPerson);

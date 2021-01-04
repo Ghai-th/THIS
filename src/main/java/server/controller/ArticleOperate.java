@@ -95,7 +95,7 @@ public class ArticleOperate {
     }
 
     /**
-     * 跟新文章的 各类num信息 失败返回错误信息
+     * 更新文章的 各类num信息 失败返回错误信息
      */
     public void updateArticle(){
         boolean success = false;
