@@ -28,7 +28,8 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
     public ArticleTittleLabel articleTittleLabel;
     public Index index;
 
-    public ClassPanel(ArrayList articleLists, Class className) {
+    public ClassPanel(ArrayList articleLists, Class className, Index  index) {
+        this.index = index;
         this.articleLists = articleLists;
         this.className = className;
         init();
@@ -40,16 +41,6 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
     }
 
     public void init() {
-
-
-//         添加数据库操作后注释掉这部分
-        articleLists = new ArrayList<ArticleTittleLabel>();
-        className = new Class();
-        className.setCid("001");
-        className.setName("C++");
-        className.setSynopsis("c语言是世界上最好的语言");
-        //
-
         this.setOpaque(true);
         this.setLayout(new BorderLayout());
 
@@ -61,8 +52,8 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
         north.add(demoLabel);
         tittleLabel = new JLabel(className.getName());
         tittleLabel.setOpaque(true);
-        tittleLabel.setFont(new Font("宋体", Font.BOLD, 40));
-        tittleLabel.setPreferredSize(new Dimension(WIDE * 5 / 64, HIGH * 11 / 210));
+        tittleLabel.setFont(new Font("宋体", Font.BOLD, 37));
+        tittleLabel.setPreferredSize(new Dimension(WIDE * 5 / 64 + 20 , HIGH * 11 / 210));
         north.add(tittleLabel);
         north.add(demoLabel);
         JLabel synopsis = new JLabel();
@@ -76,33 +67,11 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
         JPanel center = new JPanel(new GridLayout(2, 4));
         center.setPreferredSize(new Dimension(WIDE * 43 / 96, HIGH * 2 / 7));
 
-        //// 此处改为数据库拉取对应的信息
-        for (int i = 0; i < 8; i++) {
-            articleTittleLabel = new ArticleTittleLabel(Article.initArticle(),index);
-            articleLists.add(articleTittleLabel);
+        for (Object articleList : articleLists) {
+            articleTittleLabel = new ArticleTittleLabel((Article) articleList,index);
             articleTittleLabel.addMouseListener(articleTittleLabel);
             center.add(articleTittleLabel);
-    }
-        ////
-
-
-        Article article = new Article();
-        article.setOperate(ServerOperate.GET_CLASS_HOT_ARTICLE_TOP_EIGHT);
-        article.setCid(className.getCid());
-
-        try {
-            ClientUtil.sendInfo(article,Article.class);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
-        // 使用 自定义构造方法是取消注释
-
-//        for (Object articleList : articleLists) {
-//            articleTittleLabel = new ArticleTittleLabel((Article) articleList,index);
-//            articleTittleLabel.addMouseListener(articleTittleLabel);
-//            center.add(articleTittleLabel);
-//        }
 
         this.add(center, BorderLayout.CENTER);
 

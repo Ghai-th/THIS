@@ -57,6 +57,9 @@ public class ArticleOperate {
             case ServerOperate.GET_ARTICLE_TOP_TEN:
                 selectTopTenArticle();
                 break;
+            case ServerOperate.GET_CLASS_HOT_ARTICLE_TOP_EIGHT:
+                selectTopLimitArticleByCid();
+                break;
         }
     }
 
@@ -164,6 +167,17 @@ public class ArticleOperate {
     public void selectTopTenArticle() {
         List articles = articleService.selectTopLimitArticle(10);
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_TOP_TEN;
+        try {
+            serverUtil.sendInfoList(articles);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void selectTopLimitArticleByCid() {
+        List articles = articleService.selectTopLimitArticleByCid(article.getCid(),8);
+        System.out.println("articles.size() = " + articles.size());
+        ((Article)articles.get(0)).operate = ServerOperate.GET_CLASS_HOT_ARTICLE_TOP_EIGHT;
         try {
             serverUtil.sendInfoList(articles);
         } catch (IOException e) {

@@ -1,16 +1,19 @@
 package client.frame;
 
 import client.conf.IndexConf;
+import client.entity.Article;
 import client.entity.Class;
 import client.frame.modle.label.RankLabel;
 import client.frame.modle.panel.ClassPanel;
 import client.frame.modle.panel.NavigationBarPanel;
 import client.util.ClientUtil;
+import server.controller.ServerOperate;
 import server.service.IArticleService;
 import server.service.impl.ArticleServiceImpl;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -116,22 +119,33 @@ public class Index extends JPanel implements IndexConf {
         center = new JPanel(new GridLayout(classification.length, 1));
         center.setPreferredSize(new Dimension(WIDE * 5 / 8, classification.length * RANK_HIGH));
 
-        //// 后面从数据库拉取 使用二参构造函数 传入对应的文章 list 和 分类对象
-        for (int i = 0; i < 10; i++) {
-            ClassPanel classPanel = new ClassPanel(this);
+        ArrayList<Class> classArrayList = new ArrayList<>();
+
+        // 分类 lis
+        Class clazz = new Class();
+        clazz.operate = ServerOperate.SELECT_ALL_CLASS;
+        try {
+            ClientUtil.sendInfo(clazz, Class.class);
+            classArrayList.addAll(ClientUtil.acceptList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        for (Class aClass : classArrayList) {
+            Article article = new Article();
+            ArrayList<Article> articles = new ArrayList<>();
+            article.setCid(aClass.getCid());
+            article.operate = ServerOperate.GET_CLASS_HOT_ARTICLE_TOP_EIGHT;
+            try {
+                ClientUtil.sendInfo(article,Article.class);
+                articles.addAll(ClientUtil.acceptList());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            ClassPanel classPanel = new ClassPanel(articles,aClass,this);
             classPanel.addMouseListener(classPanel);
             center.add(classPanel);
         }
-        ////
-
-        Class clazz = new Class();
-
-
-//        IArticleService articleService = new ArticleServiceImpl();
-//        ArrayList list = (ArrayList) ClientUtil.acceptList();
-//        ClassPanel classPanel = new ClassPanel(list, new Class());
-//        classPanel.addMouseListener(classPanel);
-//        center.add(classPanel);
 
 
         CCPanel.add(center, BorderLayout.CENTER);
