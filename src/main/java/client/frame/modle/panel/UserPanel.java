@@ -84,12 +84,11 @@ public class UserPanel extends TranslucenceJPanel {
         center.setLayout(new BorderLayout());
         text = new JLabel("我的文章("+anum+")",JLabel.CENTER);
         text.setFont(new Font("宋体",Font.PLAIN,30));
+        centerup.setBackground(Color.WHITE);
         //中中布局
         final TranslucenceJPanel myCenterc = new TranslucenceJPanel();
         myCenterc.setOpaque(false);
         myCenterc.setTransparent(0.1f);
-        centerup.setBackground(Color.WHITE);
-        myCenterc.setBackground(new Color(240,255,255));
         myCenterc.setLayout(new FlowLayout());
         myCenterc.setPreferredSize(new Dimension(800,800));
         jScrollPane = new JScrollPane(centerc);

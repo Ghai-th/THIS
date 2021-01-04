@@ -1,4 +1,5 @@
 import client.entity.Article;
+import client.entity.Attention;
 import client.entity.Message;
 import client.entity.User;
 import client.util.ClientUtil;
@@ -8,16 +9,17 @@ import server.dao.IUserDao;
 import server.dao.IMessageDao;
 import server.dao.impl.ArticleDaoImpl;
 import server.dao.impl.UserDaoImpl;
+import server.service.IAttentionService;
 import server.service.IUserService;
+import server.service.impl.AttentionServiceImpl;
 import server.service.impl.UserServiceImpl;
 
-import java.util.Date;
+import java.util.*;
+
 import server.dao.impl.MessageDaoImpl;
 
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 
 public class TestSql {
@@ -129,6 +131,17 @@ public class TestSql {
             Message message1 = iterator.next();
             System.out.println(message1.getSendId()+"对"+message1.getAcceptId()+"说"+message1.getText()+"...."+message1.getState());
         }
+    }
+    @Test
+    public void testAttention(){
+        IAttentionService attentionService = new AttentionServiceImpl();
+        List<Attention> list = new ArrayList<>();
+        Attention attention = new Attention();
+        attention.setUid("123456");
+        attention.setFansId("6666666");
+        //attentionService.addAttention(attention);
+        list = attentionService.selectAttention(attention);
+        System.out.println(list.size());
     }
 
 }
