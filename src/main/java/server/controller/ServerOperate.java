@@ -61,7 +61,7 @@ public interface ServerOperate {
     /**
      * class表对应的操作
      */
-     int SELECT_CLASS_BY_ID = 400001;
+     int SELECT_CLASS_BY_ID = 600001;
 
 
 
