@@ -1,7 +1,6 @@
 package client.frame;
 
 import client.entity.User;
-import client.frame.modle.panel.UserPanel;
 import client.util.ClientUtil;
 import com.formdev.flatlaf.FlatLightLaf;
 import client.conf.IndexConf;
@@ -9,14 +8,12 @@ import client.frame.modle.border.RoundBorder;
 import client.frame.modle.panel.NavigationBarPanel;
 import client.frame.modle.panel.TranslucenceJPanel;
 import server.controller.ServerOperate;
-import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 
 public class Login extends JPanel implements ActionListener, IndexConf {
     //登录
@@ -51,7 +48,6 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 ClientUtil.sendInfo(user,User.class);
                 user = ClientUtil.acceptInfo(User.class);
                 if(user.operate != ServerOperate.ERROR){
-                    loginJLabel.setText("登录中..");
                     index.removeAll();
                     index.setVisible(false);
                     index.add(new Index());
@@ -149,19 +145,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 if(user.operate != ServerOperate.ERROR){
                     //跳转到修改密码界面
                     infoJPanel.removeAll();
-                    changePasswordJLabel.setBounds(60,62,50,65);
-                    changeJPasswordFiled.setBounds(155,65,200,50);
-                    infoJPanel.add(changePasswordJLabel);
-                    infoJPanel.add(changeJPasswordFiled);
-                    changePassword1JLabel.setBounds(60,160,50,65);
-                    change1JPasswordFiled.setBounds(155,163,200,50);
-                    infoJPanel.add(changePassword1JLabel);
-                    infoJPanel.add(change1JPasswordFiled);
-                    changeJLabel.setBounds(240,300,120,50);
-                    infoJPanel.add(changeJLabel);
-                    returnJLabel.setBounds(60,300,120,50);
-                    infoJPanel.add(returnJLabel);
-                    infoJPanel.repaint();
+                    goSame(changePasswordJLabel,changeJPasswordFiled,infoJPanel,changePassword1JLabel,change1JPasswordFiled,
+                            changeJLabel,returnJLabel);
                 }else{
                     JOptionPane.showMessageDialog(Login.this,"验证未通过！");
                     findidJTextField.setText("");
@@ -542,19 +527,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 infoJPanel.removeAll();
                 findidJTextField.setText("");
                 checkJTextField.setText("");
-                findidJLabel.setBounds(60,62,50,65);
-                findidJTextField.setBounds(155,65,200,50);
-                infoJPanel.add(findidJLabel);
-                infoJPanel.add(findidJTextField);
-                checkJLabel.setBounds(60,160,50,65);
-                checkJTextField.setBounds(155,163,200,50);
-                infoJPanel.add(checkJLabel);
-                infoJPanel.add(checkJTextField);
-                findJLabel.setBounds(240,300,120,50);
-                infoJPanel.add(findJLabel);
-                returnJLabel.setBounds(60,300,120,50);
-                infoJPanel.add(returnJLabel);
-                infoJPanel.repaint();
+                goSame(findidJLabel,findidJTextField,infoJPanel,checkJLabel,checkJTextField,findJLabel,returnJLabel);
             }
 
             public void mousePressed(MouseEvent e) {
@@ -781,6 +754,22 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     public void changeJLabel(JLabel findidJLabel){
         findidJLabel.setFont(new Font("楷书",Font.PLAIN,25));
         findidJLabel.setForeground(new Color(240,128,128));
+    }
+    public void goSame(JLabel findidJLabel,JTextField findidJTextField,JPanel infoJPanel,JLabel checkJLabel,
+                       JTextField checkJTextField,JLabel findJLabel,JLabel returnJLabel){
+        findidJLabel.setBounds(60,62,50,65);
+        findidJTextField.setBounds(155,65,200,50);
+        infoJPanel.add(findidJLabel);
+        infoJPanel.add(findidJTextField);
+        checkJLabel.setBounds(60,160,50,65);
+        checkJTextField.setBounds(155,163,200,50);
+        infoJPanel.add(checkJLabel);
+        infoJPanel.add(checkJTextField);
+        findJLabel.setBounds(240,300,120,50);
+        infoJPanel.add(findJLabel);
+        returnJLabel.setBounds(60,300,120,50);
+        infoJPanel.add(returnJLabel);
+        infoJPanel.repaint();
     }
 
 
