@@ -3,6 +3,7 @@ package client.frame;
 import client.conf.IndexConf;
 import client.entity.Article;
 import client.entity.Class;
+import client.entity.User;
 import client.frame.modle.label.RankLabel;
 import client.frame.modle.panel.ClassPanel;
 import client.frame.modle.panel.NavigationBarPanel;
@@ -30,11 +31,20 @@ public class Index extends JPanel implements IndexConf {
     public JPanel mainPanel;
     public JScrollPane scrollPane;
     public JPanel CCPanel;
+    public User user;
 
     /**
      * 初始化界面
      */
-    public Index() {
+    public Index(User user) {
+        this.user = user;
+        System.out.println(user);
+        this.setLayout(new BorderLayout());
+        initNorth();
+        initWest();
+        initCenter();
+    }
+    public Index(){
         this.setLayout(new BorderLayout());
         initNorth();
         initWest();
@@ -172,4 +182,6 @@ public class Index extends JPanel implements IndexConf {
 
         this.add(centerPanel, BorderLayout.CENTER);
     }
+
+
 }
