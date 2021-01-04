@@ -1,4 +1,4 @@
-package server.ServerThread;
+package server.Thread;
 
 import client.entity.*;
 import server.controller.ArticleOperate;

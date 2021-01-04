@@ -5,11 +5,14 @@ import client.entity.Article;
 import client.entity.Class;
 import client.frame.Index;
 import client.frame.modle.label.ArticleTittleLabel;
+import client.util.ClientUtil;
+import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -81,6 +84,17 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
             center.add(articleTittleLabel);
     }
         ////
+
+
+        Article article = new Article();
+        article.setOperate(ServerOperate.GET_CLASS_HOT_ARTICLE_TOP_EIGHT);
+        article.setCid(className.getCid());
+
+        try {
+            ClientUtil.sendInfo(article,Article.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // 使用 自定义构造方法是取消注释
 

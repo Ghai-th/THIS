@@ -50,44 +50,34 @@ public class ClassLabel extends JLabel {
                         System.out.println("创作界面");
                         break;
                     case "C语言":
-                        System.out.println("C语言");
+                        initData("1000");
                         break;
                     case "数据结构":
-                        System.out.println("数据结构");
+                        initData("1001");
                         break;
                     case "C++":
-                        System.out.println("C++");
+                        initData("1002");
                         break;
                     case "数据库":
-                        System.out.println("数据库");
+                        initData("1003");
                         break;
                     case "Java":
-                        System.out.println("Java");
+                        initData("1004");
                         break;
                     case "Golang":
-                        System.out.println("Golang");
+                        initData("1005");
                         break;
                     case "linux":
-                        System.out.println("linux");
+                        initData("1006");
                         break;
                     case "区块链":
-                        System.out.println("区块链");
+                        initData("1007");
                         break;
                     case "人工智能":
-                        System.out.println("人工智能");
+                        initData("1008");
                         break;
                     case "软件安全":
-                        System.out.println("软件安全");
-                        arrayList = new ArrayList();
-                        Article article = new Article();
-                        article.setCid("1009");
-                        article.setOperate(ServerOperate.GET_ARTICLE_BY_CID);
-                        try {
-                            ClientUtil.sendInfo(article,Article.class);
-                            arrayList.addAll(ClientUtil.acceptList());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        initData("1009");
                         break;
                 }
 
@@ -112,6 +102,18 @@ public class ClassLabel extends JLabel {
                 setBackground(new Color(238, 238, 238));
             }
         });
+    }
 
+    public void initData(String cid) {
+        arrayList = new ArrayList();
+        Article article = new Article();
+        article.setCid(cid);
+        article.setOperate(ServerOperate.GET_ARTICLE_BY_CID);
+        try {
+            ClientUtil.sendInfo(article,Article.class);
+            arrayList.addAll(ClientUtil.acceptList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

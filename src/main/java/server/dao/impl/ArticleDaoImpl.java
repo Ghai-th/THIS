@@ -113,9 +113,9 @@ public class ArticleDaoImpl implements IArticleDao {
     }
 
     @Override
-    public List<Article> selectArticleByTittle(String tittle) {
+    public List<Article> selectArticleByTittle(String title) {
         try {
-            String sql = "select * from article where tittle = %" + tittle + "%";
+            String sql = "select * from article where title like '%" + title + "%'";
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
             return DBUtil.executeGetMoreData(statement,sql,Article.class);
@@ -143,11 +143,11 @@ public class ArticleDaoImpl implements IArticleDao {
     }
 
     @Override
-    public List<Article> selectTopTenArticle() {
+    public List<Article> selectTopLimitArticle(int limit) {
         try {
             List<Article> articles = new ArrayList<Article>();
             int num = 0;
-            String sql = "select article.* from article order by (article.visitornum + article.likenum + article.collectnum) desc";
+            String sql = "select article.* from article order by (article.visitornum + article.likenum + article.collectnum) desc limit " + limit;
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
             for (Article article : DBUtil.executeGetMoreData(statement, sql, Article.class)) {
