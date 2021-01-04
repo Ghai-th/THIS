@@ -6,10 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CommentPanel extends JPanel {
+    private User myUser,otherUser;
     public CommentPanel(User myUser){
+        this.myUser = myUser;
         init();
     }
     public CommentPanel(User myUser,User otherUser){
+        this.myUser = myUser;
+        this.otherUser = otherUser;
         init();
     }
     public void init(){

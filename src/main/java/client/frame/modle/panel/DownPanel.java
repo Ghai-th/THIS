@@ -18,13 +18,17 @@ public class DownPanel extends TranslucenceJPanel {
     DownJlabel j3 = new DownJlabel();
     DownJlabel j4 = new DownJlabel();
     DownJlabel j5 = new DownJlabel();
+    private User myUser,otherUser;
     public DownPanel(User myUser){
+        this.myUser = myUser;
         this.setOpaque(false);
         this.setTransparent(0.01f);
         this.setBounds(GetWH.getWidth()/5+190,745, GetWH.getWidth()*3/5, 155);
         init();
     }
     public DownPanel(User myUser,User otherUser){
+        this.myUser = myUser;
+        this.otherUser = otherUser;
         this.setOpaque(false);
         this.setTransparent(0.01f);
         this.setBounds(GetWH.getWidth()/5+190,745, GetWH.getWidth()*3/5, 155);

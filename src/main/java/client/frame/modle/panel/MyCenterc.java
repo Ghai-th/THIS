@@ -10,10 +10,14 @@ import java.util.List;
 
 public class MyCenterc extends TranslucenceJPanel {
     List<Article> list  = new ArrayList();
+    private User myUser,otherUser;
     public MyCenterc(User user){
+        this.myUser = myUser;
         init();
     }
     public MyCenterc(User myUser,User otherUser){
+        this.myUser = myUser;
+        this.otherUser = otherUser;
         init();
     }
     public void init(){
