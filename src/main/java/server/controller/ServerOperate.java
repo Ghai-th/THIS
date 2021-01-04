@@ -77,14 +77,19 @@ public interface ServerOperate {
      */
      int SELECT_CLASS_BY_ID = 600001;
      int SELECT_ALL_CLASS = 600002;
+
     /**
      * store表对应的操作
      */
     int ADD_STORE = 700001;
     int DELETE_STORE = 700002;
 
-
-
-
-
+    /**
+     * report表对应的操作
+     */
+    int ADD_REPORT_ARTICLE = 800001;
+    int DELETE_REPORT_ARTICLE_BY_AID = 800002;
+    int UPDATE_REPORT_ARTICLE = 800003;
+    int SELECT_REPORT_ARTICLE_BY_AID = 800004;
+    int SELECT_REPORT_ARTICLE = 800005;
 };
