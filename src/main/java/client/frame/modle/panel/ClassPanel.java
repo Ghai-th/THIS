@@ -84,7 +84,6 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
     public void mouseClicked(MouseEvent e) {
         index.mainPanel.setVisible(false);
         index.mainPanel.remove(index.CCPanel);
-        System.out.println(11);
         index.mainPanel.add(new ArticleListPanel(articleLists,index), BorderLayout.CENTER); /// 新建出 文章列表面板
         index.mainPanel.setVisible(true);
     }

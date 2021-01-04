@@ -68,4 +68,11 @@ public class CommentServiceImpl implements ICommentService {
         List<Comment> commentList = commentDao.queryAllCommentByAid(aid);
         return commentList;
     }
+
+    @Override
+    public int selectAllCommentNum() {
+        //查询所有评论
+        int commentNum = commentDao.selectAllCommentNum();
+        return commentNum;
+    }
 }

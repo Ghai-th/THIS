@@ -7,7 +7,11 @@ import server.service.impl.CommentServiceImpl;
 import server.util.ServerUtil;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CommentOperate {
@@ -53,7 +57,29 @@ public class CommentOperate {
             case ServerOperate.QUERY_ALL_COMMENT_BY_AID:
                 clientQueryAllCommentByAid();
                 break;
+            case ServerOperate.SELECT_ALL_COMMENT_NUM:
+                selectAllComment();
+                break;
         }
+    }
+
+    private void selectAllComment() {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat dateFormat = DateFormat.getDateTimeInstance();
+        System.out.println(dateFormat.format(date));
+        Comment com = comment;
+        String dateString;
+        try {
+            dateString = dateFormat.format(date);
+            com.setCreate(format.parse(dateString));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int num = commentService.selectAllCommentNum();
+        com.setCid(String.valueOf(num + 10000));
+        System.out.println(com);
+        commentService.addComment(com);
     }
 
     /**
@@ -110,12 +136,12 @@ public class CommentOperate {
         List allComment = commentService.queryAllCommentByAid(comment.getAid());
         ((Comment)allComment.get(0)).operate = ServerOperate.QUERY_ALL_COMMENT_BY_AID;
         ArrayList l = (ArrayList) allComment;
-        System.out.println(123121231);
-        System.out.println(l.size());
         try {
             serverUtil.sendInfoList(allComment);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 }

@@ -4,6 +4,7 @@ import client.entity.Comment;
 import server.dao.ICommentDao;
 import server.util.DBUtil;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class CommentDaoImpl implements ICommentDao {
     Statement stmt = null;
     ResultSet rs = null;
     List<Comment> list;
+    int count;
 
     public void addComment(Comment comment) {
         //向数据库添加评论
@@ -118,4 +120,25 @@ public class CommentDaoImpl implements ICommentDao {
         return null;
     }
 
+    @Override
+    public int selectAllCommentNum() {
+        //全部评论数量
+        int integer = 0;
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "select count(*) num from comment";
+            stmt = DBUtil.getStatement(conn);
+            ResultSet resultSet = stmt.executeQuery(sql);
+
+            while (resultSet.next()) {
+                integer = resultSet.getInt("num");
+            }
+            return integer;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeResources(conn, stmt, rs);
+        }
+        return 0;
+    }
 }

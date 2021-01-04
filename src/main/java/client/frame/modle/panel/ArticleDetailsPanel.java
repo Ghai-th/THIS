@@ -6,16 +6,16 @@ import client.entity.Comment;
 import client.entity.User;
 import client.frame.Index;
 import client.util.ClientUtil;
+import data.Operate;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ArticleDetailsPanel extends JPanel implements IndexConf {
 
@@ -25,7 +25,11 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
     public JTextPane writeCommentPane;
     public JLabel publishLabel;
     public Index index;
-
+    public Date date;
+    public ArrayList<Comment> commentArrayList;
+    public JPanel commentListPanel;
+    public JPanel borderLimit;
+    public Comment comment;
 
     public void init() {
         this.setLayout(new BorderLayout());
@@ -144,8 +148,9 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
     }
 
     public void initSouth() {
-        ArrayList<Comment> commentArrayList = new ArrayList<>();
-        Comment comment = new Comment();
+        //评论列表
+        commentArrayList = new ArrayList<>();
+        comment = new Comment();
         comment.setAid(article.getAid());
         comment.operate = ServerOperate.QUERY_ALL_COMMENT_BY_AID;
         try {
@@ -154,6 +159,8 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
         articleDetailSouthPanel = new JPanel(new BorderLayout());
         writeCommentPane = new JTextPane();
         writeCommentPane.setFont(new Font("宋体", Font.BOLD, 22));
@@ -164,7 +171,35 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         publishLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("BB赖赖");
+                //鼠标点击后发表 并刷新评论列表
+                Comment com = new Comment();
+                ArrayList<Comment> commentArray = new ArrayList<>();
+                com.setAid(article.getAid());
+                /////////////////////////////////////////////////////////////////
+                com.setUid(article.getUid()); // 获得User的id
+                /////////////////////////////////////////////////////////////////
+                com.setText(writeCommentPane.getText());
+                com.operate = ServerOperate.SELECT_ALL_COMMENT_NUM;
+                try {
+                    ClientUtil.sendInfo(com, Comment.class);
+                    commentArray.addAll(ClientUtil.acceptList());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                writeCommentPane.setText("");
+
+                commentListPanel.removeAll();
+                commentListPanel = new JPanel(new GridLayout(commentArray.size(),1));
+                commentListPanel.setPreferredSize(new Dimension(1200,commentArray.size() * 105));
+                for (Comment comments : commentArray) {
+                    System.out.println(comments);
+                    ArticleDetailsCommentPanel articleDetailsCommentPanel = new ArticleDetailsCommentPanel(comments);
+                    commentListPanel.add(articleDetailsCommentPanel);
+                }
+                updateUI();
+                articleDetailSouthPanel.add(commentListPanel,BorderLayout.CENTER);
+                borderLimit.add(articleDetailSouthPanel, BorderLayout.SOUTH);
+
             }
 
             @Override
@@ -184,7 +219,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         writePanel.add(publishLabel, BorderLayout.EAST);
         articleDetailSouthPanel.add(writePanel,BorderLayout.NORTH);
 
-        JPanel commentListPanel = new JPanel(new GridLayout(commentArrayList.size(),1));
+        commentListPanel = new JPanel(new GridLayout(commentArrayList.size(),1));
         commentListPanel.setPreferredSize(new Dimension(1200,commentArrayList.size() * 105));
         for (Comment comments : commentArrayList) {
             System.out.println(comments);
@@ -207,7 +242,8 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         label.setPreferredSize(new Dimension(100, 50));
     }
 
-    public ArticleDetailsPanel(Article article, Index index) {
+    public ArticleDetailsPanel(Article article, Index index, JPanel borderLimit) {
+        this.borderLimit = borderLimit;
         this.index = index;
         this.article = article;
         init();

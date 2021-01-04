@@ -47,4 +47,9 @@ public interface ICommentDao {
      */
     List<Comment> queryAllCommentByAid(String aid);
 
+    /**
+     * 查询全部评论数量 返回数量
+     * @return 评论总数
+     */
+    int selectAllCommentNum();
 }

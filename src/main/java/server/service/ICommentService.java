@@ -52,4 +52,10 @@ public interface ICommentService {
      */
     List<Comment> queryAllCommentByAid(String aid);
 
+    /**
+     * 查询所有评论数量
+     * @return
+     */
+    int selectAllCommentNum();
+
 }

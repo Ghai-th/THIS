@@ -175,7 +175,6 @@ public class ArticleOperate {
 
     public void selectTopLimitArticleByCid() {
         List articles = articleService.selectTopLimitArticleByCid(article.getCid(),8);
-        System.out.println("articles.size() = " + articles.size());
         ((Article)articles.get(0)).operate = ServerOperate.GET_CLASS_HOT_ARTICLE_TOP_EIGHT;
         try {
             serverUtil.sendInfoList(articles);
