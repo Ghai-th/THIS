@@ -168,47 +168,37 @@ public class TestPanel extends JPanel {
             }
         });
 
-        imagMemberPanel1  = new MemberImagPanel(myUser,otherUser);
+        imagMemberPanel1  = new MemberImagPanel("头像",myUser.getSynopsis());
         imagMemberPanel1.setOpaque(false);//设置全透明
         imagMemberPanel1.setTransparent(0.1f);//设置透明度
         //imagMemberPanel1.setBorder(BorderFactory.createEtchedBorder());
 
-        originalMemberPanel2 = new MemberColorPanel(myUser,otherUser);
-        originalMemberPanel2.up = myUser.getArticleNum()+"";
-        originalMemberPanel2.down = "原创";
+        originalMemberPanel2 = new MemberColorPanel(myUser.getArticleNum()+"","原创");
         originalMemberPanel2.setOpaque(false);//设置全透明
         originalMemberPanel2.setTransparent(0.1f);//设置透明度
        // originalMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        rankMemberPanel2 = new MemberColorPanel(myUser,otherUser);
-        rankMemberPanel2.up = myUser.getActive()+"";
-        rankMemberPanel2.down = "活跃度";
+        rankMemberPanel2 = new MemberColorPanel(myUser.getActive()+"","活跃度");
         rankMemberPanel2.setOpaque(false);//设置全透明
         rankMemberPanel2.setTransparent(0.1f);//设置透明度
        // rankMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        gradeMemberPanel2 = new MemberColorPanel(myUser,otherUser);
-        gradeMemberPanel2.up = myUser.getLevel()+"";
-        gradeMemberPanel2.up = "等级";
+        gradeMemberPanel2 = new MemberColorPanel(myUser.getLevel()+"","等级");
         gradeMemberPanel2.setOpaque(false);//设置全透明
         gradeMemberPanel2.setTransparent(0.1f);//设置透明度
         //gradeMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        visitMemberPanel2 = new MemberColorPanel(myUser,otherUser);
-        visitMemberPanel2.up = myUser.getVisitorNum()+"";
-        visitMemberPanel2.down = "访客";
+        visitMemberPanel2 = new MemberColorPanel(myUser.getVisitorNum()+"","访客");
         visitMemberPanel2.setOpaque(false);//设置全透明
         visitMemberPanel2.setTransparent(0.1f);//设置透明度
         //visitMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        fansMemberPanel3 = new MemberNoColorPanel(myUser,otherUser);
-        fansMemberPanel3.up = myUser.getFansNum()+"";
-        fansMemberPanel3.down = "粉丝";
+        fansMemberPanel3 = new MemberNoColorPanel(myUser.getFansNum()+"","粉丝");
         fansMemberPanel3.setOpaque(false);//设置全透明
         fansMemberPanel3.setTransparent(0.1f);//设置透明度
         //fansMemberPanel3.setBorder(BorderFactory.createEtchedBorder());
 
-        attentionMemberPanel3 = new MemberNoColorPanel(myUser,otherUser);
+        attentionMemberPanel3 = new MemberNoColorPanel(myUser.getAttentionNum()+"","关注");
         attentionMemberPanel3.up = myUser.getAttentionNum()+"";
         attentionMemberPanel3.down = "关注";
         attentionMemberPanel3.setOpaque(false);//设置全透明

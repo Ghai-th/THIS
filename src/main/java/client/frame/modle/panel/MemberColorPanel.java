@@ -16,14 +16,10 @@ public class MemberColorPanel extends TranslucenceJPanel {
     JLabel downJLabel;//下部label
     String up;
     String down;
-    public User myUser,otherUser;
-    public MemberColorPanel(User myUser){
-        this.myUser = myUser;
-        init();
-    }
-    public MemberColorPanel(User myUser,User otherUser){
-        this.myUser = myUser;
-        this.otherUser = otherUser;
+    public MemberColorPanel(String up,String down){
+       this.up = up;
+       this.down = down;
+       init();
     }
     public void init(){
         upJLabel = new JLabel(up,JLabel.CENTER);

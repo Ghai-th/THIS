@@ -21,18 +21,14 @@ public class MemberImagPanel extends TranslucenceJPanel {
     public MemberImagPanel(){
 
     }
-    public MemberImagPanel(User myUser){
-        this.myUser = myUser;
-        init();
-    }
-    public MemberImagPanel(User myUser,User otherUser){
-        this.myUser = myUser;
-        this.otherUser = otherUser;
+    public MemberImagPanel(String left,String right){
+       this.left = left;
+       this.right = right;
         init();
     }
     public void init(){
-        leftJLabel = new JLabel("头像");
-        rightJLabel = new JLabel();
+        leftJLabel = new JLabel(left);
+        rightJLabel = new JLabel(right);
         leftJLabel.setFont(new Font("宋体",Font.PLAIN,20));
         rightJLabel.setFont(new Font("宋体",Font.PLAIN,20));
         rightJLabel.setForeground(Color.white);

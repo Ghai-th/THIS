@@ -12,14 +12,9 @@ public class MemberNoColorPanel extends TranslucenceJPanel {
     JLabel upJLabel;//上部label
     JLabel downJLabel;//下部label
     public String up,down;
-    public User myUser,otherUser;
-    public MemberNoColorPanel(User myUser){
-        this.myUser = myUser;
-        init();
-    }
-    public MemberNoColorPanel(User myUser,User otherUser){
-        this.myUser = myUser;
-        this.otherUser = otherUser;
+    public MemberNoColorPanel(String up,String down){
+        this.up = up;
+        this.down = down;
         init();
     }
     public void init(){
