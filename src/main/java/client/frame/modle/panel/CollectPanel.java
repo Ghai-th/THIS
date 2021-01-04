@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CollectPanel extends JPanel {
     List<MemberCollectPanel> list = new ArrayList<MemberCollectPanel>();
-    public CollectPanel(User user){
+    public CollectPanel(User myUser){
         init();
     }
     public CollectPanel(User myUser,User otherUser){

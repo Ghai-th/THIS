@@ -19,7 +19,7 @@ public class WritePanel extends JPanel {
     private JTextField t_title;
     private JComboBox<String> c_type;
     private JButton save,start;
-    public WritePanel(User user){
+    public WritePanel(User myUser){
         init1();
     }
     public WritePanel(User myUser,User otherUser){

@@ -8,13 +8,13 @@ import javax.swing.*;
 public class AllPanel extends JPanel {
     JLabel j;
     Index index;
-    public AllPanel(User user){
+    public AllPanel(User myUser){
         init();
     }
     public AllPanel(User myUser,User otherUser){
         init();
     }
-    public AllPanel(User user,Index index){
+    public AllPanel(User myUser,Index index){
         init();
     }
     public void init(){

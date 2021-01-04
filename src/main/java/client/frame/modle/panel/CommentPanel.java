@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CommentPanel extends JPanel {
-    public CommentPanel(User user){
+    public CommentPanel(User myUser){
         init();
     }
     public CommentPanel(User myUser,User otherUser){
