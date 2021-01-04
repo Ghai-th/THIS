@@ -19,6 +19,7 @@ public class UserOperate {
     public UserOperate(User user,ServerUtil serverUtil) {
         this.user = user;
         this.serverUtil = serverUtil;
+        selectOperate();
     }
 
     public UserOperate(){
@@ -80,14 +81,18 @@ public class UserOperate {
         boolean success = userServiceImpl.register(user);
         if(success){
             try {
+                System.out.println(8);
                 serverUtil.sendInfo(user,User.class);
             } catch (IOException e) {
                 e.printStackTrace();
-                try {
-                    serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+            }
+        }else{
+            System.out.println("不超过");
+            user.setOperate(ServerOperate.ERROR);
+            try {
+                serverUtil.sendInfo(user,User.class);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -121,6 +126,7 @@ public class UserOperate {
             } catch (IOException e) {
                 e.printStackTrace();
                 try {
+                    System.out.println(7);
                     serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -137,6 +143,7 @@ public class UserOperate {
         success = userServiceImpl.addUser(user);
         if (!success) {
             try {
+                System.out.println("呜呜呜");
                 serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
             } catch (IOException e) {
                 e.printStackTrace();

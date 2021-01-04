@@ -1,15 +1,22 @@
 package client.frame;
 
+import client.entity.User;
+import client.frame.modle.panel.UserPanel;
+import client.util.ClientUtil;
 import com.formdev.flatlaf.FlatLightLaf;
 import client.conf.IndexConf;
 import client.frame.modle.border.RoundBorder;
 import client.frame.modle.panel.NavigationBarPanel;
 import client.frame.modle.panel.TranslucenceJPanel;
+import server.controller.ServerOperate;
+import sun.rmi.runtime.Log;
+
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class Login extends JPanel implements ActionListener, IndexConf {
     //登录
@@ -59,7 +66,21 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     MouseListener okJLabelListener = new MouseListener() {
 
         public void mouseClicked(MouseEvent e) {
-
+            if(new String(password3JPassword.getPassword()).equals(new String(password4JPassword.getPassword()))){
+                User user = new User(id1JTextField.getText(),new String(password4JPassword.getPassword()));
+                user.setOperate(ServerOperate.REGISTER_USER);
+                try {
+                    ClientUtil.sendInfo(user,User.class);
+                    if(ClientUtil.acceptInfo(User.class).operate != ServerOperate.ERROR){
+                        user.setOperate(ServerOperate.ADD_USER);
+                        ClientUtil.sendInfo(user,User.class);
+                    }else{
+                        JOptionPane.showMessageDialog(Login.this,"注册失败");
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
 
         public void mousePressed(MouseEvent e) {

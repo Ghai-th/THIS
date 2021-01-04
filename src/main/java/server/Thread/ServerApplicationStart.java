@@ -2,6 +2,8 @@ package server.Thread;
 
 import client.entity.*;
 import server.controller.ArticleOperate;
+import server.controller.AttentionOperate;
+import server.controller.UserOperate;
 import server.util.ServerUtil;
 
 import java.io.IOException;
@@ -55,7 +57,7 @@ class Listener<T> implements Runnable {
         if (t instanceof Article) {
             new ArticleOperate((Article) t, serverUtil);
         } else if (t instanceof Attention) {
-
+            new AttentionOperate((Attention)t,serverUtil);
         } else if (t instanceof Class) {
 
         } else if (t instanceof Comment) {
@@ -65,6 +67,7 @@ class Listener<T> implements Runnable {
         } else if (t instanceof Store) {
 
         } else if (t instanceof User) {
+            new UserOperate((User)t,serverUtil);
         }
     }
 }
