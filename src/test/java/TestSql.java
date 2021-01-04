@@ -48,7 +48,7 @@ public class TestSql {
     @Test
     public void testSelectTopTen() {
         IArticleDao articleDao = new ArticleDaoImpl();
-        for (Article article : articleDao.selectTopTenArticle()) {
+        for (Article article : articleDao.selectTopLimitArticle(10)) {
             System.out.println(article);
         }
     }

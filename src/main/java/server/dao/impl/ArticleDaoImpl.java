@@ -146,16 +146,27 @@ public class ArticleDaoImpl implements IArticleDao {
     public List<Article> selectTopLimitArticle(int limit) {
         try {
             List<Article> articles = new ArrayList<Article>();
-            int num = 0;
             String sql = "select article.* from article order by (article.visitornum + article.likenum + article.collectnum) desc limit " + limit;
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
-            for (Article article : DBUtil.executeGetMoreData(statement, sql, Article.class)) {
-                if(num ++ > 10) {
-                    break;
-                }
-                articles.add(article);
-            }
+            articles = DBUtil.executeGetMoreData(statement,sql,Article.class);
+            return articles;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            DBUtil.closeResources(connection,statement);
+        }
+    }
+
+    @Override
+    public List<Article> selectTopNumArticleByCid(String cid, int limit) {
+        try {
+            List<Article> articles = new ArrayList<Article>();
+            String sql = "select article.* from article where cid = '" + cid + "' order by (article.visitornum + article.likenum + article.collectnum) desc limit " + limit;
+            connection = DBUtil.getConnection();
+            statement = DBUtil.getStatement(connection);
+            articles = DBUtil.executeGetMoreData(statement,sql,Article.class);
             return articles;
         } catch (SQLException e) {
             e.printStackTrace();

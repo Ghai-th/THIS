@@ -162,7 +162,7 @@ public class ArticleOperate {
      * 返回热度前十的文章
      */
     public void selectTopTenArticle() {
-        List articles = articleService.selectTopTenArticle();
+        List articles = articleService.selectTopLimitArticle(10);
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_TOP_TEN;
         try {
             serverUtil.sendInfoList(articles);
