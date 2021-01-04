@@ -114,7 +114,7 @@ public class TestSql {
 
     @Test
     public void testInsertMessage() throws SQLException {
-        Message message = new Message("张三","李四","cnm","1");
+        Message message = new Message("2222","李四","cnm","1","1","0");
         IMessageDao iMessageDao = new MessageDaoImpl();
         if(iMessageDao.emptyMessage(message)){
             iMessageDao.addMessage(message);
@@ -122,6 +122,7 @@ public class TestSql {
             System.out.println("不为空");
             iMessageDao.updateMessage(message);
         }
+        //iMessageDao.updateMessageSendNotice(message,"1");
         List<Message> messageList = iMessageDao.selectMessage(message);
         Iterator<Message> iterator = messageList.iterator();
         while(iterator.hasNext()){
