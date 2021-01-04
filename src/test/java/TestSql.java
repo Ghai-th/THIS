@@ -52,7 +52,7 @@ public class TestSql {
             System.out.println(article);
         }
     }
-    User u = new User("3","555",3,"66",0,null,20,30,40,30,"555",6,99);
+    User u = new User("123","666");
     @Test
     public void testAddUser(){
         IUserService userService = new UserServiceImpl();

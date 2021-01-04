@@ -40,7 +40,6 @@ class Listener<T> implements Runnable {
     public void run() {
         while (true) {
             try {
-                System.out.println(6666);
                 t = (T) serverUtil.objectInputStream.readObject();
                 System.out.println(1);
                 selectClass();
@@ -68,7 +67,6 @@ class Listener<T> implements Runnable {
         } else if (t instanceof Store) {
 
         } else if (t instanceof User) {
-            System.out.print(999);
             new UserOperate((User)t,serverUtil);
         }
     }

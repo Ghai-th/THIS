@@ -52,10 +52,21 @@ public class User extends Operate implements java.io.Serializable{
         this.mykey = mykey;
     }
     public User(String uid,String password){
-        super();
         this.uid = uid;
         this.password = password;
-        create = new Date();
+        this.setArticleNum(1);
+        this.setAttentionNum(1);
+        this.setFansNum(1);
+        this.setGender(1);
+        this.setImage(null);
+        this.setLevel(1);
+        this.setName("this的脑残粉");
+        this.setSynopsis("我爱this！");
+        this.setVisitorNum(1);
+        this.setActive(1);
+        this.setMyKey(1);
+        this.setCreate(new Date());
+        this.setLastlogin(new Date());
     }
     public User(String uid, Integer mykey){
         super();
@@ -76,8 +87,6 @@ public class User extends Operate implements java.io.Serializable{
         user.setLevel(1);
         user.setName("monkey");
         user.setSynopsis("ohhh");
-        user.setUid("1001");
-        user.setPassword("123");
         user.setVisitorNum(1);
         user.setActive(1);
         user.setMyKey(1);

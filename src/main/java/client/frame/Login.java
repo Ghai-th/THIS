@@ -9,6 +9,7 @@ import client.frame.modle.border.RoundBorder;
 import client.frame.modle.panel.NavigationBarPanel;
 import client.frame.modle.panel.TranslucenceJPanel;
 import server.controller.ServerOperate;
+import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
@@ -66,15 +67,15 @@ public class Login extends JPanel implements ActionListener, IndexConf {
 
         public void mouseClicked(MouseEvent e) {
             if(new String(password3JPassword.getPassword()).equals(new String(password4JPassword.getPassword()))){
-                User u = new User(id1JTextField.getText(),new String(password4JPassword.getPassword()));
-                u.setOperate(ServerOperate.REGISTER_USER);
+                User user = new User(id1JTextField.getText(),new String(password4JPassword.getPassword()));
+                user.setOperate(ServerOperate.REGISTER_USER);
                 try {
-                    ClientUtil.sendInfo(u,User.class);
-                    System.out.print(456456);
-                    if((ClientUtil.acceptInfo(User.class)).operate != ServerOperate.ERROR){
-                        System.out.print(666);
+                    ClientUtil.sendInfo(user,User.class);
+                    if(ClientUtil.acceptInfo(User.class).operate != ServerOperate.ERROR){
+                        user.setOperate(ServerOperate.ADD_USER);
+                        ClientUtil.sendInfo(user,User.class);
                     }else{
-                        System.out.print(123456);
+                        JOptionPane.showMessageDialog(Login.this,"注册失败");
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
