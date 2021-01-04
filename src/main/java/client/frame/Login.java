@@ -50,6 +50,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 if(user.operate != ServerOperate.ERROR){
                     index.removeAll();
                     index.setVisible(false);
+                    Index.MeUser = user;
                     index.add(new Index(user));
                     index.setVisible(true);
                 }else{

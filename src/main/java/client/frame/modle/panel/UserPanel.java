@@ -47,7 +47,7 @@ public class UserPanel extends TranslucenceJPanel {
 //        centerc.setTransparent(0.3f);
         this.setOpaque(false);
         this.setTransparent(0.01f);
-        testPanel = new TestPanel();
+        testPanel = new TestPanel(myUser,otherUser);
         this.setLayout(new BorderLayout());
         userId  = new JLabel("adsa***sadas用户");
         up = new TranslucenceJPanel();

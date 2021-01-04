@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 public class Index extends JPanel implements IndexConf {
 
+    public static User MeUser;
     public JPanel centerPanel, westPanel; // 三个大边界板块
     public static final String[] classification = new String[]
             {"C语言", "数据结构", "C++", "数据库", "Java", "Golang", "linux", "区块链", "人工智能", "软件安全"};
@@ -45,6 +46,9 @@ public class Index extends JPanel implements IndexConf {
         initCenter();
     }
     public Index(){
+        User user = new User();
+        user.setUid("0000");
+        this.user = user;
         this.setLayout(new BorderLayout());
         initNorth();
         initWest();

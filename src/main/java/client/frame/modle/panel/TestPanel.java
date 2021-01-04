@@ -1,5 +1,7 @@
 package client.frame.modle.panel;
 
+import client.entity.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -34,7 +36,17 @@ public class TestPanel extends JPanel {
 
     int width = GetWH.getWidth();//得到宽
     int height = GetWH.getHeight();//得到高
-    public TestPanel(){
+    User myUser,otherUser;
+    public TestPanel(User myUser){
+        this.myUser = myUser;
+        init();
+    }
+    public TestPanel(User myUser,User otherUser){
+        this.myUser = myUser;
+        this.otherUser = otherUser;
+        init();
+    }
+    public void init(){
         setLayout(new BorderLayout());//设置总面板的布局为东南西北，将东和西设置为无，中部布局设置为自由布局
         System.out.println(width+"，"+height);
         init1();
@@ -156,37 +168,39 @@ public class TestPanel extends JPanel {
             }
         });
 
-        imagMemberPanel1  = new MemberImagPanel("头像","666");
+        imagMemberPanel1  = new MemberImagPanel("头像",myUser.getSynopsis());
         imagMemberPanel1.setOpaque(false);//设置全透明
         imagMemberPanel1.setTransparent(0.1f);//设置透明度
         //imagMemberPanel1.setBorder(BorderFactory.createEtchedBorder());
 
-        originalMemberPanel2 = new MemberColorPanel("0","原创");
+        originalMemberPanel2 = new MemberColorPanel(myUser.getArticleNum()+"","原创");
         originalMemberPanel2.setOpaque(false);//设置全透明
         originalMemberPanel2.setTransparent(0.1f);//设置透明度
        // originalMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        rankMemberPanel2 = new MemberColorPanel("0","排名");
+        rankMemberPanel2 = new MemberColorPanel(myUser.getActive()+"","活跃度");
         rankMemberPanel2.setOpaque(false);//设置全透明
         rankMemberPanel2.setTransparent(0.1f);//设置透明度
        // rankMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        gradeMemberPanel2 = new MemberColorPanel("1","等级");
+        gradeMemberPanel2 = new MemberColorPanel(myUser.getLevel()+"","等级");
         gradeMemberPanel2.setOpaque(false);//设置全透明
         gradeMemberPanel2.setTransparent(0.1f);//设置透明度
         //gradeMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        visitMemberPanel2 = new MemberColorPanel("0","访客");
+        visitMemberPanel2 = new MemberColorPanel(myUser.getVisitorNum()+"","访客");
         visitMemberPanel2.setOpaque(false);//设置全透明
         visitMemberPanel2.setTransparent(0.1f);//设置透明度
         //visitMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        fansMemberPanel3 = new MemberNoColorPanel("0","粉丝");
+        fansMemberPanel3 = new MemberNoColorPanel(myUser.getFansNum()+"","粉丝");
         fansMemberPanel3.setOpaque(false);//设置全透明
         fansMemberPanel3.setTransparent(0.1f);//设置透明度
         //fansMemberPanel3.setBorder(BorderFactory.createEtchedBorder());
 
-        attentionMemberPanel3 = new MemberNoColorPanel("0","关注");
+        attentionMemberPanel3 = new MemberNoColorPanel(myUser.getAttentionNum()+"","关注");
+        attentionMemberPanel3.up = myUser.getAttentionNum()+"";
+        attentionMemberPanel3.down = "关注";
         attentionMemberPanel3.setOpaque(false);//设置全透明
         attentionMemberPanel3.setTransparent(0.1f);//设置透明度
         ///attentionMemberPanel3.setBorder(BorderFactory.createEtchedBorder());
