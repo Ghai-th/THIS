@@ -69,6 +69,6 @@ public interface IArticleDao {
      * @param limit 查询条数
      * @return 返回
      */
-    List<Article> selectTopNumArticleByCid(String cid, int limit);
+    List<Article> selectTopLimitArticleByCid(String cid, int limit);
 
 }

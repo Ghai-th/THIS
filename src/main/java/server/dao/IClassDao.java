@@ -2,6 +2,8 @@ package server.dao;
 
 import client.entity.Class;
 
+import java.util.List;
+
 public interface IClassDao {
     /**
      * 根据分类号查找类
@@ -13,5 +15,5 @@ public interface IClassDao {
      * 查询所有分类
      * @return 返回所有类
      */
-    Class selectAllClass();
+    List selectAllClass();
 }

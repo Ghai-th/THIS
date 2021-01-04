@@ -5,6 +5,8 @@ import server.dao.IClassDao;
 import server.dao.impl.ClassDaoImpl;
 import server.service.IClassService;
 
+import java.util.List;
+
 public class ClassServiceImpl implements IClassService {
     @Override
     public Class selectClassById(String cid){
@@ -13,7 +15,7 @@ public class ClassServiceImpl implements IClassService {
     }
 
     @Override
-    public Class selectAllClass() {
+    public List selectAllClass() {
         IClassDao classDao = new ClassDaoImpl();
         return classDao.selectAllClass();
     }

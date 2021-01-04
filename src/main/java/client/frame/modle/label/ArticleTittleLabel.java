@@ -35,7 +35,7 @@ public class ArticleTittleLabel extends JLabel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         index.mainPanel.removeAll();
         JPanel borderLimit = new JPanel(new BorderLayout());
-        borderLimit.add(new ArticleDetailsPanel(Article.initArticle(),index),BorderLayout.CENTER);
+        borderLimit.add(new ArticleDetailsPanel(article,index),BorderLayout.CENTER);
         index.mainPanel.add(borderLimit,BorderLayout.CENTER);
         updateUI();
     }

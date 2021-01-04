@@ -7,20 +7,23 @@ import server.util.ServerUtil;
 import server.service.impl.ClassServiceImpl;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ClassOperate {
     public Class clazz;
     public ServerUtil serverUtil;
-    public IClassService classService= new ClassServiceImpl();
+    public IClassService classService = new ClassServiceImpl();
 
-    public ClassOperate(Class clazz,ServerUtil serverUtil){
+    public ClassOperate(Class clazz, ServerUtil serverUtil) {
         this.clazz = clazz;
         this.serverUtil = serverUtil;
         selectOperate();
     }
-    public ClassOperate(){
+
+    public ClassOperate() {
 
     }
+
     /**
      * 执行对应操作
      */
@@ -35,10 +38,11 @@ public class ClassOperate {
                 break;
         }
     }
+
     /**
      * 根据类id查找
      */
-    public void selectClassByCid (){
+    public void selectClassByCid() {
         clazz = classService.selectClassById(clazz.getCid());
         clazz.operate = ServerOperate.SELECT_CLASS_BY_ID;
         try {
@@ -51,13 +55,13 @@ public class ClassOperate {
     /**
      * 查找所有类
      */
-    public void selectAllClass (){
-        clazz = classService.selectAllClass();
-        clazz.operate = ServerOperate.SELECT_ALL_CLASS;
-        try{
-            serverUtil.sendInfo(clazz, Class.class);
-        }catch (IOException e){
+    public void selectAllClass() {
+        List list = classService.selectAllClass();
+        ((Class)list.get(0)).operate = ServerOperate.SELECT_ALL_CLASS;
+        try {
+            serverUtil.sendInfoList(list);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    }
+}

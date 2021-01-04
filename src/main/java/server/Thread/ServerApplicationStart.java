@@ -2,11 +2,13 @@ package server.Thread;
 
 import client.entity.*;
 import server.controller.ArticleOperate;
+import server.controller.AttentionOperate;
+import server.controller.ClassOperate;
 import server.controller.UserOperate;
 import server.util.ServerUtil;
+import client.entity.Class;
 
 import java.io.IOException;
-import java.lang.Class;
 
 class Execute<T> extends Thread {
     T t = null;
@@ -39,9 +41,7 @@ class Listener<T> implements Runnable {
     public void run() {
         while (true) {
             try {
-                System.out.println(6666);
                 t = (T) serverUtil.objectInputStream.readObject();
-                System.out.println(1);
                 selectClass();
             } catch (Exception e) {
                 try {
@@ -57,9 +57,9 @@ class Listener<T> implements Runnable {
         if (t instanceof Article) {
             new ArticleOperate((Article) t, serverUtil);
         } else if (t instanceof Attention) {
-
+            new AttentionOperate((Attention)t,serverUtil);
         } else if (t instanceof Class) {
-
+            new ClassOperate((client.entity.Class) t,serverUtil);
         } else if (t instanceof Comment) {
 
         } else if (t instanceof Message) {
@@ -67,7 +67,6 @@ class Listener<T> implements Runnable {
         } else if (t instanceof Store) {
 
         } else if (t instanceof User) {
-            System.out.print(999);
             new UserOperate((User)t,serverUtil);
         }
     }

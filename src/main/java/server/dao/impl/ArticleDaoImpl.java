@@ -160,7 +160,7 @@ public class ArticleDaoImpl implements IArticleDao {
     }
 
     @Override
-    public List<Article> selectTopNumArticleByCid(String cid, int limit) {
+    public List<Article> selectTopLimitArticleByCid(String cid, int limit) {
         try {
             List<Article> articles = new ArrayList<Article>();
             String sql = "select article.* from article where cid = '" + cid + "' order by (article.visitornum + article.likenum + article.collectnum) desc limit " + limit;

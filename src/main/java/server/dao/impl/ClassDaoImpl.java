@@ -7,7 +7,7 @@ import server.util.DBUtil;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.List;
 
 
 public class ClassDaoImpl implements IClassDao {
@@ -32,12 +32,12 @@ public class ClassDaoImpl implements IClassDao {
     }
 
     @Override
-    public Class selectAllClass() {
+    public List selectAllClass() {
         try{
             String sql = "select * from class ";
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
-            return (Class) DBUtil.executeGetMoreData(statement,sql, Class.class);
+            return DBUtil.executeGetMoreData(statement,sql, Class.class);
         }catch (SQLException e){
             e.printStackTrace();
             return null;
