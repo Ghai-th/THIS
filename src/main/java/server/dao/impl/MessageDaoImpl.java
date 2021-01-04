@@ -11,7 +11,7 @@ import java.util.List;
 public class MessageDaoImpl implements IMessageDao {
     @Override
     public void addMessage(Message message) throws SQLException {
-        updateMessageState(message,"1");
+        updateMessageState(message,"1",0);
         Connection connection = DBUtil.getConnection();
         String sql = "insert into message values(?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -40,7 +40,7 @@ public class MessageDaoImpl implements IMessageDao {
 
     @Override
     public void updateMessage(Message message) throws SQLException {
-        updateMessageState(message,"1");
+        updateMessageState(message,"1",0);
         System.out.println("执行了");
         Message mymessage = selectOneMessage(message);
         String text = mymessage.getText();
@@ -63,7 +63,7 @@ public class MessageDaoImpl implements IMessageDao {
         String id = message.getAcceptId();
         String sql = "select * from message where acceptid='"+id+"'";
         messageList = DBUtil.executeGetMoreData(statement,sql,Message.class);
-        updateMessageState(message,"0");
+        updateMessageState(message,"0",1);
         statement.close();
         connection.close();
         return messageList;
@@ -88,9 +88,13 @@ public class MessageDaoImpl implements IMessageDao {
     }
 
     @Override
-    public void updateMessageState(Message message,String n) throws SQLException {
-        String sql = "update message set state='"+n+"' where sendid='"+message.getSendId()+"' and acceptid='"+message.getAcceptId()+"'";
-        System.out.println(sql);
+    public void updateMessageState(Message message,String n,int judge) throws SQLException {
+        String sql = null;
+        if(judge==0){
+            sql = "update message set state='"+n+"' where sendid='"+message.getSendId()+"' and acceptid='"+message.getAcceptId()+"'";
+        }if(judge==1){
+            sql = "update message set state='"+n+"' where sendid='"+message.getAcceptId()+"'";
+        }
         Connection connection = DBUtil.getConnection();
         Statement statement = connection.createStatement();
         DBUtil.executeChange(statement,sql);

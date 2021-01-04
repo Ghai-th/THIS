@@ -56,6 +56,8 @@ public interface ServerOperate {
     /**
      * message表对应的操作
      */
+    int SEND_MESSAGE = 400001;
+    int DELETE_MESSAGE = 400002;
 
 
     /**

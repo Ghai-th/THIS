@@ -1,11 +1,46 @@
 package server.service;
 
 import client.entity.Message;
+import server.dao.IMessageDao;
+import server.dao.impl.MessageDaoImpl;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface IMessageService {
+    /**
+     * 向message表中增加数据
+     */
+    public boolean addMessage(Message message);
+
+    /**
+     * 删除message表中的元素
+     */
+    public boolean deleteMessage(Message message);
+
+    /**
+     * 更新message表中已有的元素
+     */
+    public boolean updaateMessage(Message message);
+
+    /**
+     * 将表中被发送者的所有聊天信息拖出为集合
+     * @return
+     */
+    public List<Message> selectMessage(Message message);
+
+    /**
+     * 将表中唯一可以标识的一行message取出
+     * @param message
+     * @return
+     */
+    public Message selectOneMessage(Message message);
+
+    /**
+     * 将message表中对应的行的
+     * @param message
+     */
+    public boolean updateMessageState(Message message,String n,int judge);
     /**
      *
      * @param message 传入一个信息发送对象，判断message表中是否存在这个对象
