@@ -61,7 +61,7 @@ class Listener<T> implements Runnable {
         } else if (t instanceof Message) {
 
         } else if (t instanceof Store) {
-
+            new StoreOperate((Store)t,serverUtil);
         } else if (t instanceof User) {
             new UserOperate((User)t,serverUtil);
         }

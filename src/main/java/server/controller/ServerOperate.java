@@ -75,7 +75,11 @@ public interface ServerOperate {
      */
      int SELECT_CLASS_BY_ID = 600001;
      int SELECT_ALL_CLASS = 600002;
-
+    /**
+     * store表对应的操作
+     */
+    int ADD_STORE = 700001;
+    int DELETE_STORE = 700002;
 
 
 
