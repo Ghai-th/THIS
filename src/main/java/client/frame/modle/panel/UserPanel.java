@@ -17,25 +17,31 @@ public class UserPanel extends TranslucenceJPanel {
     public TranslucenceJPanel Big;
     TestPanel testPanel;
     JScrollPane jScrollPane;
-    WritePanel writePanel = new WritePanel();
+    WritePanel writePanel ;
     TranslucenceJPanel centerc = new TranslucenceJPanel();
     ImageIcon Imageone,Imagetwo,Imagethree,imagefour;
     JLabel imageJLabelone,imageJLabeltwo,imageJLabelthree,imageJLabelfour;
     JPanel imageJPanelone,imageJPaneltwo,imageJPanelthree,imageJPanelfour;
+    User user,myUser,otherUser;
+
     public UserPanel() {
         setBounds(0,0,1920,1080);
         init();
 
     }
     public UserPanel(User user){
+        this.user = user;
         setBounds(0,0,1920,1080);
         init();
     }
     public UserPanel(User myUser,User otherUser){
+        this.myUser = myUser;
+        this.otherUser = otherUser;
         setBounds(0,0,1920,1080);
         init();
     }
     public void init() {
+        writePanel = new WritePanel(user);
         centerc.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-50,1000));
 //        centerc.setOpaque(false);
 //        centerc.setTransparent(0.3f);
@@ -152,7 +158,7 @@ public class UserPanel extends TranslucenceJPanel {
                 clear();
                 resource.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
                 centerc.removeAll();
-                centerc.add(new WritePanel());
+                centerc.add(new WritePanel(user));
                 centerc.updateUI();
                 repaint();
             }

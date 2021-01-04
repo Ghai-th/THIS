@@ -1,5 +1,8 @@
 package client.frame.modle.panel;
 
+import client.entity.User;
+
+import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -7,7 +10,10 @@ import java.util.List;
 
 public class CollectPanel extends JPanel {
     List<MemberCollectPanel> list = new ArrayList<MemberCollectPanel>();
-    public CollectPanel(){
+    public CollectPanel(User user){
+        init();
+    }
+    public CollectPanel(User myUser,User otherUser){
         init();
     }
     public void init(){
