@@ -2,6 +2,7 @@ package client.frame.modle.panel;
 
 import client.conf.IndexConf;
 import client.entity.Article;
+import client.entity.User;
 import client.frame.Index;
 import client.frame.Login;
 import client.frame.modle.label.ClassLabel;
@@ -21,6 +22,7 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
     public JLabel searchLabel;
     public JLabel headImage;
     public Index index;
+    public User user;
 
     public NavigationBarPanel(LayoutManager layout, boolean isDoubleBuffered) {
         super(layout, isDoubleBuffered);
@@ -38,6 +40,13 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         this.index = index;
         init();
     }
+
+    public NavigationBarPanel(Index index, User user) {
+        this.index = index;
+        this.user = user;
+        init();
+    }
+
 
     public void init() {
         this.setPreferredSize(new Dimension(WIDE, HIGH * 53 / 1050));
@@ -90,15 +99,8 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                // 数据库模糊查询
                 ArrayList<Article> articles = new ArrayList<Article>();
-//                for (int i = 0; i < 10; i++) {
-//                    articles.add(Article.initArticle());
-//                }
-                ////////////////////////////
-
                 index.mainPanel.removeAll();
-
                 String searchText = null;
                 Article article = new Article();
                 try {
@@ -114,8 +116,6 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                 index.mainPanel.add(new ArticleListPanel(articles, index), BorderLayout.CENTER); /// 新建出 文章列表面板
                 updateUI();
 
-
-
                 System.out.println("点击搜索" + searchText);
             }
         });
@@ -127,9 +127,17 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
             // 进入个人中心
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
-                index.removeAll();
-                index.add(new Login(index));
+
+                if (Index.MeUser == null) {
+                    super.mousePressed(e);
+                    index.removeAll();
+                    index.add(new Login(index));
+                } else {
+                    index.removeAll();
+                    index.add(new AllPanel(Index.MeUser));
+                    index.updateUI();
+                    index.repaint();
+                }
             }
 
             // 下面俩实现弹窗

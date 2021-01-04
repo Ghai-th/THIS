@@ -1,5 +1,7 @@
 package client.frame.modle.panel;
 
+import client.entity.User;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +11,13 @@ import java.awt.*;
 public class MemberNoColorPanel extends TranslucenceJPanel {
     JLabel upJLabel;//上部label
     JLabel downJLabel;//下部label
-    public MemberNoColorPanel(String up, String down){
+    public String up,down;
+    public MemberNoColorPanel(String up,String down){
+        this.up = up;
+        this.down = down;
+        init();
+    }
+    public void init(){
         upJLabel = new JLabel(up,JLabel.CENTER);
         downJLabel = new JLabel(down,JLabel.CENTER);
         downJLabel.setFont(new Font("宋体",Font.PLAIN,20));

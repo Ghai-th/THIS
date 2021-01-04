@@ -1,5 +1,6 @@
 package client.frame;
 
+import client.entity.Class;
 import client.entity.User;
 import client.util.ClientUtil;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -14,6 +15,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.Random;
 
 public class Login extends JPanel implements ActionListener, IndexConf {
     //登录
@@ -23,8 +26,10 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     JPasswordField passwordJPasswordField;
     JPanel centerJPanel;
     TranslucenceJPanel infoJPanel,randomJPanel;
-    //String titleString,textString;
     JTextPane textJTextPane;
+    //随机文章信息
+    String titleString,textString,randomCid;
+    Random random = new Random();
     //注册
     JLabel helloJLabel,hadJLabel,goJLabel,id1JLabel,password1JLabel,password2JLabel,okJLabel,messageJLabel,message1JLabel;
     JTextField id1JTextField;
@@ -50,6 +55,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 if(user.operate != ServerOperate.ERROR){
                     index.removeAll();
                     index.setVisible(false);
+                    Index.MeUser = user;
                     index.add(new Index(user));
                     index.setVisible(true);
                 }else{
@@ -92,30 +98,21 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                         user = ClientUtil.acceptInfo(User.class);
                         if(user.operate != ServerOperate.ERROR){
                             JOptionPane.showMessageDialog(Login.this,"注册成功！请返回登陆");
-                            id1JTextField.setText("");
-                            password3JPassword.setText("");
-                            password4JPassword.setText("");
                         }else{
                             JOptionPane.showMessageDialog(Login.this,"注册失败，该id已经存在！");
-                            id1JTextField.setText("");
-                            password3JPassword.setText("");
-                            password4JPassword.setText("");
                         }
                     }else{
                         JOptionPane.showMessageDialog(Login.this,"输入格式不正确！");
-                        id1JTextField.setText("");
-                        password3JPassword.setText("");
-                        password4JPassword.setText("");
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }else{
                 JOptionPane.showMessageDialog(Login.this,"两次密码不一致！");
-                id1JTextField.setText("");
-                password3JPassword.setText("");
-                password4JPassword.setText("");
             }
+            id1JTextField.setText("");
+            password3JPassword.setText("");
+            password4JPassword.setText("");
         }
 
         public void mousePressed(MouseEvent e) {
@@ -332,14 +329,27 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         randomJPanel.setBounds(600,150,350,500);
         randomJPanel.setBackground(Color.black);
         centerJPanel.add(randomJPanel);
+        //随机生成所要取的文章的uid
+        randomCid = String.valueOf(random.nextInt(9)+1000);
+        Class clazz = new Class(randomCid);
+        clazz.setOperate(ServerOperate.SELECT_CLASS_BY_ID);
+        try {
+            ClientUtil.sendInfo(clazz,Class.class);
+            //取得文章对象
+            clazz = ClientUtil.acceptInfo(Class.class);
+            titleString = clazz.getName();
+            textString = clazz.getSynopsis();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         titleJLabel = new JLabel();
-        titleJLabel.setText("哈哈哈");
+        titleJLabel.setText(titleString);
         titleJLabel.setFont(new Font("黑体",Font.PLAIN,30));
         titleJLabel.setForeground(Color.white);
         titleJLabel.setBounds(50,80,300,30);
         randomJPanel.add(titleJLabel);
         textJTextPane = new JTextPane();
-        textJTextPane.setText("啦啦啦啦啦读取文件哦的玩去哪低品位去年底我脾气");
+        textJTextPane.setText(textString);
         textJTextPane.setEditable(false);
         textJTextPane.setFont(new Font("黑体",Font.PLAIN,20));
         textJTextPane.setForeground(Color.white);

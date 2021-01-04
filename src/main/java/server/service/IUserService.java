@@ -2,7 +2,6 @@ package server.service;
 
 import client.entity.User;
 
-import java.util.Date;
 import java.util.List;
 
 public interface IUserService {
@@ -91,8 +90,8 @@ public interface IUserService {
     boolean updateUserActive(User user);
 
     /**
-     * 更新用户基本信息
-     * @param user
+     *
+     * @param user 更新的用户
      * @return 返回更新结果
      */
     boolean updateUser(User user);

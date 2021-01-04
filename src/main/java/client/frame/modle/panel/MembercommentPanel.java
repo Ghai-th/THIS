@@ -1,12 +1,24 @@
 package client.frame.modle.panel;
 
+import client.entity.User;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MembercommentPanel extends JPanel {
     JLabel topicJLabel;
     JTextArea mainJTextArea;
-    public MembercommentPanel(){
+    User myUser,otherUser;
+    public MembercommentPanel(User myUser){
+        this.myUser = myUser;
+        init();
+    }
+    public MembercommentPanel(User myUser,User otherUser){
+        this.myUser = myUser;
+        this.otherUser = otherUser;
+        init();
+    }
+    public void init(){
         topicJLabel = new JLabel("头像：名字---时间---主题帖名字");
         mainJTextArea = new JTextArea();
         mainJTextArea.setEditable(false);

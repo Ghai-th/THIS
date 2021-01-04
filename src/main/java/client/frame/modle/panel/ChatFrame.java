@@ -10,7 +10,8 @@ public class ChatFrame extends JFrame {
     int xOld = 0;
     int yOld = 0;
 
-    JPanel leftJPanel,upJPanel,centerJPanel,downJPanel,downupJPanel;
+    JPanel leftJPanel,upJPanel,downupJPanel;
+    JTextPane centerJTextPanel,downJTextPanel;
     public ChatFrame(){
         setSize(1920*3/5,864);
         setLocationRelativeTo(null);
@@ -19,8 +20,8 @@ public class ChatFrame extends JFrame {
         init1();
         init2();
         init3();
-        init5();
-        init4();
+
+        init4(); init5();
         setResizable(false);
         //处理拖动事件
         this.addMouseListener(new MouseAdapter() {
@@ -60,22 +61,23 @@ public class ChatFrame extends JFrame {
         add(upJPanel);
     }
     public void init3(){
-        centerJPanel = new JPanel();
-        centerJPanel.setBounds(320,72,832,534);
-        centerJPanel.setBackground(Color.white);
-        centerJPanel.setBorder(BorderFactory.createMatteBorder(0,0,1,0,Color.LIGHT_GRAY));
-        add(centerJPanel);
+        centerJTextPanel = new JTextPane();
+        centerJTextPanel.setEditable(false);
+        centerJTextPanel.setBounds(320,72,832,534);
+        centerJTextPanel.setBackground(Color.white);
+        centerJTextPanel.setBorder(BorderFactory.createMatteBorder(0,0,1,0,Color.LIGHT_GRAY));
+        add(centerJTextPanel);
     }
     public void init4(){
-        downJPanel = new JPanel();
-        downJPanel.setBackground(Color.white);
-        downJPanel.setBounds(320,606,832,360);
-        add(downJPanel);
+        downJTextPanel = new JTextPane();
+        downJTextPanel.setBackground(Color.white);
+        downJTextPanel.setBounds(320,636,832,330);
+        add(downJTextPanel);
     }
     public void init5(){
         downupJPanel = new JPanel();
         downupJPanel.setBounds(320,606,832,30);
-        downupJPanel.setBackground(Color.WHITE);
+        downupJPanel.setBackground(Color.white);
         add(downupJPanel);
     }
     public static void main(String[] args) {
