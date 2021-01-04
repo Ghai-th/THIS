@@ -116,6 +116,9 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         textSynopsisPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         textSynopsisImageLabel = new JLabel("图片");
         textSynopsisLabel = new JLabel("简介");
+        textSynopsisLabel.setText(article.getSynopsis());
+        textSynopsisLabel.setFont(new Font("宋体",Font.PLAIN,17));
+        textSynopsisLabel.setForeground(Color.gray);
         textSynopsisImageLabel.setPreferredSize(new Dimension(400, 225));
         textSynopsisLabel.setPreferredSize(new Dimension(800, 225));
         textSynopsisLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
