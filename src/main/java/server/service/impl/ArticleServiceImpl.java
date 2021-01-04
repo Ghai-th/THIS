@@ -46,7 +46,12 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public List<Article> selectTopTenArticle() {
-        return articleDao.selectTopTenArticle();
+    public List<Article> selectTopLimitArticle(int limit) {
+        return articleDao.selectTopLimitArticle(limit);
+    }
+
+    @Override
+    public List<Article> selectTopNumArticleByCid(String cid, int limit) {
+        return articleDao.selectTopNumArticleByCid(cid,limit);
     }
 }
