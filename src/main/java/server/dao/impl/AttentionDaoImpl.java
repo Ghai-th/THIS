@@ -22,7 +22,7 @@ public class AttentionDaoImpl implements IAttentionDao {
         try {
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
-            String sql = "insert into attention values ('"+attention.getFansId()+"','"+attention.getUid()+"')";
+            String sql = "insert into attention values ('"+attention.getUid()+"','"+attention.getFansId()+"')";
             return statement.executeUpdate(sql)!=0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,10 +54,10 @@ public class AttentionDaoImpl implements IAttentionDao {
     public List<Attention> searchAttention(Attention attention) {
         try {
             connection = DBUtil.getConnection();
-            String sql = "select fansid from attention where uid = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,attention.getUid());
-            return DBUtil.executeGetMoreData(preparedStatement,sql,Attention.class);
+            String sql = "select * from attention where uid = '"+attention.getUid()+"'";
+            Statement statement = DBUtil.getStatement(connection);
+
+            return DBUtil.executeGetMoreData(statement,sql,Attention.class);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -73,10 +73,9 @@ public class AttentionDaoImpl implements IAttentionDao {
     public List<Attention> selectAttention(Attention attention) {
         try {
             connection = DBUtil.getConnection();
-            String sql = "select uid from attention where fansid = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,attention.getUid());
-            return DBUtil.executeGetMoreData(preparedStatement,sql,Attention.class);
+            String sql = "select * from attention where fansid = '"+attention.getFansId()+"'";
+            Statement statement = DBUtil.getStatement(connection);
+            return DBUtil.executeGetMoreData(statement,sql,Attention.class);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

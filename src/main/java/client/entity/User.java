@@ -29,11 +29,11 @@ public class User extends Operate implements java.io.Serializable{
     private Date lastlogin;
     private String synopsis;
     private Integer active;
-    private Integer mykey;
+    private String mykey;
 
     public User(String uid, String name, Integer level, String password, Integer gender, byte[] image,
                 Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis,
-                Integer active,Integer mykey) {
+                Integer active,String mykey) {
         super();
         this.uid = uid;
         this.name = name;
@@ -64,11 +64,11 @@ public class User extends Operate implements java.io.Serializable{
         this.setSynopsis("我爱this！");
         this.setVisitorNum(1);
         this.setActive(1);
-        this.setMyKey(1);
+        this.setMyKey("1");
         this.setCreate(new Date());
         this.setLastlogin(new Date());
     }
-    public User(String uid, Integer mykey){
+    public User(String uid, String mykey,String info){
         super();
         this.uid = uid;
         this.mykey = mykey;
@@ -89,7 +89,7 @@ public class User extends Operate implements java.io.Serializable{
         user.setSynopsis("ohhh");
         user.setVisitorNum(1);
         user.setActive(1);
-        user.setMyKey(1);
+        user.setMyKey("1");
     }
 
     public Integer getActive() {
@@ -204,11 +204,11 @@ public class User extends Operate implements java.io.Serializable{
         this.synopsis = synopsis;
     }
 
-    public Integer getMyKey(){
+    public String getMyKey(){
         return mykey;
     }
 
-    public void setMyKey(Integer mykey){
+    public void setMyKey(String mykey){
         this.mykey = mykey;
     }
 

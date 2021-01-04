@@ -1,5 +1,7 @@
 package client.frame.modle.panel;
 
+import client.entity.User;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -15,17 +17,31 @@ public class UserPanel extends TranslucenceJPanel {
     public TranslucenceJPanel Big;
     TestPanel testPanel;
     JScrollPane jScrollPane;
-    WritePanel writePanel = new WritePanel();
+    WritePanel writePanel ;
     TranslucenceJPanel centerc = new TranslucenceJPanel();
     ImageIcon Imageone,Imagetwo,Imagethree,imagefour;
     JLabel imageJLabelone,imageJLabeltwo,imageJLabelthree,imageJLabelfour;
     JPanel imageJPanelone,imageJPaneltwo,imageJPanelthree,imageJPanelfour;
+    User myUser,otherUser;
+
     public UserPanel() {
         setBounds(0,0,1920,1080);
         init();
 
     }
+    public UserPanel(User user){
+        this.myUser = user;
+        setBounds(0,0,1920,1080);
+        init();
+    }
+    public UserPanel(User myUser,User otherUser){
+        this.myUser = myUser;
+        this.otherUser = otherUser;
+        setBounds(0,0,1920,1080);
+        init();
+    }
     public void init() {
+        writePanel = new WritePanel(myUser);
         centerc.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-50,1000));
 //        centerc.setOpaque(false);
 //        centerc.setTransparent(0.3f);
@@ -74,12 +90,11 @@ public class UserPanel extends TranslucenceJPanel {
         center.setLayout(new BorderLayout());
         text = new JLabel("我的文章("+anum+")",JLabel.CENTER);
         text.setFont(new Font("宋体",Font.PLAIN,30));
+        centerup.setBackground(Color.WHITE);
         //中中布局
         final TranslucenceJPanel myCenterc = new TranslucenceJPanel();
         myCenterc.setOpaque(false);
         myCenterc.setTransparent(0.1f);
-        centerup.setBackground(Color.WHITE);
-        myCenterc.setBackground(new Color(240,255,255));
         myCenterc.setLayout(new FlowLayout());
         myCenterc.setPreferredSize(new Dimension(800,800));
         jScrollPane = new JScrollPane(centerc);
@@ -143,7 +158,7 @@ public class UserPanel extends TranslucenceJPanel {
                 clear();
                 resource.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
                 centerc.removeAll();
-                centerc.add(new WritePanel());
+                centerc.add(new WritePanel(myUser));
                 centerc.updateUI();
                 repaint();
             }
@@ -171,7 +186,7 @@ public class UserPanel extends TranslucenceJPanel {
                 clear();
                 topic.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
                 centerc.removeAll();
-                centerc.add(new CollectPanel());
+                centerc.add(new CollectPanel(myUser));
                 centerc.updateUI();
                 repaint();
             }
@@ -199,7 +214,7 @@ public class UserPanel extends TranslucenceJPanel {
                 // TODO Auto-generated method stub
                 clear();
                 answer.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
-                CommentPanel commentPanel = new CommentPanel();
+                CommentPanel commentPanel = new CommentPanel(myUser);
                 centerc.removeAll();
                 centerc.add(commentPanel);
                 centerc.updateUI();
@@ -400,7 +415,7 @@ public class UserPanel extends TranslucenceJPanel {
         });
 
 
-        down = new DownPanel();
+        down = new DownPanel(myUser);
 
         Big = new TranslucenceJPanel();
         Big.setOpaque(false);

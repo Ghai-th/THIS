@@ -1,5 +1,7 @@
 package client.frame.modle.panel;
 
+import client.entity.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -17,7 +19,14 @@ public class WritePanel extends JPanel {
     private JTextField t_title;
     private JComboBox<String> c_type;
     private JButton save,start;
-    public WritePanel(){
+    private User myUser,otherUser;
+    public WritePanel(User myUser){
+        this.myUser = myUser;
+        init1();
+    }
+    public WritePanel(User myUser,User otherUser){
+        this.myUser = myUser;
+        this.otherUser = otherUser;
         init1();
     }
     public void init1(){

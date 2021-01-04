@@ -38,7 +38,7 @@ public class UserDaoImpl implements IUserDao {
             preparedStatement.setString(12,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getLastlogin()));
             preparedStatement.setString(13,user.getSynopsis());
             preparedStatement.setInt(14,user.getActive());
-            preparedStatement.setInt(15,user.getMyKey());
+            preparedStatement.setString(15,user.getMyKey());
             return preparedStatement.executeUpdate()!=0;
         } catch (SQLException e) {
             return false;
@@ -182,7 +182,7 @@ public class UserDaoImpl implements IUserDao {
             preparedStatement.setString(2,user.getPassword());
             preparedStatement.setInt(3,user.getGender());
             preparedStatement.setString(4,user.getSynopsis());
-            preparedStatement.setInt(5,user.getMyKey());
+            preparedStatement.setString(5,user.getMyKey());
             preparedStatement.setString(6,user.getUid());
             return preparedStatement.executeUpdate() != 0;
         } catch (SQLException e) {

@@ -1,5 +1,7 @@
 package client.frame.modle.panel;
 
+import client.entity.User;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,7 +15,7 @@ public class testframe extends JFrame {
         setLocation(0,0);
 
 
-        AllPanel allPanel = new AllPanel();
+        AllPanel allPanel = new AllPanel(new User());
         add(allPanel);
         setVisible(true);
     }
