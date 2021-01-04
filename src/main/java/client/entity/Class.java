@@ -22,6 +22,10 @@ public class Class extends Operate implements java.io.Serializable{
     public Class() {
     }
 
+    public Class(String cid){
+        this.cid = cid;
+    }
+
     public String getName() {
         return name;
     }
