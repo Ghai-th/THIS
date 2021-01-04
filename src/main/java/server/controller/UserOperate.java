@@ -19,6 +19,7 @@ public class UserOperate {
     public UserOperate(User user,ServerUtil serverUtil) {
         this.user = user;
         this.serverUtil = serverUtil;
+        selectOperate();
     }
 
     public UserOperate(){
@@ -78,6 +79,7 @@ public class UserOperate {
      */
     public void register(){
         boolean success = userServiceImpl.register(user);
+        System.out.print(user);
         if(success){
             try {
                 serverUtil.sendInfo(user,User.class);
