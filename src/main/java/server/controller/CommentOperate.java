@@ -14,13 +14,9 @@ public class CommentOperate {
     public Comment comment;
     public ServerUtil serverUtil;
 
-    public CommentOperate(Comment comment) {
-        try {
-            serverUtil = new ServerUtil();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public CommentOperate(Comment comment, ServerUtil serverUtil) {
         this.comment = comment;
+        this.serverUtil = serverUtil;
     }
 
     /**
