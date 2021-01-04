@@ -22,7 +22,6 @@ public class UserOperate {
         this.user = user;
         this.serverUtil = serverUtil;
         selectOperate();
-        System.out.println(user);
     }
 
     public UserOperate(){
@@ -105,6 +104,7 @@ public class UserOperate {
      */
     public void isValidUser(){
         boolean success = userServiceImpl.isValidUser(user);
+        System.out.println(user);
         if(success){
             try {
                 serverUtil.sendInfo(user,User.class);
@@ -280,11 +280,17 @@ public class UserOperate {
      * 更新用户基本信息，不成功向客户端返回数据
      */
     public void updateUser(){
-        boolean success = false;
-        success = userServiceImpl.updateUser(user);
-        if (!success) {
+        boolean success = userServiceImpl.updateUser(user);
+        if(success){
             try {
-                serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
+                serverUtil.sendInfo(user,User.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            user.setOperate(ServerOperate.ERROR);
+            try {
+                serverUtil.sendInfo(user,User.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }

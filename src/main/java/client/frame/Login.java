@@ -37,7 +37,9 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     //找回密码
     JLabel findidJLabel,checkJLabel,findJLabel,returnJLabel;
     JTextField findidJTextField,checkJTextField;
-
+    //修改密码
+    JLabel changePasswordJLabel,changePassword1JLabel,changeJLabel;
+    JPasswordField changeJPasswordFiled,change1JPasswordFiled;
     Index index;
     //定时器监听的鼠标监听时间
     //登录按钮
@@ -49,6 +51,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 ClientUtil.sendInfo(user,User.class);
                 user = ClientUtil.acceptInfo(User.class);
                 if(user.operate != ServerOperate.ERROR){
+                    loginJLabel.setText("登录中..");
                     index.removeAll();
                     index.setVisible(false);
                     index.add(new Index());
@@ -138,18 +141,27 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     //找回密码按钮
     MouseListener findJLabelListener = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
-            User user = new User(findidJTextField.getText(),checkJTextField.getText());
+            User user = new User(findidJTextField.getText(),checkJTextField.getText(),"找回密码");
             user.setOperate(ServerOperate.IS_FIND_USER);
             try {
                 ClientUtil.sendInfo(user,User.class);
                 user = ClientUtil.acceptInfo(User.class);
                 if(user.operate != ServerOperate.ERROR){
-                    user.setOperate(ServerOperate.SELECT_USER);
-                    ClientUtil.sendInfo(user,User.class);
-                    user = ClientUtil.acceptInfo(User.class);
-                    JOptionPane.showMessageDialog(Login.this,"你的密码是："+user.getPassword());
-                    findidJTextField.setText("");
-                    checkJTextField.setText("");
+                    //跳转到修改密码界面
+                    infoJPanel.removeAll();
+                    changePasswordJLabel.setBounds(60,62,50,65);
+                    changeJPasswordFiled.setBounds(155,65,200,50);
+                    infoJPanel.add(changePasswordJLabel);
+                    infoJPanel.add(changeJPasswordFiled);
+                    changePassword1JLabel.setBounds(60,160,50,65);
+                    change1JPasswordFiled.setBounds(155,163,200,50);
+                    infoJPanel.add(changePassword1JLabel);
+                    infoJPanel.add(change1JPasswordFiled);
+                    changeJLabel.setBounds(240,300,120,50);
+                    infoJPanel.add(changeJLabel);
+                    returnJLabel.setBounds(60,300,120,50);
+                    infoJPanel.add(returnJLabel);
+                    infoJPanel.repaint();
                 }else{
                     JOptionPane.showMessageDialog(Login.this,"验证未通过！");
                     findidJTextField.setText("");
@@ -244,6 +256,56 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         @Override
         public void focusLost(FocusEvent e) {
             checkJTextField.setBorder(grayBorder);        }
+    };
+    MouseListener changeJLabelListener = new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if(new String(change1JPasswordFiled.getPassword()).equals(new String(changeJPasswordFiled.getPassword()))){
+                User user = new User(findidJTextField.getText(),new String(change1JPasswordFiled.getPassword()));
+                user.setOperate(ServerOperate.REGISTER_USER);
+                try {
+                    ClientUtil.sendInfo(user,User.class);
+                    user = ClientUtil.acceptInfo(User.class);
+                    if(user.operate != ServerOperate.ERROR){
+                        user.setOperate(ServerOperate.UPDATE_USER);
+                        ClientUtil.sendInfo(user,User.class);
+                        user = ClientUtil.acceptInfo(User.class);
+                        if(user.operate != ServerOperate.ERROR){
+                            JOptionPane.showMessageDialog(Login.this,"修改成功！");
+                        }else{
+                            JOptionPane.showMessageDialog(Login.this,"修改失败！");
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(Login.this,"密码不符合格式！");
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+            }else{
+                JOptionPane.showMessageDialog(Login.this,"两次输入密码不一致！");
+            }
+            changeJPasswordFiled.setText("");
+            change1JPasswordFiled.setText("");
+        }
+
+        public void mousePressed(MouseEvent e) {
+            changeJLabel.setBackground(new Color(30,150,230));
+        }
+
+
+        public void mouseReleased(MouseEvent e) {
+            changeJLabel.setBackground(new Color(30,170,252));
+        }
+
+
+        public void mouseEntered(MouseEvent e) {
+            changeJLabel.setBackground(new Color(30,170,252));
+            changeJLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        }
+        public void mouseExited(MouseEvent e) {
+            changeJLabel.setBackground(new Color(30,196,252));
+        }
     };
     //状态记录
     boolean isChange1 = false;
@@ -478,6 +540,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
 
             public void mouseClicked(MouseEvent e) {
                 infoJPanel.removeAll();
+                findidJTextField.setText("");
+                checkJTextField.setText("");
                 findidJLabel.setBounds(60,62,50,65);
                 findidJTextField.setBounds(155,65,200,50);
                 infoJPanel.add(findidJLabel);
@@ -529,10 +593,10 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         infoJPanel.add(loginJLabel);
         //注册界面组件初始化
         messageJLabel = new JLabel("？");
-        setMessageJLabel(messageJLabel,"账号格式");
+        setMessageJLabel(messageJLabel,"以字母开头，六位数字的结合");
         messageJLabel.addMouseListener(messageJLabelListener);
         message1JLabel = new JLabel("？");
-        setMessageJLabel(message1JLabel,"密码格式");
+        setMessageJLabel(message1JLabel,"6-12位字母数字的结合");
         message1JLabel.addMouseListener(message1JLabelListener);
         helloJLabel = new JLabel("欢迎注册");
         helloJLabel.setFont(new Font("微软雅黑",Font.BOLD,40));
@@ -654,6 +718,22 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 returnJLabel.setBackground(new Color(30,196,252));
             }
         });
+        //修改密码界面初始化
+        // changePasswordJLabel,changePassword1JLabel,changeJLabel;
+        // changeJPasswordFiled,change1JPasswordFiled;
+        changePasswordJLabel = new JLabel("重置");
+        changeJPasswordFiled = new JPasswordField();
+        changePassword1(changePasswordJLabel,changeJPasswordFiled);
+        changePassword1JLabel = new JLabel("确认");
+        change1JPasswordFiled = new JPasswordField();
+        changePassword1(changePassword1JLabel,change1JPasswordFiled);
+        changeJLabel = new JLabel("修改",JLabel.CENTER);
+        changeJLabel.setOpaque(true);
+        changeJLabel.setBackground(new Color(30,196,252));
+        changeJLabel.setForeground(Color.white);
+        changeJLabel.setFont(new Font("楷体",Font.PLAIN,27));
+        changeJLabel.addMouseListener(changeJLabelListener);
+
     }
     public void setMessageJLabel(JLabel messageJLabel,String message){
         messageJLabel.setFont(new Font("黑体",Font.BOLD,30));
