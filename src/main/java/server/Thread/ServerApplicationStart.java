@@ -20,7 +20,6 @@ class Execute<T> extends Thread {
 
     public void run() {
         try {
-            System.out.println(2);
             new Thread(new Listener<>(serverUtil)).start();
         } catch (Exception e) {
             e.printStackTrace();
