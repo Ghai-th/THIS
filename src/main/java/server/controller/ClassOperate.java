@@ -30,20 +30,34 @@ public class ClassOperate {
             case ServerOperate.SELECT_CLASS_BY_ID:
                 selectClassByCid();
                 break;
+            case ServerOperate.SELECT_ALL_CLASS:
+                selectAllClass();
+                break;
         }
     }
-        /**
-         * 根据类id查找
-         */
-        public void selectClassByCid (){
-            clazz = classService.selectClassById(clazz.getCid());
-            clazz.operate = ServerOperate.SELECT_CLASS_BY_ID;
-            try {
-                serverUtil.sendInfo(clazz, Class.class);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
+    /**
+     * 根据类id查找
+     */
+    public void selectClassByCid (){
+        clazz = classService.selectClassById(clazz.getCid());
+        clazz.operate = ServerOperate.SELECT_CLASS_BY_ID;
+        try {
+            serverUtil.sendInfo(clazz, Class.class);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    /**
+     * 查找所有类
+     */
+    public void selectAllClass (){
+        clazz = classService.selectAllClass();
+        clazz.operate = ServerOperate.SELECT_ALL_CLASS;
+        try{
+            serverUtil.sendInfo(clazz, Class.class);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
     }

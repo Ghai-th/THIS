@@ -2,7 +2,6 @@ package server.Thread;
 
 import client.entity.*;
 import server.controller.ArticleOperate;
-import server.controller.CommentOperate;
 import server.controller.UserOperate;
 import server.util.ServerUtil;
 
@@ -62,7 +61,7 @@ class Listener<T> implements Runnable {
         } else if (t instanceof Class) {
 
         } else if (t instanceof Comment) {
-            new CommentOperate((Comment) t,serverUtil);
+
         } else if (t instanceof Message) {
 
         } else if (t instanceof Store) {
