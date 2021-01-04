@@ -92,30 +92,21 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                         user = ClientUtil.acceptInfo(User.class);
                         if(user.operate != ServerOperate.ERROR){
                             JOptionPane.showMessageDialog(Login.this,"注册成功！请返回登陆");
-                            id1JTextField.setText("");
-                            password3JPassword.setText("");
-                            password4JPassword.setText("");
                         }else{
                             JOptionPane.showMessageDialog(Login.this,"注册失败，该id已经存在！");
-                            id1JTextField.setText("");
-                            password3JPassword.setText("");
-                            password4JPassword.setText("");
                         }
                     }else{
                         JOptionPane.showMessageDialog(Login.this,"输入格式不正确！");
-                        id1JTextField.setText("");
-                        password3JPassword.setText("");
-                        password4JPassword.setText("");
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }else{
                 JOptionPane.showMessageDialog(Login.this,"两次密码不一致！");
-                id1JTextField.setText("");
-                password3JPassword.setText("");
-                password4JPassword.setText("");
             }
+            id1JTextField.setText("");
+            password3JPassword.setText("");
+            password4JPassword.setText("");
         }
 
         public void mousePressed(MouseEvent e) {
