@@ -41,7 +41,6 @@ public class UserDaoImpl implements IUserDao {
             preparedStatement.setInt(15,user.getMyKey());
             return preparedStatement.executeUpdate()!=0;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }finally {
             DBUtil.closeResources(connection,preparedStatement);
