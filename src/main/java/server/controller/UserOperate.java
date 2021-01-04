@@ -2,6 +2,7 @@ package server.controller;
 
 import client.entity.Comment;
 import client.entity.User;
+import com.mysql.fabric.Server;
 import data.Operate;
 import server.service.IUserService;
 import server.service.impl.CommentServiceImpl;
@@ -20,6 +21,7 @@ public class UserOperate {
         this.user = user;
         this.serverUtil = serverUtil;
         selectOperate();
+        System.out.println(user);
     }
 
     public UserOperate(){
@@ -75,19 +77,17 @@ public class UserOperate {
         }
     }
     /**
-     * 判断注册是否合法，成功向客户端返回对象
+     * 判断注册是否合法，向客户端返回用户对象
      */
     public void register(){
         boolean success = userServiceImpl.register(user);
         if(success){
             try {
-                System.out.println(8);
                 serverUtil.sendInfo(user,User.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }else{
-            System.out.println("不超过");
             user.setOperate(ServerOperate.ERROR);
             try {
                 serverUtil.sendInfo(user,User.class);
@@ -126,7 +126,6 @@ public class UserOperate {
             } catch (IOException e) {
                 e.printStackTrace();
                 try {
-                    System.out.println(7);
                     serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -139,12 +138,18 @@ public class UserOperate {
      * 增加用户信息，不成功向客户端返回数据
      */
     public void addUser(){
-        boolean success = false;
-        success = userServiceImpl.addUser(user);
-        if (!success) {
+        boolean success = userServiceImpl.addUser(user);
+        if(success){
+            int x;
             try {
-                System.out.println("呜呜呜");
-                serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
+                serverUtil.sendInfo(user,User.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            user.setOperate(ServerOperate.ERROR);
+            try {
+                serverUtil.sendInfo(user,User.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
