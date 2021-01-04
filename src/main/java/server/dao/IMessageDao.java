@@ -12,5 +12,5 @@ public interface IMessageDao {
     List<Message> selectMessage(Message message) throws SQLException;
     Message selectOneMessage(Message message) throws SQLException;
     Boolean emptyMessage(Message message) throws SQLException;
-    void updateMessageState(Message message,String n) throws SQLException;
+    void updateMessageState(Message message,String n,int judge) throws SQLException;
 }
