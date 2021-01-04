@@ -74,8 +74,8 @@ public class Index extends JPanel implements IndexConf {
         article.setFont(new Font("宋体", Font.BOLD, 20));
         rankingListArticle.add(article);
 
+        //热度前十的文章
         ArrayList<Article> articleTopTenArrayList = new ArrayList<>();
-
         Article articleTopTen = new Article();
         articleTopTen.operate = ServerOperate.GET_ARTICLE_TOP_TEN;
         try {

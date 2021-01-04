@@ -5,11 +5,15 @@ import client.entity.Article;
 import client.entity.Comment;
 import client.entity.User;
 import client.frame.Index;
+import client.util.ClientUtil;
+import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -141,10 +145,17 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
          * 数据库拉取 评论区列表
          */
         ////////////////////////////////
-        ArrayList<Comment> list = new ArrayList<Comment>();
-        for (int i = 0;i < 10;i++) {
-            list.add(Comment.initComment());
+        ArrayList<Comment> commentArrayList = new ArrayList<>();
+        Comment comment1 = new Comment();
+        comment1.setAid(article.getAid());
+        comment1.operate = ServerOperate.QUERY_ALL_COMMENT_BY_AID;
+        try {
+            ClientUtil.sendInfo(comment1, Comment.class);
+            commentArrayList.addAll(ClientUtil.acceptList());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         ////////////////////////////////
 
         articleDetailSouthPanel = new JPanel(new BorderLayout());
@@ -184,12 +195,14 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         articleDetailSouthPanel.add(writePanel,BorderLayout.NORTH);
 
         JPanel commentListPanel = new JPanel(new GridLayout(10,1));
-        commentListPanel.setPreferredSize(new Dimension(1200,list.size() * 105));
+        commentListPanel.setPreferredSize(new Dimension(1200,commentArrayList.size() * 145));
 
-        for (Comment comment : list) {
+        for (Comment comment : commentArrayList) {
             ArticleDetailsCommentPanel articleDetailsCommentPanel = new ArticleDetailsCommentPanel(comment);
             commentListPanel.add(articleDetailsCommentPanel);
         }
+
+        updateUI();
 
         articleDetailSouthPanel.add(commentListPanel,BorderLayout.CENTER);
         this.add(articleDetailSouthPanel, BorderLayout.SOUTH);

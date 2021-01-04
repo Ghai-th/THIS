@@ -45,7 +45,6 @@ public class ArticleOperate {
                 selectArticleByAid();
                 break;
             case ServerOperate.GET_ARTICLE_BY_CID:
-                System.out.println("cid");
                 selectArticleByCid();
                 break;
             case ServerOperate.GET_ARTICLE_BY_UID:

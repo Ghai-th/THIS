@@ -36,6 +36,8 @@ public class ArticleDetailsCommentPanel extends JPanel {
         this.add(commenterNameLabel);
         this.add(commentPane);
         this.add(dateTimeLabel);
+
+        updateUI();
     }
 
     /**
