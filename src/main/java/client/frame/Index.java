@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class Index extends JPanel implements IndexConf {
 
     public JPanel centerPanel, westPanel; // 三个大边界板块
-    public static final String[] classification = new String[] //首页分类 整体从数据库获取
+    public static final String[] classification = new String[]
             {"C语言", "数据结构", "C++", "数据库", "Java", "Golang", "linux", "区块链", "人工智能", "软件安全"};
     public JPanel mainPanel;
     public JScrollPane scrollPane;
@@ -123,6 +123,8 @@ public class Index extends JPanel implements IndexConf {
             center.add(classPanel);
         }
         ////
+
+        Class clazz = new Class();
 
 
 //        IArticleService articleService = new ArticleServiceImpl();

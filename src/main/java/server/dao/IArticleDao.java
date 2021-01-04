@@ -57,9 +57,18 @@ public interface IArticleDao {
     List<Article> selectArticleByUid(String uid);
 
     /**
-     * 查询前10的文章
+     * 查询全部文章中热度排名前limit的文章
+     * @param limit 查询条数
      * @return 文章列表
      */
-    List<Article> selectTopTenArticle();
+    List<Article> selectTopLimitArticle(int limit);
+
+    /**
+     * 查询各个分类下的热度排名前limit的文章
+     * @param cid 分类号
+     * @param limit 查询条数
+     * @return 返回
+     */
+    List<Article> selectTopNumArticleByCid(String cid, int limit);
 
 }

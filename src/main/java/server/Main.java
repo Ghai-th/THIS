@@ -1,8 +1,6 @@
 package server;
 
-import server.ServerThread.ServerApplicationStart;
-
-import java.io.IOException;
+import server.Thread.ServerApplicationStart;
 
 public class Main {
 

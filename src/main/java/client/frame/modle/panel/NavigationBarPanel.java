@@ -5,6 +5,8 @@ import client.entity.Article;
 import client.frame.Index;
 import client.frame.Login;
 import client.frame.modle.label.ClassLabel;
+import client.util.ClientUtil;
+import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,23 +89,33 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 // 数据库模糊查询
                 ArrayList<Article> articles = new ArrayList<Article>();
-                for (int i = 0; i < 10; i++) {
-                    articles.add(Article.initArticle());
-                }
+//                for (int i = 0; i < 10; i++) {
+//                    articles.add(Article.initArticle());
+//                }
                 ////////////////////////////
 
                 index.mainPanel.removeAll();
-                index.mainPanel.add(new ArticleListPanel(articles, index), BorderLayout.CENTER); /// 新建出 文章列表面板
-                updateUI();
+
                 String searchText = null;
-                super.mouseClicked(e);
+                Article article = new Article();
                 try {
                     searchText = searchTextField.getText();
+                    article.setTitle(searchText);
+                    article.setOperate(ServerOperate.GET_ARTICLE_BY_TITTLE);
+                    ClientUtil.sendInfo(article,Article.class);
+                    articles.addAll(ClientUtil.acceptList());
                 } catch (Exception ex) {
                     System.out.println("不可为空");
                 }
+
+                index.mainPanel.add(new ArticleListPanel(articles, index), BorderLayout.CENTER); /// 新建出 文章列表面板
+                updateUI();
+
+
+
                 System.out.println("点击搜索" + searchText);
             }
         });
