@@ -41,10 +41,10 @@ public class RoundBorder implements Border {
 
     public Insets getBorderInsets(Component c) {
 
-        // top:可以调节光标与边枉的距离, 间接影响高度
-        // left:可以调节光标与边枉的距离
-        // bottom:可以调节光标与边枉的距离, 间接影响高度
-        // right:可以调节光标与边枉的距离
+        // top:可以调节光标与边框的距离, 间接影响高度
+        // left:可以调节光标与边框的距离
+        // bottom:可以调节光标与边框的距离, 间接影响高度
+        // right:可以调节光标与边框的距离
         return new Insets(10, 15, 10, 15);
     }
 
