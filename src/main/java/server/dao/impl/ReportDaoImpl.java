@@ -39,7 +39,7 @@ public class ReportDaoImpl implements IReportDao {
      *根据文章id删除举报文章
      */
     @Override
-    public void deleteReportArticle(String aid) {
+    public void deleteReportArticleByAid(String aid) {
         try {
             String sql = "delete from report where aid = '" + aid+ "'";
             connection = DBUtil.getConnection();
@@ -72,17 +72,18 @@ public class ReportDaoImpl implements IReportDao {
      * 根据文章id查找被举报文章
      */
     @Override
-    public void selectReportArticleByAid(String aid) {
+    public Report selectReportArticleByAid(String aid) {
         try {
             String sql = "select from report where aid= '" + aid +"'";
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
-            DBUtil.executeChange(statement,sql);
+            return DBUtil.executeGetData(statement,sql,Report.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
             DBUtil.closeResources(connection,statement,re);
         }
+        return null;
     }
 
     /**
