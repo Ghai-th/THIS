@@ -20,7 +20,7 @@ public class Main implements IndexConf {
 //        User user = new User();
 //        User.initUser(user);
 //        Administrate administrate = new Administrate(user);
-        jFrame.add(administrate);
+//        jFrame.add(administrate);
         jFrame.setLocationRelativeTo(null);
 
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
