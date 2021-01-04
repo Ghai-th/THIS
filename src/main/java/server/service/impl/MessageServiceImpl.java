@@ -72,6 +72,16 @@ public class MessageServiceImpl implements IMessageService {
     }
 
     @Override
+    public boolean updateMessageSendNotice(Message message, String n) {
+        return iMessageDao.updateMessageSendNotice(message,n);
+    }
+
+    @Override
+    public boolean updateMessageAcceptNotice(Message message, String n) {
+        return iMessageDao.updateMessageAcceptNotice(message,n);
+    }
+
+    @Override
     public boolean emptyMessage(Message message) throws SQLException {
         Message message1 = iMessageDao.selectOneMessage(message);
         if(message1==null){

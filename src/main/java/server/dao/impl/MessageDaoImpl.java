@@ -9,11 +9,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class MessageDaoImpl implements IMessageDao {
+    Connection connection = null;
+    Statement statement = null;
     @Override
     public void addMessage(Message message) throws SQLException {
         updateMessageState(message,"1",0);
-        Connection connection = DBUtil.getConnection();
-        String sql = "insert into message values(?,?,?,?,?)";
+        connection = DBUtil.getConnection();
+        String sql = "insert into message values(?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,message.getSendId());
         preparedStatement.setString(2,message.getAcceptId());
@@ -21,6 +23,8 @@ public class MessageDaoImpl implements IMessageDao {
         preparedStatement.setString(4,
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(message.getTime()));
         preparedStatement.setString(5,message.getState());
+        preparedStatement.setString(6,"1");
+        preparedStatement.setString(7,message.getAccpetNotice());
         System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(message.getTime()));
         preparedStatement.executeUpdate();
         preparedStatement.close();
@@ -29,7 +33,7 @@ public class MessageDaoImpl implements IMessageDao {
 
     @Override
     public void deleteMessage(Message message) throws SQLException {
-        Connection connection = DBUtil.getConnection();
+        connection = DBUtil.getConnection();
         String sql = "delete from massage where sendid=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,message.getSendId());
@@ -46,7 +50,7 @@ public class MessageDaoImpl implements IMessageDao {
         String text = mymessage.getText();
         text = text+"#"+message.getText();
         String sql = "update message set text=? where sendid=? and acceptid=?";
-        Connection connection = DBUtil.getConnection();
+        connection = DBUtil.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,text);
         preparedStatement.setString(2,message.getSendId());
@@ -58,8 +62,8 @@ public class MessageDaoImpl implements IMessageDao {
     @Override
     public List<Message> selectMessage(Message message) throws SQLException {
         List<Message> messageList;
-        Connection connection = DBUtil.getConnection();
-        Statement statement = connection.createStatement();
+        connection = DBUtil.getConnection();
+        statement = connection.createStatement();
         String id = message.getAcceptId();
         String sql = "select * from message where acceptid='"+id+"'";
         messageList = DBUtil.executeGetMoreData(statement,sql,Message.class);
@@ -71,8 +75,8 @@ public class MessageDaoImpl implements IMessageDao {
 
     @Override
     public Message selectOneMessage(Message message) throws SQLException {
-        Connection connection = DBUtil.getConnection();
-        Statement statement = connection.createStatement();
+        connection = DBUtil.getConnection();
+        statement = connection.createStatement();
         String sql = "select * from message where sendid='"+message.getSendId()+"' and acceptid='"+message.getAcceptId()+"'";
         message = DBUtil.executeGetData(statement,sql,Message.class);
         return message;
@@ -95,10 +99,47 @@ public class MessageDaoImpl implements IMessageDao {
         }if(judge==1){
             sql = "update message set state='"+n+"' where sendid='"+message.getAcceptId()+"'";
         }
-        Connection connection = DBUtil.getConnection();
-        Statement statement = connection.createStatement();
+        connection = DBUtil.getConnection();
+        statement = connection.createStatement();
+
         DBUtil.executeChange(statement,sql);
         DBUtil.closeResources(connection,statement);
     }
+
+    @Override
+    public boolean updateMessageSendNotice(Message message,String n) {
+        String sql = "update message set notice='"+n+"' where sendid='"+message.getSendId()+"'";
+        try {
+            connection = DBUtil.getConnection();
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }finally {
+            {
+                DBUtil.closeResources(connection,statement);
+            }
+        }
+
+    }
+
+    @Override
+    public boolean updateMessageAcceptNotice(Message message,String n) {
+        String sql = "update message set notice='"+n+"' where acceptid='"+message.getAcceptId()+"'";
+        try {
+            connection = DBUtil.getConnection();
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }finally {
+            {
+                DBUtil.closeResources(connection,statement);
+            }
+        }
+    }
+
 
 }

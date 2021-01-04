@@ -15,14 +15,18 @@ public class Message extends Operate implements java.io.Serializable{
     private String text;
     private Date time;
     private String state;
+    private String sendNotice;
+    private String acceptNotice;
 
-    public Message(String sendId, String acceptId, String text, String state) {
+    public Message(String sendId, String acceptId, String text, String state,String sendNotice,String accpetNotice) {
         super();
         this.sendId = sendId;
         this.acceptId = acceptId;
         this.text = text;
         this.state = state;
         this.time = new Date();
+        this.sendNotice = sendNotice;
+        this.acceptNotice = accpetNotice;
     }
 
     public Message(String acceptId){
@@ -73,6 +77,14 @@ public class Message extends Operate implements java.io.Serializable{
     public void setState(String state) {
         this.state = state;
     }
+
+    public String getSendNotice(){return sendNotice;}
+
+    public void setSendNotice(String sendNotice){this.sendNotice = sendNotice;}
+
+    public String getAccpetNotice(){return acceptNotice;}
+
+    public void setAccpetNotice(String accpetNotice){this.acceptNotice = accpetNotice;}
 
     @Override
     public String toString() {
