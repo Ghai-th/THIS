@@ -1,5 +1,7 @@
 package client.frame.modle.panel;
 
+import client.entity.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -12,7 +14,18 @@ import java.awt.event.MouseListener;
 public class MemberColorPanel extends TranslucenceJPanel {
     JLabel upJLabel;//上部label
     JLabel downJLabel;//下部label
-    public MemberColorPanel(String up, String down){
+    String up;
+    String down;
+    public User myUser,otherUser;
+    public MemberColorPanel(User myUser){
+        this.myUser = myUser;
+        init();
+    }
+    public MemberColorPanel(User myUser,User otherUser){
+        this.myUser = myUser;
+        this.otherUser = otherUser;
+    }
+    public void init(){
         upJLabel = new JLabel(up,JLabel.CENTER);
         downJLabel = new JLabel(down,JLabel.CENTER);
         downJLabel.setFont(new Font("宋体",Font.PLAIN,20));
@@ -46,6 +59,5 @@ public class MemberColorPanel extends TranslucenceJPanel {
         add(upJLabel);
         add(downJLabel);
     }
-
 
 }

@@ -19,9 +19,9 @@ public class CommentPanel extends JPanel {
     public void init(){
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(800,800));
-        MembercommentPanel membercommentPanelone = new MembercommentPanel();
-        MembercommentPanel membercommentPanelotwo = new MembercommentPanel();
-        MembercommentPanel membercommentPanelthree = new MembercommentPanel();
+        MembercommentPanel membercommentPanelone = new MembercommentPanel(myUser,otherUser);
+        MembercommentPanel membercommentPanelotwo = new MembercommentPanel(myUser,otherUser);
+        MembercommentPanel membercommentPanelthree = new MembercommentPanel(myUser,otherUser);
         add(membercommentPanelone);
         add(membercommentPanelotwo);
         add(membercommentPanelthree);
