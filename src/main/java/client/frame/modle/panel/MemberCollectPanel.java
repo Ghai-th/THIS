@@ -1,5 +1,7 @@
 package client.frame.modle.panel;
 
+import client.entity.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -10,8 +12,14 @@ public class MemberCollectPanel extends JPanel {
     ImageIcon image;
     JTextArea content;
     String stitle = "请在此放入标题",ccontent = "请在此放入文章概述",aanthor = "作者",ddate = "时间";
-    public MemberCollectPanel(){
+    private User myUser,otherUser;
+    public MemberCollectPanel(User myUser){
+        this.myUser = myUser;
         init();
+    }
+    public MemberCollectPanel(User myUser,User otherUser){
+        this.myUser = myUser;
+        this.otherUser = otherUser;
     }
     public void init(){
         this.setLayout(new BorderLayout());
