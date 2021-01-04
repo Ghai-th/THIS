@@ -1,5 +1,6 @@
 package server.service.impl;
 
+import client.entity.Class;
 import server.dao.IClassDao;
 import server.dao.impl.ClassDaoImpl;
 import server.service.IClassService;
