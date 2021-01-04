@@ -1,5 +1,7 @@
 package client.frame.modle.panel;
 
+import client.entity.User;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -24,6 +26,14 @@ public class UserPanel extends TranslucenceJPanel {
         setBounds(0,0,1920,1080);
         init();
 
+    }
+    public UserPanel(User user){
+        setBounds(0,0,1920,1080);
+        init();
+    }
+    public UserPanel(User myUser,User otherUser){
+        setBounds(0,0,1920,1080);
+        init();
     }
     public void init() {
         centerc.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-50,1000));

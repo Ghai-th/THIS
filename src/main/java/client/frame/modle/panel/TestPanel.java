@@ -75,6 +75,7 @@ public class TestPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 chatJbutton.setBackground(new Color(230,230,230));
+                new ChatFrame();
             }
 
             @Override
