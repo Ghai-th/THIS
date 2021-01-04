@@ -70,6 +70,9 @@ public class UserOperate {
                 updateUser();
                 break;
             case ServerOperate.SELECT_USER:
+                selectUser();
+                break;
+            case ServerOperate.SELECT_USERS:
                 selectUsers();
                 break;
 
@@ -106,11 +109,13 @@ public class UserOperate {
                 serverUtil.sendInfo(user,User.class);
             } catch (IOException e) {
                 e.printStackTrace();
-                try {
-                    serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+            }
+        }else{
+            user.setOperate(ServerOperate.ERROR);
+            try {
+                serverUtil.sendInfo(user,User.class);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
@@ -125,11 +130,13 @@ public class UserOperate {
                 serverUtil.sendInfo(user,User.class);
             } catch (IOException e) {
                 e.printStackTrace();
-                try {
-                    serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+            }
+        }else{
+            user.setOperate(ServerOperate.ERROR);
+            try {
+                serverUtil.sendInfo(user,User.class);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -279,6 +286,18 @@ public class UserOperate {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    /**
+     * 向客户端发送用户信息
+     */
+    public void selectUser(){
+        user = userServiceImpl.selectUser(user);
+        try{
+            serverUtil.sendInfo(user,User.class);
+        }catch (IOException e) {
+            e.printStackTrace();
         }
     }
     /**

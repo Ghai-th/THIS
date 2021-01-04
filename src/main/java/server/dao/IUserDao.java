@@ -76,6 +76,11 @@ public interface IUserDao {
     boolean updateUser(User user);
 
     /**
+     * 返回该用户
+     */
+    User selectUser(User user);
+
+    /**
      * 返回所有用户user的集合
      * @return 用户user的集合
      */

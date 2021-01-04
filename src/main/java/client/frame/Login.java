@@ -40,12 +40,27 @@ public class Login extends JPanel implements ActionListener, IndexConf {
 
     Index index;
     //定时器监听的鼠标监听时间
+    //登录按钮
     MouseListener loginJLabelListener = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
-            index.removeAll();
-            index.setVisible(false);
-            index.add(new Index());
-            index.setVisible(true);
+            User user = new User(idJTextField.getText(),new String(passwordJPasswordField.getPassword()));
+            user.setOperate(ServerOperate.IS_VALID_USER);
+            try {
+                ClientUtil.sendInfo(user,User.class);
+                user = ClientUtil.acceptInfo(User.class);
+                if(user.operate != ServerOperate.ERROR){
+                    index.removeAll();
+                    index.setVisible(false);
+                    index.add(new Index());
+                    index.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(Login.this,"账号或密码错误！");
+                    idJTextField.setText("");
+                    passwordJPasswordField.setText("");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
         public void mousePressed(MouseEvent e) {
             loginJLabel.setBackground(new Color(30,150,230));
@@ -63,8 +78,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             loginJLabel.setBackground(new Color(30,196,252));
         }
     };
+    //注册按钮
     MouseListener okJLabelListener = new MouseListener() {
-
         public void mouseClicked(MouseEvent e) {
             if(new String(password3JPassword.getPassword()).equals(new String(password4JPassword.getPassword()))){
                 User user = new User(id1JTextField.getText(),new String(password4JPassword.getPassword()));
@@ -120,8 +135,29 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             okJLabel.setBackground(new Color(30,196,252));
         }
     };
+    //找回密码按钮
     MouseListener findJLabelListener = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
+            User user = new User(findidJTextField.getText(),checkJTextField.getText());
+            user.setOperate(ServerOperate.IS_FIND_USER);
+            try {
+                ClientUtil.sendInfo(user,User.class);
+                user = ClientUtil.acceptInfo(User.class);
+                if(user.operate != ServerOperate.ERROR){
+                    user.setOperate(ServerOperate.SELECT_USER);
+                    ClientUtil.sendInfo(user,User.class);
+                    user = ClientUtil.acceptInfo(User.class);
+                    JOptionPane.showMessageDialog(Login.this,"你的密码是："+user.getPassword());
+                    findidJTextField.setText("");
+                    checkJTextField.setText("");
+                }else{
+                    JOptionPane.showMessageDialog(Login.this,"验证未通过！");
+                    findidJTextField.setText("");
+                    checkJTextField.setText("");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
         public void mousePressed(MouseEvent e) {
             findJLabel.setBackground(new Color(30,150,230));
@@ -638,6 +674,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         registerJLabel.setBounds(100,250,90,20);
         registerJLabel.setForeground(new Color(80,250,252));
         forgetJLabel.setBounds(270,250,90,20);
+        forgetJLabel.setForeground(new Color(80,250,252));
         idJTextField.setBounds(145,65,200,50);
         idJTextField.setFocusable(true);
         loginJLabel.setBounds(95,340,250,60);

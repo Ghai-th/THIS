@@ -44,7 +44,7 @@ public class UserServiceImpl implements IUserService {
         return flag;
     }
 
-    //判断登录是否合法
+    //判断登陆是否合法
     @Override
     public boolean isValidUser(User user) {
         List<User> users = dao.selectUsers();
@@ -117,6 +117,12 @@ public class UserServiceImpl implements IUserService {
     public boolean updateUser(User user) {
         return dao.updateUser(user);
     }
+
+    @Override
+    public User selectUser(User user) {
+        return dao.selectUser(user);
+    }
+
 
     @Override
     public List<User> selectUsers() {

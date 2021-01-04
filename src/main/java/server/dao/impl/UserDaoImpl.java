@@ -194,16 +194,33 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
+    public User selectUser(User user) {
+        String sql = "select * from user where uid = '"+user.getUid()+"'";
+        try {
+            connection = DBUtil.getConnection();
+            statement = connection.createStatement();
+            user = DBUtil.executeGetData(statement,sql,User.class);
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeResources(connection,statement);
+        }
+        return null;
+    }
+
+    @Override
     public List<User> selectUsers() {
         String sql = "select * from user";
         try {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();
             users = DBUtil.executeGetMoreData(statement,sql,User.class);
-            DBUtil.closeResources(connection,statement);
             return users;
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            DBUtil.closeResources(connection,statement);
         }
         return null;
 
