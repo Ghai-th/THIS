@@ -50,7 +50,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 if(user.operate != ServerOperate.ERROR){
                     index.removeAll();
                     index.setVisible(false);
-                    index.add(new Index());
+                    index.add(new Index(user));
                     index.setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(Login.this,"账号或密码错误！");
