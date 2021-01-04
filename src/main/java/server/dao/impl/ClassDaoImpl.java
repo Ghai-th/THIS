@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+
 public class ClassDaoImpl implements IClassDao {
 
     private Connection connection = null;
@@ -29,5 +31,18 @@ public class ClassDaoImpl implements IClassDao {
         }
     }
 
-
+    @Override
+    public Class selectAllClass() {
+        try{
+            String sql = "select * from class ";
+            connection = DBUtil.getConnection();
+            statement = DBUtil.getStatement(connection);
+            return (Class) DBUtil.executeGetMoreData(statement,sql, Class.class);
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }finally {
+            DBUtil.closeResources(connection,statement);
+        }
+    }
 }

@@ -11,4 +11,12 @@ public class ClassServiceImpl implements IClassService {
         IClassDao classDao = new ClassDaoImpl();
         return classDao.selectClassById(cid);
     }
+
+    @Override
+    public Class selectAllClass() {
+        IClassDao classDao = new ClassDaoImpl();
+        return classDao.selectAllClass();
+    }
+
+
 }
