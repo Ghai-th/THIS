@@ -96,7 +96,8 @@ public class MessageDaoImpl implements IMessageDao {
         String sql = null;
         if(judge==0){
             sql = "update message set state='"+n+"' where sendid='"+message.getSendId()+"' and acceptid='"+message.getAcceptId()+"'";
-        }if(judge==1){
+        }
+        if(judge==1){
             sql = "update message set state='"+n+"' where sendid='"+message.getAcceptId()+"'";
         }
         connection = DBUtil.getConnection();
