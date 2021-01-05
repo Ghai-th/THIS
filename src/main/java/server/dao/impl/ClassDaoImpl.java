@@ -22,12 +22,12 @@ public class ClassDaoImpl implements IClassDao {
         try {
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
-            re =  DBUtil.executeGetData(statement, sql, Class.class);
+            return DBUtil.executeGetData(statement, sql, Class.class);
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         } finally {
             DBUtil.closeResources(connection, statement);
-            return re;
         }
     }
 
