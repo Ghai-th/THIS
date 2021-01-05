@@ -72,6 +72,9 @@ public class UserOperate {
             case ServerOperate.SELECT_USERS:
                 selectUsers();
                 break;
+            case ServerOperate.SELECT_LIMIT_USERS:
+                seleceLimitUsers();
+                break;
         }
     }
     /**
@@ -80,12 +83,14 @@ public class UserOperate {
     public void register(){
        all(1);
     }
+
     /**
      * 判断登录是否合法，向客户端返回对象
      */
     public void isValidUser(){
       all(2);
     }
+
     /**
      * 判断找回密码是否合法，向客户端返回对象
      */
@@ -93,60 +98,70 @@ public class UserOperate {
        all(3);
     }
 
+
     /**
      * 增加用户信息，向客户端返回对象
      */
     public void addUser(){
       all(4);
     }
+
     /**
      * 删除用户信息，向客户端返回对象
      */
     public void deleteUser(){
        all(5);
     }
+
     /**
      * 更新用户等级，向客户端返回对象
      */
     public void updateUserlevel(){
        all(6);
     }
+
     /**
      * 更新用户粉丝数，向客户端返回对象
      */
     public void updateUserFansNum(){
       all(7);
     }
+
     /**
      * 更新用户关注数量，向客户端返回对象
      */
     public void updateUserAttentionnum(){
        all(8);
     }
+
     /**
      * 更新用户访问量，向客户端返回对象
      */
     public void updateUserVisitorNum(){
       all(9);
     }
+
     /**
      * 更新用户文章数量，向客户端返回对象
      */
     public void updateUserArticleNum(){
        all(10);
     }
+
     /**
      * 更新用户最后登录时间，向客户端返回对象
      */
     public void updateUserLastLogin(){
        all(11);
     }
+
     /**
      * 更新用户活跃度，向客户端返回对象
      */
     public void updateUserActive(){
         all(12);
     }
+
     /**
      * 更新用户基本信息，向客户端返回对象
      */
@@ -165,6 +180,7 @@ public class UserOperate {
             e.printStackTrace();
         }
     }
+
     /**
      * 向客户端发送所有用户信息列表
      */
@@ -176,6 +192,19 @@ public class UserOperate {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 向客户端发送热度前十的用户
+     */
+    public void seleceLimitUsers(){
+        List users = userServiceImpl.selectTopLimitUsers(10);
+        try {
+            serverUtil.sendInfoList(users);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     //传x的值，操作对应函数
     public void all(int x){
         boolean success = false;

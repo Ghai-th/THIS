@@ -44,15 +44,6 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     Index index;
     //定时器监听的鼠标监听时间
     //登录按钮
-    KeyListener loginJLabelKeyListener = new KeyAdapter() {
-        @Override
-        public void keyTyped(KeyEvent e) {
-            super.keyTyped(e);
-            if((char)e.getKeyChar() == KeyEvent.VK_ENTER){
-                goMain();
-            }
-        }
-    };
     MouseListener loginJLabelListener = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
           goMain();
@@ -239,6 +230,10 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                     ClientUtil.sendInfo(user,User.class);
                     user = ClientUtil.acceptInfo(User.class);
                     if(user.operate != ServerOperate.ERROR){
+                        user.setOperate(ServerOperate.SELECT_USER);
+                        ClientUtil.sendInfo(user,User.class);
+                        user = ClientUtil.acceptInfo(User.class);
+                        user.setPassword(new String(change1JPasswordFiled.getPassword()));
                         user.setOperate(ServerOperate.UPDATE_USER);
                         ClientUtil.sendInfo(user,User.class);
                         user = ClientUtil.acceptInfo(User.class);
@@ -283,7 +278,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         @Override
         public void keyTyped(KeyEvent e) {
             super.keyTyped(e);
-            if((char)e.getKeyChar() == KeyEvent.VK_ENTER){
+            if(e.getKeyChar() == KeyEvent.VK_ENTER){
                 goMain();
             }
         }

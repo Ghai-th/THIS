@@ -102,8 +102,16 @@ public interface IUserService {
     User selectUser(User user);
 
     /**
+     * 查询全部用户中活跃度排名前十的用户
+     * @param limit 查询条数
+     * @return 用户列表
+     */
+    List<User> selectTopLimitUsers(int limit);
+
+    /**
      * 返回所有用户user的集合
      * @return 用户user的集合
      */
+
     List<User> selectUsers();
 }

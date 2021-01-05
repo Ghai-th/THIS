@@ -1,5 +1,6 @@
 package server.dao.impl;
 
+import client.entity.Article;
 import client.entity.User;
 import server.dao.IUserDao;
 import server.util.DBUtil;
@@ -9,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -207,6 +209,22 @@ public class UserDaoImpl implements IUserDao {
             DBUtil.closeResources(connection,statement);
         }
         return null;
+    }
+
+    @Override
+    public List<User> selectTopLimitUsers(int limit) {
+        try {
+            String sql = "select * from user order by active desc limit " + limit;
+            connection = DBUtil.getConnection();
+            statement = DBUtil.getStatement(connection);
+            users = DBUtil.executeGetMoreData(statement,sql,User.class);
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            DBUtil.closeResources(connection,statement);
+        }
     }
 
     @Override

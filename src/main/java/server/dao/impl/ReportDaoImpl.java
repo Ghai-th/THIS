@@ -53,7 +53,7 @@ public class ReportDaoImpl implements IReportDao {
     }
 
     /**
-     *根据文章id修改举报文章举报次数
+     *根据文章id更新举报文章举报次数
      */
     @Override
     public void updateReportArticle(Report report) {

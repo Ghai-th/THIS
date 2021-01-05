@@ -122,6 +122,11 @@ public class UserServiceImpl implements IUserService {
         return dao.selectUser(user);
     }
 
+    @Override
+    public List<User> selectTopLimitUsers(int limit) {
+        return dao.selectTopLimitUsers(limit);
+    }
+
 
     @Override
     public List<User> selectUsers() {
