@@ -123,11 +123,15 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         this.add(searchPanel);
 
         headImage = new JLabel("头像");
+        if (Index.MeUser != null) {
+            //// 头像改为用户的头像
+            headImage.setText(Index.MeUser.getName());
+        } else {
+            headImage.setText("登录");
+        }
         headImage.addMouseListener(new MouseAdapter() {
-            // 进入个人中心
             @Override
             public void mousePressed(MouseEvent e) {
-
                 if (Index.MeUser == null) {
                     super.mousePressed(e);
                     index.removeAll();

@@ -54,4 +54,9 @@ public class ArticleServiceImpl implements IArticleService {
     public List<Article> selectTopLimitArticleByCid(String cid, int limit) {
         return articleDao.selectTopLimitArticleByCid(cid,limit);
     }
+
+    @Override
+    public int selectAllArticleNum(String uid) {
+        return articleDao.selectAllArticleNum(uid);
+    }
 }
