@@ -52,9 +52,7 @@ public class UserTable extends JTable {
         JTableHeader tabHeader = table.getTableHeader();					//获取表头
         tabHeader.setFont(new Font("宋体", Font.BOLD, 18));
 
-        //////////////////////////////
         //从数据库拉取用户数据，放入表格
-
         ArrayList<User> userList = new ArrayList<>();
         User user = new User();
         user.operate = ServerOperate.SELECT_USERS_INFO;
@@ -68,7 +66,6 @@ public class UserTable extends JTable {
         int i = 0;
         for(User userTop : userList) {
             o[i][0] = userTop.getUid();
-            System.out.println(o[i][0]);
             o[i][1] = userTop.getName();
             o[i][2] = userTop.getLevel().toString();
             o[i][3] = userTop.getGender().toString();
@@ -80,13 +77,8 @@ public class UserTable extends JTable {
             o[i][9] = userTop.getLastlogin().toString();
             o[i][10] = userTop.getActive().toString();
             o[i][11] = userTop.getSynopsis();
-            tableModel.addRow(o);
+            tableModel.addRow(o[i]);
             i++;
         }
-
-
-
-
     }
-
 }
