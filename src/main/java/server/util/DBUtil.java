@@ -198,4 +198,41 @@ public class DBUtil {
 
         }
     }
+
+    public static <T> List<T> executeGetSomeData(Statement stat, String sql, Class<T> clz) {
+        List<T> list = new ArrayList<T>();
+        try {
+            Field[] fields = clz.getDeclaredFields();
+            ResultSet set = stat.executeQuery(sql);
+            while (set.next()) {
+                T t = clz.newInstance();
+                for (int i = 0; i < fields.length; i++) {
+                    Field field = fields[i];
+                    if (field.getName().equals("operate")) {
+                        continue;
+                    }
+                    if (field.getName().equals("serialVersionUID")) {
+                        continue;
+                    }
+                    if (field.getName().equals("password")) {
+                        continue;
+                    }
+                    if (field.getName().equals("image")) {
+                        continue;
+                    }
+                    if (field.getName().equals("mykey")) {
+                        continue;
+                    }
+                    field.setAccessible(true);
+                    System.out.println(field.getName());
+                    field.set(t, set.getObject(field.getName()));
+                }
+                list.add(t);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

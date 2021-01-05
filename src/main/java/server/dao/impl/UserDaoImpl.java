@@ -250,7 +250,7 @@ public class UserDaoImpl implements IUserDao {
         try {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();
-            users = DBUtil.executeGetMoreData(statement,sql,User.class);
+            users = DBUtil.executeGetSomeData(statement,sql,User.class);
             return users;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -57,7 +57,7 @@ public class UserTable extends JTable {
 
         ArrayList<User> userList = new ArrayList<>();
         User user = new User();
-        user.operate = ServerOperate.SELECT_USERS_INFO  ;
+        user.operate = ServerOperate.SELECT_USERS_INFO;
         try {
             ClientUtil.sendInfo(user, User.class);
             userList.addAll(ClientUtil.acceptList());
