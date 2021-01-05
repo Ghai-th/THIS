@@ -146,6 +146,7 @@ public class ArticleOperate {
      */
     public void selectArticleByTittle() {
         List articles = articleService.selectArticleByTittle(article.getTitle());
+        System.out.println(articles.size());
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_BY_TITTLE;
         try {
             serverUtil.sendInfoList(articles);

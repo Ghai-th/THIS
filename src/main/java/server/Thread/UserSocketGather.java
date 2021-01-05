@@ -11,7 +11,7 @@ public class UserSocketGather {
     public static Map<User, ServerUtil> userServerUtilMap = new HashMap<User,ServerUtil>();
     public static Iterator iterator = userServerUtilMap.entrySet().iterator();
     /**
-     * 插入心得元素
+     * 插入新的元素
      * @param user
      * @param serverUtil
      */

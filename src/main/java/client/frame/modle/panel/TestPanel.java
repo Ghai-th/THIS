@@ -155,8 +155,12 @@ public class TestPanel extends JPanel {
                         myUser = ClientUtil.acceptInfo(User.class);
                     } catch (IOException | ClassNotFoundException ex) {
                         ex.printStackTrace();
+                    }
+                if(otherUser==null){
+                    Index.MeUser.setFansNum(Index.MeUser.getFansNum()+1);
+                }else{
+                    myUser.setFansNum((myUser.getFansNum()+1));
                 }
-                Index.MeUser.setFansNum(Index.MeUser.getFansNum()+1);
                 userJPanel3.removeAll();
                 myUser.setFansNum(myUser.getFansNum()+1);
                 fansMemberPanel3 = new MemberNoColorPanel(myUser.getFansNum()+"","粉丝");
@@ -283,10 +287,7 @@ public class TestPanel extends JPanel {
 
         //将两个按钮加入到按钮面板中
         if(otherUser==null){
-            chatJbutton.setBounds(45,30,100,40);
-            buttonJPanel.add(chatJbutton);
-            attentionJbutton.setBounds(238,30,100,40);
-            buttonJPanel.add(attentionJbutton);
+
         }else{
             chatJbutton.setBounds(45,30,100,40);
             buttonJPanel.add(chatJbutton);

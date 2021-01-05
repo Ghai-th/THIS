@@ -124,7 +124,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
             @Override
             public void mouseClicked(MouseEvent e) {
                 index.removeAll();
-                index.add(new AllPanel(author,Index.MeUser,index,commentList,storeList,articleList));
+                index.add(new AllPanel(author,User.copyUser(Index.MeUser),index,commentList,storeList,articleList));
                 index.repaint();
                 index.updateUI();
                 super.mouseClicked(e);

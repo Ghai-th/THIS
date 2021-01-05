@@ -170,7 +170,18 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                     } catch (IOException | ClassNotFoundException ee) {
                         ee.printStackTrace();
                     }
-                    index.add(new AllPanel(Index.MeUser,null,index,commentList,storeList,null));
+                    Article article = new Article();
+                    List<Article> articleList = new ArrayList<>();
+                    article.operate = ServerOperate.GET_ARTICLE_BY_UID;
+                    article.setUid(Index.MeUser.getUid());
+                    try {
+                        ClientUtil.sendInfo(article,Article.class);
+                        articleList.addAll(ClientUtil.acceptList());
+                    } catch (IOException | ClassNotFoundException eee) {
+                        eee.printStackTrace();
+                    }
+
+                    index.add(new AllPanel(Index.MeUser,null,index,commentList,storeList,articleList));
                     index.updateUI();
                     index.repaint();
                 }

@@ -22,6 +22,7 @@ public class MemberMyArticlePanel extends JPanel {
         this.myUser = myUser;
         this.otherUser = otherUser;
         this.stitle = stitle;
+        this.stext = stext;
         this.suid =suid;
         this.createTime = createTime;
         this.renewalTime = renewalTime;
@@ -64,8 +65,26 @@ public class MemberMyArticlePanel extends JPanel {
         textArea.append("概述：  "+stext);
         textArea.setBorder(BorderFactory.createMatteBorder(1,0,1,0,Color.LIGHT_GRAY));
         this.add(textArea,BorderLayout.CENTER);
-        JPanel down = new JPanel();
+        JPanel down = new JPanel(new FlowLayout());
         uid = new JLabel("作者： "+suid);
+        process(uid);
+        down.add(uid);
+        create = new JLabel("发表时间"+createTime);
+        process(create);
+        down.add(create);
+        renewal = new JLabel("最后一次更新时间"+renewalTime);
+        process(renewal);
+        down.add(renewal);
+        visitor = new JLabel("访客数"+visitorNum);
+        process(visitor);
+        down.add(visitor);
+        like = new JLabel("喜欢"+likeNum);
+        process(like);
+        down.add(like);
+        collect = new JLabel("收藏"+collectNum);
+        process(collect);
+        down.add(collect);
+        this.add(down,BorderLayout.SOUTH);
 
 
     }
