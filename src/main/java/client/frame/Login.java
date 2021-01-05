@@ -15,7 +15,6 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.util.Random;
 
 public class Login extends JPanel implements ActionListener, IndexConf {
@@ -45,27 +44,18 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     Index index;
     //定时器监听的鼠标监听时间
     //登录按钮
+    KeyListener loginJLabelKeyListener = new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent e) {
+            super.keyTyped(e);
+            if((char)e.getKeyChar() == KeyEvent.VK_ENTER){
+                goMain();
+            }
+        }
+    };
     MouseListener loginJLabelListener = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
-            User user = new User(idJTextField.getText(),new String(passwordJPasswordField.getPassword()));
-            user.setOperate(ServerOperate.IS_VALID_USER);
-            try {
-                ClientUtil.sendInfo(user,User.class);
-                user = ClientUtil.acceptInfo(User.class);
-                if(user.operate != ServerOperate.ERROR){
-                    index.removeAll();
-                    index.setVisible(false);
-                    Index.MeUser = user;
-                    index.add(new Index(user));
-                    index.setVisible(true);
-                }else{
-                    JOptionPane.showMessageDialog(Login.this,"账号或密码错误！");
-                    idJTextField.setText("");
-                    passwordJPasswordField.setText("");
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+          goMain();
         }
         public void mousePressed(MouseEvent e) {
             loginJLabel.setBackground(new Color(30,150,230));
@@ -287,6 +277,15 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         }
         public void mouseExited(MouseEvent e) {
             changeJLabel.setBackground(new Color(30,196,252));
+        }
+    };
+    KeyListener fieldKeyListener = new KeyAdapter() {
+        @Override
+        public void keyTyped(KeyEvent e) {
+            super.keyTyped(e);
+            if((char)e.getKeyChar() == KeyEvent.VK_ENTER){
+                goMain();
+            }
         }
     };
     //状态记录
@@ -782,6 +781,31 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         infoJPanel.repaint();
     }
 
+    public void goMain(){
+        User user = new User(idJTextField.getText(),new String(passwordJPasswordField.getPassword()));
+        user.setOperate(ServerOperate.IS_VALID_USER);
+        try {
+            ClientUtil.sendInfo(user,User.class);
+            user = ClientUtil.acceptInfo(User.class);
+            if(user.operate != ServerOperate.ERROR){
+                user.setOperate(ServerOperate.SELECT_USER);
+                ClientUtil.sendInfo(user,User.class);
+                user = ClientUtil.acceptInfo(User.class);
+                index.removeAll();
+                index.setVisible(false);
+                Index.MeUser = user;
+                index.add(new Index(user));
+                index.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(Login.this,"账号或密码错误！");
+                idJTextField.setText("");
+                passwordJPasswordField.setText("");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
     public void actionPerformed(ActionEvent e) {
         if(!(idJTextField.getText().equals("")||idJTextField.getText().equals("账号")||
@@ -791,16 +815,20 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 loginJLabel.setBackground(new Color(30,196,252));
                 loginJLabel.setBorder(null);
                 loginJLabel.addMouseListener(loginJLabelListener);
+                idJTextField.addKeyListener(fieldKeyListener);
+                passwordJPasswordField.addKeyListener(fieldKeyListener);
                 isChange1 = true;
             }
         }
         if(idJTextField.getText().equals("")||idJTextField.getText().equals("账号")||
                 new String(passwordJPasswordField.getPassword()).equals("")||
                 new String(passwordJPasswordField.getPassword()).equals("密码")){
-            if(!isChange1){
+            if(isChange1){
                 loginJLabel.setBackground(new Color(189,206,252));
                 loginJLabel.setBorder(grayBorder);
                 loginJLabel.removeMouseListener(loginJLabelListener);
+                idJTextField.removeKeyListener(fieldKeyListener);
+                passwordJPasswordField.removeKeyListener(fieldKeyListener);
                 loginJLabel.setCursor(Cursor.getDefaultCursor());
                 isChange1 = false;
             }
@@ -816,7 +844,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         }
         if(id1JTextField.getText().equals("")||new String(password3JPassword.getPassword()).equals("")||
                 new String(password4JPassword.getPassword()).equals("")){
-            if(!isChange2){
+            if(isChange2){
                 okJLabel.setBackground(new Color(189,206,252));
                 okJLabel.removeMouseListener(findJLabelListener);
                 okJLabel.setBorder(grayBorder);
