@@ -1,5 +1,6 @@
 package server.controller;
 
+import client.entity.Attention;
 import client.entity.Store;
 import data.Operate;
 import server.service.IStoreService;
@@ -7,6 +8,7 @@ import server.service.impl.StoreServiceImpl;
 import server.util.ServerUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 public class StoreOperate {
     public Store store;
@@ -24,6 +26,9 @@ public class StoreOperate {
                 break;
             case ServerOperate.DELETE_STORE:
                 deleteStore();
+                break;
+            case ServerOperate.SELECT_STORE:
+                selectStore();
                 break;
 
         }
@@ -48,6 +53,14 @@ public class StoreOperate {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+    public void selectStore(){
+        List<Store> attentions = storeService.selectStore(store);
+        try {
+            serverUtil.sendInfoList(attentions);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

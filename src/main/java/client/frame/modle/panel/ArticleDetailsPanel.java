@@ -30,15 +30,15 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
     public JPanel commentListPanel;
     public JPanel borderLimit;
     public Comment comment;
-    private JLabel reportLabel = null;
+    private JLabel reportLabel;
 
     public void init() {
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(1200, 2600));
         initAuthor();
-        initNorth();
         initCenter();
         initSouth();
+        initNorth();
     }
 
 
@@ -46,11 +46,19 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
 
         final JLabel authorNameLabel, writeTimeLabel, viewNumLabel, collectionLabel, classLabel;
 
+        JTextArea mouseLocation = new JTextArea();
+
+        mouseLocation.setPreferredSize(new Dimension(1200, 0));
+        mouseLocation.setText("在这儿");
+        mouseLocation.setForeground(new Color(238,238,238));
+        mouseLocation.setBackground(new Color(238,238,238));
+        mouseLocation.setCaretPosition(0);
+
 
         articleDetailNorthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        articleDetailNorthPanel.setPreferredSize(new Dimension(1200, 150));
+        articleDetailNorthPanel.setPreferredSize(new Dimension(1200, 160));
         articleDetailNorthPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-
+        articleDetailNorthPanel.add(mouseLocation);
         JLabel articleTittle = new JLabel(article.getTitle(), JLabel.CENTER);
         articleTittle.setFont(new Font("宋体", Font.BOLD, 30));
         articleTittle.setPreferredSize(new Dimension(1200, 100));
@@ -63,6 +71,8 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         viewNumLabel = new JLabel(String.valueOf(article.getVisitorNum()));
         collectionLabel = new JLabel(String.valueOf(article.getCollectNum()));
         classLabel = new JLabel(article.getCid()); // 数据库查询
+
+
 
         initLabel(authorNameLabel);
         initLabel(writeTimeLabel);
@@ -119,6 +129,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         JLabel articleClassLabel = new JLabel("文章分类");
         initLabel(articleClassLabel);
 
+        articleDetailNorthPanel.add(mouseLocation);
         articleDetailNorthPanel.add(authorNameLabel);
         articleDetailNorthPanel.add(writeTimeLabel);
         articleDetailNorthPanel.add(viewEyeLabel);
@@ -183,7 +194,6 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         articleDetailSouthPanel = new JPanel(new BorderLayout());
         writeCommentPane = new JTextPane();

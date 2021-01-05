@@ -11,15 +11,19 @@ public class MemberCollectPanel extends JPanel {
     JLabel title,anthor,img,date;
     ImageIcon image;
     JTextArea content;
-    String stitle = "请在此放入标题",ccontent = "请在此放入文章概述",aanthor = "作者",ddate = "时间";
+    String stitle ,ccontent ,aanthor ,ddate ;
     private User myUser,otherUser;
     public MemberCollectPanel(User myUser){
         this.myUser = myUser;
         init();
     }
-    public MemberCollectPanel(User myUser,User otherUser){
+    public MemberCollectPanel(User myUser,User otherUser,String stitle,String ccontent,String ddate){
         this.myUser = myUser;
         this.otherUser = otherUser;
+        this.stitle =stitle;
+        this.ccontent = ccontent;
+        this.ddate = ddate;
+        this.aanthor = myUser.getName();
     }
     public void init(){
         this.setLayout(new BorderLayout());
@@ -74,5 +78,37 @@ public class MemberCollectPanel extends JPanel {
     public JLabel process(JLabel jLabel){
         jLabel.setFont(new Font("宋体,",Font.PLAIN,20));
         return jLabel;
+    }
+
+    public String getStitle() {
+        return stitle;
+    }
+
+    public void setStitle(String stitle) {
+        this.stitle = stitle;
+    }
+
+    public String getCcontent() {
+        return ccontent;
+    }
+
+    public void setCcontent(String ccontent) {
+        this.ccontent = ccontent;
+    }
+
+    public String getAanthor() {
+        return aanthor;
+    }
+
+    public void setAanthor(String aanthor) {
+        this.aanthor = aanthor;
+    }
+
+    public String getDdate() {
+        return ddate;
+    }
+
+    public void setDdate(String ddate) {
+        this.ddate = ddate;
     }
 }

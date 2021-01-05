@@ -15,4 +15,5 @@ public class MemberMyArticlePanel extends JPanel {
         this.myUser = myUser;
         this.otherUser = otherUser;
     }
+
 }

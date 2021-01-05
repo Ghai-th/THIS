@@ -2,9 +2,6 @@ package client.entity;
 
 import data.Operate;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.Socket;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -90,6 +87,12 @@ public class User extends Operate implements java.io.Serializable{
         user.setVisitorNum(1);
         user.setActive(1);
         user.setMyKey("1");
+    }
+
+    public static User initUser() {
+        return new User("u123","monkey",76,"123",
+                1,null,10,11,12,
+                14,"这是一条简介",19,"1");
     }
 
     public Integer getActive() {
