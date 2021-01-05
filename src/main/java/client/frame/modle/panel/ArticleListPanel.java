@@ -3,11 +3,14 @@ package client.frame.modle.panel;
 import client.conf.IndexConf;
 import client.entity.Article;
 import client.frame.Index;
+import client.util.ClientUtil;
+import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ArticleListPanel extends JPanel implements MouseListener, IndexConf { // 文章 面板
@@ -18,6 +21,18 @@ public class ArticleListPanel extends JPanel implements MouseListener, IndexConf
 
     public ArticleListPanel(ArrayList<Article> articles, Index index) {
         this.articles = articles;
+
+        Article article = new Article();
+        article.setCid(articles.get(0).getCid());
+        article.operate = ServerOperate.GET_ARTICLE_BY_CID;
+        this.articles = new ArrayList();
+        try {
+            ClientUtil.sendInfo(article,Article.class);
+            this.articles.addAll(ClientUtil.acceptList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         this.index = index;
         panel = new JPanel(new FlowLayout(FlowLayout.CENTER,0,70));
         panel.setPreferredSize(new Dimension(WIDE * 5 / 8,this.articles.size() * HIGH * 181 / 1050));

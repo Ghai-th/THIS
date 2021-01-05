@@ -36,6 +36,7 @@ public class RankLabel extends JLabel implements MouseListener {
 
     public void mouseEntered(MouseEvent e) {
         setForeground(Color.RED);
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
     }
 

@@ -14,13 +14,14 @@ public class UserTable extends JTable {
 
     public JTable table;
     public DefaultTableModel tableModel;
+    public int userLength;
 
     public UserTable(JTable table) {
         this.table = table;
-        init();
+        this.userLength = init();
     }
 
-    private void init() {
+    private int init() {
         tableModel = (DefaultTableModel) table.getModel();
         tableModel.addColumn("账户");
         tableModel.addColumn("姓名");
@@ -38,7 +39,7 @@ public class UserTable extends JTable {
         table.getTableHeader().setReorderingAllowed(false); // 不可交换顺序
         table.getTableHeader().setResizingAllowed(false); // 不可拉动表格
 
-        int[] length = {160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 350};		//表格的列宽
+        int[] length = {140, 150, 50, 50, 50, 50, 50, 50, 250, 250, 50, 350};		//表格的列宽
 
         //获取表格的 列 模型
         TableColumnModel model = table.getColumnModel();
@@ -52,9 +53,7 @@ public class UserTable extends JTable {
         JTableHeader tabHeader = table.getTableHeader();					//获取表头
         tabHeader.setFont(new Font("宋体", Font.BOLD, 18));
 
-        //////////////////////////////
         //从数据库拉取用户数据，放入表格
-
         ArrayList<User> userList = new ArrayList<>();
         User user = new User();
         user.operate = ServerOperate.SELECT_USERS_INFO;
@@ -64,13 +63,27 @@ public class UserTable extends JTable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Object[][] o = new Object[userList.size()][12];
+        int i = 0;
         for(User userTop : userList) {
-            System.out.println(userTop);
+            o[i][0] = userTop.getUid();
+            o[i][1] = userTop.getName();
+            o[i][2] = userTop.getLevel().toString();
+            o[i][3] = userTop.getGender().toString();
+            o[i][4] = userTop.getFansNum().toString();
+            o[i][5] = userTop.getAttentionNum().toString();
+            o[i][6] = userTop.getVisitorNum().toString();
+            o[i][7] = userTop.getActive().toString();
+            o[i][8] = userTop.getCreate().toString();
+            o[i][9] = userTop.getLastlogin().toString();
+            o[i][10] = userTop.getActive().toString();
+            o[i][11] = userTop.getSynopsis();
+            tableModel.addRow(o[i]);
+            i++;
         }
+        table.setFont(new Font("宋体", Font.PLAIN, 18));
+        table.setRowHeight(30);
 
-
-
-
+        return userList.size();
     }
-
 }
