@@ -55,7 +55,7 @@ public class CommentOperate {
             case ServerOperate.SELECT_ALL_COMMENT_NUM:
                 selectAllComment();
                 break;
-            case ServerOperate.SELECT_USERS_INFO:
+            case ServerOperate.SELECT_COMMENT_INFO:
                 selectCommentInfo();
                 break;
         }

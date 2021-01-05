@@ -146,9 +146,10 @@ public class CommentDaoImpl implements ICommentDao {
 
     @Override
     public List<Comment> selectCommentInfo() {
+        //查找全部评论
         try {
             conn = DBUtil.getConnection();
-            String sql = "SELECT cid,uid,aid,`create`,text from comment";
+            String sql = "select * from comment";
             stmt = DBUtil.getStatement(conn);
             list = DBUtil.executeGetMoreData(stmt, sql, Comment.class);
             return list;

@@ -17,13 +17,14 @@ public class CommentTable extends JTable {
 
     public JTable table;
     public DefaultTableModel tableModel;
+    public int commentLength;
 
     public CommentTable(JTable table){
         this.table = table;
-        init();
+        this.commentLength = init();
     }
 
-    private void init() {
+    private int init() {
         tableModel = (DefaultTableModel) table.getModel();
         tableModel.addColumn("评论id");
         tableModel.addColumn("评论者账户");
@@ -49,61 +50,33 @@ public class CommentTable extends JTable {
         tabHeader.setFont(new Font("宋体", Font.BOLD, 18));
 
 
-        //////////////////////////////
+///////////////////////////////////////////
         //从数据库拉取评论数据，放入表格
-////        ArrayList<Comment> commentList = new ArrayList<>();
-//        Comment comment = new Comment();
-//        comment.operate = ServerOperate.SELECT_COMMENT_INFO ;
-//        try {
-//            ClientUtil.sendInfo(comment, User.class);
-//            commentList.addAll(ClientUtil.acceptList());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        for(Comment comment1 : commentList) {
-//            System.out.println(comment1);
-//        }
-//
-//        //从数据库拉取评论数据，放入表格
-//        ArrayList<Comment> commentList = new ArrayList<>();
-//        User user = new User();
-//        user.operate = ServerOperate.SELECT_USERS_INFO;
-//        try {
-//            ClientUtil.sendInfo(user, User.class);
-//            userList.addAll(ClientUtil.acceptList());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        Object[][] o = new Object[userList.size()][12];
-//        int i = 0;
-//        for(User userTop : userList) {
-//            o[i][0] = userTop.getUid();
-//            o[i][1] = userTop.getName();
-//            o[i][2] = userTop.getLevel().toString();
-//            o[i][3] = userTop.getGender().toString();
-//            o[i][4] = userTop.getFansNum().toString();
-//            o[i][5] = userTop.getAttentionNum().toString();
-//            o[i][6] = userTop.getVisitorNum().toString();
-//            o[i][7] = userTop.getActive().toString();
-//            o[i][8] = userTop.getCreate().toString();
-//            o[i][9] = userTop.getLastlogin().toString();
-//            o[i][10] = userTop.getActive().toString();
-//            o[i][11] = userTop.getSynopsis();
-//            tableModel.addRow(o[i]);
-//            i++;
-//        }
-//        table.setFont(new Font("宋体", Font.PLAIN, 18));
-//        table.setRowHeight(30);
+        ArrayList<Comment> commentList = new ArrayList<>();
+        Comment comment = new Comment();
+        comment.operate = ServerOperate.SELECT_COMMENT_INFO;
+        try {
+            ClientUtil.sendInfo(comment, User.class);
+            commentList.addAll(ClientUtil.acceptList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Object[][] o = new Object[commentList.size()][5];
+        int i = 0;
+        System.out.println(commentList);
+        for(Comment comm : commentList) {
+            o[i][0] = comm.getCid();
+            o[i][1] = comm.getUid();
+            o[i][2] = comm.getAid();
+            o[i][3] = comm.getCreate().toString();
+            o[i][4] = comm.getText();
+            tableModel.addRow(o[i]);
+            i++;
+        }
+        table.setFont(new Font("宋体", Font.PLAIN, 18));
+        table.setRowHeight(30);
 
-
-
-
-
-
-
-
-
-
+        return commentList.size();
     }
 
 }
