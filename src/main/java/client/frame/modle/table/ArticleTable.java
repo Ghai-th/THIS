@@ -35,7 +35,7 @@ public class ArticleTable extends JTable {
         table.getTableHeader().setReorderingAllowed(false); // 不可交换顺序
         table.getTableHeader().setResizingAllowed(false); // 不可拉动表格
 
-        int[] length = {350,160, 160, 160, 160, 160, 160, 160, 160};		//表格的列宽
+        int[] length = {400, 50, 50, 50, 250, 250, 50, 50, 50};		//表格的列宽
 
         //获取表格的 列 模型
         TableColumnModel model = table.getColumnModel();
