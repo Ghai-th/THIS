@@ -15,7 +15,7 @@ public class testframe extends JFrame {
         setLocation(0,0);
 
 
-        AllPanel allPanel = new AllPanel(new User());
+        AllPanel allPanel = new AllPanel(new User(),new User());
         add(allPanel);
         setVisible(true);
     }
@@ -24,4 +24,5 @@ public class testframe extends JFrame {
         //FlatLightLaf.install();
         new testframe();
     }
+
 }

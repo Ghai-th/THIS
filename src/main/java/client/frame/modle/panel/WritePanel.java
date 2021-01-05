@@ -1,11 +1,20 @@
 package client.frame.modle.panel;
 
+import client.entity.Article;
 import client.entity.User;
+import client.frame.Login;
+import client.util.ClientUtil;
+import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class WritePanel extends JPanel {
     JPanel centerJPanel;//中部的写文章部分面板
@@ -77,21 +86,7 @@ public class WritePanel extends JPanel {
         up.add(t_title);
         up.add(c_type);
         this.add(up,BorderLayout.NORTH);
-        l_yueshu = new JLabel("请遵守THIS论坛的言论原则，不得违反国家法律法规               ");
-        l_yueshu.setFont(new Font("宋体",Font.PLAIN,13));
-        l_yueshu.setForeground(new Color(10, 3, 9, 102));
-        JPanel south = new JPanel(new FlowLayout());
-        south.add(l_yueshu,JPanel.LEFT_ALIGNMENT);
-        save = new JButton("保存草稿");
-        save.setPreferredSize(new Dimension(100,30));
-        save.setFont(new Font("宋体",Font.PLAIN,15));
-        south.add(save);
-        start = new JButton("发表文章");
-        start.setPreferredSize(new Dimension(100,30));
-        start.setFont(new Font("宋体",Font.PLAIN,15));
-        south.add(start);
-        south.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-100,50));
-        this.add(south,BorderLayout.SOUTH);
+
         //中部面板的创建和设置布局
         centerJPanel = new JPanel();
         centerJPanel.setLayout(new BorderLayout());
@@ -191,6 +186,45 @@ public class WritePanel extends JPanel {
         centerJPanel.add(csouthPanel,BorderLayout.SOUTH);
 
         add(centerJPanel,BorderLayout.CENTER);
+        //SOUTH
+        l_yueshu = new JLabel("请遵守THIS论坛的言论原则，不得违反国家法律法规               ");
+        l_yueshu.setFont(new Font("宋体",Font.PLAIN,13));
+        l_yueshu.setForeground(new Color(10, 3, 9, 102));
+        JPanel south = new JPanel(new FlowLayout());
+        south.add(l_yueshu,JPanel.LEFT_ALIGNMENT);
+        save = new JButton("保存草稿");
+        save.setPreferredSize(new Dimension(100,30));
+        save.setFont(new Font("宋体",Font.PLAIN,15));
+        south.add(save);
+        start = new JButton("发表文章");
+        start.setPreferredSize(new Dimension(100,30));
+        start.setFont(new Font("宋体",Font.PLAIN,15));
+        start.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String title = t_title.getText();
+                String synopsis = summaryJtextArea.getText();
+                String content = textJTextPane.getText();
+                String uid = myUser.getUid();
+                String aid = myUser.getUid()+myUser.getArticleNum();
+                String cid = String.valueOf(c_type.getSelectedIndex()+1000);
+                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Article article = new Article(aid,uid,cid,title,synopsis,content,0,0,0,null);
+                article.operate = ServerOperate.ADD_ARTICLE;
+                try {
+                    ClientUtil.sendInfo(article,Article.class);
+                    article = ClientUtil.acceptInfo(Article.class);
+                    if (article.operate!=ServerOperate.ERROR){
+                        JOptionPane.showMessageDialog(WritePanel.this,"发表成功");
+                    }
+                } catch (IOException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        south.add(start);
+        south.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-100,50));
+        this.add(south,BorderLayout.SOUTH);
 
     }
 }

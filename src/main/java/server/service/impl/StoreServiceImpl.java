@@ -5,6 +5,8 @@ import server.dao.IStoreDao;
 import server.dao.impl.StoreDaoImpl;
 import server.service.IStoreService;
 
+import java.util.List;
+
 public class StoreServiceImpl implements IStoreService {
     private IStoreDao storeDao = new StoreDaoImpl();
     @Override
@@ -15,5 +17,10 @@ public class StoreServiceImpl implements IStoreService {
     @Override
     public boolean deleteStore(Store store) {
         return storeDao.deleteStore(store);
+    }
+
+    @Override
+    public List<Store> selectStore(Store store) {
+        return storeDao.selectStore(store);
     }
 }
