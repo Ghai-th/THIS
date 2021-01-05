@@ -148,7 +148,7 @@ public class CommentDaoImpl implements ICommentDao {
     public List<Comment> selectCommentInfo() {
         try {
             conn = DBUtil.getConnection();
-            String sql = "SELECT cid,uid,aid,'create',text from comment";
+            String sql = "SELECT cid,uid,aid,`create`,text from comment";
             stmt = DBUtil.getStatement(conn);
             list = DBUtil.executeGetMoreData(stmt, sql, Comment.class);
             return list;
