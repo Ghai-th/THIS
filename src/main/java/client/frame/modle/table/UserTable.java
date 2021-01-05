@@ -14,13 +14,14 @@ public class UserTable extends JTable {
 
     public JTable table;
     public DefaultTableModel tableModel;
+    public int userLength;
 
     public UserTable(JTable table) {
         this.table = table;
-        init();
+        this.userLength = init();
     }
 
-    private void init() {
+    private int init() {
         tableModel = (DefaultTableModel) table.getModel();
         tableModel.addColumn("账户");
         tableModel.addColumn("姓名");
@@ -38,7 +39,7 @@ public class UserTable extends JTable {
         table.getTableHeader().setReorderingAllowed(false); // 不可交换顺序
         table.getTableHeader().setResizingAllowed(false); // 不可拉动表格
 
-        int[] length = {160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 350};		//表格的列宽
+        int[] length = {140, 150, 50, 50, 50, 50, 50, 50, 250, 250, 50, 350};		//表格的列宽
 
         //获取表格的 列 模型
         TableColumnModel model = table.getColumnModel();
@@ -80,5 +81,9 @@ public class UserTable extends JTable {
             tableModel.addRow(o[i]);
             i++;
         }
+        table.setFont(new Font("宋体", Font.PLAIN, 18));
+        table.setRowHeight(30);
+
+        return userList.size();
     }
 }

@@ -96,7 +96,7 @@ public class Administrate extends JPanel implements IndexConf {
 
         table = new JTable();
         userTable = new UserTable(table);
-        table.setPreferredSize(new Dimension(1900,2000));
+        table.setPreferredSize(new Dimension(1900, ((UserTable) userTable).userLength * 30));
         mainPane =  new JScrollPane(
                 table,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
@@ -210,7 +210,7 @@ public class Administrate extends JPanel implements IndexConf {
                     userJpanel.removeAll();
                     table = new JTable();
                     userTable = new UserTable(table);
-                    table.setPreferredSize(new Dimension(1900,2000));
+                    table.setPreferredSize(new Dimension(1900,((UserTable) userTable).userLength * 30));
                     mainPane = new JScrollPane(
                             table,
                             ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
