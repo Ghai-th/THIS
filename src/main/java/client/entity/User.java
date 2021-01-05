@@ -48,6 +48,23 @@ public class User extends Operate implements java.io.Serializable{
         this.active = active;
         this.mykey = mykey;
     }
+    public User(String uid,Integer level,Integer gender, Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum,
+                String synopsis, Date create,Date lastlogin,Integer active,String mykey) {
+        super();
+        this.uid = uid;
+        this.level = level;
+        this.gender = gender;
+        this.fansNum = fansNum;
+        this.attentionNum = attentionNum;
+        this.visitorNum = visitorNum;
+        this.articleNum = articleNum;
+        this.create = new Date();
+        this.lastlogin = new Date();
+        this.synopsis = synopsis;
+        this.active = active;
+        this.mykey = mykey;
+    }
+
     public User(String uid,String password){
         this.uid = uid;
         this.password = password;
