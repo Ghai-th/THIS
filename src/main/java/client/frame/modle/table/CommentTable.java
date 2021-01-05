@@ -54,7 +54,7 @@ public class CommentTable extends JTable {
 
         ArrayList<Comment> commentList = new ArrayList<>();
         Comment comment = new Comment();
-        comment.operate = ServerOperate.SELECT_USERS_INFO ;
+        comment.operate = ServerOperate.SELECT_COMMENT_INFO ;
         try {
             ClientUtil.sendInfo(comment, User.class);
             commentList.addAll(ClientUtil.acceptList());
