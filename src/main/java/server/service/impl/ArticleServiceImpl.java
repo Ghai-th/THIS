@@ -1,17 +1,25 @@
 package server.service.impl;
 
 import client.entity.Article;
+import client.entity.User;
 import server.dao.IArticleDao;
 import server.dao.impl.ArticleDaoImpl;
 import server.service.IArticleService;
+import server.service.IUserService;
 
 import java.util.List;
 
 public class ArticleServiceImpl implements IArticleService {
     private IArticleDao articleDao = new ArticleDaoImpl();
+    private IUserService userService = new UserServiceImpl();
 
     @Override
     public boolean addArticle(Article article) {
+        User user = new User();
+        user.setUid(article.getUid());
+        user = userService.selectUser(user);
+        user.setArticleNum(user.getArticleNum() + 1);
+        userService.updateUserArticleNum(user);
         return articleDao.addArticle(article);
     }
 

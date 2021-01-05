@@ -1,36 +1,60 @@
 package client.frame.modle.panel;
 
+import client.entity.Article;
+import client.entity.Store;
 import client.entity.User;
+import client.util.ClientUtil;
+import server.controller.ServerOperate;
 
 import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CollectPanel extends JPanel {
     List<MemberCollectPanel> list = new ArrayList<MemberCollectPanel>();
+    List<Store>storeList;
     private User myUser,otherUser;
     public CollectPanel(User myUser){
         this.myUser = myUser;
         init();
     }
-    public CollectPanel(User myUser,User otherUser){
+    public CollectPanel(User myUser,User otherUser,List<Store>storeList){
         this.myUser = myUser;
         this.otherUser = otherUser;
+        this.storeList = storeList;
         init();
     }
     public void init(){
         this.setLayout(new FlowLayout());
         this.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-100,800));
-        for(int i=0;i<3;i++){
-            MemberCollectPanel a = new MemberCollectPanel(myUser);
-            list.add(a);
+
+        /**
+         * 按文章id查询获取所有收藏的文章信息
+         */
+        List<Article> articleList = new ArrayList<>();
+        Article article = new Article();
+        article.operate = ServerOperate.GET_ARTICLE_BY_AID;
+        for (int i =0;i<storeList.size();i++){
+            article.setAid(storeList.get(i).getAid());
+            try {
+                ClientUtil.sendInfo(article,Article.class);
+                articleList.add(ClientUtil.acceptInfo(Article.class));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
-        System.out.println(list.size());
+        for (int i=0;i<articleList.size();i++){
+            MemberCollectPanel memberCollectPanel = new MemberCollectPanel(myUser,null,articleList.get(i).getTitle(),articleList.get(i).getSynopsis(),String.valueOf(articleList.get(i).getCreate()));
+            list.add(memberCollectPanel);
+        }
         for (int i = 0;i<list.size();i++){
             this.add(list.get(i));
-            System.out.println(3);
         }
     }
 }

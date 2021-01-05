@@ -1,12 +1,18 @@
 package client.frame.modle.panel;
 
 import client.entity.User;
+import client.frame.Index;
+import client.util.ClientUtil;
+import com.mysql.fabric.xmlrpc.Client;
+import data.Operate;
+import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 public class TestPanel extends JPanel {
     JButton chatJbutton;//放入私信按钮
@@ -36,7 +42,7 @@ public class TestPanel extends JPanel {
 
     int width = GetWH.getWidth();//得到宽
     int height = GetWH.getHeight();//得到高
-    User myUser,otherUser;
+    static User myUser,otherUser;
     public TestPanel(User myUser){
         this.myUser = myUser;
         init();
@@ -141,7 +147,30 @@ public class TestPanel extends JPanel {
         attentionJbutton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                System.out.println("点击了");
                 attentionJbutton.setBackground(new Color(230,230,230));
+                myUser.setOperate(ServerOperate.UPDATE_FANS_NUM);
+                    try {
+                        ClientUtil.sendInfo(myUser,User.class);
+                        myUser = ClientUtil.acceptInfo(User.class);
+                    } catch (IOException | ClassNotFoundException ex) {
+                        ex.printStackTrace();
+                }
+                Index.MeUser.setFansNum(Index.MeUser.getFansNum()+1);
+                userJPanel3.removeAll();
+                myUser.setFansNum(myUser.getFansNum()+1);
+                fansMemberPanel3 = new MemberNoColorPanel(myUser.getFansNum()+"","粉丝");
+                fansMemberPanel3.setOpaque(false);//设置全透明
+                fansMemberPanel3.setTransparent(0.1f);//设置透明度
+                userJPanel3.add(fansMemberPanel3);
+                attentionMemberPanel3 = new MemberNoColorPanel(myUser.getAttentionNum()+"","关注");
+                attentionMemberPanel3.up = myUser.getAttentionNum()+"";
+                attentionMemberPanel3.down = "关注";
+                attentionMemberPanel3.setOpaque(false);//设置全透明
+                attentionMemberPanel3.setTransparent(0.1f);//设置透明度
+                userJPanel3.add(attentionMemberPanel3);
+                userJPanel3.updateUI();
+                userJPanel3.repaint();
             }
 
             @Override
@@ -188,7 +217,15 @@ public class TestPanel extends JPanel {
         gradeMemberPanel2.setTransparent(0.1f);//设置透明度
         //gradeMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
 
-        visitMemberPanel2 = new MemberColorPanel(myUser.getVisitorNum()+"","访客");
+        int num = myUser.getVisitorNum()+1;
+        visitMemberPanel2 = new MemberColorPanel(num+"","访客");
+        myUser.setOperate(ServerOperate.UPDATE_VISITOR_NUM);
+        try {
+            ClientUtil.sendInfo(myUser,User.class);
+            myUser = ClientUtil.acceptInfo(User.class);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         visitMemberPanel2.setOpaque(false);//设置全透明
         visitMemberPanel2.setTransparent(0.1f);//设置透明度
         //visitMemberPanel2.setBorder(BorderFactory.createEtchedBorder());
@@ -245,10 +282,17 @@ public class TestPanel extends JPanel {
         userJPanel.add(userJPanel3);
 
         //将两个按钮加入到按钮面板中
-        chatJbutton.setBounds(45,30,100,40);
-        buttonJPanel.add(chatJbutton);
-        attentionJbutton.setBounds(238,30,100,40);
-        buttonJPanel.add(attentionJbutton);
+        if(otherUser==null){
+            chatJbutton.setBounds(45,30,100,40);
+            buttonJPanel.add(chatJbutton);
+            attentionJbutton.setBounds(238,30,100,40);
+            buttonJPanel.add(attentionJbutton);
+        }else{
+            chatJbutton.setBounds(45,30,100,40);
+            buttonJPanel.add(chatJbutton);
+            attentionJbutton.setBounds(238,30,100,40);
+            buttonJPanel.add(attentionJbutton);
+        }
 
         //将按钮面板加入到用户面板的第四行
         userJPanel.add(buttonJPanel);

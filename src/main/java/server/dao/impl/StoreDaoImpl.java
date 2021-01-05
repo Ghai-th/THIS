@@ -1,13 +1,12 @@
 package server.dao.impl;
 
+import client.entity.Attention;
 import client.entity.Store;
 import server.dao.IStoreDao;
 import server.util.DBUtil;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.List;
 
 public class StoreDaoImpl implements IStoreDao {
     private Connection connection = null;
@@ -20,8 +19,9 @@ public class StoreDaoImpl implements IStoreDao {
      */
     @Override
     public boolean addStore(Store store) {
-        try {
-            String sql = "insert into store values(???)";
+            try {
+            String sql = "insert into store values(?,?,?)";
+            connection = DBUtil.getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,store.getUid());
             preparedStatement.setString(2,store.getAid());
@@ -45,7 +45,9 @@ public class StoreDaoImpl implements IStoreDao {
     @Override
     public boolean deleteStore(Store store) {
         try {
+
             String sql = "delete from store where uid = ? and aid = ?";
+            connection = DBUtil.getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,store.getUid());
             preparedStatement.setString(2,store.getAid());
@@ -57,5 +59,25 @@ public class StoreDaoImpl implements IStoreDao {
             DBUtil.closeResources(connection,preparedStatement);
         }
 
+    }
+
+    /**
+     * 查询用户的收藏
+     * @param store
+     * @return
+     */
+    @Override
+    public List<Store> selectStore(Store store) {
+        try {
+            connection = DBUtil.getConnection();
+            String sql = "select * from store where uid = '"+store.getUid()+"'";
+            Statement statement = DBUtil.getStatement(connection);
+            return DBUtil.executeGetMoreData(statement,sql, Store.class);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            DBUtil.closeResources(connection,preparedStatement);
+        }
     }
 }

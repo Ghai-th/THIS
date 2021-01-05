@@ -24,4 +24,5 @@ public class Main implements IndexConf {
 //        jFrame.setResizable(false);
         jFrame.setVisible(true);
     }
+
 }

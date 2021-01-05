@@ -33,7 +33,7 @@ public class UserPanel extends TranslucenceJPanel {
     ImageIcon Imageone,Imagetwo,Imagethree,imagefour;
     JLabel imageJLabelone,imageJLabeltwo,imageJLabelthree,imageJLabelfour;
     JPanel imageJPanelone,imageJPaneltwo,imageJPanelthree,imageJPanelfour;
-    User myUser,otherUser;
+    static User myUser,otherUser;
     AllPanel allPanel;
     List<Comment> commentList = null;
     List<Store> storeList = null;
@@ -53,6 +53,7 @@ public class UserPanel extends TranslucenceJPanel {
     public UserPanel(User myUser, User otherUser, Index index, AllPanel allPanel, List<Comment> commentList, List<Store> storeList, List<Article> articleList){
         this.commentList = commentList;
         this.storeList = storeList;
+        cnum = storeList.size();
         this.articleList = articleList;
         this.myUser = myUser;
         this.otherUser = otherUser;
@@ -62,8 +63,9 @@ public class UserPanel extends TranslucenceJPanel {
         init();
     }
     public void init() {
+        //User.initUser(myUser);
         writePanel = new WritePanel(myUser);
-        centerc.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-50,1000));
+        centerc.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-50,5000));
 //        centerc.setOpaque(false);
 //        centerc.setTransparent(0.3f);
         this.setOpaque(false);
@@ -129,6 +131,7 @@ public class UserPanel extends TranslucenceJPanel {
         myCenterc.setLayout(new FlowLayout());
         myCenterc.setPreferredSize(new Dimension(800,800));
         jScrollPane = new JScrollPane(centerc);
+        jScrollPane.getVerticalScrollBar().setUnitIncrement(20);
         jScrollPane.setOpaque(false);
         jScrollPane.getViewport().setOpaque(false);
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -217,7 +220,7 @@ public class UserPanel extends TranslucenceJPanel {
                 clear();
                 topic.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
                 centerc.removeAll();
-                centerc.add(new CollectPanel(myUser));
+                centerc.add(new CollectPanel(myUser,otherUser,storeList));
                 centerc.updateUI();
                 repaint();
             }
@@ -231,7 +234,7 @@ public class UserPanel extends TranslucenceJPanel {
         topic.addMouseListener(adapter3);
         topic.addMouseMotionListener(adapter3);
         centerup.add(topic);
-        answer = new JLabel("我的评论("+dnum+")",JLabel.CENTER);
+        answer = new JLabel("我的评论("+commentList.size()+")",JLabel.CENTER);
         answer=setFontLabel(answer);
 
         MouseAdapter adapter4 = new MouseAdapter() {
@@ -247,8 +250,11 @@ public class UserPanel extends TranslucenceJPanel {
                 answer.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
 
                 CommentPanel commentPanel = new CommentPanel(myUser,commentList);
+                centerc.setPreferredSize(new Dimension(800,250*commentList.size()));
                 centerc.removeAll();
                 centerc.add(commentPanel);
+                JScrollBar sBar = jScrollPane.getVerticalScrollBar();
+                sBar.setValue(sBar.getMinimum());
                 centerc.updateUI();
                 repaint();
             }
@@ -477,5 +483,4 @@ public class UserPanel extends TranslucenceJPanel {
         jlabel.setFont(new Font("宋体",Font.PLAIN,30));
         return jlabel;
     }
-
 }
