@@ -45,6 +45,14 @@ public class Index extends JPanel implements IndexConf {
         initWest();
         initCenter();
     }
+    public Index(int x){
+        User user = new User();
+        user.setUid("0000");
+        this.user = user;
+        this.setLayout(new BorderLayout());
+        initNorth();
+
+    }
     public Index(){
         User user = new User();
         user.setUid("0000");
