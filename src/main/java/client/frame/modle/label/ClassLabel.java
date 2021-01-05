@@ -34,6 +34,7 @@ public class ClassLabel extends JLabel {
         this.setOpaque(true);
         this.setFont(new Font("宋体" , Font.BOLD,20));
         this.setBorder(BorderFactory.createEmptyBorder(0,8,0,8));
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
 
         this.addMouseListener(new MouseListener() {
             // 发送对应的请求 更新文章列表
