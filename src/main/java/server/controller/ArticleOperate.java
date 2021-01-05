@@ -74,9 +74,11 @@ public class ArticleOperate {
     public void addArticle() {
         boolean success = false;
         success = articleService.addArticle(article);
+        System.out.println("服务器收到发文章");
         if (!success) {
             try {
                 serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

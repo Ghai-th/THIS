@@ -1,6 +1,7 @@
 package client.frame.modle.label;
 
 import client.entity.Article;
+import client.entity.User;
 import client.frame.Index;
 import client.frame.modle.panel.ArticleDetailsPanel;
 
@@ -15,7 +16,7 @@ import java.awt.event.MouseListener;
  */
 public class RankLabel extends JLabel implements MouseListener {
     public Index index;
-
+    public User user;
 
     public void mouseClicked(MouseEvent e) {
         index.mainPanel.removeAll();

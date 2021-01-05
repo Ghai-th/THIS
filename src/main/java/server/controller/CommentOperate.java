@@ -55,6 +55,9 @@ public class CommentOperate {
             case ServerOperate.SELECT_ALL_COMMENT_NUM:
                 selectAllComment();
                 break;
+            case ServerOperate.SELECT_USERS_INFO:
+                selectCommentInfo();
+                break;
         }
     }
 
@@ -128,6 +131,18 @@ public class CommentOperate {
     public void clientQueryAllCommentByAid() {
         List allComment = commentService.queryAllCommentByAid(comment.getAid());
         ((Comment)allComment.get(0)).operate = ServerOperate.QUERY_ALL_COMMENT_BY_AID;
+        try {
+            serverUtil.sendInfoList(allComment);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 向服务器发送某文章全部评论列表
+     */
+    public void selectCommentInfo() {
+        List allComment = commentService.selectCommentInfo();
         try {
             serverUtil.sendInfoList(allComment);
         } catch (IOException e) {

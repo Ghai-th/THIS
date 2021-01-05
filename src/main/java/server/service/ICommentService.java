@@ -58,4 +58,10 @@ public interface ICommentService {
      */
     int selectAllCommentNum();
 
+    /**
+     * 按顺序 返回所有评论
+     * @return 所有评论的列表
+     */
+    List<Comment> selectCommentInfo();
+
 }

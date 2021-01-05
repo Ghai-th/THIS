@@ -143,4 +143,20 @@ public class CommentDaoImpl implements ICommentDao {
         }
         return 0;
     }
+
+    @Override
+    public List<Comment> selectCommentInfo() {
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "SELECT cid,uid,aid,'create',text from comment";
+            stmt = DBUtil.getStatement(conn);
+            list = DBUtil.executeGetMoreData(stmt, sql, Comment.class);
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeResources(conn, stmt, rs);
+        }
+        return null;
+    }
 }

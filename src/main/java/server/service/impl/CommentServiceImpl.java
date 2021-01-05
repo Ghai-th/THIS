@@ -80,4 +80,12 @@ public class CommentServiceImpl implements ICommentService {
         int commentNum = commentDao.selectAllCommentNum();
         return commentNum;
     }
+
+    @Override
+    public List<Comment> selectCommentInfo() {
+        //返回文章的所有评论
+        List<Comment> commentList = commentDao.selectCommentInfo();
+        return commentList;
+    }
+
 }
