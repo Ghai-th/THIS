@@ -53,18 +53,34 @@ public class ArticleTable extends JTable {
 
 
         //////////////////////////////
-        //从数据库拉取用户数据，放入表格
-        ArrayList<User> userList = new ArrayList<>();
-        Article article = new Article();
-        article.operate = ServerOperate.SELECT_USERS_INFO  ;
+        //从数据库拉取文章数据，放入表格
+        ArrayList<Article> articleList = new ArrayList<>();
+        Article articl = new Article();
+        articl.operate = ServerOperate.SELECT_USERS_INFO;
         try {
-            ClientUtil.sendInfo(article, User.class);
-            userList.addAll(ClientUtil.acceptList());
+            ClientUtil.sendInfo(articl, Article.class);
+            articleList.addAll(ClientUtil.acceptList());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        for(User userTop : userList) {
-            System.out.println(userTop);
+        Object[][] o = new Object[articleList.size()][9];
+        int i = 0;
+        for(Article art : articleList) {
+            o[i][0] = art.getTitle();
+            o[i][1] = art.getAid();
+            o[i][2] = art.getUid();
+            o[i][3] = art.getCid();
+            o[i][4] = art.getCreate().toString();
+            o[i][5] = art.getRenewal().toString();
+            o[i][6] = art.getVisitorNum().toString();
+            o[i][7] = art.getLikeNum().toString();
+            o[i][8] = art.getCollectNum().toString();
+            tableModel.addRow(o[i]);
+            i++;
         }
+        table.setFont(new Font("宋体", Font.PLAIN, 18));
+        table.setRowHeight(30);
+
+
     }
 }
