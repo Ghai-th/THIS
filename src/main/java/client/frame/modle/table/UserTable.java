@@ -64,8 +64,24 @@ public class UserTable extends JTable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Object[][] o = new Object[userList.size()][12];
+        int i = 0;
         for(User userTop : userList) {
-            System.out.println(userTop);
+            o[i][0] = userTop.getUid();
+            System.out.println(o[i][0]);
+            o[i][1] = userTop.getName();
+            o[i][2] = userTop.getLevel().toString();
+            o[i][3] = userTop.getGender().toString();
+            o[i][4] = userTop.getFansNum().toString();
+            o[i][5] = userTop.getAttentionNum().toString();
+            o[i][6] = userTop.getVisitorNum().toString();
+            o[i][7] = userTop.getActive().toString();
+            o[i][8] = userTop.getCreate().toString();
+            o[i][9] = userTop.getLastlogin().toString();
+            o[i][10] = userTop.getActive().toString();
+            o[i][11] = userTop.getSynopsis();
+            tableModel.addRow(o);
+            i++;
         }
 
 

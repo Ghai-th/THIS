@@ -246,7 +246,7 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public List<User> selectUsersInfo() {
-        String sql = "select uid,name,level,gender,fansnum,attentionnum,visitornum,articlenum,`create`,lastlogin,synopsis,active from user";
+        String sql = "select * from user";
         try {
             connection = DBUtil.getConnection();
             statement = connection.createStatement();

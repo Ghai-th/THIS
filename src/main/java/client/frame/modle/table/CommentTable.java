@@ -63,6 +63,7 @@ public class CommentTable extends JTable {
         }
         for(Comment comment1 : commentList) {
             System.out.println(comment1);
+
         }
 
 
