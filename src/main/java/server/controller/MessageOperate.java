@@ -29,7 +29,7 @@ public class MessageOperate {
                 iMessageService.addMessage(message);
             }else{
                 System.out.println("不为空");
-                iMessageService.updaateMessage(message);
+                iMessageService.updateMessage(message);
             }
         } catch (SQLException e) {
             e.printStackTrace();

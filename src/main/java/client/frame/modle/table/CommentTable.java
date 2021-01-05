@@ -56,14 +56,13 @@ public class CommentTable extends JTable {
         Comment comment = new Comment();
         comment.operate = ServerOperate.SELECT_COMMENT_INFO;
         try {
-            ClientUtil.sendInfo(comment, User.class);
+            ClientUtil.sendInfo(comment, Comment.class);
             commentList.addAll(ClientUtil.acceptList());
         } catch (Exception e) {
             e.printStackTrace();
         }
         Object[][] o = new Object[commentList.size()][5];
         int i = 0;
-        System.out.println(commentList);
         for(Comment comm : commentList) {
             o[i][0] = comm.getCid();
             o[i][1] = comm.getUid();
