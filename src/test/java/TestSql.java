@@ -14,10 +14,13 @@ import server.service.impl.AttentionServiceImpl;
 import server.service.impl.StoreServiceImpl;
 import server.service.impl.UserServiceImpl;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.Statement;
 import java.util.*;
 
 import server.dao.impl.MessageDaoImpl;
+import server.util.DBUtil;
 
 import java.sql.SQLException;
 
@@ -154,6 +157,14 @@ public class TestSql {
         List<Store> list = new ArrayList<>();
         list .addAll(storeService.selectStore(store));
         System.out.println(list.size());
+    }
+
+    @Test
+    public void testDate() throws SQLException {
+        Connection connection = DBUtil.getConnection();
+        Statement statement = DBUtil.getStatement(connection);
+        String sql = "select * from user where uid = '123'";
+        System.out.println(DBUtil.executeGetSomeUserData(statement, sql, User.class));
     }
 
 }

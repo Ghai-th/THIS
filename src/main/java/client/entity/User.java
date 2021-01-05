@@ -49,7 +49,8 @@ public class User extends Operate implements java.io.Serializable{
         this.mykey = mykey;
     }
 
-    public User(String uid,String name,Integer level,Integer gender, Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum,
+    public User(String uid,String name,Integer level,Integer gender,
+                Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum,
                  Date create,Date lastlogin,String synopsis,Integer active) {
         this.uid = uid;
         this.name = name;
@@ -252,5 +253,12 @@ public class User extends Operate implements java.io.Serializable{
                 ", active=" + active +
                 ", mykey='" + mykey + '\'' +
                 '}';
+    }
+
+    public static User copyUser(User user) {
+        return new User(user.getUid(),user.getName(),user.getLevel(),
+                user.getPassword(),user.getGender(),user.getImage(),
+                user.getFansNum(),user.getAttentionNum(),user.getVisitorNum(),
+                user.getArticleNum(),user.getSynopsis(),user.getActive(),user.getMyKey());
     }
 }
