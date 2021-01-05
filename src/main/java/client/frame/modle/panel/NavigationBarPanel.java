@@ -3,6 +3,7 @@ package client.frame.modle.panel;
 import client.conf.IndexConf;
 import client.entity.Article;
 import client.entity.Comment;
+import client.entity.Store;
 import client.entity.User;
 import client.frame.Index;
 import client.frame.Login;
@@ -156,7 +157,20 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                     } catch (ClassNotFoundException ex) {
                         ex.printStackTrace();
                     }
-                    index.add(new AllPanel(Index.MeUser,null,index,commentList,null,null));
+                    /**
+                     * 获取此用户的所有收藏信息
+                     */
+                    List<Store> storeList = new ArrayList<>();
+                    Store store = new Store();
+                    store.operate = ServerOperate.SELECT_STORE;
+                    store.setUid(Index.MeUser.getUid());
+                    try {
+                        ClientUtil.sendInfo(store,Store.class);
+                        storeList.addAll(ClientUtil.acceptList());
+                    } catch (IOException | ClassNotFoundException ee) {
+                        ee.printStackTrace();
+                    }
+                    index.add(new AllPanel(Index.MeUser,null,index,commentList,storeList,null));
                     index.updateUI();
                     index.repaint();
                 }

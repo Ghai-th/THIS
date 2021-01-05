@@ -11,7 +11,7 @@ public class MemberCollectPanel extends JPanel {
     JLabel title,anthor,img,date;
     ImageIcon image;
     JTextArea content;
-    String stitle ,ccontent ,aanthor ,ddate ;
+    String stitle = "请在此放入标题",ccontent = "请在此放入文章概述",aanthor = "作者",ddate = "时间";
     private User myUser,otherUser;
     public MemberCollectPanel(User myUser){
         this.myUser = myUser;
@@ -23,12 +23,12 @@ public class MemberCollectPanel extends JPanel {
         this.stitle =stitle;
         this.ccontent = ccontent;
         this.ddate = ddate;
-        this.aanthor = myUser.getName();
+        init();
     }
     public void init(){
         this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY,2));
-        title = new JLabel(stitle);
+        title = new JLabel("标题：  "+stitle);
         title .setPreferredSize(new Dimension(GetWH.getWidth()*3/5-200,25));
         title = process(title);
         MouseAdapter adapter1 = new MouseAdapter() {
@@ -58,7 +58,7 @@ public class MemberCollectPanel extends JPanel {
         content.setFont(new Font("宋体",Font.PLAIN,20));
 //        content.setPreferredSize(new Dimension(GetWH.getWidth()*3/5,140));
         content.setEditable(false);
-        content.append(ccontent);
+        content.append("概述：  "+ccontent);
         content.setBorder(BorderFactory.createMatteBorder(1,0,1,0,Color.LIGHT_GRAY));
         this.add(content,BorderLayout.CENTER);
         JPanel south = new JPanel();
@@ -78,37 +78,5 @@ public class MemberCollectPanel extends JPanel {
     public JLabel process(JLabel jLabel){
         jLabel.setFont(new Font("宋体,",Font.PLAIN,20));
         return jLabel;
-    }
-
-    public String getStitle() {
-        return stitle;
-    }
-
-    public void setStitle(String stitle) {
-        this.stitle = stitle;
-    }
-
-    public String getCcontent() {
-        return ccontent;
-    }
-
-    public void setCcontent(String ccontent) {
-        this.ccontent = ccontent;
-    }
-
-    public String getAanthor() {
-        return aanthor;
-    }
-
-    public void setAanthor(String aanthor) {
-        this.aanthor = aanthor;
-    }
-
-    public String getDdate() {
-        return ddate;
-    }
-
-    public void setDdate(String ddate) {
-        this.ddate = ddate;
     }
 }

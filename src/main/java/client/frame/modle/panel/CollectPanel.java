@@ -15,33 +15,22 @@ import java.util.List;
 
 public class CollectPanel extends JPanel {
     List<MemberCollectPanel> list = new ArrayList<MemberCollectPanel>();
+    List<Store>storeList;
     private User myUser,otherUser;
     public CollectPanel(User myUser){
         this.myUser = myUser;
         init();
     }
-    public CollectPanel(User myUser,User otherUser){
+    public CollectPanel(User myUser,User otherUser,List<Store>storeList){
         this.myUser = myUser;
         this.otherUser = otherUser;
+        this.storeList = storeList;
         init();
     }
     public void init(){
-        myUser.setUid("u123456");
         this.setLayout(new FlowLayout());
         this.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-100,800));
-        /**
-         * 获取此用户的所有收藏信息
-         */
-        List<Store> storeList = new ArrayList<>();
-        Store store = new Store();
-        store.operate = ServerOperate.SELECT_STORE;
-        store.setUid(myUser.getUid());
-        try {
-            ClientUtil.sendInfo(store,Store.class);
-            storeList.addAll(ClientUtil.acceptList());
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
         /**
          * 按文章id查询获取所有收藏的文章信息
          */
@@ -60,18 +49,12 @@ public class CollectPanel extends JPanel {
                 e.printStackTrace();
             }
         }
-
-
         for (int i=0;i<articleList.size();i++){
             MemberCollectPanel memberCollectPanel = new MemberCollectPanel(myUser,null,articleList.get(i).getTitle(),articleList.get(i).getSynopsis(),String.valueOf(articleList.get(i).getCreate()));
-            System.out.println(articleList.get(i).getSynopsis());
             list.add(memberCollectPanel);
-            System.out.println(list.size());
         }
-
         for (int i = 0;i<list.size();i++){
             this.add(list.get(i));
-
         }
     }
 }

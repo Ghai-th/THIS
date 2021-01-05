@@ -53,6 +53,7 @@ public class UserPanel extends TranslucenceJPanel {
     public UserPanel(User myUser, User otherUser, Index index, AllPanel allPanel, List<Comment> commentList, List<Store> storeList, List<Article> articleList){
         this.commentList = commentList;
         this.storeList = storeList;
+        cnum = storeList.size();
         this.articleList = articleList;
         this.myUser = myUser;
         this.otherUser = otherUser;
@@ -62,6 +63,7 @@ public class UserPanel extends TranslucenceJPanel {
         init();
     }
     public void init() {
+        //User.initUser(myUser);
         writePanel = new WritePanel(myUser);
         centerc.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-50,1000));
 //        centerc.setOpaque(false);
@@ -217,7 +219,7 @@ public class UserPanel extends TranslucenceJPanel {
                 clear();
                 topic.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
                 centerc.removeAll();
-                centerc.add(new CollectPanel(myUser));
+                centerc.add(new CollectPanel(myUser,otherUser,storeList));
                 centerc.updateUI();
                 repaint();
             }
