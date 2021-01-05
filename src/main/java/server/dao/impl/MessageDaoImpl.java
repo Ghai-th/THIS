@@ -88,7 +88,7 @@ public class MessageDaoImpl implements IMessageDao {
         if(message1==null){
             return true;
         }else
-        return false;
+            return false;
     }
 
     @Override

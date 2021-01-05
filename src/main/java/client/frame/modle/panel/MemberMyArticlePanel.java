@@ -34,7 +34,8 @@ public class MemberMyArticlePanel extends JPanel {
     public void init(){
         this.setLayout(new BorderLayout());
         title = new JLabel("标题：  "+stitle);
-        title .setPreferredSize(new Dimension(GetWH.getWidth()*3/5-200,25));
+        title .setPreferredSize(new Dimension(GetWH.getWidth()*3/5-100,25));
+        title.setBorder(BorderFactory.createMatteBorder(1,0,0,0,Color.LIGHT_GRAY));
         process(title);
         MouseAdapter adapter1 = new MouseAdapter() {
             //            @Override
@@ -63,33 +64,35 @@ public class MemberMyArticlePanel extends JPanel {
         textArea.setEditable(false);
         textArea.setFont(new Font("宋体",Font.PLAIN,20));
         textArea.append("概述：  "+stext);
+        textArea.setBackground(new Color(0xEEEEEE));
         textArea.setBorder(BorderFactory.createMatteBorder(1,0,1,0,Color.LIGHT_GRAY));
         this.add(textArea,BorderLayout.CENTER);
         JPanel down = new JPanel(new FlowLayout());
         uid = new JLabel("作者： "+suid);
         process(uid);
         down.add(uid);
-        create = new JLabel("发表时间"+createTime);
+        create = new JLabel("发表时间"+createTime+" ");
         process(create);
         down.add(create);
-        renewal = new JLabel("最后一次更新时间"+renewalTime);
+        renewal = new JLabel("最后一次更新时间"+renewalTime+" ");
         process(renewal);
         down.add(renewal);
-        visitor = new JLabel("访客数"+visitorNum);
+        visitor = new JLabel("访客数"+visitorNum+" ");
         process(visitor);
         down.add(visitor);
-        like = new JLabel("喜欢"+likeNum);
+        like = new JLabel("喜欢"+likeNum+" ");
         process(like);
         down.add(like);
         collect = new JLabel("收藏"+collectNum);
         process(collect);
         down.add(collect);
+        down.setBorder(BorderFactory.createMatteBorder(0,0,1,0,Color.LIGHT_GRAY));
         this.add(down,BorderLayout.SOUTH);
 
 
     }
     public void process(JLabel jLabel){
-        jLabel.setFont(new Font("宋体,",Font.PLAIN,20));
+        jLabel.setFont(new Font("宋体,",Font.PLAIN,18));
 
     }
 
