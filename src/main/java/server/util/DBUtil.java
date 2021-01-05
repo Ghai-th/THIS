@@ -199,7 +199,7 @@ public class DBUtil {
         }
     }
 
-    public static <T> List<T> executeGetSomeData(Statement stat, String sql, Class<T> clz) {
+    public static <T> List<T> executeGetSomeUserData(Statement stat, String sql, Class<T> clz) {
         List<T> list = new ArrayList<T>();
         try {
             Field[] fields = clz.getDeclaredFields();
