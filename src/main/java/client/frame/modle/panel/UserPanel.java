@@ -1,10 +1,19 @@
 package client.frame.modle.panel;
 
+import client.entity.Article;
+import client.entity.Comment;
+import client.entity.Store;
 import client.entity.User;
 import client.frame.Index;
+import client.util.ClientUtil;
+import server.controller.ServerOperate;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -26,6 +35,9 @@ public class UserPanel extends TranslucenceJPanel {
     JPanel imageJPanelone,imageJPaneltwo,imageJPanelthree,imageJPanelfour;
     User myUser,otherUser;
     AllPanel allPanel;
+    List<Comment> commentList = null;
+    List<Store> storeList = null;
+    List<Article> articleList = null;
     public Index index;
 
     public UserPanel() {
@@ -38,7 +50,10 @@ public class UserPanel extends TranslucenceJPanel {
         setBounds(0,0,1920,1080);
         init();
     }
-    public UserPanel(User myUser,User otherUser,Index index,AllPanel allPanel){
+    public UserPanel(User myUser, User otherUser, Index index, AllPanel allPanel, List<Comment> commentList, List<Store> storeList, List<Article> articleList){
+        this.commentList = commentList;
+        this.storeList = storeList;
+        this.articleList = articleList;
         this.myUser = myUser;
         this.otherUser = otherUser;
         this.index = index;
@@ -230,7 +245,8 @@ public class UserPanel extends TranslucenceJPanel {
                 // TODO Auto-generated method stub
                 clear();
                 answer.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
-                CommentPanel commentPanel = new CommentPanel(myUser);
+
+                CommentPanel commentPanel = new CommentPanel(myUser,commentList);
                 centerc.removeAll();
                 centerc.add(commentPanel);
                 centerc.updateUI();
