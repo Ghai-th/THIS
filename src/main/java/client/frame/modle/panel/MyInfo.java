@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class MyInfo extends JFrame {
     User user;
@@ -17,8 +18,8 @@ public class MyInfo extends JFrame {
     JTextField idJTextField,nameJTextField,mykeyJTextField,genderJTextField;
     JTextPane synopsisJTextPane;
     JPasswordField passwordJPasswordField;
-    JRadioButton boyJRadio,girlJRadio;
     JPanel okJPanel;
+    boolean state = false;
     public MyInfo(User user){
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -26,14 +27,6 @@ public class MyInfo extends JFrame {
             System.err.println("Failed to initialize LaF");
         }
         this.user = user;
-        user.setOperate(ServerOperate.SELECT_USER);
-        try {
-            ClientUtil.sendInfo(user,User.class);
-            user = ClientUtil.acceptInfo(User.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         this.setTitle("个人信息管理");
         this.setSize(600,750);
         this.setLocationRelativeTo(null);
@@ -43,6 +36,13 @@ public class MyInfo extends JFrame {
         this.setVisible(true);
     }
     public void init(){
+        try {
+            user.setOperate(ServerOperate.SELECT_USER);
+            ClientUtil.sendInfo(user,User.class);
+            user = ClientUtil.acceptInfo(User.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //组件初始化
         headJLabel = new JLabel("头像");
         initJLabel(headJLabel);
@@ -68,19 +68,16 @@ public class MyInfo extends JFrame {
         passwordJPasswordField = new JPasswordField();
         passwordJPasswordField.setFont(new Font("楷体",Font.PLAIN,25));
         passwordJPasswordField.setEchoChar('*');
-        passwordJPasswordField.setEnabled(false);
         genderJTextField = new JTextField();
         initJTextField(genderJTextField);
         synopsisJTextPane = new JTextPane();
         synopsisJTextPane.setFont(new Font("楷体",Font.PLAIN,25));
         synopsisJTextPane.setBorder(BorderFactory.createLineBorder(new Color(196,196,196)));
-        synopsisJTextPane.setEnabled(false);
         mykeyJTextField = new JTextField();
         initJTextField(mykeyJTextField);
+        enableField();
+        setCenter();
         okJPanel = new JPanel(null);
-        boyJRadio = new JRadioButton("男");
-        girlJRadio = new JRadioButton("女");
-        //设置初始文本框都无法编辑
         //组件放置
         bkgJLabel.setBounds(0,0,550,150);
         this.add(bkgJLabel);
@@ -104,11 +101,61 @@ public class MyInfo extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                passwordJPasswordField.setText("");
-                nameJTextField.setText("");
-                synopsisJTextPane.setText("");
-                genderJTextField.setText("");
-                mykeyJTextField.setText("");
+                if(state){
+                    passwordJPasswordField.setText("");
+                    nameJTextField.setText("");
+                    synopsisJTextPane.setText("");
+                    genderJTextField.setText("");
+                    mykeyJTextField.setText("");
+                }
+            }
+        });
+        okJButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if(okJButton.getText().equals("修改")){
+                    state = true;
+                    ableField();
+                    passwordJPasswordField.setEchoChar((char)0);
+                    okJButton.setText("保存");
+                }else{
+                    enableField();
+                    state = false;
+                    passwordJPasswordField.setEchoChar('*');
+                    user.setName(nameJTextField.getText());
+                    user.setPassword(new String(passwordJPasswordField.getPassword()));
+                    user.setSynopsis(synopsisJTextPane.getText());
+                    if(genderJTextField.getText().equals("男")){
+                        user.setGender(1);
+                    }else if(genderJTextField.getText().equals("女")){
+                        user.setGender(0);
+                    }
+                    user.setMyKey(mykeyJTextField.getText());
+                    try {
+                        user.setOperate(ServerOperate.REGISTER_USER);
+                        System.out.println(user);
+                        ClientUtil.sendInfo(user,User.class);
+                        user = ClientUtil.acceptInfo(User.class);
+                        System.out.println(user.operate);
+                        if(user.operate == ServerOperate.SUCCESS){
+                            System.out.println("成功了！！！！");
+                            user.setOperate(ServerOperate.UPDATE_USER);
+                            ClientUtil.sendInfo(user,User.class);
+                            user = ClientUtil.acceptInfo(User.class);
+                            if(user.operate != ServerOperate.ERROR){
+                                JOptionPane.showMessageDialog(MyInfo.this,"修改成功！");
+                            }else{
+                                JOptionPane.showMessageDialog(MyInfo.this,"修改失败！");
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(MyInfo.this,"密码格式不合法！");
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                    okJButton.setText("修改");
+                }
             }
         });
         okJButton.setBounds(0,0,120,60);
@@ -140,9 +187,32 @@ public class MyInfo extends JFrame {
     //设置初始JTextField的样式
     public void initJTextField(JTextField someJTextField){
         someJTextField.setFont(new Font("楷体",Font.PLAIN,25));
-        someJTextField.setEnabled(false);
     }
-
+    //使得Field可编辑
+    public void ableField(){
+        nameJTextField.setEnabled(true);
+        passwordJPasswordField.setEnabled(true);
+        genderJTextField.setEnabled(true);
+        synopsisJTextPane.setEnabled(true);
+        mykeyJTextField.setEnabled(true);
+    }
+    //使得Field不可编辑
+    public void enableField(){
+        idJTextField.setEnabled(false);
+        nameJTextField.setEnabled(false);
+        passwordJPasswordField.setEnabled(false);
+        genderJTextField.setEnabled(false);
+        synopsisJTextPane.setEnabled(false);
+        mykeyJTextField.setEnabled(false);
+    }
+    //设置文本框文字居中
+    public void setCenter(){
+        idJTextField.setHorizontalAlignment(JTextField.CENTER);
+        passwordJPasswordField.setHorizontalAlignment(JTextField.CENTER);
+        genderJTextField.setHorizontalAlignment(JTextField.CENTER);
+        nameJTextField.setHorizontalAlignment(JTextField.CENTER);
+        mykeyJTextField.setHorizontalAlignment(JTextField.CENTER);
+    }
     //文本赋值
     public void setText(){
         idJTextField.setText(user.getUid());
@@ -156,10 +226,5 @@ public class MyInfo extends JFrame {
         synopsisJTextPane.setText(user.getSynopsis());
         mykeyJTextField.setText(user.getMyKey());
     }
-    public static void main(String []args){
-        User user = new User("333","888");
-        new MyInfo(user);
-    }
-
 
 }

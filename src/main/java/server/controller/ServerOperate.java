@@ -9,6 +9,7 @@ public interface ServerOperate {
     /**
      * 系统级 指令
      */
+    int SUCCESS = 111111;
     int ERROR = 999999;
 
     /**
