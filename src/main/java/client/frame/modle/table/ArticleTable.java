@@ -6,10 +6,7 @@ import client.util.ClientUtil;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -52,8 +49,6 @@ public class ArticleTable extends JTable {
         JTableHeader tabHeader = table.getTableHeader();					//获取表头
         tabHeader.setFont(new Font("宋体", Font.BOLD, 18));
 
-
-        //////////////////////////////
         //从数据库拉取文章数据，放入表格
         ArrayList<Article> articleList = new ArrayList<>();
         Article articl = new Article();
@@ -81,6 +76,10 @@ public class ArticleTable extends JTable {
         }
         table.setFont(new Font("宋体", Font.PLAIN, 18));
         table.setRowHeight(30);
+
+        DefaultTableCellRenderer r   = new DefaultTableCellRenderer();
+        r.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, r);
 
         return articleList.size();
     }
