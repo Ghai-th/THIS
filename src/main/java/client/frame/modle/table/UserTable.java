@@ -84,6 +84,10 @@ public class UserTable extends JTable {
         table.setFont(new Font("宋体", Font.PLAIN, 18));
         table.setRowHeight(30);
 
+        DefaultTableCellRenderer r   = new DefaultTableCellRenderer();
+        r.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, r);
+
         return userList.size();
     }
 }
