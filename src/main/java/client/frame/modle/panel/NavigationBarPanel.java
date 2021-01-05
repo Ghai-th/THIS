@@ -157,6 +157,7 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                         ex.printStackTrace();
                     }
                     index.add(new AllPanel(Index.MeUser,null,index,commentList,null,null));
+                    System.out.println("目前"+Index.MeUser);
                     index.updateUI();
                     index.repaint();
                 }

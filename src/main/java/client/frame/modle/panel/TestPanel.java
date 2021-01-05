@@ -1,12 +1,17 @@
 package client.frame.modle.panel;
 
 import client.entity.User;
+import client.frame.Index;
+import client.util.ClientUtil;
+import com.mysql.fabric.xmlrpc.Client;
+import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 public class TestPanel extends JPanel {
     JButton chatJbutton;//放入私信按钮
@@ -36,7 +41,7 @@ public class TestPanel extends JPanel {
 
     int width = GetWH.getWidth();//得到宽
     int height = GetWH.getHeight();//得到高
-    User myUser,otherUser;
+    static User myUser,otherUser;
     public TestPanel(User myUser){
         this.myUser = myUser;
         init();
@@ -142,6 +147,8 @@ public class TestPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 attentionJbutton.setBackground(new Color(230,230,230));
+                myUser.setOperate(ServerOperate.UPDATE_ATTENTION_NUM);
+                Index.MeUser.setAttentionNum(Index.MeUser.getAttentionNum()+1);
             }
 
             @Override
