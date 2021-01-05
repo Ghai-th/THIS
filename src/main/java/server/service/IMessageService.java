@@ -21,7 +21,7 @@ public interface IMessageService {
     /**
      * 更新message表中已有的元素
      */
-    public boolean updaateMessage(Message message);
+    public boolean updateMessage(Message message);
 
     /**
      * 将表中被发送者的所有聊天信息拖出为集合

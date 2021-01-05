@@ -18,8 +18,8 @@ public class MessageServiceImpl implements IMessageService {
             iMessageDao.addMessage(message);
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
-            //e.printStackTrace();
         }
     }
 
@@ -29,16 +29,18 @@ public class MessageServiceImpl implements IMessageService {
             iMessageDao.deleteMessage(message);
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
 
     @Override
-    public boolean updaateMessage(Message message) {
+    public boolean updateMessage(Message message) {
         try {
             iMessageDao.updateMessage(message);
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -67,6 +69,7 @@ public class MessageServiceImpl implements IMessageService {
             iMessageDao.updateMessageState(message,n,judge);
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
