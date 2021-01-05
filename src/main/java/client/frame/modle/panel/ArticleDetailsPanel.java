@@ -196,14 +196,15 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
                 writeCommentPane.setText("");
 
                 commentListPanel.removeAll();
+                commentListPanel.setVisible(false);
                 commentListPanel = new JPanel(new GridLayout(commentArray.size(),1));
                 commentListPanel.setPreferredSize(new Dimension(1200,commentArray.size() * 105));
                 for (Comment comments : commentArray) {
-                    System.out.println("kaisl");
                     System.out.println(comments);
                     ArticleDetailsCommentPanel articleDetailsCommentPanel = new ArticleDetailsCommentPanel(comments);
                     commentListPanel.add(articleDetailsCommentPanel);
                 }
+                commentListPanel.setVisible(true);
                 commentListPanel.repaint();
                 updateUI();
                 articleDetailSouthPanel.add(commentListPanel,BorderLayout.CENTER);
@@ -237,7 +238,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         }
         articleDetailSouthPanel.add(commentListPanel,BorderLayout.CENTER);
         this.add(articleDetailSouthPanel, BorderLayout.SOUTH);
-    }
+}
 
     public void initAuthor() {
         // 从根据作者的id从数据库拉去作者信息

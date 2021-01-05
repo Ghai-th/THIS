@@ -62,26 +62,23 @@ public class CommentOperate {
         }
     }
 
-
-    //////////////////////////////////
-    //修改时间
+    /**
+     * 查询所有评论数 并且插入新评论
+     */
     private void selectAllComment() {
         Comment com = comment;
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
-
         try {
             com.setCreate(timestamp);
-            System.out.println(timestamp);
         } catch (Exception e) {
             e.printStackTrace();
         }
         int num = commentService.selectAllCommentNum();
         com.setCid(String.valueOf(num + 10000));
-        System.out.println(com);
         commentService.addComment(com);
     }
-///////////////////////////////
+
     /**
      * 添加评论
      */
