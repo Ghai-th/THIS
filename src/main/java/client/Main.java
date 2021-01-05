@@ -21,7 +21,6 @@ public class Main implements IndexConf {
         jFrame.setLocationRelativeTo(null);
 
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        jFrame.setResizable(false);
         jFrame.setVisible(true);
     }
 
