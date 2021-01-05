@@ -207,19 +207,23 @@ public class WritePanel extends JPanel {
                 String content = textJTextPane.getText();
                 String uid = myUser.getUid();
                 String aid = myUser.getUid()+myUser.getArticleNum();
+                myUser.setArticleNum(myUser.getArticleNum()+1);
+
                 String cid = String.valueOf(c_type.getSelectedIndex()+1000);
                 SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Article article = new Article(aid,uid,cid,title,synopsis,content,0,0,0,null);
                 article.operate = ServerOperate.ADD_ARTICLE;
                 try {
                     ClientUtil.sendInfo(article,Article.class);
-                    article = ClientUtil.acceptInfo(Article.class);
+                    System.out.println(article.getTitle());
+                    //article = ClientUtil.acceptInfo(Article.class);
                     if (article.operate!=ServerOperate.ERROR){
                         JOptionPane.showMessageDialog(WritePanel.this,"发表成功");
                     }
-                } catch (IOException | ClassNotFoundException ex) {
+                } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+                System.out.println("出来了");
             }
         });
         south.add(start);
