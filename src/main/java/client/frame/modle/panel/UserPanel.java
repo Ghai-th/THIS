@@ -90,7 +90,7 @@ public class UserPanel extends TranslucenceJPanel {
             public void actionPerformed(ActionEvent e) {
                 index.removeAll();
                 index.setVisible(false);
-                Index.MeUser = myUser;
+                //Index.MeUser = myUser;
                 index.add(new Index(myUser));
                 index.setVisible(true);
             }

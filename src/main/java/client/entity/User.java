@@ -256,9 +256,14 @@ public class User extends Operate implements java.io.Serializable{
     }
 
     public static User copyUser(User user) {
-        return new User(user.getUid(),user.getName(),user.getLevel(),
-                user.getPassword(),user.getGender(),user.getImage(),
-                user.getFansNum(),user.getAttentionNum(),user.getVisitorNum(),
-                user.getArticleNum(),user.getSynopsis(),user.getActive(),user.getMyKey());
+        if(user==null){
+            return null;
+        }else{
+            return new User(user.getUid(),user.getName(),user.getLevel(),
+                    user.getPassword(),user.getGender(),user.getImage(),
+                    user.getFansNum(),user.getAttentionNum(),user.getVisitorNum(),
+                    user.getArticleNum(),user.getSynopsis(),user.getActive(),user.getMyKey());
+        }
+
     }
 }
