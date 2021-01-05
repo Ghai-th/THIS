@@ -67,6 +67,7 @@ public class UserOperate {
                 updateUser();
                 break;
             case ServerOperate.SELECT_USER:
+                System.out.println("一次");
                 selectUser();
                 break;
             case ServerOperate.SELECT_USERS:
