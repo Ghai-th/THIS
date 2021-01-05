@@ -95,7 +95,7 @@ public class UserPanel extends TranslucenceJPanel {
                 index.setVisible(true);
             }
         });
-        b_guanli = new JButton("返回首页");
+        b_guanli = new JButton("信息管理");
         b_guanli.setForeground(Color.black);
         b_guanli.setBackground(Color.white);
         b_guanli.setBounds(1700, 30, 160, 30);
@@ -104,7 +104,7 @@ public class UserPanel extends TranslucenceJPanel {
         b_guanli.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                //new MyInfo(myUser);
             }
         });
         up.add(b_return);
