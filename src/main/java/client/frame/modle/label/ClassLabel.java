@@ -100,6 +100,7 @@ public class ClassLabel extends JLabel {
 
             public void mouseEntered(MouseEvent e) {
                 setBackground(Color.GRAY);
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
             public void mouseExited(MouseEvent e) {

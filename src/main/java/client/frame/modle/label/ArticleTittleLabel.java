@@ -50,6 +50,7 @@ public class ArticleTittleLabel extends JLabel implements MouseListener {
 
     public void mouseEntered(MouseEvent e) {
         setForeground(Color.red);
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     public void mouseExited(MouseEvent e) {
