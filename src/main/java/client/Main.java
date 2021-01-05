@@ -15,14 +15,14 @@ public class Main implements IndexConf {
         jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        Login index = new Login(jFrame);
 //        jFrame.add(index);
-//        Index index = new Index();
-//        jFrame.add(index);
+        Index index = new Index();
+        jFrame.add(index);
 
-        User user = new User();
-        User.initUser(user);
-        Administrate administrate = new Administrate(user);
-        jFrame.add(administrate);
-        jFrame.setLocationRelativeTo(null);
+//        User user = new User();
+//        User.initUser(user);
+//        Administrate administrate = new Administrate(user);
+//        jFrame.add(administrate);
+//        jFrame.setLocationRelativeTo(null);
 
 
         jFrame.setLocationRelativeTo(null);

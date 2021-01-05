@@ -1,8 +1,6 @@
 package server.controller;
 
 import client.entity.User;
-import data.Operate;
-import server.Thread.UserSocketGather;
 import server.service.IUserService;
 import server.service.impl.UserServiceImpl;
 import server.util.ServerUtil;
@@ -15,18 +13,18 @@ public class UserOperate {
     public ServerUtil serverUtil;
     public IUserService userServiceImpl = new UserServiceImpl();
 
-    public UserOperate(User user,ServerUtil serverUtil) {
+    public UserOperate(User user, ServerUtil serverUtil) {
         this.user = user;
         this.serverUtil = serverUtil;
         selectOperate();
     }
 
-    public UserOperate(){
+    public UserOperate() {
 
     }
 
-    public void selectOperate(){
-        switch (user.operate){
+    public void selectOperate() {
+        switch (user.operate) {
             case ServerOperate.REGISTER_USER:
                 register();
                 break;
@@ -73,113 +71,114 @@ public class UserOperate {
                 selectUsers();
                 break;
             case ServerOperate.SELECT_LIMIT_USERS:
-                seleceLimitUsers();
+                selectLimitUsers();
                 break;
             case ServerOperate.SELECT_USERS_INFO:
                 selectUserInfo();
                 break;
         }
     }
+
     /**
      * 判断注册是否合法，向客户端返回用户对象
      */
-    public void register(){
-       all(1);
+    public void register() {
+        isSuccess(userServiceImpl.register(user));
     }
 
     /**
      * 判断登录是否合法，向客户端返回对象
      */
-    public void isValidUser(){
-      all(2);
+    public void isValidUser() {
+        isSuccess(userServiceImpl.isValidUser(user));
     }
 
     /**
      * 判断找回密码是否合法，向客户端返回对象
      */
-    public void isFind(){
-       all(3);
+    public void isFind() {
+        isSuccess(userServiceImpl.isFind(user));
     }
 
 
     /**
      * 增加用户信息，向客户端返回对象
      */
-    public void addUser(){
-      all(4);
+    public void addUser() {
+        isSuccess(userServiceImpl.addUser(user));
     }
 
     /**
      * 删除用户信息，向客户端返回对象
      */
-    public void deleteUser(){
-       all(5);
+    public void deleteUser() {
+        isSuccess(userServiceImpl.deleteUser(user));
     }
 
     /**
      * 更新用户等级，向客户端返回对象
      */
-    public void updateUserlevel(){
-       all(6);
+    public void updateUserlevel() {
+        isSuccess(userServiceImpl.updateUserlevel(user));
     }
 
     /**
      * 更新用户粉丝数，向客户端返回对象
      */
-    public void updateUserFansNum(){
-      all(7);
+    public void updateUserFansNum() {
+        isSuccess(userServiceImpl.updateUserFansNum(user));
     }
 
     /**
      * 更新用户关注数量，向客户端返回对象
      */
-    public void updateUserAttentionnum(){
-       all(8);
+    public void updateUserAttentionnum() {
+        isSuccess(userServiceImpl.updateUserAttentionnum(user));
     }
 
     /**
      * 更新用户访问量，向客户端返回对象
      */
-    public void updateUserVisitorNum(){
-      all(9);
+    public void updateUserVisitorNum() {
+        isSuccess(userServiceImpl.updateUserVisitorNum(user));
     }
 
     /**
      * 更新用户文章数量，向客户端返回对象
      */
-    public void updateUserArticleNum(){
-       all(10);
+    public void updateUserArticleNum() {
+        isSuccess(userServiceImpl.updateUserArticleNum(user));
     }
 
     /**
      * 更新用户最后登录时间，向客户端返回对象
      */
-    public void updateUserLastLogin(){
-       all(11);
+    public void updateUserLastLogin() {
+        isSuccess(userServiceImpl.updateUserLastLogin(user));
     }
 
     /**
      * 更新用户活跃度，向客户端返回对象
      */
-    public void updateUserActive(){
-        all(12);
+    public void updateUserActive() {
+        isSuccess(userServiceImpl.updateUserActive(user));
     }
 
     /**
      * 更新用户基本信息，向客户端返回对象
      */
-    public void updateUser(){
-       all(13);
+    public void updateUser() {
+        isSuccess(userServiceImpl.updateUser(user));
     }
 
     /**
      * 向客户端发送单个用户
      */
-    public void selectUser(){
+    public void selectUser() {
         user = userServiceImpl.selectUser(user);
-        try{
-            serverUtil.sendInfo(user,User.class);
-        }catch (IOException e) {
+        try {
+            serverUtil.sendInfo(user, User.class);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -196,7 +195,7 @@ public class UserOperate {
     /**
      * 向客户端发送所有用户信息列表
      */
-    public void selectUsers(){
+    public void selectUsers() {
         List users = userServiceImpl.selectUsers();
         try {
             serverUtil.sendInfoList(users);
@@ -208,7 +207,7 @@ public class UserOperate {
     /**
      * 向客户端发送热度前十的用户
      */
-    public void seleceLimitUsers(){
+    public void selectLimitUsers() {
         List users = userServiceImpl.selectTopLimitUsers(10);
         try {
             serverUtil.sendInfoList(users);
@@ -217,66 +216,23 @@ public class UserOperate {
         }
     }
 
-    //传x的值，操作对应函数
-    public void all(int x){
-        boolean success = false;
-        switch(x){
-            case 1:
-                success = userServiceImpl.register(user);
-                break;
-            case 2:
-                success = userServiceImpl.isValidUser(user);
-                break;
-            case 3:
-                success = userServiceImpl.isFind(user);
-                break;
-            case 4:
-                success = userServiceImpl.addUser(user);
-                break;
-            case 5:
-                success = userServiceImpl.deleteUser(user);
-                break;
-            case 6:
-                success = userServiceImpl.updateUserlevel(user);
-                break;
-            case 7:
-                success = userServiceImpl.updateUserFansNum(user);
-                break;
-            case 8:
-                success = userServiceImpl.updateUserAttentionnum(user);
-                break;
-            case 9:
-                success = userServiceImpl.updateUserVisitorNum(user);
-                break;
-            case 10:
-                success = userServiceImpl.updateUserArticleNum(user);
-                break;
-            case 11:
-                success = userServiceImpl.updateUserLastLogin(user);
-                break;
-            case 12:
-                success = userServiceImpl.updateUserActive(user);
-                break;
-            case 13:
-                success = userServiceImpl.updateUser(user);
-                break;
-        }
-        if(success){
+
+
+    public void isSuccess(boolean success) {
+        if (success) {
             try {
-                user.setOperate(ServerOperate.SUCCESS);
-                serverUtil.sendInfo(user,User.class);
+                serverUtil.sendInfo(user, User.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             user.setOperate(ServerOperate.ERROR);
             try {
-                serverUtil.sendInfo(user,User.class);
+                serverUtil.sendInfo(user, User.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
 
 }
