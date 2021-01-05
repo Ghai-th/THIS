@@ -94,14 +94,6 @@ public class Index extends JPanel implements IndexConf {
             i++;
         }
 
-//        for (int i = 1; i <= 10; i++) {
-//            person = new RankLabel(i + "  " + "这里写活跃排行需要从数据库选取", JLabel.CENTER, this);
-//            person.setOpaque(true);
-//            person.addMouseListener(person);
-//            person.setFont(new Font("宋体", Font.BOLD, 15));
-//            rankingListPerson.add(person);
-//        }
-
         JPanel rankingListArticle = new JPanel(new GridLayout(11, 1));
         rankingListArticle.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
         RankLabel article;

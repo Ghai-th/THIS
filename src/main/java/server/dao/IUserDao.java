@@ -100,4 +100,10 @@ public interface IUserDao {
      * @return 返回user的集合
      */
     List<User> selectTopLimitUser(int limit);
+
+    /**
+     * 返回用户的部分数据
+     * @return user的部分数据集合
+     */
+    List<User> selectUsersInfo();
 }

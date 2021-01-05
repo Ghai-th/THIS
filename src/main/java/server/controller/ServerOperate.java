@@ -56,6 +56,7 @@ public interface ServerOperate {
     int SELECT_USER = 200014;
     int SELECT_USERS = 200015;
     int SELECT_LIMIT_USERS = 200016;
+    int SELECT_USERS_INFO = 200017;
     /**
      * message表对应的操作
      */

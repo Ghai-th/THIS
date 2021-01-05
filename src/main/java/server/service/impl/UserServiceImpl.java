@@ -73,6 +73,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public List<User> selectUsersInfo() {
+        return dao.selectUsersInfo();
+    }
+
+    @Override
     public boolean addUser(User user) {
         return dao.addUser(user);
     }
