@@ -15,8 +15,8 @@ import java.util.List;
 
 public class CollectPanel extends JPanel {
     List<MemberCollectPanel> list = new ArrayList<MemberCollectPanel>();
-    List<Store>storeList;
     private User myUser,otherUser;
+    List<Store> storeList;
     public CollectPanel(User myUser){
         this.myUser = myUser;
         init();
@@ -30,7 +30,19 @@ public class CollectPanel extends JPanel {
     public void init(){
         this.setLayout(new FlowLayout());
         this.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-100,800));
-
+        /**
+         * 获取此用户的所有收藏信息
+         */
+        List<Store> storeList = new ArrayList<>();
+        Store store = new Store();
+        store.operate = ServerOperate.SELECT_STORE;
+        store.setUid(myUser.getUid());
+        try {
+            ClientUtil.sendInfo(store,Store.class);
+            storeList.addAll(ClientUtil.acceptList());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         /**
          * 按文章id查询获取所有收藏的文章信息
          */

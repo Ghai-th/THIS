@@ -3,17 +3,72 @@ package client.frame.modle.panel;
 import client.entity.User;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MemberMyArticlePanel extends JPanel {
-    private JLabel title;
+    private JLabel title,uid,create,renewal,visitor,like,collect;
+    String stitle,stext,suid,createTime,renewalTime,visitorNum,likeNum,collectNum;
+    private JTextArea textArea;
     private User myUser,otherUser;
     public MemberMyArticlePanel(User myUser){
         this.myUser = myUser;
+        init();
 
     }
-    public MemberMyArticlePanel(User myUser,User otherUser){
+    public MemberMyArticlePanel(User myUser,User otherUser,String stitle,String stext, String suid,String createTime,String renewalTime,String visitorNum,String likeNum,String collectNum){
+
         this.myUser = myUser;
         this.otherUser = otherUser;
+        this.stitle = stitle;
+        this.suid =suid;
+        this.createTime = createTime;
+        this.renewalTime = renewalTime;
+        this.visitorNum = visitorNum;
+        this.likeNum = likeNum;
+        this.collectNum = collectNum;
+        init();
+    }
+    public void init(){
+        this.setLayout(new BorderLayout());
+        title = new JLabel("标题：  "+stitle);
+        title .setPreferredSize(new Dimension(GetWH.getWidth()*3/5-200,25));
+        process(title);
+        MouseAdapter adapter1 = new MouseAdapter() {
+            //            @Override
+            public void mouseExited(MouseEvent e) {
+                // TODO Auto-generated method stub
+                int x;
+                title.setForeground(Color.black);
+            }
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // TODO Auto-generated method stub
+                title.setForeground(new Color(255,69,0));
+                title.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+        };
+        title.addMouseListener(adapter1);
+        this.add(title,BorderLayout.NORTH);
+        textArea = new JTextArea();
+        textArea.setLineWrap(true);
+        textArea.setEditable(false);
+        textArea.setFont(new Font("宋体",Font.PLAIN,20));
+        textArea.append("概述：  "+stext);
+        textArea.setBorder(BorderFactory.createMatteBorder(1,0,1,0,Color.LIGHT_GRAY));
+        this.add(textArea,BorderLayout.CENTER);
+
+    }
+    public void process(JLabel jLabel){
+        jLabel.setFont(new Font("宋体,",Font.PLAIN,20));
+
     }
 
 }
