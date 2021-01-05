@@ -50,22 +50,6 @@ public class UserDaoImpl implements IUserDao {
 
     }
 
-    @Override
-    public List<User> selectTopLimitUser(int limit) {
-        try {
-            List<User> users = new ArrayList<User>();
-            String sql = "select user.* from user order by level desc limit " + limit;
-            connection = DBUtil.getConnection();
-            statement = DBUtil.getStatement(connection);
-            users = DBUtil.executeGetMoreData(statement,sql,User.class);
-            return users;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            DBUtil.closeResources(connection,statement);
-        }
-    }
 
     @Override
     public boolean deleteUser(User user) {

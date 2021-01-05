@@ -6,6 +6,7 @@ import client.entity.User;
 import java.util.List;
 
 public interface IUserDao {
+
     /**
      * 注册成功增加User用户
      * @param user 用户
@@ -94,12 +95,7 @@ public interface IUserDao {
      */
     List<User> selectUsers();
 
-    /**
-     * 返回等级排名前十的用户
-     * @param limit 需要十名
-     * @return 返回user的集合
-     */
-    List<User> selectTopLimitUser(int limit);
+
 
     /**
      * 返回用户的部分数据

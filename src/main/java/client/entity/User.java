@@ -48,10 +48,11 @@ public class User extends Operate implements java.io.Serializable{
         this.active = active;
         this.mykey = mykey;
     }
-    public User(String uid,Integer level,Integer gender, Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum,
-                String synopsis, Date create,Date lastlogin,Integer active,String mykey) {
+    public User(String uid,String name,Integer level,Integer gender, Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum,
+                 Date create,Date lastlogin,Integer active,String synopsis) {
         super();
         this.uid = uid;
+        this.name = name;
         this.level = level;
         this.gender = gender;
         this.fansNum = fansNum;
@@ -60,9 +61,8 @@ public class User extends Operate implements java.io.Serializable{
         this.articleNum = articleNum;
         this.create = new Date();
         this.lastlogin = new Date();
-        this.synopsis = synopsis;
         this.active = active;
-        this.mykey = mykey;
+        this.synopsis = synopsis;
     }
 
     public User(String uid,String password){
