@@ -4,10 +4,7 @@ import client.entity.Article;
 import server.dao.IArticleDao;
 import server.util.DBUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,7 @@ public class ArticleDaoImpl implements IArticleDao {
     private Statement statement = null;
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
     @Override
     public boolean addArticle(Article article) {
         try {
@@ -85,7 +83,7 @@ public class ArticleDaoImpl implements IArticleDao {
     @Override
     public Article selectArticleByAid(String aid) {
         try {
-            String sql = "select * from article where aid = " + aid;
+            String sql = "select * from article where aid = '" + aid + "'";
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
             return DBUtil.executeGetData(statement, sql, Article.class);
@@ -100,7 +98,7 @@ public class ArticleDaoImpl implements IArticleDao {
     @Override
     public List<Article> selectArticleByCid(String cid) {
         try {
-            String sql = "select * from article where cid = " + cid;
+            String sql = "select * from article where cid = '" + cid + "'";
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
             return  DBUtil.executeGetMoreData(statement,sql,Article.class);
@@ -130,7 +128,7 @@ public class ArticleDaoImpl implements IArticleDao {
     @Override
     public List<Article> selectArticleByUid(String uid) {
         try {
-            String sql = "select * from article where uid =" + uid ;
+            String sql = "select * from article where uid = '" + uid + "'" ;
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
             return DBUtil.executeGetMoreData(statement,sql,Article.class);
@@ -176,5 +174,23 @@ public class ArticleDaoImpl implements IArticleDao {
         }
     }
 
-
+    @Override
+    public int selectAllArticleNum(String uid) {
+        int integer = 0;
+        try {
+            connection = DBUtil.getConnection();
+            String sql = "select count(*) num from article";
+            statement = DBUtil.getStatement(connection);
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                integer = resultSet.getInt("num");
+            }
+            return integer;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeResources(connection, statement,resultSet);
+        }
+        return 0;
+    }
 }

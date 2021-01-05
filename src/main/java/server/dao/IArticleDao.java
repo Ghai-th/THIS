@@ -71,4 +71,11 @@ public interface IArticleDao {
      */
     List<Article> selectTopLimitArticleByCid(String cid, int limit);
 
+    /**
+     * 统计某用户的文章数量
+     * @param uid 用户id
+     * @return 返回数量
+     */
+    int selectAllArticleNum(String uid);
+
 }
