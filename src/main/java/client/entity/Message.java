@@ -82,9 +82,9 @@ public class Message extends Operate implements java.io.Serializable{
 
     public void setSendNotice(String sendNotice){this.sendNotice = sendNotice;}
 
-    public String getAccpetNotice(){return acceptNotice;}
+    public String getAcceptNotice(){return acceptNotice;}
 
-    public void setAccpetNotice(String accpetNotice){this.acceptNotice = accpetNotice;}
+    public void setAcceptNotice(String accpetNotice){this.acceptNotice = accpetNotice;}
 
     @Override
     public String toString() {
