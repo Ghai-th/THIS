@@ -76,6 +76,7 @@ public class User extends Operate implements java.io.Serializable{
     }
 
     public static void initUser(User user) {
+        user.setUid("u123456");
         user.setArticleNum(1);
         user.setAttentionNum(1);
         user.setFansNum(1);
