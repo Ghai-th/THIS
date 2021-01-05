@@ -94,7 +94,12 @@ public class Administrate extends JPanel implements IndexConf {
         deleteComment = new JLabel("删除评论");
         deleteComment.setFont(new Font("宋体", Font.BOLD, 20));
 
-        table = new JTable();
+        table = new JTable(){
+            public boolean isCellEditable(int rowIndex, int ColIndex){
+                return false;
+            }
+        } ;
+
         userTable = new UserTable(table);
         table.setPreferredSize(new Dimension(1900, ((UserTable) userTable).userLength * 30));
         mainPane =  new JScrollPane(
@@ -208,7 +213,11 @@ public class Administrate extends JPanel implements IndexConf {
                     functionJPanel.add(deleteUser);
 
                     userJpanel.removeAll();
-                    table = new JTable();
+                    table = new JTable(){
+                        public boolean isCellEditable(int rowIndex, int ColIndex){
+                            return false;
+                        }
+                    } ;
                     userTable = new UserTable(table);
                     table.setPreferredSize(new Dimension(1900,((UserTable) userTable).userLength * 30));
                     mainPane = new JScrollPane(
@@ -226,7 +235,11 @@ public class Administrate extends JPanel implements IndexConf {
                     functionJPanel.add(reportDetail);
 
                     articleJpanel.removeAll();
-                    table = new JTable();
+                    table = new JTable(){
+                        public boolean isCellEditable(int rowIndex, int ColIndex){
+                            return false;
+                        }
+                    } ;
                     articleTable = new ArticleTable(table);
                     table.setPreferredSize(new Dimension(1900,2000));
                     mainPane =  new JScrollPane(
@@ -242,7 +255,11 @@ public class Administrate extends JPanel implements IndexConf {
                     functionJPanel.add(deleteComment);
 
                     commentJpanel.removeAll();
-                    table = new JTable();
+                    table = new JTable(){
+                        public boolean isCellEditable(int rowIndex, int ColIndex){
+                            return false;
+                        }
+                    } ;
                     commentTable = new CommentTable(table);
                     table.setPreferredSize(new Dimension(1900,2000));
                     mainPane =  new JScrollPane(
