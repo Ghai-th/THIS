@@ -258,6 +258,23 @@ public class UserDaoImpl implements IUserDao {
             DBUtil.closeResources(connection,statement);
         }
         return null;
-
     }
+
+    @Override
+    public List<User> selectUsersInfo() {
+        String sql = "select uid,name,level,gender,fansnum,attentionnum,visitornum,articlenum,'create',lastlogin,active,synopsis from user";
+        try {
+            connection = DBUtil.getConnection();
+            statement = connection.createStatement();
+            users = DBUtil.executeGetMoreData(statement,sql,User.class);
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeResources(connection,statement);
+        }
+        return null;
+    }
+
+
 }

@@ -151,6 +151,7 @@ public class ArticleOperate {
      * 向客户端发送 某个用户的全部的文章
      */
     public void selectArticleByUid() {
+        System.out.println(article.getUid());
         List articles = articleService.selectArticleByUid(article.getUid());
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_BY_UID;
         try {

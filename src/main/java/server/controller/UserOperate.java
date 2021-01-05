@@ -67,7 +67,6 @@ public class UserOperate {
                 updateUser();
                 break;
             case ServerOperate.SELECT_USER:
-                System.out.println("一次");
                 selectUser();
                 break;
             case ServerOperate.SELECT_USERS:
@@ -75,6 +74,9 @@ public class UserOperate {
                 break;
             case ServerOperate.SELECT_LIMIT_USERS:
                 seleceLimitUsers();
+                break;
+            case ServerOperate.SELECT_USERS_INFO:
+                selectUserInfo();
                 break;
         }
     }
@@ -178,6 +180,15 @@ public class UserOperate {
         try{
             serverUtil.sendInfo(user,User.class);
         }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void selectUserInfo() {
+        List users = userServiceImpl.selectUsersInfo();
+        try {
+            serverUtil.sendInfoList(users);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
