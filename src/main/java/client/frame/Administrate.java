@@ -241,7 +241,7 @@ public class Administrate extends JPanel implements IndexConf {
                         }
                     } ;
                     articleTable = new ArticleTable(table);
-                    table.setPreferredSize(new Dimension(1900,2000));
+                    table.setPreferredSize(new Dimension(1900,((ArticleTable) articleTable).articleLength * 30));
                     mainPane =  new JScrollPane(
                             table,
                             ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,

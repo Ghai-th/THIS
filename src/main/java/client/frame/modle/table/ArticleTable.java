@@ -16,13 +16,14 @@ import java.util.ArrayList;
 public class ArticleTable extends JTable {
     public JTable table;
     public DefaultTableModel tableModel;
+    public int articleLength;
 
     public ArticleTable(JTable table){
         this.table = table;
-        init();
+        articleLength = init();
     }
 
-    private void init() {
+    private int init() {
         tableModel = (DefaultTableModel) table.getModel();
         tableModel.addColumn("标题");
         tableModel.addColumn("文章id");
@@ -56,7 +57,7 @@ public class ArticleTable extends JTable {
         //从数据库拉取文章数据，放入表格
         ArrayList<Article> articleList = new ArrayList<>();
         Article articl = new Article();
-        articl.operate = ServerOperate.SELECT_USERS_INFO;
+        articl.operate = ServerOperate.SELECT_ARTICLE_INFO;
         try {
             ClientUtil.sendInfo(articl, Article.class);
             articleList.addAll(ClientUtil.acceptList());
@@ -81,6 +82,6 @@ public class ArticleTable extends JTable {
         table.setFont(new Font("宋体", Font.PLAIN, 18));
         table.setRowHeight(30);
 
-
+        return articleList.size();
     }
 }

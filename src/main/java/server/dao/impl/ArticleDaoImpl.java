@@ -1,6 +1,7 @@
 package server.dao.impl;
 
 import client.entity.Article;
+import client.entity.User;
 import server.dao.IArticleDao;
 import server.util.DBUtil;
 
@@ -15,6 +16,7 @@ public class ArticleDaoImpl implements IArticleDao {
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+    public List<Article> articles;
     @Override
     public boolean addArticle(Article article) {
         try {
@@ -197,16 +199,17 @@ public class ArticleDaoImpl implements IArticleDao {
     @Override
     public List<Article> selectArticlesInfo() {
         try {
-            String sql = "select title,aid,uid,cid,'create','renewal',visitornum,likenum,collectnum  from article";
+            String sql = "select title,aid,uid,cid,`create`,renewal,visitornum,likenum,collectnum from article";
+
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
-            return  DBUtil.executeGetMoreData(statement,sql,Article.class);
+            articles = DBUtil.executeGetSomeArticleData(statement,sql,Article.class);
+            return articles;
         } catch (SQLException e) {
             e.printStackTrace();
             return  null;
         }finally {
             DBUtil.closeResources(connection,statement);
         }
-
     }
 }

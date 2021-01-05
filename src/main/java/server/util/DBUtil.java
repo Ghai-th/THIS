@@ -1,5 +1,7 @@
 package server.util;
 
+import client.entity.Article;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.Field;
@@ -224,7 +226,42 @@ public class DBUtil {
                         continue;
                     }
                     field.setAccessible(true);
-                    System.out.println(field.getName());
+                    field.set(t, set.getObject(field.getName()));
+                }
+                list.add(t);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static <T> List<T> executeGetSomeArticleData(Statement statement, String sql, Class<T> articleClass) {
+        List<T> list = new ArrayList<T>();
+        try {
+            Field[] fields = articleClass.getDeclaredFields();
+            ResultSet set = statement.executeQuery(sql);
+            while (set.next()) {
+                T t = articleClass.newInstance();
+                for (int i = 0; i < fields.length; i++) {
+                    Field field = fields[i];
+                    if (field.getName().equals("operate")) {
+                        continue;
+                    }
+                    if (field.getName().equals("serialVersionUID")) {
+                        continue;
+                    }
+                    if (field.getName().equals("synopsis")) {
+                        continue;
+                    }
+                    if (field.getName().equals("text")) {
+                        continue;
+                    }
+                    if (field.getName().equals("image")) {
+                        continue;
+                    }
+                    field.setAccessible(true);
                     field.set(t, set.getObject(field.getName()));
                 }
                 list.add(t);
