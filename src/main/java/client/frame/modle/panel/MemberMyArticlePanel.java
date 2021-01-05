@@ -64,6 +64,9 @@ public class MemberMyArticlePanel extends JPanel {
         textArea.append("概述：  "+stext);
         textArea.setBorder(BorderFactory.createMatteBorder(1,0,1,0,Color.LIGHT_GRAY));
         this.add(textArea,BorderLayout.CENTER);
+        JPanel down = new JPanel();
+        uid = new JLabel("作者： "+suid);
+
 
     }
     public void process(JLabel jLabel){
