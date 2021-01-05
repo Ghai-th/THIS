@@ -29,7 +29,7 @@ public class AllPanel extends JPanel{
         this.commentList = commentList;
         this.storeList = storeList;
         this.articleList = articleList;
-        this.myUser = User.copyUser(myUser);
+        this.myUser = myUser;
         this.otherUser = otherUser;
         this.index = index;
         init();
