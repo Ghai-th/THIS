@@ -6,10 +6,7 @@ import client.util.ClientUtil;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -35,7 +32,7 @@ public class CommentTable extends JTable {
         table.getTableHeader().setReorderingAllowed(false); // 不可交换顺序
         table.getTableHeader().setResizingAllowed(false); // 不可拉动表格
 
-        int[] length = {160, 160, 160, 160, 500};		//表格的列宽
+        int[] length = {120, 120, 120, 160, 550};		//表格的列宽
 
         //获取表格的 列 模型
         TableColumnModel model = table.getColumnModel();
@@ -49,8 +46,6 @@ public class CommentTable extends JTable {
         JTableHeader tabHeader = table.getTableHeader();					//获取表头
         tabHeader.setFont(new Font("宋体", Font.BOLD, 18));
 
-
-///////////////////////////////////////////
         //从数据库拉取评论数据，放入表格
         ArrayList<Comment> commentList = new ArrayList<>();
         Comment comment = new Comment();
@@ -74,6 +69,10 @@ public class CommentTable extends JTable {
         }
         table.setFont(new Font("宋体", Font.PLAIN, 18));
         table.setRowHeight(30);
+
+        DefaultTableCellRenderer r   = new DefaultTableCellRenderer();
+        r.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, r);
 
         return commentList.size();
     }
