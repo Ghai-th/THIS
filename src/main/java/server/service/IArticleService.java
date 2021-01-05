@@ -77,4 +77,9 @@ public interface IArticleService {
      */
     int selectAllArticleNum(String uid);
 
+    /**
+     * 返回文章的部分数据
+     */
+    List<Article> selectArticlesInfo();
+
 }

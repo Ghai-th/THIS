@@ -193,4 +193,20 @@ public class ArticleDaoImpl implements IArticleDao {
         }
         return 0;
     }
+
+    @Override
+    public List<Article> selectArticlesInfo() {
+        try {
+            String sql = "select title,aid,uid,cid,'create','renewal',visitornum,likenum,collectnum  from article";
+            connection = DBUtil.getConnection();
+            statement = DBUtil.getStatement(connection);
+            return  DBUtil.executeGetMoreData(statement,sql,Article.class);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return  null;
+        }finally {
+            DBUtil.closeResources(connection,statement);
+        }
+
+    }
 }

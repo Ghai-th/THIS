@@ -67,4 +67,9 @@ public class ArticleServiceImpl implements IArticleService {
     public int selectAllArticleNum(String uid) {
         return articleDao.selectAllArticleNum(uid);
     }
+
+    @Override
+    public List<Article> selectArticlesInfo() {
+        return articleDao.selectArticlesInfo();
+    }
 }

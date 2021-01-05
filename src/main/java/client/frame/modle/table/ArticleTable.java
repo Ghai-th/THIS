@@ -1,11 +1,17 @@
 package client.frame.modle.table;
 
+import client.entity.Article;
+import client.entity.User;
+import client.util.ClientUtil;
+import server.controller.ServerOperate;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ArticleTable extends JTable {
     public JTable table;
@@ -44,5 +50,21 @@ public class ArticleTable extends JTable {
 
         JTableHeader tabHeader = table.getTableHeader();					//获取表头
         tabHeader.setFont(new Font("宋体", Font.BOLD, 18));
+
+
+        //////////////////////////////
+        //从数据库拉取用户数据，放入表格
+        ArrayList<User> userList = new ArrayList<>();
+        Article article = new Article();
+        article.operate = ServerOperate.SELECT_USERS_INFO  ;
+        try {
+            ClientUtil.sendInfo(article, User.class);
+            userList.addAll(ClientUtil.acceptList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for(User userTop : userList) {
+            System.out.println(userTop);
+        }
     }
 }

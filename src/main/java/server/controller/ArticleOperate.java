@@ -59,8 +59,13 @@ public class ArticleOperate {
             case ServerOperate.GET_CLASS_HOT_ARTICLE_TOP_EIGHT:
                 selectTopLimitArticleByCid();
                 break;
+            case ServerOperate.SELECT_ARTICLE_INFO:
+                selectArticleInfo();
+                break;
         }
     }
+
+
 
 
     /**
@@ -182,7 +187,21 @@ public class ArticleOperate {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+
+
+        }
+        /**
+         * 返回文章的部分数据
+         */
+        private void selectArticleInfo() {
+            List articles = articleService.selectArticlesInfo();
+            ((Article)articles.get(0)).operate = ServerOperate.SELECT_ARTICLE_INFO;
+            try{
+                serverUtil.sendInfoList(articles);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
 
     public Article getArticle() {
         return article;
