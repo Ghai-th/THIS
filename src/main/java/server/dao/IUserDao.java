@@ -1,5 +1,6 @@
 package server.dao;
 
+import client.entity.Article;
 import client.entity.User;
 
 import java.util.List;
@@ -79,6 +80,13 @@ public interface IUserDao {
      * 返回该用户
      */
     User selectUser(User user);
+
+    /**
+     * 查询全部用户中活跃度排名前十的用户
+     * @param limit 查询条数
+     * @return 用户列表
+     */
+    List<User> selectTopLimitUsers(int limit);
 
     /**
      * 返回所有用户user的集合

@@ -18,6 +18,8 @@ public class CommentDaoImpl implements ICommentDao {
 
     public void addComment(Comment comment) {
         //向数据库添加评论
+        System.out.println("tianjia");
+        System.out.println(comment);
         try {
             conn = DBUtil.getConnection();
             String sql = "insert into comment values ('" + comment.getCid() + "' ,'" + comment.getUid() + "', '" + comment.getAid() + "' , '" + comment.getText() + "' , '" + comment.getCreate() + "')";

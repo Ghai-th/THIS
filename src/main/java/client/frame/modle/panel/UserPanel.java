@@ -1,6 +1,7 @@
 package client.frame.modle.panel;
 
 import client.entity.User;
+import client.frame.Index;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -15,6 +16,7 @@ public class UserPanel extends TranslucenceJPanel {
     private JButton b_return,b_guanli;
     public int anum,bnum,cnum,dnum;
     public TranslucenceJPanel Big;
+    public static boolean returnall = false;
     TestPanel testPanel;
     JScrollPane jScrollPane;
     WritePanel writePanel ;
@@ -23,6 +25,8 @@ public class UserPanel extends TranslucenceJPanel {
     JLabel imageJLabelone,imageJLabeltwo,imageJLabelthree,imageJLabelfour;
     JPanel imageJPanelone,imageJPaneltwo,imageJPanelthree,imageJPanelfour;
     User myUser,otherUser;
+    AllPanel allPanel;
+    public Index index;
 
     public UserPanel() {
         setBounds(0,0,1920,1080);
@@ -34,9 +38,11 @@ public class UserPanel extends TranslucenceJPanel {
         setBounds(0,0,1920,1080);
         init();
     }
-    public UserPanel(User myUser,User otherUser){
+    public UserPanel(User myUser,User otherUser,Index index,AllPanel allPanel){
         this.myUser = myUser;
         this.otherUser = otherUser;
+        this.index = index;
+        this.allPanel = allPanel;
         setBounds(0,0,1920,1080);
         init();
     }
@@ -65,15 +71,25 @@ public class UserPanel extends TranslucenceJPanel {
         b_return.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                removeAll();
+                index.removeAll();
+                index.setVisible(false);
+                Index.MeUser = myUser;
+                index.add(new Index(myUser));
+                index.setVisible(true);
             }
         });
-        b_guanli = new JButton("管理个人信息");
+        b_guanli = new JButton("返回首页");
         b_guanli.setForeground(Color.black);
         b_guanli.setBackground(Color.white);
         b_guanli.setBounds(1700, 30, 160, 30);
         b_guanli.setFont(new Font("宋体",Font.PLAIN,15));
         up.add(userId);
+        b_guanli.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
         up.add(b_return);
         up.add(b_guanli);
         this.add(up,BorderLayout.NORTH);

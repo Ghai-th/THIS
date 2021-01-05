@@ -138,7 +138,7 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                     index.add(new Login(index));
                 } else {
                     index.removeAll();
-                    index.add(new AllPanel(Index.MeUser));
+                    index.add(new AllPanel(Index.MeUser,null,index));
                     index.updateUI();
                     index.repaint();
                 }

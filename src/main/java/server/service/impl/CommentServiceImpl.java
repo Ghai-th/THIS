@@ -14,12 +14,17 @@ public class CommentServiceImpl implements ICommentService {
     @Override
     public boolean addComment(Comment comment) {
         //某人评论
+        /**
+         * 判断评论人是否已经评论
+         */
         List<Comment> commentList = commentDao.queryAllCommentByAid(comment.getAid());
-        for(Comment demo : commentList) {
-            if(demo.getUid().equals(comment.getUid())){
-                return false;
-            }
-        }
+//        for(Comment demo : commentList) {
+//            System.out.println(demo);
+//            if(demo.getUid().equals(comment.getUid())){
+//                System.out.println("相同tui chu le");
+//                return false;
+//            }
+//        }
         commentDao.addComment(comment);
         return true;
     }
