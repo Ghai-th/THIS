@@ -2,6 +2,7 @@ package client.frame.modle.panel;
 
 import client.conf.IndexConf;
 import client.entity.Article;
+import client.entity.Comment;
 import client.entity.User;
 import client.frame.Index;
 import client.frame.Login;
@@ -13,7 +14,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class NavigationBarPanel extends JPanel implements IndexConf {
 
@@ -138,7 +141,22 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                     index.add(new Login(index));
                 } else {
                     index.removeAll();
-                    index.add(new AllPanel(Index.MeUser,null,index));
+                    try {
+                        Comment comment = new Comment(null,Index.MeUser.getUid(),null,null);
+                        comment.setOperate(ServerOperate.QUERY_ALL_COMMENT_BY_UID);
+                        ClientUtil.sendInfo(comment,Comment.class);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    java.util.List<Comment> commentList = null;
+                    try {
+                        commentList= (List) ClientUtil.acceptList();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (ClassNotFoundException ex) {
+                        ex.printStackTrace();
+                    }
+                    index.add(new AllPanel(Index.MeUser,null,index,commentList,null,null));
                     index.updateUI();
                     index.repaint();
                 }

@@ -24,7 +24,7 @@ public class MessageDaoImpl implements IMessageDao {
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(message.getTime()));
         preparedStatement.setString(5,message.getState());
         preparedStatement.setString(6,"1");
-        preparedStatement.setString(7,message.getAccpetNotice());
+        preparedStatement.setString(7,message.getAcceptNotice());
         System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(message.getTime()));
         preparedStatement.executeUpdate();
         preparedStatement.close();

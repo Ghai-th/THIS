@@ -30,6 +30,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
     public JPanel commentListPanel;
     public JPanel borderLimit;
     public Comment comment;
+    private JLabel reportLabel = null;
 
     public void init() {
         this.setLayout(new BorderLayout());
@@ -45,6 +46,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
 
         final JLabel authorNameLabel, writeTimeLabel, viewNumLabel, collectionLabel, classLabel;
 
+
         articleDetailNorthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         articleDetailNorthPanel.setPreferredSize(new Dimension(1200, 150));
         articleDetailNorthPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
@@ -55,6 +57,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         articleTittle.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         articleDetailNorthPanel.add(articleTittle);
 
+        reportLabel = new JLabel("举报");
         authorNameLabel = new JLabel(author.getName());
         writeTimeLabel = new JLabel(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(article.getCreate()));
         viewNumLabel = new JLabel(String.valueOf(article.getVisitorNum()));
@@ -66,6 +69,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         initLabel(viewNumLabel);
         initLabel(collectionLabel);
         initLabel(classLabel);
+        initLabel(reportLabel);
 
         writeTimeLabel.setPreferredSize(new Dimension(240, 50));
         authorNameLabel.setFont(new Font("宋体", Font.BOLD, 22));
@@ -89,6 +93,25 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
                 super.mouseExited(e);
             }
         });
+        reportLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ///////  举报文章对应的事件
+                super.mouseClicked(e);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                reportLabel.setBackground(new Color(255, 77, 77));
+                super.mouseEntered(e);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                reportLabel.setBackground(new Color(252, 25, 68));
+                super.mouseExited(e);
+            }
+        });
 
 
         JLabel viewEyeLabel = new JLabel(new ImageIcon("src/main/resources/articleReadEyes.png"));
@@ -104,6 +127,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         articleDetailNorthPanel.add(collectionLabel);
         articleDetailNorthPanel.add(articleClassLabel);
         articleDetailNorthPanel.add(classLabel);
+        articleDetailNorthPanel.add(reportLabel);
 
         this.add(articleDetailNorthPanel, BorderLayout.NORTH);
     }
@@ -229,7 +253,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         writePanel.add(publishLabel, BorderLayout.EAST);
         articleDetailSouthPanel.add(writePanel,BorderLayout.NORTH);
 
-        commentListPanel = new JPanel(new GridLayout(commentArrayList.size(),1));
+        commentListPanel = new JPanel(new GridLayout(commentArrayList.size(),1));int x;
         commentListPanel.setPreferredSize(new Dimension(1200,commentArrayList.size() * 105));
         for (Comment comments : commentArrayList) {
             System.out.println(comments);

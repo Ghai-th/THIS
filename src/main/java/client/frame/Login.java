@@ -230,6 +230,10 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                     ClientUtil.sendInfo(user,User.class);
                     user = ClientUtil.acceptInfo(User.class);
                     if(user.operate != ServerOperate.ERROR){
+                        user.setOperate(ServerOperate.SELECT_USER);
+                        ClientUtil.sendInfo(user,User.class);
+                        user = ClientUtil.acceptInfo(User.class);
+                        user.setPassword(new String(change1JPasswordFiled.getPassword()));
                         user.setOperate(ServerOperate.UPDATE_USER);
                         ClientUtil.sendInfo(user,User.class);
                         user = ClientUtil.acceptInfo(User.class);

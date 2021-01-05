@@ -42,13 +42,16 @@ public class ClassLabel extends JLabel {
                 switch (getText()) {
                     case "收藏":
                         System.out.println("进入收藏");
-                        break;
+                        ///// 连接个人中心
+                        return;
                     case "消息":
                         System.out.println("进入消息");
-                        break;
+                        ///// 写写消息界面
+                        return;
                     case "发表文章":
                         System.out.println("创作界面");
-                        break;
+                        ///// 连接创作界面
+                        return;
                     case "C语言":
                         initData("1000");
                         break;
