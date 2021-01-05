@@ -14,6 +14,7 @@ public class Administrate extends JPanel implements IndexConf {
     public JPanel northPanel;
     public JPanel centerPanel;
     public JLabel exitLable;
+    public JLabel deleteUser;
     public JLabel welcomeLable;
     public JScrollPane mainPane;
     JTabbedPane tabbedPane;
@@ -63,14 +64,45 @@ public class Administrate extends JPanel implements IndexConf {
     }
 
     public void initCenter() {
+
+
+
+
+
+
+
+
+        JPanel deleteJpanel = new JPanel(new FlowLayout(FlowLayout.LEFT,30,10));
         tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         mainPane = new JScrollPane(
                 tabbedPane,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        deleteUser = new JLabel("删除用户");
+        deleteUser.setFont(new Font("宋体", Font.BOLD, 20));
+        deleteUser.setBorder(BorderFactory.createMatteBorder(0,0,0,0,Color.BLACK));
+        deleteJpanel.add(deleteUser);
+        deleteJpanel.setPreferredSize(new Dimension(WIDTH / 6, HIGH * 53 / 1050));
+
+        deleteUser.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                exitLable.setForeground(Color.RED);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exitLable.setForeground(Color.BLACK);
+            }
+            @Override
+            public void mouseClicked(MouseEvent e){
+                System.out.println("删除用户");
+            }
+        });
 
         centerPanel = new JPanel(new BorderLayout());
         centerPanel.add(mainPane, BorderLayout.CENTER);
+        centerPanel.add(deleteJpanel, BorderLayout.SOUTH);
+
         this.add(centerPanel, BorderLayout.CENTER);
     }
 
