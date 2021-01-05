@@ -84,6 +84,7 @@ public interface ServerOperate {
      */
     int ADD_STORE = 700001;
     int DELETE_STORE = 700002;
+    int SELECT_STORE = 700003;
 
     /**
      * report表对应的操作

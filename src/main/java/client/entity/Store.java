@@ -53,4 +53,6 @@ public class Store extends Operate implements java.io.Serializable{
                 ", time=" + time +
                 '}';
     }
+
+
 }

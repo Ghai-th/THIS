@@ -477,5 +477,4 @@ public class UserPanel extends TranslucenceJPanel {
         jlabel.setFont(new Font("宋体",Font.PLAIN,30));
         return jlabel;
     }
-
 }

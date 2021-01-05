@@ -1,8 +1,6 @@
-import client.entity.Article;
-import client.entity.Attention;
-import client.entity.Message;
-import client.entity.User;
+import client.entity.*;
 import client.util.ClientUtil;
+import com.sun.org.apache.xml.internal.security.keys.storage.StorageResolverException;
 import org.junit.Test;
 import server.dao.IArticleDao;
 import server.dao.IUserDao;
@@ -10,16 +8,18 @@ import server.dao.IMessageDao;
 import server.dao.impl.ArticleDaoImpl;
 import server.dao.impl.UserDaoImpl;
 import server.service.IAttentionService;
+import server.service.IStoreService;
 import server.service.IUserService;
 import server.service.impl.AttentionServiceImpl;
+import server.service.impl.StoreServiceImpl;
 import server.service.impl.UserServiceImpl;
 
+import java.sql.Date;
 import java.util.*;
 
 import server.dao.impl.MessageDaoImpl;
 
 import java.sql.SQLException;
-import java.util.Date;
 
 
 public class TestSql {
@@ -141,6 +141,18 @@ public class TestSql {
         attention.setFansId("6666666");
         //attentionService.addAttention(attention);
         list = attentionService.selectAttention(attention);
+        System.out.println(list.size());
+    }
+    @Test
+    public void testStore(){
+        Store store = new Store();
+        store.setUid("88888");
+        store.setAid("555555");
+        store.setTime(new Date(10));
+        IStoreService storeService = new StoreServiceImpl();
+
+        List<Store> list = new ArrayList<>();
+        list .addAll(storeService.selectStore(store));
         System.out.println(list.size());
     }
 
