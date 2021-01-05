@@ -7,7 +7,8 @@ import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MyInfo extends JFrame {
     User user;
@@ -99,6 +100,17 @@ public class MyInfo extends JFrame {
         this.add(synopsisJLabel);
         cleanJButton.setBounds(160,630,120,60);
         this.add(cleanJButton);
+        cleanJButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                passwordJPasswordField.setText("");
+                nameJTextField.setText("");
+                synopsisJTextPane.setText("");
+                genderJTextField.setText("");
+                mykeyJTextField.setText("");
+            }
+        });
         okJButton.setBounds(0,0,120,60);
         okJPanel.add(okJButton);
         okJPanel.setBounds(350,630,120,60);
@@ -144,5 +156,10 @@ public class MyInfo extends JFrame {
         synopsisJTextPane.setText(user.getSynopsis());
         mykeyJTextField.setText(user.getMyKey());
     }
+    public static void main(String []args){
+        User user = new User("333","888");
+        new MyInfo(user);
+    }
+
 
 }

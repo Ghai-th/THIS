@@ -104,7 +104,7 @@ public class UserPanel extends TranslucenceJPanel {
         b_guanli.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //new MyInfo(myUser);
+                new MyInfo(myUser);
             }
         });
         up.add(b_return);
