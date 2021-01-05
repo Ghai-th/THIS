@@ -7,12 +7,11 @@ import server.service.impl.CommentServiceImpl;
 import server.util.ServerUtil;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class CommentOperate {
 
@@ -63,17 +62,18 @@ public class CommentOperate {
         }
     }
 
+
+    //////////////////////////////////
+    //修改时间
     private void selectAllComment() {
-        Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        DateFormat dateFormat = DateFormat.getDateTimeInstance();
-        System.out.println(dateFormat.format(date));
         Comment com = comment;
-        String dateString;
+        Date date = new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+
         try {
-            dateString = dateFormat.format(date);
-            com.setCreate(format.parse(dateString));
-        } catch (ParseException e) {
+            com.setCreate(timestamp);
+            System.out.println(timestamp);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         int num = commentService.selectAllCommentNum();
@@ -81,7 +81,7 @@ public class CommentOperate {
         System.out.println(com);
         commentService.addComment(com);
     }
-
+///////////////////////////////
     /**
      * 添加评论
      */

@@ -173,6 +173,9 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
             public void mouseClicked(MouseEvent e) {
                 //鼠标点击后发表 并刷新评论列表
                 Comment com = new Comment();
+                com.setCreate(new Date());
+                System.out.println(com);
+                Comment comm = new Comment();
                 ArrayList<Comment> commentArray = new ArrayList<>();
                 com.setAid(article.getAid());
                 /////////////////////////////////////////////////////////////////
@@ -180,22 +183,28 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
                 /////////////////////////////////////////////////////////////////
                 com.setText(writeCommentPane.getText());
                 com.operate = ServerOperate.SELECT_ALL_COMMENT_NUM;
+                comm.setAid(article.getAid());
+                comm.operate = ServerOperate.QUERY_ALL_COMMENT_BY_AID;
                 try {
                     ClientUtil.sendInfo(com, Comment.class);
+                    ClientUtil.sendInfo(comm, Comment.class);
                     commentArray.addAll(ClientUtil.acceptList());
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+
                 writeCommentPane.setText("");
 
                 commentListPanel.removeAll();
                 commentListPanel = new JPanel(new GridLayout(commentArray.size(),1));
                 commentListPanel.setPreferredSize(new Dimension(1200,commentArray.size() * 105));
                 for (Comment comments : commentArray) {
+                    System.out.println("kaisl");
                     System.out.println(comments);
                     ArticleDetailsCommentPanel articleDetailsCommentPanel = new ArticleDetailsCommentPanel(comments);
                     commentListPanel.add(articleDetailsCommentPanel);
                 }
+                commentListPanel.repaint();
                 updateUI();
                 articleDetailSouthPanel.add(commentListPanel,BorderLayout.CENTER);
                 borderLimit.add(articleDetailSouthPanel, BorderLayout.SOUTH);

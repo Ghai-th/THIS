@@ -67,7 +67,6 @@ public class Comment extends Operate implements java.io.Serializable{
     }
 
     public Date getCreate() {
-
         return create;
     }
 
