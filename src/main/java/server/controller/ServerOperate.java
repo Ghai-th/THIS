@@ -22,6 +22,7 @@ public interface ServerOperate {
     int QUERY_ALL_COMMENT_BY_UID = 100006;
     int QUERY_ALL_COMMENT_BY_AID = 100007;
     int SELECT_ALL_COMMENT_NUM = 100008;
+    int SELECT_COMMENT_INFO = 100009;
 
     /**
      * 文章对应操作

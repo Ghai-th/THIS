@@ -52,4 +52,10 @@ public interface ICommentDao {
      * @return 评论总数
      */
     int selectAllCommentNum();
+
+    /**
+     * 查询全部评论列表 字段有顺序的查询
+     * @return 评论列表
+     */
+    List<Comment> selectCommentInfo();
 }
