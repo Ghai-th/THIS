@@ -59,8 +59,8 @@ public class User extends Operate implements java.io.Serializable{
         this.attentionNum = attentionNum;
         this.visitorNum = visitorNum;
         this.articleNum = articleNum;
-        this.create = new Date();
-        this.lastlogin = new Date();
+        this.create = create;
+        this.lastlogin = lastlogin;
         this.active = active;
         this.synopsis = synopsis;
     }
