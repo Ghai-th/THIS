@@ -78,4 +78,9 @@ public interface IArticleDao {
      */
     int selectAllArticleNum(String uid);
 
+    /**
+     * 返回用户的部分数据
+     */
+    List<Article> selectArticlesInfo();
+
 }
