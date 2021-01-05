@@ -73,13 +73,34 @@ public class Index extends JPanel implements IndexConf {
         person = new RankLabel("用户活跃度排行", JLabel.CENTER, this);
         person.setFont(new Font("宋体", Font.BOLD, 20));
         rankingListPerson.add(person);
-        for (int i = 1; i <= 10; i++) {
-            person = new RankLabel(i + "  " + "这里写活跃排行需要从数据库选取", JLabel.CENTER, this);
+
+        //等级前十的用户
+        ArrayList<User> userTopTenArrayList = new ArrayList<>();
+        User userTopTen = new User();
+        userTopTen.operate = ServerOperate.SELECT_LIMIT_USERS;
+        try {
+            ClientUtil.sendInfo(userTopTen, User.class);
+            userTopTenArrayList.addAll(ClientUtil.acceptList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        int i = 1;
+        for(User userTop : userTopTenArrayList) {
+            person = new RankLabel(i + "    " + userTop.getName(), JLabel.CENTER, this);
             person.setOpaque(true);
             person.addMouseListener(person);
             person.setFont(new Font("宋体", Font.BOLD, 15));
             rankingListPerson.add(person);
+            i++;
         }
+
+//        for (int i = 1; i <= 10; i++) {
+//            person = new RankLabel(i + "  " + "这里写活跃排行需要从数据库选取", JLabel.CENTER, this);
+//            person.setOpaque(true);
+//            person.addMouseListener(person);
+//            person.setFont(new Font("宋体", Font.BOLD, 15));
+//            rankingListPerson.add(person);
+//        }
 
         JPanel rankingListArticle = new JPanel(new GridLayout(11, 1));
         rankingListArticle.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
@@ -98,14 +119,14 @@ public class Index extends JPanel implements IndexConf {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int i = 1;
+        int j = 1;
         for(Article articleTop : articleTopTenArrayList) {
-            article = new RankLabel(i + "    " + articleTop.getTitle(), JLabel.CENTER, this);
+            article = new RankLabel(j + "    " + articleTop.getTitle(), JLabel.CENTER, this);
             article.setOpaque(true);
             article.addMouseListener(article);
             article.setFont(new Font("宋体", Font.BOLD, 15));
             rankingListArticle.add(article);
-            i++;
+            j++;
         }
 
         westPanel.add(rankingListPerson);

@@ -1,16 +1,12 @@
 package server.controller;
 
 import client.entity.Comment;
-import data.Operate;
 import server.service.ICommentService;
 import server.service.impl.CommentServiceImpl;
 import server.util.ServerUtil;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class CommentOperate {
@@ -132,7 +128,6 @@ public class CommentOperate {
     public void clientQueryAllCommentByAid() {
         List allComment = commentService.queryAllCommentByAid(comment.getAid());
         ((Comment)allComment.get(0)).operate = ServerOperate.QUERY_ALL_COMMENT_BY_AID;
-        ArrayList l = (ArrayList) allComment;
         try {
             serverUtil.sendInfoList(allComment);
         } catch (IOException e) {

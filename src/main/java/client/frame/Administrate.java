@@ -17,7 +17,8 @@ public class Administrate extends JPanel implements IndexConf {
     public JLabel deleteUser;
     public JLabel welcomeLable;
     public JScrollPane mainPane;
-    JTabbedPane tabbedPane;
+    public JTabbedPane tabbedPane;
+    public JTable table;
 
     public Administrate(User Administrator) {
         this.setLayout(new BorderLayout());
@@ -64,8 +65,38 @@ public class Administrate extends JPanel implements IndexConf {
     }
 
     public void initCenter() {
+        tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        mainPane =  new JScrollPane(
+                table,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        mainPane.setBorder(BorderFactory.createMatteBorder(1,1,1,1,Color.RED));
+
+        JLabel userLabel = new JLabel();
+        JLabel articleLabel = new JLabel();
+        JLabel commentLabel = new JLabel();
+
+        JPanel userJpanel = new JPanel();
+        userJpanel.setLayout(new GridLayout(1,1));
+        userJpanel.add(mainPane);
 
 
+        JPanel articleJpanel = new JPanel();
+        articleJpanel.setLayout(new GridLayout(1,1));
+        articleJpanel.add(mainPane);
+
+        JPanel commentJpanel = new JPanel();
+        commentJpanel.setLayout(new GridLayout(1,1));
+        commentJpanel.add(mainPane);
+
+        userJpanel.add(userLabel);
+        articleJpanel.add(articleLabel);
+        commentJpanel.add(commentLabel);
+
+        tabbedPane.addTab("用户管理", userJpanel);
+        tabbedPane.addTab("文章管理", articleJpanel);
+        tabbedPane.addTab("评论管理", commentJpanel);
+        tabbedPane.setFont(new Font("宋体", Font.BOLD, 20));
 
 
 
@@ -73,11 +104,7 @@ public class Administrate extends JPanel implements IndexConf {
 
 
         JPanel deleteJpanel = new JPanel(new FlowLayout(FlowLayout.LEFT,30,10));
-        tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        mainPane = new JScrollPane(
-                tabbedPane,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
         deleteUser = new JLabel("删除用户");
         deleteUser.setFont(new Font("宋体", Font.BOLD, 20));
         deleteUser.setBorder(BorderFactory.createMatteBorder(0,0,0,0,Color.BLACK));
@@ -87,11 +114,11 @@ public class Administrate extends JPanel implements IndexConf {
         deleteUser.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                exitLable.setForeground(Color.RED);
+                deleteUser.setForeground(Color.RED);
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                exitLable.setForeground(Color.BLACK);
+                deleteUser.setForeground(Color.BLACK);
             }
             @Override
             public void mouseClicked(MouseEvent e){
@@ -100,7 +127,10 @@ public class Administrate extends JPanel implements IndexConf {
         });
 
         centerPanel = new JPanel(new BorderLayout());
-        centerPanel.add(mainPane, BorderLayout.CENTER);
+
+
+
+        centerPanel.add(tabbedPane, BorderLayout.CENTER);
         centerPanel.add(deleteJpanel, BorderLayout.SOUTH);
 
         this.add(centerPanel, BorderLayout.CENTER);

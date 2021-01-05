@@ -1,5 +1,6 @@
 package server.service.impl;
 
+import client.entity.Article;
 import client.entity.User;
 import server.dao.IUserDao;
 import server.dao.impl.UserDaoImpl;
@@ -65,6 +66,10 @@ public class UserServiceImpl implements IUserService {
             }
         }
         return false;
+    }
+
+    public List<User> selectTopLimitUser(int limit) {
+        return dao.selectTopLimitUser(limit);
     }
 
     @Override

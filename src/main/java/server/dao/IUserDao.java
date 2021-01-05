@@ -93,4 +93,11 @@ public interface IUserDao {
      * @return 用户user的集合
      */
     List<User> selectUsers();
+
+    /**
+     * 返回等级排名前十的用户
+     * @param limit 需要十名
+     * @return 返回user的集合
+     */
+    List<User> selectTopLimitUser(int limit);
 }

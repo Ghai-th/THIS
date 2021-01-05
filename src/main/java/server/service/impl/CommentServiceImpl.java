@@ -17,7 +17,7 @@ public class CommentServiceImpl implements ICommentService {
         /**
          * 判断评论人是否已经评论
          */
-        List<Comment> commentList = commentDao.queryAllCommentByAid(comment.getAid());
+//        List<Comment> commentList = commentDao.queryAllCommentByAid(comment.getAid());
 //        for(Comment demo : commentList) {
 //            System.out.println(demo);
 //            if(demo.getUid().equals(comment.getUid())){

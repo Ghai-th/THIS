@@ -1,5 +1,6 @@
 package server.service;
 
+import client.entity.Article;
 import client.entity.User;
 
 import java.util.List;
@@ -114,4 +115,11 @@ public interface IUserService {
      */
 
     List<User> selectUsers();
+
+    /**
+     * 返回等级排名前十的user集合
+     * @param limit 返回用户的人数
+     * @return 用户user的集合
+     */
+    List<User> selectTopLimitUser(int limit);
 }

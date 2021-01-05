@@ -15,12 +15,9 @@ public class Main implements IndexConf {
         jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        Login index = new Login(jFrame);
 //        jFrame.add(index);
-//        Index index = new Index();
-//        jFrame.add(index);
-        User user = new User();
-        User.initUser(user);
-        Administrate administrate = new Administrate(user);
-        jFrame.add(administrate);
+        Index index = new Index();
+        jFrame.add(index);
+
         jFrame.setLocationRelativeTo(null);
 
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
