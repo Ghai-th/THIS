@@ -6,7 +6,9 @@ import server.util.DBUtil;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MessageDaoImpl implements IMessageDao {
     Connection connection = null;
@@ -59,18 +61,43 @@ public class MessageDaoImpl implements IMessageDao {
         DBUtil.closeResources(connection,preparedStatement);
     }
 
+    /**
+     * 拉取接收者对应发送者具体的聊天记录
+     * @param message
+     * @return
+     * @throws SQLException
+     */
     @Override
     public List<Message> selectMessage(Message message) throws SQLException {
         List<Message> messageList;
         connection = DBUtil.getConnection();
         statement = connection.createStatement();
-        String id = message.getAcceptId();
-        String sql = "select * from message where acceptid='"+id+"'";
+        String acceptId = message.getAcceptId();
+        String sendId = message.getSendId();
+        String sql = "select * from message where acceptid='"+acceptId+"' and sendid='"+sendId+"'";
         messageList = DBUtil.executeGetMoreData(statement,sql,Message.class);
         updateMessageState(message,"0",1);
         statement.close();
         connection.close();
         return messageList;
+    }
+
+    @Override
+    public HashMap<String, String> selectMapMessage(Message message) {
+        HashMap<String,String> otherMap = new HashMap<String,String>();
+        String sql = "select * from message where acceptid='"+message.getAcceptId()+"'";
+        try {
+            connection = DBUtil.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery(sql);
+            while(set.next()){
+                otherMap.put(set.getString("sendid"),null);
+            }
+            return otherMap;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
