@@ -7,6 +7,7 @@ import server.service.impl.ArticleServiceImpl;
 import server.util.ServerUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -74,7 +75,6 @@ public class ArticleOperate {
     public void addArticle() {
         boolean success = false;
         success = articleService.addArticle(article);
-        System.out.println("服务器收到发文章");
         if (!success) {
             try {
                 serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
@@ -132,6 +132,7 @@ public class ArticleOperate {
      * 向客户端发送 分类产找的id
      */
     public void selectArticleByCid() {
+        System.out.println("cid");
         List articles = articleService.selectArticleByCid(article.getCid());
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_BY_CID;
         try {
@@ -145,9 +146,14 @@ public class ArticleOperate {
      * 向客户端发送 根据文章标题模糊查询的文章列表
      */
     public void selectArticleByTittle() {
+        System.out.println("tittle");
         List articles = articleService.selectArticleByTittle(article.getTitle());
-        System.out.println(articles.size());
-        ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_BY_TITTLE;
+        if (articles == null) {
+            articles = new ArrayList();
+            Article article = new Article();
+            article.operate = ServerOperate.NONE_ARTICLE;
+            articles.add(article);
+        }
         try {
             serverUtil.sendInfoList(articles);
         } catch (IOException e) {
@@ -159,7 +165,6 @@ public class ArticleOperate {
      * 向客户端发送 某个用户的全部的文章
      */
     public void selectArticleByUid() {
-        System.out.println(article.getUid());
         List articles = articleService.selectArticleByUid(article.getUid());
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_BY_UID;
         try {

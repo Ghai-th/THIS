@@ -91,18 +91,15 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
             @Override
             public void mouseEntered(MouseEvent e) {
                 searchLabel.setBackground(new Color(255, 142, 141));
-                super.mouseEntered(e);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 searchLabel.setBackground(new Color(188, 16, 3, 240));
-                super.mouseExited(e);
             }
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
                 ArrayList<Article> articles = new ArrayList<Article>();
                 index.mainPanel.removeAll();
                 String searchText = null;
@@ -115,6 +112,11 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                     articles.addAll(ClientUtil.acceptList());
                 } catch (Exception ex) {
                     System.out.println("不可为空");
+                }
+
+                if (articles.get(0).operate == ServerOperate.NONE_ARTICLE) {
+                    showMessage("无查询结果");
+                    return;
                 }
 
                 index.mainPanel.add(new ArticleListPanel(articles, index), BorderLayout.CENTER); /// 新建出 文章列表面板
@@ -208,4 +210,7 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         }
     }
 
+    public void showMessage(String str) {
+        JOptionPane.showMessageDialog(null,str);
+    }
 }

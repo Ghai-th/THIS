@@ -82,25 +82,6 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         authorNameLabel.setFont(new Font("宋体", Font.BOLD, 22));
         authorNameLabel.setForeground(new Color(121, 86, 102));
 
-        authorNameLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println("文章详情进入作者首页");
-                super.mouseClicked(e);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                authorNameLabel.setForeground(Color.red);
-                super.mouseEntered(e);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                authorNameLabel.setForeground(new Color(121, 86, 102));
-                super.mouseExited(e);
-            }
-        });
         reportLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -120,6 +101,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
                 super.mouseExited(e);
             }
         });
+
         authorNameLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

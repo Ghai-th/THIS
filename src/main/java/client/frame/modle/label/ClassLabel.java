@@ -118,7 +118,6 @@ public class ClassLabel extends JLabel {
             arrayList.addAll(ClientUtil.acceptList());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("classlabel");
         }
     }
 
