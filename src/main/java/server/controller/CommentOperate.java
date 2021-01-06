@@ -89,7 +89,7 @@ public class CommentOperate {
      * 删除评论
      */
     public void clientDeleteComment(){
-        commentService.addComment(comment);
+        commentService.deleteComment(comment);
     }
 
     /**
