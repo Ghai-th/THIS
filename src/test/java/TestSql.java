@@ -122,7 +122,7 @@ public class TestSql {
         Message message = new Message("2222","李四","cnm","1","1","0");
         IMessageDao iMessageDao = new MessageDaoImpl();
         if(iMessageDao.emptyMessage(message)){
-            iMessageDao.addMessage(message);
+//            iMessageDao.addMessage(message);
         }else{
             System.out.println("不为空");
             iMessageDao.updateMessage(message);
