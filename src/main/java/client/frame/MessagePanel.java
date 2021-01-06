@@ -6,22 +6,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Message extends JFrame {
+public class MessagePanel extends JPanel {
 
     public static User meUser;
     public ArrayList userList;
     private JPanel northPanel,centerPanel,southPanel;
 
-    public Message(ArrayList list) throws HeadlessException {
+    public MessagePanel(ArrayList list) throws HeadlessException {
         this.userList = list;
         init();
+        setBackground(new Color(61,61,61));
     }
 
     public void init() {
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setLayout(new BorderLayout());
-        this.setLocation(1500,200);
-        this.setSize(new Dimension(314,707));
+        this.setBounds(0,0,1920/6,864);
         initNorth();
         initCenter();
         this.setVisible(true);
@@ -37,11 +36,13 @@ public class Message extends JFrame {
         nameLabel = new JLabel(meUser.getName());
         synopsisLabel = new JLabel(meUser.getSynopsis());
         levelLabel = new JLabel(String.valueOf(meUser.getLevel()));
+        imageLabel.setForeground(Color.white);
 
         nameLabel.setFont(new Font("黑体",Font.BOLD,19));
         synopsisLabel.setFont(new Font("宋体",Font.PLAIN,14));
         synopsisLabel.setForeground(Color.gray);
         levelLabel.setFont(new Font("宋体",Font.BOLD,9));
+        nameLabel.setForeground(Color.white);
 
         imageLabel.setBounds(30,20,50,50);
         synopsisLabel.setBounds(100,60,180,20);
@@ -76,14 +77,6 @@ public class Message extends JFrame {
         this.add(centerPanel,BorderLayout.CENTER);
     }
 
-    public static void main(String[] args) {
-        meUser = User.initUser();
-        //// 直接从数据库拉
-        ArrayList userList = new ArrayList<User>();
-        for (int i = 0 ;i < 12; i++) {
-            userList.add(User.initUser());
-        }
-        new Message(userList);
-    }
-
 }
+
+

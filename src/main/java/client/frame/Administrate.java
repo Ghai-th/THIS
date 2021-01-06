@@ -59,7 +59,13 @@ public class Administrate extends JPanel implements IndexConf {
             }
             @Override
             public void mouseClicked(MouseEvent e){
-                System.out.println("退出");
+                removeAll();
+                Index index =  new Index(1);
+                index.removeAll();
+                index.add(new Login(index));
+                Administrate.this.add(index);
+                updateUI();
+                repaint();
             }
         });
 
@@ -134,6 +140,7 @@ public class Administrate extends JPanel implements IndexConf {
             @Override
             public void mouseEntered(MouseEvent e) {
                 deleteUser.setForeground(Color.RED);
+                deleteUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
             @Override
             public void mouseExited(MouseEvent e) {
@@ -149,6 +156,7 @@ public class Administrate extends JPanel implements IndexConf {
             @Override
             public void mouseEntered(MouseEvent e) {
                 deleteArticle.setForeground(Color.RED);
+                deleteArticle.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
             @Override
             public void mouseExited(MouseEvent e) {
@@ -164,6 +172,7 @@ public class Administrate extends JPanel implements IndexConf {
             @Override
             public void mouseEntered(MouseEvent e) {
                 deleteComment.setForeground(Color.RED);
+                deleteComment.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
             @Override
             public void mouseExited(MouseEvent e) {
@@ -179,6 +188,7 @@ public class Administrate extends JPanel implements IndexConf {
             @Override
             public void mouseEntered(MouseEvent e) {
                 articleDetail.setForeground(Color.RED);
+                articleDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
             @Override
             public void mouseExited(MouseEvent e) {
@@ -194,6 +204,7 @@ public class Administrate extends JPanel implements IndexConf {
             @Override
             public void mouseEntered(MouseEvent e) {
                 reportDetail.setForeground(Color.RED);
+                reportDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
             @Override
             public void mouseExited(MouseEvent e) {
@@ -233,7 +244,6 @@ public class Administrate extends JPanel implements IndexConf {
                     functionJPanel.add(deleteArticle);
                     functionJPanel.add(articleDetail);
                     functionJPanel.add(reportDetail);
-
                     articleJpanel.removeAll();
                     table = new JTable(){
                         public boolean isCellEditable(int rowIndex, int ColIndex){
@@ -241,7 +251,7 @@ public class Administrate extends JPanel implements IndexConf {
                         }
                     } ;
                     articleTable = new ArticleTable(table);
-                    table.setPreferredSize(new Dimension(1900,2000));
+                    table.setPreferredSize(new Dimension(1900,((ArticleTable) articleTable).articleLength * 30));
                     mainPane =  new JScrollPane(
                             table,
                             ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,

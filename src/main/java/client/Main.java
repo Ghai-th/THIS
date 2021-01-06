@@ -22,7 +22,7 @@ public class Main implements IndexConf {
 //        User.initUser(user);
 //        Administrate administrate = new Administrate(user);
 //        jFrame.add(administrate);
-//        jFrame.setLocationRelativeTo(null);
+        jFrame.setLocationRelativeTo(null);
 
 
         jFrame.setLocationRelativeTo(null);

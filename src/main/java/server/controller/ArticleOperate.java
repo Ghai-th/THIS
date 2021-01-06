@@ -198,7 +198,6 @@ public class ArticleOperate {
          */
         private void selectArticleInfo() {
             List articles = articleService.selectArticlesInfo();
-            ((Article)articles.get(0)).operate = ServerOperate.SELECT_ARTICLE_INFO;
             try{
                 serverUtil.sendInfoList(articles);
             }catch (IOException e){
