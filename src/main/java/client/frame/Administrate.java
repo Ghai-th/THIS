@@ -30,7 +30,7 @@ public class Administrate extends JPanel implements IndexConf {
     public JLabel exitLable;
     public JLabel signLabel;
     public JPanel northLeft, northRight;
-    public JLabel deleteUser, deleteArticle, deleteComment, articleDetail, reportDetail;
+    public JLabel deleteUser, deleteArticle, deleteComment, articleDetail, reportDetail, returnArticleTable;
     public JLabel welcomeLable;
     public JScrollPane mainPane;
     public JTabbedPane tabbedPane;
@@ -117,6 +117,8 @@ public class Administrate extends JPanel implements IndexConf {
         reportDetail.setFont(new Font("宋体", Font.BOLD, 20));
         deleteComment = new JLabel("删除评论");
         deleteComment.setFont(new Font("宋体", Font.BOLD, 20));
+        returnArticleTable = new JLabel("返回上一级");
+        returnArticleTable.setFont(new Font("宋体", Font.BOLD, 20));
 
         table = new JTable(){
             public boolean isCellEditable(int rowIndex, int ColIndex){
