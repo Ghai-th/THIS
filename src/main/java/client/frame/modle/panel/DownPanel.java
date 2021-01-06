@@ -53,6 +53,20 @@ public class DownPanel extends TranslucenceJPanel {
         up.add(a5);
 
         this.add(up,BorderLayout.NORTH);
+        a3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                Desktop desktop = Desktop.getDesktop();
+                URI uri = null; //创建URI统一资源标识符
+                try {
+                    uri = new URI("https://space.bilibili.com/176534591?from=search&seid=3910647422385211263");
+                    desktop.browse(uri); //使用默认浏览器打开超链接
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         a5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
