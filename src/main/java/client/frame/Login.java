@@ -9,12 +9,14 @@ import client.frame.modle.border.RoundBorder;
 import client.frame.modle.panel.NavigationBarPanel;
 import client.frame.modle.panel.TranslucenceJPanel;
 import server.controller.ServerOperate;
+import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.Random;
 
 public class Login extends JPanel implements ActionListener, IndexConf {
@@ -786,11 +788,17 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 user.setOperate(ServerOperate.SELECT_USER);
                 ClientUtil.sendInfo(user,User.class);
                 user = ClientUtil.acceptInfo(User.class);
-                index.removeAll();
-                index.setVisible(false);
-                Index.MeUser = user;
-                index.add(new Index(user));
-                index.setVisible(true);
+                if(user.getPassword().equals("admin")){
+                    Login.this.setVisible(false);
+                    Administrate administrate = new Administrate(user);
+                    index.add(administrate);
+                }else{
+                    index.removeAll();
+                    index.setVisible(false);
+                    Index.MeUser = user;
+                    index.add(new Index(user));
+                    index.setVisible(true);
+                }
             }else{
                 JOptionPane.showMessageDialog(Login.this,"账号或密码错误！");
                 idJTextField.setText("");
