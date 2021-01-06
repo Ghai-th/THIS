@@ -22,6 +22,10 @@ public class AttentionOperate {
         this.serverUtil = serverUtil;
         selectOperate();
     }
+
+    /**
+     * 执行操作
+     */
     public void selectOperate(){
         switch (attention.operate){
             case ServerOperate.ADD_ATTENTION :
@@ -39,6 +43,10 @@ public class AttentionOperate {
 
         }
     }
+
+    /**
+     * 增加关注
+     */
     public void addAttention(){
         boolean success = false;
         success = attentionService.addAttention(attention);
@@ -50,6 +58,10 @@ public class AttentionOperate {
             }
         }
     }
+
+    /**
+     * 取消关注
+     */
     public void deleteAttention(){
         boolean success = false;
         success = attentionService.deleteAttention(attention);
