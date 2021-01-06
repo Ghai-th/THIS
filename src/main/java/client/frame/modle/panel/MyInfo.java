@@ -3,6 +3,7 @@ package client.frame.modle.panel;
 import client.entity.User;
 import client.util.ClientUtil;
 import com.formdev.flatlaf.FlatLightLaf;
+import data.Operate;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
@@ -138,8 +139,7 @@ public class MyInfo extends JFrame {
                         ClientUtil.sendInfo(user,User.class);
                         user = ClientUtil.acceptInfo(User.class);
                         System.out.println(user.operate);
-                        if(user.operate == ServerOperate.SUCCESS){
-                            System.out.println("成功了！！！！");
+                        if(user.operate == ServerOperate.REGISTER_USER){
                             user.setOperate(ServerOperate.UPDATE_USER);
                             ClientUtil.sendInfo(user,User.class);
                             user = ClientUtil.acceptInfo(User.class);
