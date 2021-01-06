@@ -9,14 +9,11 @@ import client.frame.modle.border.RoundBorder;
 import client.frame.modle.panel.NavigationBarPanel;
 import client.frame.modle.panel.TranslucenceJPanel;
 import server.controller.ServerOperate;
-import sun.rmi.runtime.Log;
-
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.util.Random;
 
 public class Login extends JPanel implements ActionListener, IndexConf {
@@ -785,6 +782,9 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             ClientUtil.sendInfo(user,User.class);
             user = ClientUtil.acceptInfo(User.class);
             if(user.operate != ServerOperate.ERROR){
+                user.setOperate(ServerOperate.UPDATE_LAST_LOGIN);
+                ClientUtil.sendInfo(user,User.class);
+                user = ClientUtil.acceptInfo(User.class);
                 user.setOperate(ServerOperate.SELECT_USER);
                 ClientUtil.sendInfo(user,User.class);
                 user = ClientUtil.acceptInfo(User.class);
