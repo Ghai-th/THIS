@@ -6,10 +6,15 @@ import client.entity.Store;
 import client.entity.User;
 import client.frame.Index;
 import client.util.ClientUtil;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import server.controller.ServerOperate;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 import java.util.Iterator;
@@ -40,7 +45,9 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
     List<Article> articleList = null;
     public Index index;
     public static int sign = 0;
-
+    boolean state = false;//音乐的播放状态
+    Thread [] music = new Thread[30];
+    int i = 0;
     public UserPanel() {
         setBounds(0,0,1920,1080);
         init();
@@ -358,7 +365,7 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
                 //System.out.println("111");
             }
         });
-        Imageone=new ImageIcon("src/main/resources/耳机.png");
+        Imageone=new ImageIcon("src/main/resources/音乐.png");
         imageJLabelthree = new JLabel(Imageone);
         imageJPanelthree = new JPanel();
         imageJPanelthree.setOpaque(false);
@@ -367,7 +374,37 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
         imageJPanelthree.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                //播放音乐
+                music[++i] = new Thread("music"){
+                    public void run(){
+                            String filename="src/main/resources/祖海 - 好运来.mp3";
+                            try {
+                                BufferedInputStream buffer = new BufferedInputStream(new FileInputStream(filename));
+                                Player player = new Player(buffer);
+                                player.play();
+                            } catch (Exception e) {
+                                System.out.println(e);
+                            }
+                    }
+                };
+                imageJPanelthree.remove(imageJLabelthree);
+                if(state == false){
+                    Imageone = new ImageIcon("src/main/resources/开始.png");
+                    state = true;
+                    imageJLabelthree = new JLabel(Imageone);
+                    imageJPanelthree.add(imageJLabelthree);
+                    imageJPanelthree.validate();
+                    imageJPanelthree.updateUI();
+                    music[i].start();
+                } else{
+                    Imageone = new ImageIcon("src/main/resources/暂停.png");
+                    imageJLabelthree = new JLabel(Imageone);
+                    imageJPanelthree.add(imageJLabelthree);
+                    imageJPanelthree.validate();
+                    imageJPanelthree.updateUI();
+                    music[--i].stop();
+                    state = false;
+                }
             }
 
             @Override
@@ -383,7 +420,10 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
             @Override
             public void mouseEntered(MouseEvent e) {
                 imageJPanelthree.remove(imageJLabelthree);
-                Imageone = new ImageIcon("src/main/resources/耳机text.png");
+                if(state == false)
+                    Imageone = new ImageIcon("src/main/resources/暂停.png");
+                else
+                    Imageone = new ImageIcon("src/main/resources/开始.png");
                 imageJLabelthree = new JLabel(Imageone);
                 imageJPanelthree.add(imageJLabelthree);
                 imageJPanelthree.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
@@ -394,10 +434,10 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
             @Override
             public void mouseExited(MouseEvent e) {
                 imageJPanelthree.remove(imageJLabelthree);
-                Imageone = new ImageIcon("src/main/resources/耳机.png");
+                Imageone = new ImageIcon("src/main/resources/音乐.png");
                 imageJLabelthree = new JLabel(Imageone);
                 imageJPanelthree.add(imageJLabelthree);
-                imageJPanelthree.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
+                imageJPanelthree.setCursor(Cursor.getDefaultCursor());//设置鼠标移入是光标变成手指
                 imageJPanelthree.validate();
                 //System.out.println("111");
             }
