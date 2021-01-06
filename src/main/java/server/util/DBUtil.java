@@ -252,12 +252,6 @@ public class DBUtil {
                     if (field.getName().equals("serialVersionUID")) {
                         continue;
                     }
-                    if (field.getName().equals("synopsis")) {
-                        continue;
-                    }
-                    if (field.getName().equals("text")) {
-                        continue;
-                    }
                     if (field.getName().equals("image")) {
                         continue;
                     }

@@ -199,7 +199,7 @@ public class ArticleDaoImpl implements IArticleDao {
     @Override
     public List<Article> selectArticlesInfo() {
         try {
-            String sql = "select title,aid,uid,cid,`create`,renewal,visitornum,likenum,collectnum from article";
+            String sql = "select title,aid,uid,cid,`create`,renewal,visitornum,likenum,collectnum,synopsis,text from article";
 
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
