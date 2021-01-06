@@ -2,15 +2,12 @@ package client.frame.modle.panel;
 
 import client.entity.Article;
 import client.entity.Comment;
-import client.entity.User;
 import client.frame.Index;
 import client.util.ClientUtil;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,29 +30,40 @@ public class ArticleDetailPanel extends JPanel {
         initNorth();
         initCenter();
         initSouth();
+        initWestEast();
+    }
+
+    private void initWestEast() {
+
+        JPanel westJpanel, EastJpanel;
+        westJpanel = new JPanel();
+        EastJpanel = new JPanel();
+        westJpanel.setPreferredSize(new Dimension(430, 2400));
+        EastJpanel.setPreferredSize(new Dimension(430, 2400));
+        this.articleDetailPanel.add(westJpanel, BorderLayout.WEST);
+        this.articleDetailPanel.add(EastJpanel, BorderLayout.EAST);
     }
 
     public void initNorth() {
 
         JLabel authorNameLabel, writeTimeLabel, viewNumLabel, collectionLabel, classLabel;
-
-        articleDetailNorthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        articleDetailNorthPanel.setPreferredSize(new Dimension(1200, 160));
-        articleDetailNorthPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, Color.BLACK));
         JLabel articleTittle = new JLabel(article.getTitle(), JLabel.CENTER);
         articleTittle.setFont(new Font("宋体", Font.BOLD, 30));
-        articleTittle.setPreferredSize(new Dimension(1200, 100));
-        articleDetailNorthPanel.add(articleTittle);
+        articleDetailNorthPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        articleDetailNorthPanel.setPreferredSize(new Dimension(0, 160));
 
+        articleTittle.setPreferredSize(new Dimension(1850, 100));
         reportLabel = new JLabel("举报");
         authorNameLabel = new JLabel(article.getUid());
         writeTimeLabel = new JLabel(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(article.getCreate()));
         viewNumLabel = new JLabel(String.valueOf(article.getVisitorNum()));
+        articleDetailNorthPanel.add(articleTittle);
+
+        JLabel collectionIconLabel = new JLabel(new ImageIcon("src/main/resources/tobarCollectionActive.png"));
+        JLabel articleClassLabel = new JLabel(Index.classification[Integer.parseInt(article.getCid()) - 1000]);
         collectionLabel = new JLabel(String.valueOf(article.getCollectNum()));
         classLabel = new JLabel(article.getCid()); // 数据库查询
         JLabel viewEyeLabel = new JLabel(new ImageIcon("src/main/resources/articleReadEyes.png"));
-        JLabel collectionIconLabel = new JLabel(new ImageIcon("src/main/resources/tobarCollectionActive.png"));
-//        JLabel articleClassLabel = new JLabel(Index.classification[Integer.parseInt(article.getCid()) - 1000]);
 
         initLabel(authorNameLabel);
         initLabel(writeTimeLabel);
@@ -63,11 +71,10 @@ public class ArticleDetailPanel extends JPanel {
         initLabel(collectionLabel);
         initLabel(classLabel);
         initLabel(reportLabel);
-//        initLabel(articleClassLabel);
-
+        initLabel(articleClassLabel);
+        authorNameLabel.setForeground(new Color(121, 86, 102));
         writeTimeLabel.setPreferredSize(new Dimension(240, 50));
         authorNameLabel.setFont(new Font("宋体", Font.BOLD, 22));
-        authorNameLabel.setForeground(new Color(121, 86, 102));
 
         articleDetailNorthPanel.add(authorNameLabel);
         articleDetailNorthPanel.add(writeTimeLabel);
@@ -75,7 +82,7 @@ public class ArticleDetailPanel extends JPanel {
         articleDetailNorthPanel.add(viewNumLabel);
         articleDetailNorthPanel.add(collectionIconLabel);
         articleDetailNorthPanel.add(collectionLabel);
-//        articleDetailNorthPanel.add(articleClassLabel);
+        articleDetailNorthPanel.add(articleClassLabel);
         articleDetailNorthPanel.add(classLabel);
         articleDetailNorthPanel.add(reportLabel);
 
@@ -90,24 +97,24 @@ public class ArticleDetailPanel extends JPanel {
         articleDetailCenterPanel = new JPanel(new BorderLayout());
 
         textSynopsisPanel = new JPanel(new BorderLayout());
-        textSynopsisPanel.setPreferredSize(new Dimension(1200, 225));
+        textSynopsisPanel.setPreferredSize(new Dimension(1000, 225));
         textSynopsisPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         textSynopsisImageLabel = new JLabel("图片");
         textSynopsisLabel = new JLabel("简介");
         textSynopsisLabel.setText(this.article.getSynopsis());
         textSynopsisLabel.setFont(new Font("宋体",Font.PLAIN,17));
         textSynopsisLabel.setForeground(Color.gray);
-        textSynopsisImageLabel.setPreferredSize(new Dimension(400, 225));
-        textSynopsisLabel.setPreferredSize(new Dimension(800, 225));
+        textSynopsisImageLabel.setPreferredSize(new Dimension(300, 225));
+        textSynopsisLabel.setPreferredSize(new Dimension(700, 225));
         textSynopsisLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
         textSynopsisPanel.add(textSynopsisLabel, BorderLayout.WEST);
         textSynopsisPanel.add(textSynopsisImageLabel, BorderLayout.EAST);
 
         textPortPanel = new JPanel();
-        textPortPanel.setPreferredSize(new Dimension(1200, 500));
+        textPortPanel.setPreferredSize(new Dimension(1000, 500));
         textPortPane = new JTextPane();
         textPortPane.setText(this.article.getText());
-        textPortPane.setPreferredSize(new Dimension(1200, 500));
+        textPortPane.setPreferredSize(new Dimension(1000, 500));
         textPortPane.setEditable(false);
         textPortPane.setBackground(new Color(238, 238, 238));
         textPortPane.setFont(new Font("宋体", Font.BOLD, 22));
@@ -142,6 +149,11 @@ public class ArticleDetailPanel extends JPanel {
             ArticleDetailsCommentPanel articleDetailsCommentPanel = new ArticleDetailsCommentPanel(comments);
             commentListPanel.add(articleDetailsCommentPanel);
         }
+
+        JPanel seatJpanel = new JPanel();
+        seatJpanel.setPreferredSize(new Dimension(330, commentArrayList.size() * 105));
+
+        articleDetailSouthPanel.add(seatJpanel, BorderLayout.WEST);
         articleDetailSouthPanel.add(commentListPanel,BorderLayout.CENTER);
         this.articleDetailPanel.add(articleDetailSouthPanel, BorderLayout.SOUTH);
     }
