@@ -28,7 +28,22 @@ public class User extends Operate implements java.io.Serializable{
     private Integer active;
     private String mykey;
 
-    //全参数构造
+    /**
+     * 全参构造
+     * @param uid 账号id
+     * @param name 姓名
+     * @param level 等级
+     * @param password 密码
+     * @param gender 性别
+     * @param image 图像
+     * @param fansNum 粉丝数
+     * @param attentionNum 关注数
+     * @param visitorNum 浏览量
+     * @param articleNum 文章数量
+     * @param synopsis 简介
+     * @param active 活跃度
+     * @param mykey 密钥
+     */
     public User(String uid, String name, Integer level, String password, Integer gender, byte[] image,
                 Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis,
                 Integer active,String mykey) {
@@ -106,6 +121,10 @@ public class User extends Operate implements java.io.Serializable{
         super();
     }
 
+    /**
+     * 初始化User
+     * @param user 用户对象
+     */
     public static void initUser(User user) {
         user.setUid("u123456");
         user.setArticleNum(1);
@@ -268,6 +287,11 @@ public class User extends Operate implements java.io.Serializable{
                 '}';
     }
 
+    /**
+     * 复制用户
+     * @param user 传进来的用户
+     * @return 新用户
+     */
     public static User copyUser(User user) {
         if(user==null){
             return null;
