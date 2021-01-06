@@ -2,12 +2,15 @@ package client.frame.modle.panel;
 
 import client.entity.Article;
 import client.entity.Comment;
+import client.entity.User;
 import client.frame.Index;
 import client.util.ClientUtil;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,23 +50,26 @@ public class ArticleDetailPanel extends JPanel {
     public void initNorth() {
 
         JLabel authorNameLabel, writeTimeLabel, viewNumLabel, collectionLabel, classLabel;
+
         JLabel articleTittle = new JLabel(article.getTitle(), JLabel.CENTER);
         articleTittle.setFont(new Font("宋体", Font.BOLD, 30));
+        articleTittle.setPreferredSize(new Dimension(1850, 100));
         articleDetailNorthPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
         articleDetailNorthPanel.setPreferredSize(new Dimension(0, 160));
 
-        articleTittle.setPreferredSize(new Dimension(1850, 100));
-        reportLabel = new JLabel("举报");
+        articleDetailNorthPanel.add(articleTittle);
+
         authorNameLabel = new JLabel(article.getUid());
         writeTimeLabel = new JLabel(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(article.getCreate()));
         viewNumLabel = new JLabel(String.valueOf(article.getVisitorNum()));
-        articleDetailNorthPanel.add(articleTittle);
-
-        JLabel collectionIconLabel = new JLabel(new ImageIcon("src/main/resources/tobarCollectionActive.png"));
-        JLabel articleClassLabel = new JLabel(Index.classification[Integer.parseInt(article.getCid()) - 1000]);
         collectionLabel = new JLabel(String.valueOf(article.getCollectNum()));
         classLabel = new JLabel(article.getCid()); // 数据库查询
         JLabel viewEyeLabel = new JLabel(new ImageIcon("src/main/resources/articleReadEyes.png"));
+        JLabel collectionIconLabel = new JLabel(new ImageIcon("src/main/resources/tobarCollectionActive.png"));
+        JLabel articleClassLabel = new JLabel(Index.classification[Integer.parseInt(article.getCid()) - 1000]);
+
+        reportLabel = new JLabel("举报");
 
         initLabel(authorNameLabel);
         initLabel(writeTimeLabel);
@@ -72,9 +78,10 @@ public class ArticleDetailPanel extends JPanel {
         initLabel(classLabel);
         initLabel(reportLabel);
         initLabel(articleClassLabel);
-        authorNameLabel.setForeground(new Color(121, 86, 102));
+
         writeTimeLabel.setPreferredSize(new Dimension(240, 50));
         authorNameLabel.setFont(new Font("宋体", Font.BOLD, 22));
+        authorNameLabel.setForeground(new Color(121, 86, 102));
 
         articleDetailNorthPanel.add(authorNameLabel);
         articleDetailNorthPanel.add(writeTimeLabel);
