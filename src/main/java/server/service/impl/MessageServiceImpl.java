@@ -6,6 +6,7 @@ import server.dao.impl.MessageDaoImpl;
 import server.service.IMessageService;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,9 +14,9 @@ public class MessageServiceImpl implements IMessageService {
     IMessageDao iMessageDao = new MessageDaoImpl();
 
     @Override
-    public boolean addMessage(Message message) {
+    public boolean addMessage(Message message,int n) {
         try {
-            iMessageDao.addMessage(message);
+            iMessageDao.addMessage(message,n);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,12 +47,22 @@ public class MessageServiceImpl implements IMessageService {
     }
 
     @Override
+    public List<Message> selectAllMessage(Message message) throws SQLException {
+        return iMessageDao.selectAllMessage(message);
+    }
+
+    @Override
     public List<Message> selectMessage(Message message) {
         try {
             return iMessageDao.selectMessage(message);
         } catch (SQLException e) {
             return null;
         }
+    }
+
+    @Override
+    public HashMap<String, String> selectMapMessage(Message message) {
+        return iMessageDao.selectMapMessage(message);
     }
 
     @Override
@@ -102,5 +113,18 @@ public class MessageServiceImpl implements IMessageService {
                 messageList.remove(message.getState());
             }
         }
+    }
+
+    @Override
+    public boolean newMessage(Message message) throws SQLException {
+        List<Message> messageList = iMessageDao.selectAllMessage(message);
+        boolean judge = false;
+        Iterator<Message> iterator = messageList.iterator();
+        while(iterator.hasNext()){
+            if(iterator.next().getState().equals("1")){
+                judge = true;
+            }
+        }
+        return judge;
     }
 }
