@@ -71,6 +71,7 @@ class Listener<T> implements Runnable {
 
  public class ServerApplicationStart<T> {
     public ServerApplicationStart() {
+        new MessageServer().start();
         while (true) {
             ServerUtil serverUtil = null;
             try {

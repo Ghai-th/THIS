@@ -39,10 +39,10 @@ public class MessageOperate {
                 sendMessage();break;
 
             case ServerOperate.ACCEPT_MAP_MESSAGE:
-                acceptMessage();break;
+                acceptMapMessage();break;
 
             case  ServerOperate.ACCEPT_LIST_MESSAGE:
-                acceptMapMessage();break;
+                acceptMessage();break;
         }
     }
 

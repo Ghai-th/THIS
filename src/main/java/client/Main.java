@@ -4,12 +4,14 @@ import client.conf.IndexConf;
 import client.entity.User;
 import client.frame.Administrate;
 import client.frame.Index;
+import client.util.MessageClientUtil;
 
 import javax.swing.*;
 
 public class Main implements IndexConf {
 
     public static void main(String[] args) {
+        new MessageClientUtil();
 
         JFrame jFrame = new JFrame("test");
         jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);

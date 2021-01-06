@@ -19,12 +19,14 @@ public class MessageClientUtil {
 
 
     static {
-        try {
+       try {System.out.println("socket已发出");
             Properties properties = new Properties();
             properties.load(new FileInputStream(new File("db.properties")));
-            port = Integer.parseInt(properties.getProperty("server.port"));
+            port = Integer.parseInt(properties.getProperty("message.port"));
             host = properties.getProperty("message.host");
+
             socket = new Socket(host, port);
+
             outputStream = socket.getOutputStream();
             inputStream = socket.getInputStream();
             objectOutputStream = new ObjectOutputStream(outputStream);
@@ -32,6 +34,7 @@ public class MessageClientUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("socket已发出");
     }
 
     /**

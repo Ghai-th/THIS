@@ -7,22 +7,28 @@ import java.io.IOException;
 
 public class MessageServer extends  Thread{
 
-    public User user;
+    //public User user;
 
-    public MessageServer(User user) {
-        this.user = user;
+    public MessageServer() {
+
     }
 
     @Override
     public void run() {
-
         MessageServerUtil messageServerUtil;
-        try {
-            messageServerUtil = new MessageServerUtil();
-        } catch (IOException e) {
-            e.printStackTrace();
+        while (true){
+            try {
+                messageServerUtil = new MessageServerUtil();
+                System.out.println("接到socket");
+                Thread thread = new Thread(new readThread(messageServerUtil));
+                thread.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            super.run();
         }
 
-        super.run();
+
     }
 }

@@ -24,7 +24,7 @@ public class MessageServerUtil {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(new File("db.properties")));
-            port = Integer.parseInt(properties.getProperty("server.port"));
+            port = Integer.parseInt(properties.getProperty("message.port"));
             host = properties.getProperty("message.host");
             serverSocket = new ServerSocket(port);
         } catch (IOException e) {
@@ -33,6 +33,7 @@ public class MessageServerUtil {
     }
 
     public MessageServerUtil() throws IOException {
+        System.out.println("到了到了");
         socket = serverSocket.accept();
         outputStream = socket.getOutputStream();
         inputStream = socket.getInputStream();
@@ -62,5 +63,13 @@ public class MessageServerUtil {
 
     public void sendMessageList(List list) throws IOException {
         objectOutputStream.writeObject(list);
+    }
+
+    public void closeResource() throws Exception {
+        this.socket.close();
+        this.outputStream.close();
+        this.inputStream.close();
+        this.objectInputStream.close();
+        this.objectInputStream.close();
     }
 }

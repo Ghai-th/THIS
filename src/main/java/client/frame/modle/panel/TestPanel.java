@@ -5,8 +5,6 @@ import client.entity.User;
 import client.frame.Index;
 import client.util.ClientUtil;
 import client.util.MessageClientUtil;
-import com.mysql.fabric.xmlrpc.Client;
-import data.Operate;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
@@ -99,7 +97,7 @@ public class TestPanel extends JPanel {
                 Message message = new Message();
                 message.setSendId(otherUser.getUid());
                 message.setOperate(ServerOperate.ONLINE_MESSAGE);
-                /*try {
+                try {
                     MessageClientUtil.sendInfo(message);
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -109,11 +107,13 @@ public class TestPanel extends JPanel {
                 message1.setOperate(ServerOperate.ACCEPT_MAP_MESSAGE);
                 try {
                     MessageClientUtil.sendInfo(message1);
+                    System.out.println("up");
                     HashMap<String,String> userMap = MessageClientUtil.accept();
+                    System.out.println("down");
                     new ChatFrame(otherUser,myUser,userMap);
                 } catch (IOException | ClassNotFoundException ex) {
                     ex.printStackTrace();
-                }*/
+                }
                 new ChatFrame(otherUser,myUser,null);
             }
 

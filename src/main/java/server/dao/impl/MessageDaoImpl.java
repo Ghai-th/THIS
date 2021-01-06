@@ -15,11 +15,6 @@ public class MessageDaoImpl implements IMessageDao {
     Statement statement = null;
     @Override
     public void addMessage(Message message,int n) throws SQLException {
-        if(n==1){
-            updateMessageState(message,"1",0);
-        }else {
-            updateMessageState(message,"0",0);
-        }
         connection = DBUtil.getConnection();
         String sql = "insert into message values(?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -28,11 +23,16 @@ public class MessageDaoImpl implements IMessageDao {
         preparedStatement.setString(3,"#"+message.getText());
         preparedStatement.setString(4,
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(message.getTime()));
-        preparedStatement.setString(5,message.getState());
+        preparedStatement.setString(5,String.valueOf(n));
         preparedStatement.setString(6,"1");
         preparedStatement.setString(7,message.getAcceptNotice());
         System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(message.getTime()));
         preparedStatement.executeUpdate();
+        /*if(n==1){
+            updateMessageState(message,"1",0);
+        }else {
+            updateMessageState(message,"0",0);
+        }*/
         preparedStatement.close();
         connection.close();
     }

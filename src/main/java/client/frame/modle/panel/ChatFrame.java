@@ -2,9 +2,7 @@ package client.frame.modle.panel;
 
 import client.entity.Message;
 import client.entity.User;
-import client.frame.MessagePanel;
 import client.util.MessageClientUtil;
-import javafx.scene.layout.Pane;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
@@ -43,6 +41,7 @@ public class ChatFrame extends JFrame implements Runnable {
                 message.setOperate(ServerOperate.SEND_MESSAGE);
                 try {
                     MessageClientUtil.sendInfo(message);
+
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -91,7 +90,7 @@ public class ChatFrame extends JFrame implements Runnable {
         leftJPanel.add(listPanel);
         ListPanel listPanel1 = new ListPanel(acceptUser.getUid());
         leftJPanel.add(listPanel1);
-       /* Iterator iterator = userMap.entrySet().iterator();
+        /*Iterator iterator = userMap.entrySet().iterator();
         while(iterator.hasNext()){
             final Map.Entry<String,String> entry = (Map.Entry<String, String>) iterator.next();
             final ListPanel listPanel2 = new ListPanel(entry.getKey());
@@ -135,6 +134,14 @@ public class ChatFrame extends JFrame implements Runnable {
         imagJLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                Message message = new Message();
+                message.setSendId(sendUser.getUid());
+                message.setOperate(ServerOperate.WINDING_MESSAGE);
+                try {
+                    MessageClientUtil.sendInfo(message);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 dispose();
             }
 
