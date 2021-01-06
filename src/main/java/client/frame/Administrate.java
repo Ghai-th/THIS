@@ -387,7 +387,7 @@ public class Administrate extends JPanel implements IndexConf {
     }
 
     /**
-     *
+     * 用户管理标签事件
      */
     public void changeListener0() {
         functionJPanel.removeAll();
@@ -422,6 +422,9 @@ public class Administrate extends JPanel implements IndexConf {
         });
     }
 
+    /**
+     * 文章管理标签事件
+     */
     public void changeListener1(){
         functionJPanel.removeAll();
         functionJPanel.add(deleteArticle);
@@ -459,6 +462,9 @@ public class Administrate extends JPanel implements IndexConf {
         });
     }
 
+    /**
+     * 评论管理标签事件
+     */
     public void changeListener2(){
         functionJPanel.removeAll();
         functionJPanel.add(deleteComment);
