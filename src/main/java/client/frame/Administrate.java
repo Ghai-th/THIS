@@ -223,7 +223,6 @@ public class Administrate extends JPanel implements IndexConf {
                     article.operate = ServerOperate.DELETE_ARTICLE;
                     try {
                         ClientUtil.sendInfo(article,Article.class);
-                        //ClientUtil.acceptInfo(Article.class);
                         if (article.operate!=ServerOperate.ERROR){
                             JOptionPane.showMessageDialog(Administrate.this,"文章删除成功");
                             changeListener1();

@@ -24,6 +24,11 @@ public class MessageOperate {
         this.message = message;
         selectOperate();
     }
+
+    /**
+     * 执行操作
+     * @throws SQLException
+     */
     public void selectOperate() throws SQLException {
         switch ((message.getOperate())){
             case ServerOperate.TEST_MESSAGE:

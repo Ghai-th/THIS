@@ -19,6 +19,10 @@ public class StoreOperate {
         this.serverUtil = serverUtil;
         selectOperate();
     }
+
+    /**
+     * 执行操作
+     */
     public void selectOperate(){
         switch (store.operate){
             case ServerOperate.ADD_STORE:
@@ -33,6 +37,10 @@ public class StoreOperate {
 
         }
     }
+
+    /**
+     * 增加收藏
+     */
     public void addStore(){
         boolean success = false;
         success = storeService.addStore(store);
@@ -44,6 +52,10 @@ public class StoreOperate {
             }
         }
     }
+
+    /**
+     * 删除收藏
+     */
     public void deleteStore(){
         boolean success = false;
         success = storeService.deleteStore(store);
@@ -55,6 +67,10 @@ public class StoreOperate {
             }
         }
     }
+
+    /**
+     * 查询收藏
+     */
     public void selectStore(){
         List<Store> attentions = storeService.selectStore(store);
         try {
