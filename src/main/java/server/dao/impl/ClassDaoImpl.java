@@ -15,6 +15,11 @@ public class ClassDaoImpl implements IClassDao {
     private Connection connection = null;
     private Statement statement = null;
 
+    /**
+     * 格局类id查询某个类别
+     * @param cid
+     * @return 返回某个类
+     */
     @Override
     public Class selectClassById(String cid) {
         String sql = "select * from class where cid =  '" + cid + "'";
@@ -31,6 +36,10 @@ public class ClassDaoImpl implements IClassDao {
         }
     }
 
+    /**
+     * 查询所有类
+     * @return返回类列表
+     */
     @Override
     public List selectAllClass() {
         try{

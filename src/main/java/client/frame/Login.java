@@ -17,7 +17,8 @@ import java.awt.event.*;
 import java.util.Random;
 
 public class Login extends JPanel implements ActionListener, IndexConf {
-    //登录
+
+    //登录所需组件
     JLabel idJLabel,passwordJLabel,registerJLabel,forgetJLabel,bkgJLabel,titleJLabel;
     JTextField idJTextField;
     JLabel loginJLabel;
@@ -25,23 +26,27 @@ public class Login extends JPanel implements ActionListener, IndexConf {
     JPanel centerJPanel;
     TranslucenceJPanel infoJPanel,randomJPanel;
     JTextPane textJTextPane;
-    //随机文章信息
+
+    //随机文章所需组件
     String titleString,textString,randomCid;
     Random random = new Random();
-    //注册
+
+    //注册所需组件
     JLabel helloJLabel,hadJLabel,goJLabel,id1JLabel,password1JLabel,password2JLabel,okJLabel,messageJLabel,message1JLabel;
     JTextField id1JTextField;
     JPasswordField password3JPassword,password4JPassword;
     RoundBorder whiteBorder = new RoundBorder(Color.white);
     RoundBorder grayBorder = new RoundBorder(Color.gray);
-    //找回密码
+
+    //找回密码所需组件
     JLabel findidJLabel,checkJLabel,findJLabel,returnJLabel;
     JTextField findidJTextField,checkJTextField;
-    //修改密码
+
+    //修改密码所需组件
     JLabel changePasswordJLabel,changePassword1JLabel,changeJLabel;
     JPasswordField changeJPasswordFiled,change1JPasswordFiled;
     Index index;
-    //定时器监听的鼠标监听时间
+
     //登录按钮
     MouseListener loginJLabelListener = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
@@ -63,6 +68,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             loginJLabel.setBackground(new Color(30,196,252));
         }
     };
+
     //注册按钮
     MouseListener okJLabelListener = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
@@ -111,6 +117,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             okJLabel.setBackground(new Color(30,196,252));
         }
     };
+
     //找回密码按钮
     MouseListener findJLabelListener = new MouseListener() {
         public void mouseClicked(MouseEvent e) {
@@ -151,6 +158,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             findJLabel.setBackground(new Color(30,196,252));
         }
     };
+
+    //注册格式提示信息
     MouseAdapter messageJLabelListener = new MouseAdapter() {
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -177,6 +186,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             message1JLabel.setForeground(new Color(155,155,155));
         }
     };
+
+    //边框样式提示
     FocusListener password3JPasswordListener = new FocusListener() {
         @Override
         public void focusGained(FocusEvent e) {
@@ -207,7 +218,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
 
         @Override
         public void focusLost(FocusEvent e) {
-            findidJTextField.setBorder(grayBorder);        }
+            findidJTextField.setBorder(grayBorder);
+        }
     };
     FocusListener checkJTextFieldListener = new FocusListener() {
         @Override
@@ -219,6 +231,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         public void focusLost(FocusEvent e) {
             checkJTextField.setBorder(grayBorder);        }
     };
+
+    //修改密码按钮
     MouseListener changeJLabelListener = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -273,6 +287,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             changeJLabel.setBackground(new Color(30,196,252));
         }
     };
+
+    //回车事件
     KeyListener fieldKeyListener = new KeyAdapter() {
         @Override
         public void keyTyped(KeyEvent e) {
@@ -282,11 +298,18 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             }
         }
     };
-    //状态记录
+
+    //文本信息状态
     boolean isChange1 = false;
     boolean isChange2 = false;
+
+    //定时器监听
     Timer timer = new Timer(200,this);
-    //构造函数，调用扁平化风格，初始化总界面的布局方式及标题等
+
+    /**
+     * 构造方法调用扁平化设计，构造登陆界面
+     * @param index
+     */
     public Login(Index index) {
         this.index = index;
         try {
@@ -300,19 +323,25 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         timer.start();
     }
 
-
-    //初始化north与center
+    /**
+     * 初始化north与center
+     */
     public void init () {
         initNorth();
         initCenter();
     }
-    //初始化north
+
+    /**
+     * 初始化north
+     */
     public void initNorth(){
         NavigationBarPanel navigationBarPanel = new NavigationBarPanel(index);
         this.add(navigationBarPanel, BorderLayout.NORTH);
     }
 
-    //初始化center
+    /**
+     * 初始化center
+     */
     public void initCenter(){
         centerJPanel = new JPanel(null);
         randomJPanel = new TranslucenceJPanel();
@@ -359,7 +388,10 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         centerJPanel.add(bkgJLabel);
         this.add(centerJPanel,BorderLayout.CENTER);
     }
-    //初始化信息窗体
+
+    /**
+     * 初始化信息窗体
+     */
     public void initInfo(){
         infoJPanel = new TranslucenceJPanel();
         infoJPanel.setOpaque(false);
@@ -387,7 +419,10 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         infoJPanel.add(idJLabel);
 
         idJTextField.addFocusListener(new FocusListener() {
-            //获得焦点
+            /**
+             * 获得焦点
+             * @param e 事件
+             */
             public void focusGained(FocusEvent e) {
                 if(idJTextField.getText().equals("账号"))
                     idJTextField.setText("");
@@ -400,7 +435,11 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 infoJPanel.repaint();
                 idJTextField.setBorder(BorderFactory.createMatteBorder(0,0,1,0,new Color(18,183,245)));
             }
-            //失去焦点
+
+            /**
+             * 失去焦点
+             * @param e 事件
+             */
             public void focusLost(FocusEvent e) {
                 if(idJTextField.getText().equals("")){
                     idJTextField.setFont(new Font("楷体",Font.ITALIC,23));
@@ -428,6 +467,11 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         passwordJPasswordField.setText("密码");
         passwordJPasswordField.setEchoChar((char)0);
         passwordJPasswordField.addFocusListener(new FocusListener() {
+
+            /**
+             * 获得焦点
+             * @param e 事件
+             */
             public void focusGained(FocusEvent e) {
                 if(new String(passwordJPasswordField.getPassword()).equals("密码"))
                     passwordJPasswordField.setText("");
@@ -442,6 +486,10 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 passwordJPasswordField.setBorder(BorderFactory.createMatteBorder(0,0,1,0,new Color(18,183,245)));
             }
 
+            /**
+             * 失去焦点
+             * @param e 事件
+             */
             public void focusLost(FocusEvent e) {
                 if(new String(passwordJPasswordField.getPassword()).equals("")){
                     passwordJPasswordField.setFont(new Font("楷体",Font.ITALIC,23));
@@ -558,8 +606,6 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             }
         });
 
-
-
         loginJLabel.setBounds(95,340,250,60);
         loginJLabel.setOpaque(true);
         loginJLabel.setBackground(new Color(189,206,252));
@@ -625,7 +671,6 @@ public class Login extends JPanel implements ActionListener, IndexConf {
             public void focusGained(FocusEvent e) {
                 id1JTextField.setBorder(whiteBorder);
             }
-
 
             public void focusLost(FocusEvent e) {
                 id1JTextField.setBorder(grayBorder);
@@ -694,9 +739,8 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 returnJLabel.setBackground(new Color(30,196,252));
             }
         });
+
         //修改密码界面初始化
-        // changePasswordJLabel,changePassword1JLabel,changeJLabel;
-        // changeJPasswordFiled,change1JPasswordFiled;
         changePasswordJLabel = new JLabel("重置");
         changeJPasswordFiled = new JPasswordField();
         changePassword1(changePasswordJLabel,changeJPasswordFiled);
@@ -711,11 +755,22 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         changeJLabel.addMouseListener(changeJLabelListener);
 
     }
+
+    /**
+     * 修改消息JLabel样式
+     * @param messageJLabel 修改的消息JLabel
+     * @param message 提示信息
+     */
     public void setMessageJLabel(JLabel messageJLabel,String message){
         messageJLabel.setFont(new Font("黑体",Font.BOLD,30));
         messageJLabel.setForeground(new Color(155,155,155));
         messageJLabel.setToolTipText(message);
     }
+
+    /**
+     * 修改JTextField样式
+     * @param jTextField 修改的JTextField
+     */
     public void setJTextField(JTextField jTextField){
         jTextField.setFont(new Font("幼圆",Font.PLAIN,25));
         jTextField.setCaretColor(Color.orange);
@@ -723,6 +778,10 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         jTextField.setBorder(grayBorder);
         jTextField.setOpaque(false);
     }
+
+    /**
+     * 返回登录界面
+     */
     public void returnLogin(){
         infoJPanel.removeAll();
         idJLabel.setBounds(90,62,50,65);
@@ -745,6 +804,12 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         infoJPanel.add(loginJLabel);
         infoJPanel.repaint();
     }
+
+    /**
+     * 改变JLabel，JPasswordField样式
+     * @param password1JLabel 修改的JLabel
+     * @param password3JPassword 修改的JPassword
+     */
     public void changePassword1(JLabel password1JLabel,JPasswordField password3JPassword){
         password1JLabel.setFont(new Font("隶书",Font.PLAIN,25));
         password1JLabel.setForeground(new Color(240,128,128));
@@ -754,10 +819,26 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         password3JPassword.setOpaque(false);
         password3JPassword.setBorder(grayBorder);
     }
+
+    /**
+     * 修改JLabel样式
+     * @param findidJLabel 修改的JLabel
+     */
     public void changeJLabel(JLabel findidJLabel){
         findidJLabel.setFont(new Font("楷书",Font.PLAIN,25));
         findidJLabel.setForeground(new Color(240,128,128));
     }
+
+    /**
+     * 跳转到找回密码和修改密码界面
+     * @param findidJLabel 修改的JLabel
+     * @param findidJTextField 修改的JTextField
+     * @param infoJPanel 修改的infoJPanel
+     * @param checkJLabel 修改的JLabel
+     * @param checkJTextField 修改的JTextField
+     * @param findJLabel 修改的JLabel
+     * @param returnJLabel 修改的JLabel
+     */
     public void goSame(JLabel findidJLabel,JTextField findidJTextField,JPanel infoJPanel,JLabel checkJLabel,
                        JTextField checkJTextField,JLabel findJLabel,JLabel returnJLabel){
         findidJLabel.setBounds(60,62,50,65);
@@ -775,6 +856,9 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         infoJPanel.repaint();
     }
 
+    /**
+     * 跳转到主界面：管理员界面或者文章界面
+     */
     public void goMain(){
         User user = new User(idJTextField.getText(),new String(passwordJPasswordField.getPassword()));
         user.setOperate(ServerOperate.IS_VALID_USER);
@@ -811,7 +895,10 @@ public class Login extends JPanel implements ActionListener, IndexConf {
         }
     }
 
-
+    /**
+     * 定时器方法 监听文本信息的完整性
+     * @param e 事件
+     */
     public void actionPerformed(ActionEvent e) {
         if(!(idJTextField.getText().equals("")||idJTextField.getText().equals("账号")||
                 new String(passwordJPasswordField.getPassword()).equals("")||

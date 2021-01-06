@@ -1,5 +1,6 @@
 package client.frame.modle.panel;
 
+import client.entity.Attention;
 import client.entity.Message;
 import client.entity.User;
 import client.frame.Index;
@@ -13,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 
 public class TestPanel extends JPanel {
@@ -173,10 +175,18 @@ public class TestPanel extends JPanel {
                     JOptionPane.showMessageDialog(TestPanel.this,"请您先登录！");
                 }else{
                     myUser.setOperate(ServerOperate.UPDATE_FANS_NUM);
+                    Attention attention = new Attention();
+                    attention.setUid(myUser.getUid());
+                    attention.setFansId(otherUser.getUid());
+                    attention.operate = ServerOperate.ADD_ATTENTION;
                     try {
                         ClientUtil.sendInfo(myUser,User.class);
                         myUser = ClientUtil.acceptInfo(User.class);
-
+                        ClientUtil.sendInfo(attention,Attention.class);
+                        attention = ClientUtil.acceptInfo(Attention.class);
+                        if(attention.operate!=ServerOperate.ERROR){
+                            JOptionPane.showMessageDialog(null,"关注成功");
+                        }
                     } catch (IOException | ClassNotFoundException ex) {
                         ex.printStackTrace();
                     }

@@ -21,18 +21,6 @@ public class ArticleListPanel extends JPanel implements MouseListener, IndexConf
 
     public ArticleListPanel(ArrayList<Article> articles, Index index) {
         this.articles = articles;
-
-        Article article = new Article();
-        article.setCid(articles.get(0).getCid());
-        article.operate = ServerOperate.GET_ARTICLE_BY_CID;
-        this.articles = new ArrayList();
-        try {
-            ClientUtil.sendInfo(article,Article.class);
-            this.articles.addAll(ClientUtil.acceptList());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         this.index = index;
         panel = new JPanel(new FlowLayout(FlowLayout.CENTER,0,70));
         panel.setPreferredSize(new Dimension(WIDE * 5 / 8,this.articles.size() * HIGH * 181 / 1050));

@@ -23,6 +23,9 @@ public class UserOperate {
 
     }
 
+    /**
+     * 执行操作
+     */
     public void selectOperate() {
         switch (user.operate) {
             case ServerOperate.REGISTER_USER:
@@ -216,8 +219,10 @@ public class UserOperate {
         }
     }
 
-
-
+    /**
+     * 判断服务器返回的信息类型
+     * @param success service层执行操作的结果
+     */
     public void isSuccess(boolean success) {
         if (success) {
             System.out.println("success");
