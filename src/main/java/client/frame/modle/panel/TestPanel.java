@@ -176,6 +176,7 @@ public class TestPanel extends JPanel {
                     try {
                         ClientUtil.sendInfo(myUser,User.class);
                         myUser = ClientUtil.acceptInfo(User.class);
+
                     } catch (IOException | ClassNotFoundException ex) {
                         ex.printStackTrace();
                     }

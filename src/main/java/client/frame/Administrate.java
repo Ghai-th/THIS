@@ -5,13 +5,11 @@ import client.entity.Article;
 import client.entity.Comment;
 import client.entity.User;
 import client.frame.modle.panel.ArticleDetailPanel;
-import client.frame.modle.panel.WritePanel;
 import client.frame.modle.table.ArticleTable;
 import client.frame.modle.table.CommentTable;
 import client.frame.modle.table.UserTable;
 import client.util.ClientUtil;
 import server.controller.ServerOperate;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -19,7 +17,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Administrate extends JPanel implements IndexConf {
@@ -125,7 +122,18 @@ public class Administrate extends JPanel implements IndexConf {
                 return false;
             }
         } ;
-
+        table.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                // TODO Auto-generated method stub
+                if (arg0.getClickCount() == 1) {
+                    row = ((JTable) arg0.getSource()).rowAtPoint(arg0.getPoint());
+                    deleteUser.removeMouseListener(userAdepter);
+                    deleteUser.addMouseListener(userAdepter);
+                    changeListener0();
+                }
+            }
+        });
         userTable = new UserTable(table);
         table.setPreferredSize(new Dimension(1900, ((UserTable) userTable).userLength * 30));
         mainPane =  new JScrollPane(
@@ -184,8 +192,10 @@ public class Administrate extends JPanel implements IndexConf {
                 } else {
                     JOptionPane.showMessageDialog(Administrate.this,"请选择有效的行！");
                 }
+                row = -1;
             }
         };
+        deleteUser.addMouseListener(userAdepter);
 
 
         articleAdepter = new MouseAdapter() {
@@ -217,8 +227,10 @@ public class Administrate extends JPanel implements IndexConf {
                 } else {
                     JOptionPane.showMessageDialog(Administrate.this,"请选择有效的行！");
                 }
+                row = -1;
             }
         };
+        deleteArticle.addMouseListener(articleAdepter);
         commentAdapter = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -240,6 +252,7 @@ public class Administrate extends JPanel implements IndexConf {
                         //ClientUtil.acceptInfo(Article.class);
                         if (comment.operate!=ServerOperate.ERROR){
                             JOptionPane.showMessageDialog(Administrate.this,"评论删除成功");
+
                             changeListener2();
                         }
                     } catch (IOException ex) {
@@ -248,8 +261,10 @@ public class Administrate extends JPanel implements IndexConf {
                 } else {
                     JOptionPane.showMessageDialog(Administrate.this,"请选择有效的行！");
                 }
+                row = -1;
             }
         };
+        deleteComment.addMouseListener(commentAdapter);
         reportDetail.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -352,11 +367,12 @@ public class Administrate extends JPanel implements IndexConf {
         } ;
         userTable = new UserTable(table);
         table.setPreferredSize(new Dimension(1900,((UserTable) userTable).userLength * 30));
+        userJpanel.setLayout(new GridLayout(1,1));
         mainPane = new JScrollPane(
                 table,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        userJpanel.setLayout(new GridLayout(1,1));
+
         userJpanel.add(mainPane);
         updateUI();
         table.addMouseListener(new MouseAdapter(){
@@ -365,6 +381,7 @@ public class Administrate extends JPanel implements IndexConf {
                 // TODO Auto-generated method stub
                 if (arg0.getClickCount() == 1) {
                     row = ((JTable) arg0.getSource()).rowAtPoint(arg0.getPoint());
+                    deleteUser.removeMouseListener(userAdepter);
                     deleteUser.addMouseListener(userAdepter);
                 }
             }
@@ -386,10 +403,8 @@ public class Administrate extends JPanel implements IndexConf {
             }
         } ;
         articleTable = new ArticleTable(table);
-        ///////////////////////////////////////////////////////
         //返回lit
         table.setPreferredSize(new Dimension(1900,((ArticleTable) articleTable).articleArrayList.size() * 30));
-        ///////////////////////////////////////////////////////
         mainPane =  new JScrollPane(
                 table,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
@@ -398,13 +413,12 @@ public class Administrate extends JPanel implements IndexConf {
         articleJpanel.add(mainPane);
         updateUI();
         table.addMouseListener(new MouseAdapter(){
-            int y;
-            int z;
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 // TODO Auto-generated method stub
                 if (arg0.getClickCount() == 1) {
                     row = ((JTable) arg0.getSource()).rowAtPoint(arg0.getPoint());
+                    deleteArticle.removeMouseListener(articleAdepter);
                     deleteArticle.addMouseListener(articleAdepter);
                 }
             }
@@ -430,14 +444,15 @@ public class Administrate extends JPanel implements IndexConf {
         commentJpanel.setLayout(new GridLayout(1,1));
         commentJpanel.add(mainPane);
         updateUI();
-
         table.addMouseListener(new MouseAdapter(){
             int x;
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 // TODO Auto-generated method stub
                 if (arg0.getClickCount() == 1) {
+                    x=1;
                     row = ((JTable) arg0.getSource()).rowAtPoint(arg0.getPoint());
+                    deleteComment.removeMouseListener(commentAdapter);
                     deleteComment.addMouseListener(commentAdapter);
                 }
             }
