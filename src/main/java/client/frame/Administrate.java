@@ -52,7 +52,11 @@ public class Administrate extends JPanel implements IndexConf {
         initNorth();
         initCenter();
     }
+    /**
+     * 初始化北部界面——欢迎界面
+     */
     public void initNorth() {
+
         signLabel = new JLabel("THIS");
         welcomeLable = new JLabel(Administrator.getName() + "你好");
         exitLable = new JLabel("退出");
@@ -60,8 +64,11 @@ public class Administrate extends JPanel implements IndexConf {
         signLabel.setFont(new Font("宋体", Font.BOLD, 20));
         welcomeLable.setFont(new Font("宋体", Font.BOLD, 20));
         exitLable.setFont(new Font("宋体", Font.BOLD, 20));
-
+        /**
+         * 退出按钮初始化
+         */
         exitLable.addMouseListener(new MouseAdapter() {
+            //退出的鼠标监听器
             @Override
             public void mouseEntered(MouseEvent e) {
                 exitLable.setForeground(Color.RED);

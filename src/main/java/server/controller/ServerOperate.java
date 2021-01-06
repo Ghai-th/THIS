@@ -38,6 +38,7 @@ public interface ServerOperate {
     int GET_CLASS_HOT_ARTICLE_TOP_EIGHT = 300009;
     int ARTICLE_NOT_ANY_COMMENT = 300010;
     int SELECT_ARTICLE_INFO = 300011;
+    int NONE_ARTICLE = 300012;
 
     /**
      * User表对应的操作

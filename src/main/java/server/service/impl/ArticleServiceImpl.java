@@ -2,11 +2,13 @@ package server.service.impl;
 
 import client.entity.Article;
 import client.entity.User;
+import server.controller.ServerOperate;
 import server.dao.IArticleDao;
 import server.dao.impl.ArticleDaoImpl;
 import server.service.IArticleService;
 import server.service.IUserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleServiceImpl implements IArticleService {
@@ -35,32 +37,77 @@ public class ArticleServiceImpl implements IArticleService {
 
     @Override
     public Article selectArticleByAid(String aid) {
-        return articleDao.selectArticleByAid(aid);
+        Article article = articleDao.selectArticleByAid(aid);
+        if (article == null) {
+            article = new Article();
+            article.operate = ServerOperate.NONE_ARTICLE;
+        }
+        return article;
     }
 
     @Override
     public List<Article> selectArticleByCid(String cid) {
-        return articleDao.selectArticleByCid(cid);
+        List list = articleDao.selectArticleByCid(cid);
+        if (list == null) {
+            list = new ArrayList();
+            Article article = new Article();
+            article.operate = ServerOperate.NONE_ARTICLE;
+            list.add(article);
+            return list;
+        }
+        return list;
     }
 
     @Override
     public List<Article> selectArticleByTittle(String tittle) {
-        return articleDao.selectArticleByTittle(tittle);
+        List list = articleDao.selectArticleByTittle(tittle);
+        if (list == null) {
+            list = new ArrayList();
+            Article article = new Article();
+            article.operate = ServerOperate.NONE_ARTICLE;
+            list.add(article);
+            return list;
+        }
+        return list;
     }
 
     @Override
     public List<Article> selectArticleByUid(String uid) {
-        return articleDao.selectArticleByUid(uid);
+        List list = articleDao.selectArticleByUid(uid);
+        if (list == null) {
+            list = new ArrayList();
+            Article article = new Article();
+            article.operate = ServerOperate.NONE_ARTICLE;
+            list.add(article);
+            return list;
+        }
+        return list;
     }
 
     @Override
     public List<Article> selectTopLimitArticle(int limit) {
-        return articleDao.selectTopLimitArticle(limit);
+        List list = articleDao.selectTopLimitArticle(limit);
+        if (list == null) {
+            list = new ArrayList();
+            Article article = new Article();
+            article.operate = ServerOperate.NONE_ARTICLE;
+            list.add(article);
+            return list;
+        }
+        return list;
     }
 
     @Override
     public List<Article> selectTopLimitArticleByCid(String cid, int limit) {
-        return articleDao.selectTopLimitArticleByCid(cid,limit);
+        List list = articleDao.selectTopLimitArticleByCid(cid,limit);
+        if (list == null) {
+            list = new ArrayList();
+            Article article = new Article();
+            article.operate = ServerOperate.NONE_ARTICLE;
+            list.add(article);
+            return list;
+        }
+        return list;
     }
 
     @Override
@@ -70,6 +117,14 @@ public class ArticleServiceImpl implements IArticleService {
 
     @Override
     public List<Article> selectArticlesInfo() {
-        return articleDao.selectArticlesInfo();
+        List list = articleDao.selectArticlesInfo();
+        if (list == null) {
+            list = new ArrayList();
+            Article article = new Article();
+            article.operate = ServerOperate.NONE_ARTICLE;
+            list.add(article);
+            return list;
+        }
+        return list;
     }
 }
