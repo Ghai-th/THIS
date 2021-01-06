@@ -486,6 +486,11 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                try {
+                    throw e;
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }
