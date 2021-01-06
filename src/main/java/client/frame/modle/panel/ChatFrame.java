@@ -91,7 +91,7 @@ public class ChatFrame extends JFrame implements Runnable {
         leftJPanel.add(listPanel);
         ListPanel listPanel1 = new ListPanel(acceptUser.getUid());
         leftJPanel.add(listPanel1);
-        Iterator iterator = userMap.entrySet().iterator();
+       /* Iterator iterator = userMap.entrySet().iterator();
         while(iterator.hasNext()){
             final Map.Entry<String,String> entry = (Map.Entry<String, String>) iterator.next();
             final ListPanel listPanel2 = new ListPanel(entry.getKey());
@@ -123,7 +123,7 @@ public class ChatFrame extends JFrame implements Runnable {
 
                 }
             });
-        }
+        }*/
         leftJPanel.setBounds(0,0,1920/6,864);
         leftJPanel.setBackground(new Color(61,61,61));
         allJpanel.add(leftJPanel);
