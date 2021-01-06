@@ -16,8 +16,11 @@ public class CommentDaoImpl implements ICommentDao {
     List<Comment> list;
     int count;
 
+    /**
+     * 向数据库添加评论
+     * @param comment 评论
+     */
     public void addComment(Comment comment) {
-        //向数据库添加评论
         System.out.println("tianjia");
         System.out.println(comment);
         try {
@@ -32,8 +35,12 @@ public class CommentDaoImpl implements ICommentDao {
         }
     }
 
+    /**
+     * 删除评论
+     * @param comment 评论
+     * @return返回true或者false
+     */
     public boolean deleteComment(Comment comment) {
-        //删除数据库评论
         try {
             conn = DBUtil.getConnection();
             String sql = "delete from comment where cid = '" + comment.getCid() + "'";
@@ -49,9 +56,12 @@ public class CommentDaoImpl implements ICommentDao {
         }
     }
 
+    /**
+     * 根据用户id删除数据库中的评论
+     * @param uid 用户id
+     */
     @Override
     public void deleteCommentByUid(String uid) {
-        //删除用户id对应数据库中所有评论
         try {
             conn = DBUtil.getConnection();
             String sql = "delete from comment where uid = '" + uid + "'";
@@ -64,9 +74,12 @@ public class CommentDaoImpl implements ICommentDao {
         }
     }
 
+    /**
+     * 根据文章id删除数据库种中的所有评论
+     * @param aid 文章id
+     */
     @Override
     public void deleteCommentByAid(String aid) {
-        //删除文章id对应数据库中的所有评论
         try {
             conn = DBUtil.getConnection();
             String sql = "delete from comment where aid = '" + aid + "'";
@@ -79,8 +92,11 @@ public class CommentDaoImpl implements ICommentDao {
         }
     }
 
+    /**
+     * 根据评论id修改数据库中的评论
+     * @param comment 评论
+     */
     public void updateComment(Comment comment) {
-        //修改数据库中评论
         try {
             conn = DBUtil.getConnection();
             String sql = "update comment set text = '" + comment.getText() + "' and create = '" + comment.getCreate() + "' where cid = '" + comment.getCid() + "'";
@@ -93,8 +109,12 @@ public class CommentDaoImpl implements ICommentDao {
         }
     }
 
+    /**
+     * 根据用户id查询所有评论
+     * @param  uid 的用户id
+     * @return 评论列表
+     */
     public List<Comment> queryAllCommentByUid(String uid) {
-        //查找用户id对应所有评论信息
         try {
             conn = DBUtil.getConnection();
             String sql = "select * from comment where uid = '" + uid + "'";
@@ -109,8 +129,12 @@ public class CommentDaoImpl implements ICommentDao {
         return null;
     }
 
+    /**
+     * 根据文章id查询所有评论
+     * @param aid 文章id
+     * @return 评论信息
+     */
     public List<Comment> queryAllCommentByAid(String aid) {
-        //查找文章id对应所有评论信息
         try {
             conn = DBUtil.getConnection();
             String sql = "select * from comment where aid = '" + aid + "'";
@@ -125,9 +149,12 @@ public class CommentDaoImpl implements ICommentDao {
         return null;
     }
 
+    /**
+     * 查询全部评论数量
+     * @return
+     */
     @Override
     public int selectAllCommentNum() {
-        //全部评论数量
         int integer = 0;
         try {
             conn = DBUtil.getConnection();
@@ -147,9 +174,12 @@ public class CommentDaoImpl implements ICommentDao {
         return 0;
     }
 
+    /**
+     * 查询全部评论
+     * @return
+     */
     @Override
     public List<Comment> selectCommentInfo() {
-        //查找全部评论
         try {
             conn = DBUtil.getConnection();
             String sql = "select * from comment";
