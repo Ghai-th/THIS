@@ -13,6 +13,13 @@ import java.util.Map;
 public class MessageDaoImpl implements IMessageDao {
     Connection connection = null;
     Statement statement = null;
+
+    /**
+     * 增加私信
+     * @param message
+     * @param n
+     * @throws SQLException
+     */
     @Override
     public void addMessage(Message message,int n) throws SQLException {
         connection = DBUtil.getConnection();
@@ -37,6 +44,11 @@ public class MessageDaoImpl implements IMessageDao {
         connection.close();
     }
 
+    /**
+     * 删除私信
+     * @param message
+     * @throws SQLException
+     */
     @Override
     public void deleteMessage(Message message) throws SQLException {
         connection = DBUtil.getConnection();
@@ -48,6 +60,11 @@ public class MessageDaoImpl implements IMessageDao {
         connection.close();
     }
 
+    /**
+     * 更新私信
+     * @param message
+     * @throws SQLException
+     */
     @Override
     public void updateMessage(Message message) throws SQLException {
         updateMessageState(message,"1",0);
@@ -65,6 +82,12 @@ public class MessageDaoImpl implements IMessageDao {
         DBUtil.closeResources(connection,preparedStatement);
     }
 
+    /**
+     * 根据接收者id查询对应的所有私信
+     * @param message
+     * @return私信内容列表
+     * @throws SQLException
+     */
     @Override
     public List<Message> selectAllMessage(Message message) throws SQLException {
         List<Message> messageList;
