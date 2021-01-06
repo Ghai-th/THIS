@@ -28,6 +28,7 @@ public class User extends Operate implements java.io.Serializable{
     private Integer active;
     private String mykey;
 
+    //全参数构造
     public User(String uid, String name, Integer level, String password, Integer gender, byte[] image,
                 Integer fansNum, Integer attentionNum, Integer visitorNum, Integer articleNum, String synopsis,
                 Integer active,String mykey) {
@@ -66,6 +67,11 @@ public class User extends Operate implements java.io.Serializable{
         this.active = active;
     }
 
+    /**
+     * 注册账号所需
+     * @param uid 账户id
+     * @param password 密码
+     */
     public User(String uid,String password){
         this.uid = uid;
         this.password = password;
@@ -83,6 +89,13 @@ public class User extends Operate implements java.io.Serializable{
         this.setCreate(new Date());
         this.setLastlogin(new Date());
     }
+
+    /**
+     * 找回密码所需
+     * @param uid 账户id
+     * @param mykey 密钥
+     * @param info "找回密码"
+     */
     public User(String uid, String mykey,String info){
         super();
         this.uid = uid;

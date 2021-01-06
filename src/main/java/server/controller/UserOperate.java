@@ -263,7 +263,6 @@ public class UserOperate {
         }
         if(success){
             try {
-                user.setOperate(ServerOperate.SUCCESS);
                 serverUtil.sendInfo(user,User.class);
             } catch (IOException e) {
                 e.printStackTrace();
