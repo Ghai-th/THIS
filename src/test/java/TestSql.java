@@ -8,9 +8,11 @@ import server.dao.IMessageDao;
 import server.dao.impl.ArticleDaoImpl;
 import server.dao.impl.UserDaoImpl;
 import server.service.IAttentionService;
+import server.service.ICommentService;
 import server.service.IStoreService;
 import server.service.IUserService;
 import server.service.impl.AttentionServiceImpl;
+import server.service.impl.CommentServiceImpl;
 import server.service.impl.StoreServiceImpl;
 import server.service.impl.UserServiceImpl;
 
@@ -165,6 +167,13 @@ public class TestSql {
         Statement statement = DBUtil.getStatement(connection);
         String sql = "select * from user where uid = '123'";
         System.out.println(DBUtil.executeGetSomeUserData(statement, sql, User.class));
+    }
+    @Test
+    public void testComment(){
+        Comment comment = new Comment();
+        comment.setCid("10001");
+        ICommentService commentService = new CommentServiceImpl();
+        commentService.deleteComment(comment);
     }
 
 }

@@ -31,15 +31,7 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     public boolean deleteComment(Comment comment) {
-        //某人删除自己的评论
-        List<Comment> commentList = commentDao.queryAllCommentByUid(comment.getUid());
-        for(Comment demo : commentList) {
-            if(demo.getAid().equals(comment.getAid())){
-                commentDao.deleteComment(comment);
-                return true;
-            }
-        }
-        return false;
+        return commentDao.deleteComment(comment);
     }
 
     @Override

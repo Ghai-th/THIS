@@ -15,7 +15,7 @@ public interface ICommentDao {
      * 删除评论
      * @param comment 评论
      */
-    void deleteComment(Comment comment);
+    boolean deleteComment(Comment comment);
 
     /**
      * 根据用户id删除评论

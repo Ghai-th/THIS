@@ -32,15 +32,18 @@ public class CommentDaoImpl implements ICommentDao {
         }
     }
 
-    public void deleteComment(Comment comment) {
+    public boolean deleteComment(Comment comment) {
         //删除数据库评论
         try {
             conn = DBUtil.getConnection();
             String sql = "delete from comment where cid = '" + comment.getCid() + "'";
+            System.out.println(comment.getCid());
             stmt = DBUtil.getStatement(conn);
             DBUtil.executeChange(stmt, sql);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }finally {
             DBUtil.closeResources(conn, stmt, rs);
         }
