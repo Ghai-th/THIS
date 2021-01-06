@@ -23,6 +23,9 @@ public class UserOperate {
 
     }
 
+    /**
+     * 执行操作
+     */
     public void selectOperate() {
         switch (user.operate) {
             case ServerOperate.REGISTER_USER:

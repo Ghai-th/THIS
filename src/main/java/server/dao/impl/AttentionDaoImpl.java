@@ -13,7 +13,12 @@ import java.util.List;
 public class AttentionDaoImpl implements IAttentionDao {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
-    //点击关注后，我被加入别人的粉丝中
+
+    /**
+     * 增加关注
+     * @param attention
+     * @return返回true或者false
+     */
     @Override
     public boolean addAttention(Attention attention) {
         Connection connection = null;
@@ -31,7 +36,12 @@ public class AttentionDaoImpl implements IAttentionDao {
            DBUtil.closeResources(connection,statement);
         }
     }
-    //取消关注
+
+    /**
+     * 取消关注
+     * @param attention
+     * @return返回true或者false
+     */
     @Override
     public boolean deleteAttention(Attention attention) {
         try {
@@ -49,7 +59,12 @@ public class AttentionDaoImpl implements IAttentionDao {
         }
 
     }
-    //查询我的粉丝
+
+    /**
+     * 根据id查询粉丝
+     * @param attention
+     * @return 返回粉丝列表
+     */
     @Override
     public List<Attention> searchAttention(Attention attention) {
         try {
@@ -68,7 +83,12 @@ public class AttentionDaoImpl implements IAttentionDao {
 
 
     }
-    //查询我的关注
+
+    /**
+     * 根据粉丝id查询关注
+     * @param attention
+     * @return 返回关注
+     */
     @Override
     public List<Attention> selectAttention(Attention attention) {
         try {
