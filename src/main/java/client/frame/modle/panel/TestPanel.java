@@ -99,7 +99,7 @@ public class TestPanel extends JPanel {
                 Message message = new Message();
                 message.setSendId(otherUser.getUid());
                 message.setOperate(ServerOperate.ONLINE_MESSAGE);
-                try {
+                /*try {
                     MessageClientUtil.sendInfo(message);
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -113,7 +113,8 @@ public class TestPanel extends JPanel {
                     new ChatFrame(otherUser,myUser,userMap);
                 } catch (IOException | ClassNotFoundException ex) {
                     ex.printStackTrace();
-                }
+                }*/
+                new ChatFrame(otherUser,myUser,null);
             }
 
             @Override
@@ -178,11 +179,7 @@ public class TestPanel extends JPanel {
                     } catch (IOException | ClassNotFoundException ex) {
                         ex.printStackTrace();
                     }
-                    if(otherUser==null){
-                        Index.MeUser.setFansNum(Index.MeUser.getFansNum()+1);
-                    }else{
-                        myUser.setFansNum((myUser.getFansNum()+1));
-                    }
+                    Index.MeUser.setFansNum(Index.MeUser.getFansNum()+1);
                     userJPanel3.removeAll();
                     myUser.setFansNum(myUser.getFansNum()+1);
                     fansMemberPanel3 = new MemberNoColorPanel(myUser.getFansNum()+"","粉丝");
@@ -309,16 +306,22 @@ public class TestPanel extends JPanel {
         userJPanel.add(userJPanel2);
         userJPanel.add(userJPanel3);
 
-        //将两个按钮加入到按钮面板中
+        if(otherUser==null&&myUser.getUid().equals(Index.MeUser.getUid())){
 
-        chatJbutton.setBounds(45,30,100,40);
-        buttonJPanel.add(chatJbutton);
-        attentionJbutton.setBounds(238,30,100,40);
-        buttonJPanel.add(attentionJbutton);
-
+        }else {
+            //将两个按钮加入到按钮面板中
+            chatJbutton.setBounds(45,30,100,40);
+            buttonJPanel.add(chatJbutton);
+            attentionJbutton.setBounds(238,30,100,40);
+            buttonJPanel.add(attentionJbutton);
+        }
 
         //将按钮面板加入到用户面板的第四行
-        userJPanel.add(buttonJPanel);
+        if(otherUser==null&&myUser.getUid().equals(Index.MeUser.getUid())){
+        }else {
+            userJPanel.add(buttonJPanel);
+        }
+
 
         //热门文章的添加
         textPanel.add(textRowone);
