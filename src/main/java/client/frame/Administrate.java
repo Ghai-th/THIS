@@ -175,6 +175,7 @@ public class Administrate extends JPanel implements IndexConf {
 
         functionJPanel.add(deleteUser);
         functionJPanel.setPreferredSize(new Dimension(WIDTH / 6, HIGH * 53 / 1050));
+
         /**
          * 用户事件对应的适配器
          */
@@ -213,7 +214,7 @@ public class Administrate extends JPanel implements IndexConf {
         deleteUser.addMouseListener(userAdepter);
 
         /**
-        * 文章事件的监听器
+        * 文章事件的适配器
         */
         articleAdepter = new MouseAdapter() {
             @Override
@@ -247,6 +248,10 @@ public class Administrate extends JPanel implements IndexConf {
             }
         };
         deleteArticle.addMouseListener(articleAdepter);
+
+        /**
+         * 评论的事件适配器
+         */
         commentAdapter = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -280,6 +285,10 @@ public class Administrate extends JPanel implements IndexConf {
                 row = -1;
             }
         };
+
+        /**
+         * 举报详情按钮事件
+         */
         deleteComment.addMouseListener(commentAdapter);
         reportDetail.addMouseListener(new MouseAdapter() {
             @Override
@@ -297,6 +306,9 @@ public class Administrate extends JPanel implements IndexConf {
             }
         });
 
+        /**
+         * 文章详情按钮事件
+         */
         articleDetail.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -344,13 +356,16 @@ public class Administrate extends JPanel implements IndexConf {
                     @Override
                     public void mouseEntered(MouseEvent e) {
                         returnArticleTable.setForeground(Color.RED);
-//                        articleDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                        articleDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                     }
                 });
                 updateUI();
             }
-
         });
+
+        /**
+         * 标签面板事件
+         */
         tabbedPane.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -371,6 +386,9 @@ public class Administrate extends JPanel implements IndexConf {
         this.add(centerPanel, BorderLayout.CENTER);
     }
 
+    /**
+     *
+     */
     public void changeListener0() {
         functionJPanel.removeAll();
         functionJPanel.add(deleteUser);
