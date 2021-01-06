@@ -5,13 +5,14 @@ import server.dao.IMessageDao;
 import server.dao.impl.MessageDaoImpl;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 public interface IMessageService {
     /**
      * 向message表中增加数据
      */
-    public boolean addMessage(Message message);
+    public boolean addMessage(Message message,int n);
 
     /**
      * 删除message表中的元素
@@ -24,10 +25,24 @@ public interface IMessageService {
     public boolean updateMessage(Message message);
 
     /**
+     * 拉去接收者的所有的聊天记录
+     * @param message
+     * @return
+     */
+    public List<Message> selectAllMessage(Message message) throws SQLException;
+
+    /**
      * 将表中被发送者的所有聊天信息拖出为集合
      * @return
      */
     public List<Message> selectMessage(Message message);
+
+    /**
+     * 拉去接收者的所有有关的发送者id组成的哈希集合
+     * @param message
+     * @return
+     */
+    public HashMap<String,String> selectMapMessage(Message message);
 
     /**
      * 将表中唯一可以标识的一行message取出
@@ -71,5 +86,7 @@ public interface IMessageService {
      * @param messageList 传入一个从数据库中拉出的List将该集合中所有state值为0的元素从集合中删除
      */
     void perfectList(List<Message> messageList);
+
+    boolean newMessage(Message message) throws SQLException;
 
 }

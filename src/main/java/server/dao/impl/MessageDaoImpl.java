@@ -14,8 +14,12 @@ public class MessageDaoImpl implements IMessageDao {
     Connection connection = null;
     Statement statement = null;
     @Override
-    public void addMessage(Message message) throws SQLException {
-        updateMessageState(message,"1",0);
+    public void addMessage(Message message,int n) throws SQLException {
+        if(n==1){
+            updateMessageState(message,"1",0);
+        }else {
+            updateMessageState(message,"0",0);
+        }
         connection = DBUtil.getConnection();
         String sql = "insert into message values(?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -59,6 +63,21 @@ public class MessageDaoImpl implements IMessageDao {
         preparedStatement.setString(3,message.getAcceptId());
         preparedStatement.executeUpdate();
         DBUtil.closeResources(connection,preparedStatement);
+    }
+
+    @Override
+    public List<Message> selectAllMessage(Message message) throws SQLException {
+        List<Message> messageList;
+        connection = DBUtil.getConnection();
+        statement = connection.createStatement();
+        String acceptId = message.getAcceptId();
+        String sendId = message.getSendId();
+        String sql = "select * from message where acceptid='"+acceptId+"'";
+        messageList = DBUtil.executeGetMoreData(statement,sql,Message.class);
+        updateMessageState(message,"0",1);
+        statement.close();
+        connection.close();
+        return messageList;
     }
 
     /**
@@ -123,9 +142,6 @@ public class MessageDaoImpl implements IMessageDao {
         String sql = null;
         if(judge==0){
             sql = "update message set state='"+n+"' where sendid='"+message.getSendId()+"' and acceptid='"+message.getAcceptId()+"'";
-        }
-        if(judge==1){
-            sql = "update message set state='"+n+"' where sendid='"+message.getAcceptId()+"'";
         }
         connection = DBUtil.getConnection();
         statement = connection.createStatement();

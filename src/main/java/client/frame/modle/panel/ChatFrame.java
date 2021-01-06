@@ -73,6 +73,7 @@ public class ChatFrame extends JFrame {
         f.setHgap(0);//水平间距
         f.setVgap(0);//组件垂直间距
         leftJPanel.setLayout(f);
+
         ListPanel listPanel = new ListPanel();
         leftJPanel.add(listPanel);
         leftJPanel.setBounds(0,0,1920/6,864);

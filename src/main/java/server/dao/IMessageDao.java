@@ -3,6 +3,7 @@ package server.dao;
 import client.entity.Message;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ public interface IMessageDao {
      * @param message
      * @throws SQLException
      */
-    void addMessage(Message message) throws SQLException;
+    void addMessage(Message message,int n) throws SQLException;
 
     /**
      * 删除message中的元素
@@ -29,6 +30,13 @@ public interface IMessageDao {
     void updateMessage(Message message) throws SQLException;
 
     /**
+     * 拉去接收者的所有的聊天记录
+     * @param message
+     * @return
+     */
+    List<Message> selectAllMessage(Message message) throws SQLException;
+
+    /**
      * 拉取接收者对应发送者具体的聊天记录
      * @param message
      * @return
@@ -41,7 +49,7 @@ public interface IMessageDao {
      * @param message
      * @return
      */
-    Map<String,String> selectMapMessage(Message message);
+    HashMap<String,String> selectMapMessage(Message message);
 
     /**
      * 拉出发送者和接收者所唯一标识的一行
