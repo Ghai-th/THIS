@@ -45,6 +45,9 @@ public class Administrate extends JPanel implements IndexConf {
     public User user;
     public Comment comment ;
     int row = -1;
+    public MouseAdapter userAdepter;
+    public MouseAdapter articleAdepter;
+    public MouseAdapter commentAdapter;
 
     public Administrate(User Administrator) {
         this.setLayout(new BorderLayout());
@@ -150,7 +153,7 @@ public class Administrate extends JPanel implements IndexConf {
 
         functionJPanel.add(deleteUser);
         functionJPanel.setPreferredSize(new Dimension(WIDTH / 6, HIGH * 53 / 1050));
-        final MouseAdapter userAdepter  = new MouseAdapter() {
+        userAdepter  = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 deleteUser.setForeground(Color.RED);
@@ -186,7 +189,7 @@ public class Administrate extends JPanel implements IndexConf {
         };
 
 
-        final MouseAdapter articleAdepter = new MouseAdapter() {
+        articleAdepter = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 deleteArticle.setForeground(Color.RED);
@@ -221,7 +224,7 @@ public class Administrate extends JPanel implements IndexConf {
                 System.out.println("删除文章");
             }
         };
-        final MouseAdapter commentAdapter = new MouseAdapter() {
+        commentAdapter = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 deleteComment.setForeground(Color.RED);
@@ -281,7 +284,6 @@ public class Administrate extends JPanel implements IndexConf {
             public void mouseExited(MouseEvent e) {
                 articleDetail.setForeground(Color.BLACK);
             }
-            //////////////////////////////////////////////////////////////////////////////////////
             @Override
             public void mouseClicked(MouseEvent e){
                 int i = table.getSelectedRow();
@@ -303,115 +305,24 @@ public class Administrate extends JPanel implements IndexConf {
                         articleDetailPanel,
                         ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                         ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                mainPane.getVerticalScrollBar().setUnitIncrement(20);
                 articleJpanel.setLayout(new GridLayout(1,1));
                 articleJpanel.add(mainPane);
                 updateUI();
             }
 
         });
-        /////////////////////////////////////////////////////////////////////
         tabbedPane.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 if(((JTabbedPane)e.getSource()).getSelectedIndex() == 0){
-                    functionJPanel.removeAll();
-                    functionJPanel.add(deleteUser);
-
-                    userJpanel.removeAll();
-                    table = new JTable(){
-                        public boolean isCellEditable(int rowIndex, int ColIndex){
-                            return false;
-                        }
-                    } ;
-                    userTable = new UserTable(table);
-                    table.setPreferredSize(new Dimension(1900,((UserTable) userTable).userLength * 30));
-                    mainPane = new JScrollPane(
-                            table,
-                            ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                    userJpanel.setLayout(new GridLayout(1,1));
-                    userJpanel.add(mainPane);
-                    updateUI();
-                    table.addMouseListener(new MouseAdapter(){
-                        @Override
-                        public void mouseClicked(MouseEvent arg0) {
-                            // TODO Auto-generated method stub
-                            if (arg0.getClickCount() == 1) {
-                                row = ((JTable) arg0.getSource()).rowAtPoint(arg0.getPoint());
-                                deleteUser.addMouseListener(userAdepter);
-                            }
-                        }
-                    });
+                    changeListener0();
                 }
                 else if(((JTabbedPane)e.getSource()).getSelectedIndex() == 1){
-                    functionJPanel.removeAll();
-                    functionJPanel.add(deleteArticle);
-                    functionJPanel.add(articleDetail);
-                    functionJPanel.add(reportDetail);
-
-                    articleJpanel.removeAll();
-                    table = new JTable(){
-                        public boolean isCellEditable(int rowIndex, int ColIndex){
-                            return false;
-                        }
-                    } ;
-                    articleTable = new ArticleTable(table);
-                    ///////////////////////////////////////////////////////
-                    //返回lit
-                    table.setPreferredSize(new Dimension(1900,((ArticleTable) articleTable).articleArrayList.size() * 30));
-                    ///////////////////////////////////////////////////////
-                    mainPane =  new JScrollPane(
-                            table,
-                            ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                    articleJpanel.setLayout(new GridLayout(1,1));
-                    articleJpanel.add(mainPane);
-                    updateUI();
-                    table.addMouseListener(new MouseAdapter(){
-                        int y;
-                        int z;
-                        @Override
-                        public void mouseClicked(MouseEvent arg0) {
-                            // TODO Auto-generated method stub
-                            if (arg0.getClickCount() == 1) {
-                                row = ((JTable) arg0.getSource()).rowAtPoint(arg0.getPoint());
-                                deleteArticle.addMouseListener(articleAdepter);
-                            }
-                        }
-                    });
+                    changeListener1();
                 }
                 else if(((JTabbedPane)e.getSource()).getSelectedIndex() == 2){
-                    functionJPanel.removeAll();
-                    functionJPanel.add(deleteComment);
-
-                    commentJpanel.removeAll();
-                    table = new JTable(){
-                        public boolean isCellEditable(int rowIndex, int ColIndex){
-                            return false;
-                        }
-                    } ;
-                    commentTable = new CommentTable(table);
-                    table.setPreferredSize(new Dimension(1900,((CommentTable) commentTable).commentLength * 30));
-                    mainPane =  new JScrollPane(
-
-                            table,
-                            ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                    commentJpanel.setLayout(new GridLayout(1,1));
-                    commentJpanel.add(mainPane);
-                    updateUI();
-
-                    table.addMouseListener(new MouseAdapter(){
-                        int x;
-                        @Override
-                        public void mouseClicked(MouseEvent arg0) {
-                            // TODO Auto-generated method stub
-                            if (arg0.getClickCount() == 1) {
-                                row = ((JTable) arg0.getSource()).rowAtPoint(arg0.getPoint());
-                                deleteComment.addMouseListener(commentAdapter);
-                            }
-                        }
-                    });
+                    changeListener2();
                 }
             }
         });
@@ -421,4 +332,106 @@ public class Administrate extends JPanel implements IndexConf {
         this.add(centerPanel, BorderLayout.CENTER);
     }
 
+    public void changeListener0() {
+        functionJPanel.removeAll();
+        functionJPanel.add(deleteUser);
+
+        userJpanel.removeAll();
+        table = new JTable(){
+            public boolean isCellEditable(int rowIndex, int ColIndex){
+                return false;
+            }
+        } ;
+        userTable = new UserTable(table);
+        table.setPreferredSize(new Dimension(1900,((UserTable) userTable).userLength * 30));
+        mainPane = new JScrollPane(
+                table,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        userJpanel.setLayout(new GridLayout(1,1));
+        userJpanel.add(mainPane);
+        updateUI();
+        table.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                // TODO Auto-generated method stub
+                if (arg0.getClickCount() == 1) {
+                    row = ((JTable) arg0.getSource()).rowAtPoint(arg0.getPoint());
+                    deleteUser.addMouseListener(userAdepter);
+                }
+            }
+        });
+    }
+
+    public void changeListener1(){
+        functionJPanel.removeAll();
+        functionJPanel.add(deleteArticle);
+        functionJPanel.add(articleDetail);
+        functionJPanel.add(reportDetail);
+
+        articleJpanel.removeAll();
+        table = new JTable(){
+            public boolean isCellEditable(int rowIndex, int ColIndex){
+                return false;
+            }
+        } ;
+        articleTable = new ArticleTable(table);
+        ///////////////////////////////////////////////////////
+        //返回lit
+        table.setPreferredSize(new Dimension(1900,((ArticleTable) articleTable).articleArrayList.size() * 30));
+        ///////////////////////////////////////////////////////
+        mainPane =  new JScrollPane(
+                table,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        articleJpanel.setLayout(new GridLayout(1,1));
+        articleJpanel.add(mainPane);
+        updateUI();
+        table.addMouseListener(new MouseAdapter(){
+            int y;
+            int z;
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                // TODO Auto-generated method stub
+                if (arg0.getClickCount() == 1) {
+                    row = ((JTable) arg0.getSource()).rowAtPoint(arg0.getPoint());
+                    deleteArticle.addMouseListener(articleAdepter);
+                }
+            }
+        });
+    }
+
+    public void changeListener2(){
+        functionJPanel.removeAll();
+        functionJPanel.add(deleteComment);
+
+        commentJpanel.removeAll();
+        table = new JTable(){
+            public boolean isCellEditable(int rowIndex, int ColIndex){
+                return false;
+            }
+        } ;
+        commentTable = new CommentTable(table);
+        table.setPreferredSize(new Dimension(1900,((CommentTable) commentTable).commentLength * 30));
+        mainPane =  new JScrollPane(
+
+                table,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        commentJpanel.setLayout(new GridLayout(1,1));
+        commentJpanel.add(mainPane);
+        updateUI();
+
+        table.addMouseListener(new MouseAdapter(){
+            int x;
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                // TODO Auto-generated method stub
+                if (arg0.getClickCount() == 1) {
+                    row = ((JTable) arg0.getSource()).rowAtPoint(arg0.getPoint());
+                    deleteComment.addMouseListener(commentAdapter);
+                }
+            }
+        });
+    }
 }
