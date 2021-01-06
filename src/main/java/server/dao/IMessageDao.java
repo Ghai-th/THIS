@@ -4,6 +4,7 @@ import client.entity.Message;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface IMessageDao {
     /**
@@ -28,12 +29,19 @@ public interface IMessageDao {
     void updateMessage(Message message) throws SQLException;
 
     /**
-     * 拉出接收者接收消息的列表
+     * 拉取接收者对应发送者具体的聊天记录
      * @param message
      * @return
      * @throws SQLException
      */
     List<Message> selectMessage(Message message) throws SQLException;
+
+    /**
+     * 拉去接收者的所有有关的发送者id组成的哈希集合
+     * @param message
+     * @return
+     */
+    Map<String,String> selectMapMessage(Message message);
 
     /**
      * 拉出发送者和接收者所唯一标识的一行

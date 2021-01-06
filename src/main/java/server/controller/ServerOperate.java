@@ -62,11 +62,11 @@ public interface ServerOperate {
     /**
      * message表对应的操作
      */
-    int SEND_MESSAGE = 400001;
-    int ACCEPT_MESSAGE = 400002;
-    int DELETE_MESSAGE = 400003;
-    int NOTCIE_MESSAGE = 400004;
-    int CLOSE_NOTICE_MESSAGE = 400005;
+    int TEST_MESSAGE = 400001;
+    int ONLINE_MESSAGE = 400002;
+    int WINDING_MESSAGE = 400003;
+    int SEND_MESSAGE = 400004;
+    int ACCEPT_MESSAGE = 400005;
 
     /**
      * attention表对应的操作

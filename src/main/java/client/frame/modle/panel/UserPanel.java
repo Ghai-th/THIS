@@ -18,7 +18,7 @@ import java.util.List;
 import javax.swing.*;
 
 
-public class UserPanel extends TranslucenceJPanel {
+public class UserPanel extends TranslucenceJPanel implements Runnable {
     private TranslucenceJPanel center;
     TranslucenceJPanel up,down;
     private JLabel userId,text,resource,topic,answer,j;
@@ -39,6 +39,7 @@ public class UserPanel extends TranslucenceJPanel {
     List<Store> storeList = null;
     List<Article> articleList = null;
     public Index index;
+    public static int sign = 0;
 
     public UserPanel() {
         setBounds(0,0,1920,1080);
@@ -467,5 +468,16 @@ public class UserPanel extends TranslucenceJPanel {
     public JLabel setFontLabel(JLabel jlabel){
         jlabel.setFont(new Font("宋体",Font.PLAIN,30));
         return jlabel;
+    }
+
+    @Override
+    public void run() {
+        while(true){
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

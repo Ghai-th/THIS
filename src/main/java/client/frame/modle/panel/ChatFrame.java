@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChatFrame extends JFrame {
     int xOld = 0;
@@ -18,7 +19,7 @@ public class ChatFrame extends JFrame {
     JTextPane centerJTextPanel,downJTextPanel;
     JButton sendJButton;
 
-    public ChatFrame(User sendUser,User acceptUser){
+    public ChatFrame(User sendUser, User acceptUser, List<User> userList){
         this.sendUser = sendUser;
         this.acceptUser = acceptUser;
         setSize(1920*3/5,864);
@@ -85,7 +86,7 @@ public class ChatFrame extends JFrame {
         imagJLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                dispose();
             }
 
             @Override
@@ -142,6 +143,6 @@ public class ChatFrame extends JFrame {
     }
     public static void main(String[] args) {
         //User user = new User()
-        new ChatFrame(null,null);
+        new ChatFrame(null,null,null);
     }
 }
