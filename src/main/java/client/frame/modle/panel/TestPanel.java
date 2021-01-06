@@ -1,8 +1,10 @@
 package client.frame.modle.panel;
 
+import client.entity.Message;
 import client.entity.User;
 import client.frame.Index;
 import client.util.ClientUtil;
+import client.util.MessageClientUtil;
 import com.mysql.fabric.xmlrpc.Client;
 import data.Operate;
 import server.controller.ServerOperate;
@@ -13,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class TestPanel extends JPanel {
     JButton chatJbutton;//放入私信按钮
@@ -93,7 +96,24 @@ public class TestPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 chatJbutton.setBackground(new Color(230,230,230));
-                new ChatFrame(otherUser,myUser,null);
+                Message message = new Message();
+                message.setSendId(otherUser.getUid());
+                message.setOperate(ServerOperate.ONLINE_MESSAGE);
+                try {
+                    MessageClientUtil.sendInfo(message);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                Message message1 = new Message();
+                message1.setAcceptId(otherUser.getUid());
+                message1.setOperate(ServerOperate.ACCEPT_MAP_MESSAGE);
+                try {
+                    MessageClientUtil.sendInfo(message1);
+                    HashMap<String,String> userMap = MessageClientUtil.accept();
+                    new ChatFrame(otherUser,myUser,userMap);
+                } catch (IOException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
             }
 
             @Override

@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 public class MessageServerUtil {
@@ -57,5 +58,9 @@ public class MessageServerUtil {
 
     public void sendMessageHashMap(HashMap hashMap) throws IOException {
         objectOutputStream.writeObject(hashMap);
+    }
+
+    public void sendMessageList(List list) throws IOException {
+        objectOutputStream.writeObject(list);
     }
 }

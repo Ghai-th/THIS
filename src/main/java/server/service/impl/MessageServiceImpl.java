@@ -115,6 +115,7 @@ public class MessageServiceImpl implements IMessageService {
         }
     }
 
+    //判断发送者有没有新消息
     @Override
     public boolean newMessage(Message message) throws SQLException {
         List<Message> messageList = iMessageDao.selectAllMessage(message);

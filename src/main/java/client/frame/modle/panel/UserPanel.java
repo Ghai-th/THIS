@@ -54,8 +54,11 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
     public UserPanel(User myUser, User otherUser, Index index, AllPanel allPanel, List<Comment> commentList, List<Store> storeList, List<Article> articleList){
         this.commentList = commentList;
         this.storeList = storeList;
-        cnum = storeList.size();
-
+        if(storeList==null){
+            cnum = 0;
+        }else{
+            cnum = storeList.size();
+        }
         this.articleList = articleList;
         anum = articleList.size();
         this.myUser = myUser;
@@ -220,7 +223,13 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
         topic.addMouseListener(adapter3);
         topic.addMouseMotionListener(adapter3);
         centerup.add(topic);
-        answer = new JLabel("我的评论("+commentList.size()+")",JLabel.CENTER);
+        int comnum;
+        if(commentList==null){
+            comnum = 0;
+        }else{
+            comnum = commentList.size();
+        }
+        answer = new JLabel("我的评论("+comnum+")",JLabel.CENTER);
         answer=setFontLabel(answer);
 
         MouseAdapter adapter4 = new MouseAdapter() {
