@@ -20,7 +20,9 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public class Administrate extends JPanel implements IndexConf {
-
+    /**
+     * 各种需要的组件
+     */
     public User Administrator;
     public JPanel northPanel;
     public JPanel centerPanel;
@@ -46,12 +48,20 @@ public class Administrate extends JPanel implements IndexConf {
     public MouseAdapter articleAdepter;
     public MouseAdapter commentAdapter;
 
+    /**
+     * 构造方法 传入一个管理员的user对象
+     * @param Administrator
+     */
     public Administrate(User Administrator) {
         this.setLayout(new BorderLayout());
         this.Administrator = Administrator;
         initNorth();
         initCenter();
     }
+
+    /**
+     * 初始化管理员界面的北面
+     */
     public void initNorth() {
         signLabel = new JLabel("THIS");
         welcomeLable = new JLabel(Administrator.getName() + "你好");
