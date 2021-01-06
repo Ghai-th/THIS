@@ -1,25 +1,31 @@
 package client.frame.modle.panel;
 
+import client.entity.Message;
 import client.entity.User;
 import client.frame.MessagePanel;
+import client.util.MessageClientUtil;
 import javafx.scene.layout.Pane;
+import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.*;
 import java.util.List;
 
-public class ChatFrame extends JFrame {
+public class ChatFrame extends JFrame implements Runnable {
     int xOld = 0;
     int yOld = 0;
-    User sendUser,acceptUser;
+    public static User sendUser,acceptUser;
+    HashMap<String,String> userMap;
     JPanel allJpanel;
     JPanel leftJPanel,upJPanel,downupJPanel;
     JTextPane centerJTextPanel,downJTextPanel;
     JButton sendJButton;
 
-    public ChatFrame(User sendUser, User acceptUser, List<User> userList){
+    public ChatFrame(final User sendUser, final User acceptUser, HashMap<String,String> userMap){
+        this.userMap = userMap;
         this.sendUser = sendUser;
         this.acceptUser = acceptUser;
         setSize(1920*3/5,864);
@@ -32,7 +38,14 @@ public class ChatFrame extends JFrame {
         sendJButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String text = downJTextPanel.getText();
+                Message message = new Message(sendUser.getUid(),acceptUser.getUid(),text,null,null,null);
+                message.setOperate(ServerOperate.SEND_MESSAGE);
+                try {
+                    MessageClientUtil.sendInfo(message);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         init1();
@@ -74,8 +87,43 @@ public class ChatFrame extends JFrame {
         f.setVgap(0);//组件垂直间距
         leftJPanel.setLayout(f);
 
-        ListPanel listPanel = new ListPanel();
+        ListPanel listPanel = new ListPanel(sendUser.getUid());
         leftJPanel.add(listPanel);
+        ListPanel listPanel1 = new ListPanel(acceptUser.getUid());
+        leftJPanel.add(listPanel1);
+        Iterator iterator = userMap.entrySet().iterator();
+        while(iterator.hasNext()){
+            final Map.Entry<String,String> entry = (Map.Entry<String, String>) iterator.next();
+            final ListPanel listPanel2 = new ListPanel(entry.getKey());
+            leftJPanel.add(listPanel2);
+            listPanel2.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    listPanel2.setBackground(Color.black);
+                    acceptUser.setUid(entry.getKey());
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+        }
         leftJPanel.setBounds(0,0,1920/6,864);
         leftJPanel.setBackground(new Color(61,61,61));
         allJpanel.add(leftJPanel);
@@ -145,5 +193,23 @@ public class ChatFrame extends JFrame {
     public static void main(String[] args) {
         //User user = new User()
         new ChatFrame(null,null,null);
+    }
+
+    @Override
+    public void run() {
+        while(true){
+            try {
+                List<Message> messageList = MessageClientUtil.acceptList2();
+                Iterator<Message> iterator = messageList.iterator();
+                while(iterator.hasNext()){
+                    Message message = iterator.next();
+                    centerJTextPanel.replaceSelection(acceptUser.getName()+":"+message.getText()+"\n");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

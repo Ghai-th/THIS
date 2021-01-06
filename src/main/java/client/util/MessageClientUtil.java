@@ -5,6 +5,7 @@ import client.entity.Message;
 import java.io.*;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 public class MessageClientUtil {
@@ -50,6 +51,10 @@ public class MessageClientUtil {
 
     public static HashMap accept() throws IOException, ClassNotFoundException {
         return (HashMap) objectInputStream.readObject();
+    }
+
+    public static List acceptList2 () throws IOException, ClassNotFoundException {
+        return (List)objectInputStream.readObject();
     }
 
 }

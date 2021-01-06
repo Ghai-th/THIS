@@ -66,7 +66,8 @@ public interface ServerOperate {
     int ONLINE_MESSAGE = 400002;
     int WINDING_MESSAGE = 400003;
     int SEND_MESSAGE = 400004;
-    int ACCEPT_MESSAGE = 400005;
+    int ACCEPT_MAP_MESSAGE = 400005;
+    int ACCEPT_LIST_MESSAGE = 400006;
 
     /**
      * attention表对应的操作

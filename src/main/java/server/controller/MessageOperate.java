@@ -9,8 +9,11 @@ import server.service.impl.MessageServiceImpl;
 import server.util.MessageServerUtil;
 import server.util.ServerUtil;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MessageOperate {
     public Message message;
@@ -35,9 +38,11 @@ public class MessageOperate {
             case ServerOperate.SEND_MESSAGE:
                 sendMessage();break;
 
-            case ServerOperate.ACCEPT_MESSAGE:
+            case ServerOperate.ACCEPT_MAP_MESSAGE:
                 acceptMessage();break;
 
+            case  ServerOperate.ACCEPT_LIST_MESSAGE:
+                acceptMapMessage();break;
         }
     }
 
@@ -55,9 +60,21 @@ public class MessageOperate {
      */
     public void testMessage() throws SQLException {
         if(iMessageService.newMessage(message)){
-
+            //给客户端回发有新消息时的操作
+            message.setSendNotice("10");
+            try {
+                messageServerUtil.sendMessage(message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }else {
-
+            //给客户端回发没有新消息时的操作
+            message.setSendNotice("0");
+            try {
+                messageServerUtil.sendMessage(message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -68,8 +85,17 @@ public class MessageOperate {
         int n = 0;
         User user = new User();
         user.setUid(message.getAcceptId());
-        //if()
-        if(iMessageService.newMessage(message)){
+        //if()d
+        Map.Entry<User,MessageServerUtil> entry = UserSocketGather.getUserMessageServerUtil(user);
+        if(entry!=null){
+            n = 0;
+            //调用entry里的socket向客户端发送消息
+            try {
+                entry.getValue().sendMessage(message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else {
             n = 1;
         }
         iMessageService.addMessage(message,n);
@@ -80,7 +106,23 @@ public class MessageOperate {
      */
     public void acceptMessage(){
         List<Message> messageList = iMessageService.selectMessage(message);
+        try {
+            messageServerUtil.sendMessageList(messageList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    /**
+     * 拉取哈希map
+     */
+    public void acceptMapMessage(){
+        HashMap<String,String> otherMap = iMessageService.selectMapMessage(message);
+        try {
+            messageServerUtil.sendMessageHashMap(otherMap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
