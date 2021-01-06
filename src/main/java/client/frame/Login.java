@@ -789,9 +789,11 @@ public class Login extends JPanel implements ActionListener, IndexConf {
                 ClientUtil.sendInfo(user,User.class);
                 user = ClientUtil.acceptInfo(User.class);
                 if(user.getPassword().equals("admin")){
-                    Login.this.setVisible(false);
+                    index.removeAll();
+                    index.setVisible(false);
                     Administrate administrate = new Administrate(user);
                     index.add(administrate);
+                    index.setVisible(true);
                 }else{
                     index.removeAll();
                     index.setVisible(false);

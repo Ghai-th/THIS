@@ -10,6 +10,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URI;
 
 public class DownPanel extends TranslucenceJPanel {
     private JLabel a1,a2,a3,a4,a5;
@@ -50,7 +51,22 @@ public class DownPanel extends TranslucenceJPanel {
         up.add(a4);
         a5 = j5.init("邮箱：861789352@qq.com  ");
         up.add(a5);
+
         this.add(up,BorderLayout.NORTH);
+        a5.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                Desktop desktop = Desktop.getDesktop();
+                URI uri = null; //创建URI统一资源标识符
+                try {
+                    uri = new URI("https://mail.qq.com/");
+                    desktop.browse(uri); //使用默认浏览器打开超链接
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         final JTextArea text =new JTextArea();
         text.append("  感谢使用THIS论坛，孔夫子曾言，知之者不如好之者，好之者不如乐之者。看来对于鲸鱼一行一道者，最高的境界应该是乐之，" +
                 "乐从何来，欧翁有醉翁之言，或许可以借鉴，乐人之乐是为其乐。埋头断案，愁思不得，忽然解惑，" +
@@ -75,5 +91,6 @@ public class DownPanel extends TranslucenceJPanel {
             }
         });
         this.add(text,BorderLayout.CENTER);
+
     }
 }
