@@ -1,7 +1,9 @@
 package client.frame;
 
 import client.conf.IndexConf;
+import client.entity.Article;
 import client.entity.User;
+import client.frame.modle.panel.ArticleDetailPanel;
 import client.frame.modle.table.ArticleTable;
 import client.frame.modle.table.CommentTable;
 import client.frame.modle.table.UserTable;
@@ -12,6 +14,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Administrate extends JPanel implements IndexConf {
 
@@ -30,6 +34,9 @@ public class Administrate extends JPanel implements IndexConf {
     public JPanel userJpanel, articleJpanel, commentJpanel;
     public JLabel userLabel, articleLabel, commentLabel;
     public JTable userTable, articleTable, commentTable;
+    public JPanel articleDetailPanel;
+    public JPanel aJPanel;
+    public Article article;
 
     public Administrate(User Administrator) {
         this.setLayout(new BorderLayout());
@@ -184,22 +191,6 @@ public class Administrate extends JPanel implements IndexConf {
             }
         });
 
-        articleDetail.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                articleDetail.setForeground(Color.RED);
-                articleDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-                articleDetail.setForeground(Color.BLACK);
-            }
-            @Override
-            public void mouseClicked(MouseEvent e){
-                System.out.println("文章详情");
-            }
-        });
-
         reportDetail.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -215,6 +206,58 @@ public class Administrate extends JPanel implements IndexConf {
                 System.out.println("举报详情");
             }
         });
+
+        articleDetail.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                articleDetail.setForeground(Color.RED);
+                articleDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                articleDetail.setForeground(Color.BLACK);
+            }
+            //////////////////////////////////////////////////////////////////////////////////////
+            @Override
+            public void mouseClicked(MouseEvent e){
+                int i = table.getSelectedRow();
+                int j = 0;
+                article = new Article();
+                Iterator articleIterator = ((ArticleTable) articleTable).articleArrayList.iterator();
+                while(articleIterator.hasNext())
+                {
+                    if(i == j) {
+                        article = (Article) articleIterator.next();
+                        break;
+                    }
+                    j++;
+                }
+                articleJpanel.removeAll();
+                articleDetailPanel = new JPanel();
+                aJPanel = new ArticleDetailPanel(article, articleDetailPanel);
+                mainPane =  new JScrollPane(
+                        articleDetailPanel,
+                        ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                articleJpanel.setLayout(new GridLayout(1,1));
+                articleJpanel.add(mainPane);
+                updateUI();
+            }
+
+        });
+        /////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
 
         tabbedPane.addChangeListener(new ChangeListener() {
             @Override
@@ -244,6 +287,7 @@ public class Administrate extends JPanel implements IndexConf {
                     functionJPanel.add(deleteArticle);
                     functionJPanel.add(articleDetail);
                     functionJPanel.add(reportDetail);
+
                     articleJpanel.removeAll();
                     table = new JTable(){
                         public boolean isCellEditable(int rowIndex, int ColIndex){
@@ -251,7 +295,10 @@ public class Administrate extends JPanel implements IndexConf {
                         }
                     } ;
                     articleTable = new ArticleTable(table);
-                    table.setPreferredSize(new Dimension(1900,((ArticleTable) articleTable).articleLength * 30));
+                    ///////////////////////////////////////////////////////
+                    //返回lit
+                    table.setPreferredSize(new Dimension(1900,((ArticleTable) articleTable).articleArrayList.size() * 30));
+                    ///////////////////////////////////////////////////////
                     mainPane =  new JScrollPane(
                             table,
                             ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,

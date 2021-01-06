@@ -248,7 +248,6 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
                 commentListPanel = new JPanel(new GridLayout(commentArray.size(),1));
                 commentListPanel.setPreferredSize(new Dimension(1200,commentArray.size() * 105));
                 for (Comment comments : commentArray) {
-                    System.out.println(comments);
                     ArticleDetailsCommentPanel articleDetailsCommentPanel = new ArticleDetailsCommentPanel(comments);
                     commentListPanel.add(articleDetailsCommentPanel);
                 }
