@@ -2,15 +2,12 @@ package client.frame.modle.panel;
 
 import client.entity.Article;
 import client.entity.Comment;
-import client.entity.User;
 import client.frame.Index;
 import client.util.ClientUtil;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -109,6 +106,7 @@ public class ArticleDetailPanel extends JPanel {
         textSynopsisImageLabel = new JLabel("图片");
         textSynopsisLabel = new JLabel("简介");
         textSynopsisLabel.setText(this.article.getSynopsis());
+        System.out.println();
         textSynopsisLabel.setFont(new Font("宋体",Font.PLAIN,17));
         textSynopsisLabel.setForeground(Color.gray);
         textSynopsisImageLabel.setPreferredSize(new Dimension(300, 225));

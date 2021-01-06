@@ -246,19 +246,6 @@ public class Administrate extends JPanel implements IndexConf {
 
         });
         /////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
         tabbedPane.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
