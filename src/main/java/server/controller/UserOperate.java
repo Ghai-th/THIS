@@ -220,12 +220,14 @@ public class UserOperate {
 
     public void isSuccess(boolean success) {
         if (success) {
+            System.out.println("success");
             try {
                 serverUtil.sendInfo(user, User.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
+            System.out.println("error");
             user.setOperate(ServerOperate.ERROR);
             try {
                 serverUtil.sendInfo(user, User.class);

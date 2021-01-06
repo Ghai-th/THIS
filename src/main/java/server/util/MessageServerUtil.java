@@ -1,11 +1,11 @@
 package server.util;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import data.MessageInfo;
+import client.entity.Message;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.Properties;
 
 public class MessageServerUtil {
@@ -42,16 +42,20 @@ public class MessageServerUtil {
     /**
      * 向客户端发送消息对象包含时间和内容
      */
-    public void sendMessageInfo(MessageInfo messageInfo) throws IOException {
-        objectOutputStream.writeObject(messageInfo);
+    public void sendMessage(Message message) throws IOException {
+        objectOutputStream.writeObject(message);
     }
 
     /**
      * 接受客户端发送的消息对象
      * @return 返回对象
      */
-    public MessageInfo acceptMessageInfo() throws IOException, ClassNotFoundException {
-        return (MessageInfo) objectInputStream.readObject();
+    public Message acceptMessage() throws IOException, ClassNotFoundException {
+        return (Message) objectInputStream.readObject();
     }
 
+
+    public void sendMessageHashMap(HashMap hashMap) throws IOException {
+        objectOutputStream.writeObject(hashMap);
+    }
 }

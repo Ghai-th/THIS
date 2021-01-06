@@ -5,18 +5,13 @@ import client.frame.Index;
 import client.frame.Login;
 import client.frame.modle.panel.ArticleListPanel;
 import client.util.ClientUtil;
-import client.util.MessageClientUtil;
-import data.Operate;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * 大分类的label 封装
@@ -50,7 +45,7 @@ public class ClassLabel extends JLabel {
                     case "消息":
                         System.out.println("进入消息");
                         isLogin();
-
+                        openMessage();
                         return;
                     case "发表文章":
                         System.out.println("创作界面");
@@ -132,5 +127,9 @@ public class ClassLabel extends JLabel {
             index.removeAll();
             index.add(new Login(index));
         }
+    }
+
+    public void openMessage() {
+
     }
 }

@@ -1,9 +1,10 @@
 package client.util;
 
-import data.MessageInfo;
+import client.entity.Message;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.Properties;
 
 public class MessageClientUtil {
@@ -35,15 +36,20 @@ public class MessageClientUtil {
     /**
      * 向服务端发送消息对象包含时间和内容
      */
-    public static void sendInfo(MessageInfo messageInfo) throws IOException {
-        objectOutputStream.writeObject(messageInfo);
+    public static void sendInfo(Message message) throws IOException {
+        objectOutputStream.writeObject(message);
     }
 
     /**
      * 接受服务端发送的消息对象
      * @return 返回对象
      */
-    public static MessageInfo acceptInfo() throws IOException, ClassNotFoundException {
-        return (MessageInfo) objectInputStream.readObject();
+    public static Message acceptInfo() throws IOException, ClassNotFoundException {
+        return (Message) objectInputStream.readObject();
     }
+
+    public static HashMap accept() throws IOException, ClassNotFoundException {
+        return (HashMap) objectInputStream.readObject();
+    }
+
 }
