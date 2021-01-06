@@ -287,7 +287,7 @@ public class Administrate extends JPanel implements IndexConf {
         };
 
         /**
-         *
+         * 举报详情按钮事件
          */
         deleteComment.addMouseListener(commentAdapter);
         reportDetail.addMouseListener(new MouseAdapter() {
@@ -306,6 +306,9 @@ public class Administrate extends JPanel implements IndexConf {
             }
         });
 
+        /**
+         * 文章详情按钮事件
+         */
         articleDetail.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -353,13 +356,16 @@ public class Administrate extends JPanel implements IndexConf {
                     @Override
                     public void mouseEntered(MouseEvent e) {
                         returnArticleTable.setForeground(Color.RED);
-//                        articleDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                        articleDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                     }
                 });
                 updateUI();
             }
-
         });
+
+        /**
+         * 标签面板事件
+         */
         tabbedPane.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -380,6 +386,9 @@ public class Administrate extends JPanel implements IndexConf {
         this.add(centerPanel, BorderLayout.CENTER);
     }
 
+    /**
+     *
+     */
     public void changeListener0() {
         functionJPanel.removeAll();
         functionJPanel.add(deleteUser);
