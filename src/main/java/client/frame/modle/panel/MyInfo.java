@@ -3,14 +3,12 @@ package client.frame.modle.panel;
 import client.entity.User;
 import client.util.ClientUtil;
 import com.formdev.flatlaf.FlatLightLaf;
-import data.Operate;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 public class MyInfo extends JFrame {
     User user;
@@ -114,6 +112,7 @@ public class MyInfo extends JFrame {
         okJButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                String temp = user.getPassword();
                 super.mouseClicked(e);
                 if(okJButton.getText().equals("修改")){
                     state = true;
@@ -135,11 +134,9 @@ public class MyInfo extends JFrame {
                     user.setMyKey(mykeyJTextField.getText());
                     try {
                         user.setOperate(ServerOperate.REGISTER_USER);
-                        System.out.println(user);
                         ClientUtil.sendInfo(user,User.class);
                         user = ClientUtil.acceptInfo(User.class);
-                        System.out.println(user.operate);
-                        if(user.operate == ServerOperate.REGISTER_USER){
+                        if(user.operate != ServerOperate.ERROR){
                             user.setOperate(ServerOperate.UPDATE_USER);
                             ClientUtil.sendInfo(user,User.class);
                             user = ClientUtil.acceptInfo(User.class);
@@ -150,6 +147,7 @@ public class MyInfo extends JFrame {
                             }
                         }else{
                             JOptionPane.showMessageDialog(MyInfo.this,"密码格式不合法！");
+                            passwordJPasswordField.setText(temp);
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();
