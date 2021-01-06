@@ -9,18 +9,19 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleTable extends JTable {
     public JTable table;
     public DefaultTableModel tableModel;
-    public int articleLength;
+    public ArrayList<Article> articleArrayList;
 
     public ArticleTable(JTable table){
         this.table = table;
-        articleLength = init();
+        init();
     }
 
-    private int init() {
+    private void init() {
         tableModel = (DefaultTableModel) table.getModel();
         tableModel.addColumn("标题");
         tableModel.addColumn("文章id");
@@ -50,18 +51,18 @@ public class ArticleTable extends JTable {
         tabHeader.setFont(new Font("宋体", Font.BOLD, 18));
 
         //从数据库拉取文章数据，放入表格
-        ArrayList<Article> articleList = new ArrayList<>();
+        articleArrayList = new ArrayList<>();
         Article articl = new Article();
         articl.operate = ServerOperate.SELECT_ARTICLE_INFO;
         try {
             ClientUtil.sendInfo(articl, Article.class);
-            articleList.addAll(ClientUtil.acceptList());
+            articleArrayList.addAll(ClientUtil.acceptList());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Object[][] o = new Object[articleList.size()][9];
+        Object[][] o = new Object[articleArrayList.size()][9];
         int i = 0;
-        for(Article art : articleList) {
+        for(Article art : articleArrayList) {
             o[i][0] = art.getTitle();
             o[i][1] = art.getAid();
             o[i][2] = art.getUid();
@@ -81,6 +82,5 @@ public class ArticleTable extends JTable {
         r.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class, r);
 
-        return articleList.size();
     }
 }
