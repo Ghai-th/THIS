@@ -176,9 +176,7 @@ public class Administrate extends JPanel implements IndexConf {
                         ClientUtil.acceptInfo(User.class);
                         if (user.operate!=ServerOperate.ERROR){
                             JOptionPane.showMessageDialog(Administrate.this,"用户删除成功");
-                            Administrate.this.removeAll();
-                            Administrate.this.add(new Administrate(Administrator));
-                            updateUI();
+                            changeListener0();
                         }
                     } catch (IOException | ClassNotFoundException ex) {
                         ex.printStackTrace();
@@ -186,7 +184,6 @@ public class Administrate extends JPanel implements IndexConf {
                 } else {
                     JOptionPane.showMessageDialog(Administrate.this,"请选择有效的行！");
                 }
-                System.out.println("删除用户");
             }
         };
 
@@ -212,9 +209,7 @@ public class Administrate extends JPanel implements IndexConf {
                         //ClientUtil.acceptInfo(Article.class);
                         if (article.operate!=ServerOperate.ERROR){
                             JOptionPane.showMessageDialog(Administrate.this,"文章删除成功");
-                            Administrate.this.removeAll();
-                            Administrate.this.add(new Administrate(Administrator));
-                            updateUI();
+                            changeListener1();
                         }
                     } catch (IOException ex) {
                         ex.printStackTrace();
@@ -222,8 +217,6 @@ public class Administrate extends JPanel implements IndexConf {
                 } else {
                     JOptionPane.showMessageDialog(Administrate.this,"请选择有效的行！");
                 }
-
-                System.out.println("删除文章");
             }
         };
         commentAdapter = new MouseAdapter() {
@@ -247,9 +240,7 @@ public class Administrate extends JPanel implements IndexConf {
                         //ClientUtil.acceptInfo(Article.class);
                         if (comment.operate!=ServerOperate.ERROR){
                             JOptionPane.showMessageDialog(Administrate.this,"评论删除成功");
-                            Administrate.this.removeAll();
-                            Administrate.this.add(new Administrate(Administrator));
-                            updateUI();
+                            changeListener2();
                         }
                     } catch (IOException ex) {
                         ex.printStackTrace();
@@ -257,7 +248,6 @@ public class Administrate extends JPanel implements IndexConf {
                 } else {
                     JOptionPane.showMessageDialog(Administrate.this,"请选择有效的行！");
                 }
-                System.out.println("删除评论");
             }
         };
         reportDetail.addMouseListener(new MouseAdapter() {
@@ -310,6 +300,22 @@ public class Administrate extends JPanel implements IndexConf {
                 mainPane.getVerticalScrollBar().setUnitIncrement(20);
                 articleJpanel.setLayout(new GridLayout(1,1));
                 articleJpanel.add(mainPane);
+                returnArticleTable.setVisible(true);
+                returnArticleTable.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                        changeListener1();
+                    }
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        returnArticleTable.setForeground(Color.BLACK);
+                    }
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        returnArticleTable.setForeground(Color.RED);
+//                        articleDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                    }
+                });
                 updateUI();
             }
 
@@ -370,6 +376,8 @@ public class Administrate extends JPanel implements IndexConf {
         functionJPanel.add(deleteArticle);
         functionJPanel.add(articleDetail);
         functionJPanel.add(reportDetail);
+        functionJPanel.add(returnArticleTable);
+        returnArticleTable.setVisible(false);
 
         articleJpanel.removeAll();
         table = new JTable(){
@@ -416,7 +424,6 @@ public class Administrate extends JPanel implements IndexConf {
         commentTable = new CommentTable(table);
         table.setPreferredSize(new Dimension(1900,((CommentTable) commentTable).commentLength * 30));
         mainPane =  new JScrollPane(
-
                 table,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
