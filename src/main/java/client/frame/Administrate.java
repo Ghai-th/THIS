@@ -65,10 +65,9 @@ public class Administrate extends JPanel implements IndexConf {
         welcomeLable.setFont(new Font("宋体", Font.BOLD, 20));
         exitLable.setFont(new Font("宋体", Font.BOLD, 20));
         /**
-         * 退出按钮初始化
+         * 退出按钮初的鼠标事件，进入登陆界面
          */
         exitLable.addMouseListener(new MouseAdapter() {
-            //退出的鼠标监听器
             @Override
             public void mouseEntered(MouseEvent e) {
                 exitLable.setForeground(Color.RED);
@@ -106,6 +105,9 @@ public class Administrate extends JPanel implements IndexConf {
         this.add(northPanel, BorderLayout.NORTH);
     }
 
+    /**
+     * 初始化管理员界面的中间部分
+     */
     public void initCenter() {
         centerPanel = new JPanel(new BorderLayout());
         tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -128,7 +130,10 @@ public class Administrate extends JPanel implements IndexConf {
             public boolean isCellEditable(int rowIndex, int ColIndex){
                 return false;
             }
-        } ;
+        };
+        /**
+         * 给表格加鼠标事件
+         */
         table.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent arg0) {
@@ -170,6 +175,9 @@ public class Administrate extends JPanel implements IndexConf {
 
         functionJPanel.add(deleteUser);
         functionJPanel.setPreferredSize(new Dimension(WIDTH / 6, HIGH * 53 / 1050));
+        /**
+         * 用户事件对应的适配器
+         */
         userAdepter  = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -204,7 +212,9 @@ public class Administrate extends JPanel implements IndexConf {
         };
         deleteUser.addMouseListener(userAdepter);
 
-
+        /**
+        * 文章事件的监听器
+        */
         articleAdepter = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
