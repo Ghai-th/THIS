@@ -14,7 +14,6 @@ public class testframe extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocation(0,0);
 
-
         AllPanel allPanel = new AllPanel(new User(),new User());
         add(allPanel);
         setVisible(true);

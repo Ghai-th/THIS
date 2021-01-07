@@ -5,19 +5,12 @@ import client.entity.Comment;
 import client.entity.Store;
 import client.entity.User;
 import client.frame.Index;
-import client.util.ClientUtil;
-import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
-import server.controller.ServerOperate;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.*;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.*;
@@ -34,7 +27,7 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
     TestPanel testPanel;
     JScrollPane jScrollPane;
     WritePanel writePanel ;
-    TranslucenceJPanel centerc = new TranslucenceJPanel();
+    TranslucenceJPanel centerc = new TranslucenceJPanel(new GridLayout(2, 1));
     ImageIcon Imageone,Imagetwo,Imagethree,imagefour;
     JLabel imageJLabelone,imageJLabeltwo,imageJLabelthree,imageJLabelfour;
     JPanel imageJPanelone,imageJPaneltwo,imageJPanelthree,imageJPanelfour;
@@ -49,16 +42,19 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
     Thread [] music = new Thread[30];
     int i = 0;
     public UserPanel() {
+        super(new GridLayout(2, 1));
         setBounds(0,0,1920,1080);
         init();
 
     }
     public UserPanel(User user){
+        super(new GridLayout(2, 1));
         this.myUser = user;
         setBounds(0,0,1920,1080);
         init();
     }
     public UserPanel(User myUser, User otherUser, Index index, AllPanel allPanel, List<Comment> commentList, List<Store> storeList, List<Article> articleList){
+        super(new GridLayout(2, 1));
         this.commentList = commentList;
         this.storeList = storeList;
         if(storeList==null){
@@ -86,7 +82,7 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
         testPanel = new TestPanel(myUser,otherUser);
         this.setLayout(new BorderLayout());
         userId  = new JLabel(myUser.getName());
-        up = new TranslucenceJPanel();
+        up = new TranslucenceJPanel(new GridLayout(2, 1));
         up.setOpaque(false);
         up.setTransparent(0.5f);
         up.setLayout(null);
@@ -127,7 +123,7 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
         up.setBorder(BorderFactory.createMatteBorder(0,5,0,0,new Color(255,69,0)));
         up.setBackground(new Color(0,0,0,0.9f));
 //中间布局
-        center = new TranslucenceJPanel();
+        center = new TranslucenceJPanel(new GridLayout(2, 1));
         center.setOpaque(false);
         center.setTransparent(0.01f);
         //中北布局
@@ -490,7 +486,7 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
 
         down = new DownPanel(myUser);
 
-        Big = new TranslucenceJPanel();
+        Big = new TranslucenceJPanel(new GridLayout(2, 1));
         Big.setOpaque(false);
         Big.add(imageJPanelone);
         Big.add(imageJPaneltwo);

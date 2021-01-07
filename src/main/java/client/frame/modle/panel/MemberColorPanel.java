@@ -1,7 +1,5 @@
 package client.frame.modle.panel;
 
-import client.entity.User;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -17,7 +15,8 @@ public class MemberColorPanel extends TranslucenceJPanel {
     String up;
     String down;
     public MemberColorPanel(String up,String down){
-       this.up = up;
+        super(new GridLayout(2, 1));
+        this.up = up;
        this.down = down;
        init();
     }

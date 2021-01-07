@@ -4,7 +4,6 @@ package client.frame.modle.panel;
 
 import client.entity.User;
 
-import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
 import java.awt.*;
 
@@ -20,9 +19,11 @@ public class MemberImagPanel extends TranslucenceJPanel {
     String right;
     public MemberImagPanel(){
 
+        super(new GridLayout(2, 1));
     }
     public MemberImagPanel(String left,String right){
-       this.left = left;
+        super(new GridLayout(2, 1));
+        this.left = left;
        this.right = right;
         init();
     }

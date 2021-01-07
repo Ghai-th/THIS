@@ -41,8 +41,8 @@ public class AllPanel extends JPanel{
     public void init(){
         setLayout(null);
         UserPanel userPanel = new UserPanel(myUser,otherUser,index,this,commentList,storeList,articleList);
-        Thread thread = new Thread(userPanel);
-        thread.start();
+//        Thread thread = new Thread(userPanel);
+//        thread.start();
         ImageIcon Image=new ImageIcon("src/main/resources/屏幕截图 2020-12-30 223025.png");
         j = new JLabel(Image);
         j.setBounds(0,0,1920,1080);

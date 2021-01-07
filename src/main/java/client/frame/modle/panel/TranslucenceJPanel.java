@@ -1,9 +1,7 @@
 package client.frame.modle.panel;/*
  *重写这个类来实现半透明的JPanel
  */
-import java.awt.AlphaComposite;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
@@ -12,11 +10,12 @@ public class TranslucenceJPanel extends JPanel {
 
     private float transparency;
 
+    public TranslucenceJPanel(GridLayout gridLayout){
+        super(gridLayout);
+    }
     public TranslucenceJPanel(){
 
     }
-
-
 
     /**这个方法用来设置JPanel的透明度
      *

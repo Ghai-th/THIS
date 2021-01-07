@@ -2,7 +2,6 @@ package client.frame.modle.panel;
 
 import client.entity.User;
 import client.frame.modle.label.DownJlabel;
-import server.util.DBUtil;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -21,6 +20,7 @@ public class DownPanel extends TranslucenceJPanel {
     DownJlabel j5 = new DownJlabel();
     private User myUser,otherUser;
     public DownPanel(User myUser){
+        super(new GridLayout(2, 1));
         this.myUser = myUser;
         this.setOpaque(false);
         this.setTransparent(0.01f);
@@ -28,6 +28,7 @@ public class DownPanel extends TranslucenceJPanel {
         init();
     }
     public DownPanel(User myUser,User otherUser){
+        super(new GridLayout(2, 1));
         this.myUser = myUser;
         this.otherUser = otherUser;
         this.setOpaque(false);
@@ -37,7 +38,7 @@ public class DownPanel extends TranslucenceJPanel {
     }
     public void init(){
         this.setLayout(new BorderLayout());
-        TranslucenceJPanel up = new TranslucenceJPanel();
+        TranslucenceJPanel up = new TranslucenceJPanel(new GridLayout(2, 1));
         up.setLayout(new FlowLayout());
         up.setBorder(BorderFactory.createMatteBorder(0,0,2,0,Color.GRAY));
         up.setBackground(new Color(0xFDFFFB));

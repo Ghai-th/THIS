@@ -1,7 +1,5 @@
 package client.frame.modle.panel;
 
-import client.entity.User;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,6 +11,7 @@ public class MemberNoColorPanel extends TranslucenceJPanel {
     JLabel downJLabel;//下部label
     public String up,down;
     public MemberNoColorPanel(String up,String down){
+        super(new GridLayout(2, 1));
         this.up = up;
         this.down = down;
         init();
