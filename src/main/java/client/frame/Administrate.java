@@ -189,24 +189,29 @@ public class Administrate extends JPanel implements IndexConf {
             }
             @Override
             public void mouseClicked(MouseEvent e){
-                if(row!=-1){
-                    user = new User();
-                    user.setUid((String)table.getValueAt(row, 0));
-                    user.operate = ServerOperate.DELETE_USER;
-                    try {
-                        ClientUtil.sendInfo(user,User.class);
-                        ClientUtil.acceptInfo(User.class);
-                        if (user.operate!=ServerOperate.ERROR){
-                            JOptionPane.showMessageDialog(Administrate.this,"用户删除成功");
-                            changeListener0();
-                        }
-                    } catch (IOException | ClassNotFoundException ex) {
-                        ex.printStackTrace();
-                    }
+                if(table.getSelectedRow() >=0 && table.getSelectedRow() <=5){
+                    JOptionPane.showMessageDialog(Administrate.this,"无权删除该用户！");
+                    changeListener0();
                 } else {
-                    JOptionPane.showMessageDialog(Administrate.this,"请选择有效的行！");
+                    if(row!=-1) {
+                        user = new User();
+                        user.setUid((String)table.getValueAt(row, 0));
+                        user.operate = ServerOperate.DELETE_USER;
+                        try {
+                            ClientUtil.sendInfo(user,User.class);
+                            ClientUtil.acceptInfo(User.class);
+                            if (user.operate!=ServerOperate.ERROR){
+                                JOptionPane.showMessageDialog(Administrate.this,"用户删除成功");
+                                changeListener0();
+                            }
+                        } catch (IOException | ClassNotFoundException ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(Administrate.this,"请选择有效的行！");
+                    }
+                    row = -1;
                 }
-                row = -1;
             }
         };
         deleteUser.addMouseListener(userAdepter);
@@ -302,46 +307,51 @@ public class Administrate extends JPanel implements IndexConf {
             @Override
             public void mouseClicked(MouseEvent e){
                 int i = table.getSelectedRow();
-                int j = 0;
-                article = new Article();
-                Iterator articleIterator = ((ArticleTable) articleTable).articleArrayList.iterator();
-                while(articleIterator.hasNext())
-                {
-                    if(i == j) {
-                        article = (Article) articleIterator.next();
-                        break;
+                if(i != -1){
+                    int j = 0;
+                    article = new Article();
+                    Iterator articleIterator = ((ArticleTable) articleTable).articleArrayList.iterator();
+                    while(articleIterator.hasNext())
+                    {
+                        if(i == j) {
+                            article = (Article) articleIterator.next();
+                            break;
+                        }
+                        j++;
                     }
-                    j++;
+                    articleJpanel.removeAll();
+                    articleDetailPanel = new JPanel();
+                    aJPanel = new ArticleDetailPanel(article, articleDetailPanel);
+                    mainPane =  new JScrollPane(
+                            articleDetailPanel,
+                            ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                    mainPane.getVerticalScrollBar().setUnitIncrement(20);
+                    articleJpanel.setLayout(new GridLayout(1,1));
+                    articleJpanel.add(mainPane);
+                    deleteArticle.setVisible(false);
+                    articleDetail.setVisible(false);
+                    returnArticleTable.setVisible(true);
+                    returnArticleTable.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e){
+                            changeListener1();
+                        }
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                            returnArticleTable.setForeground(Color.BLACK);
+                        }
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                            returnArticleTable.setForeground(Color.RED);
+                            articleDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                        }
+                    });
+                    updateUI();
+                } else {
+                    JOptionPane.showMessageDialog(Administrate.this,"请选择有效的行！");
                 }
-                articleJpanel.removeAll();
-                articleDetailPanel = new JPanel();
-                aJPanel = new ArticleDetailPanel(article, articleDetailPanel);
-                mainPane =  new JScrollPane(
-                        articleDetailPanel,
-                        ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                mainPane.getVerticalScrollBar().setUnitIncrement(20);
-                articleJpanel.setLayout(new GridLayout(1,1));
-                articleJpanel.add(mainPane);
-                deleteArticle.setVisible(false);
-                articleDetail.setVisible(false);
-                returnArticleTable.setVisible(true);
-                returnArticleTable.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e){
-                        changeListener1();
-                    }
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                        returnArticleTable.setForeground(Color.BLACK);
-                    }
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                        returnArticleTable.setForeground(Color.RED);
-                        articleDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                    }
-                });
-                updateUI();
+
             }
         });
 
@@ -389,7 +399,7 @@ public class Administrate extends JPanel implements IndexConf {
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        userJpanel.add(mainPane);
+        userJpanel.add(mainPane); int x = 1;
         updateUI();
         table.addMouseListener(new MouseAdapter(){
             @Override
@@ -397,7 +407,7 @@ public class Administrate extends JPanel implements IndexConf {
                 // TODO Auto-generated method stub
                 if (arg0.getClickCount() == 1) {
                     row = ((JTable) arg0.getSource()).rowAtPoint(arg0.getPoint());
-                    deleteUser.removeMouseListener(userAdepter);
+                    deleteUser.removeMouseListener(userAdepter);int x = 1;
                     deleteUser.addMouseListener(userAdepter);
                 }
             }

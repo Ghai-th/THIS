@@ -75,8 +75,8 @@ public class ClassPanel extends JPanel implements MouseListener, IndexConf {
 
         this.add(center, BorderLayout.CENTER);
 
-        JPanel west = new JPanel();
-        west.setPreferredSize(new Dimension(WIDE * 5 / 32, RANK_HIGH));
+        JPanel west = new ClassBackgroundPanel(className.getName());
+        west.setPreferredSize(new Dimension(WIDE * 13 / 64, RANK_HIGH));
         west.setBorder(BorderFactory.createMatteBorder(0, 2, 0, 0, Color.BLACK));
         this.add(west, BorderLayout.EAST);
     }

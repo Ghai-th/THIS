@@ -220,9 +220,6 @@ public class DBUtil {
                     if (field.getName().equals("serialVersionUID")) {
                         continue;
                     }
-                    if (field.getName().equals("password")) {
-                        continue;
-                    }
                     if (field.getName().equals("image")) {
                         continue;
                     }

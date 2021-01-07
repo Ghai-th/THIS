@@ -174,6 +174,7 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                     } catch (IOException | ClassNotFoundException ee) {
                         ee.printStackTrace();
                     }
+                    //获取我的文章所有信息
                     Article article = new Article();
                     List<Article> articleList = new ArrayList<>();
                     article.operate = ServerOperate.GET_ARTICLE_BY_UID;

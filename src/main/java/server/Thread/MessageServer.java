@@ -19,7 +19,6 @@ public class MessageServer extends  Thread{
         while (true){
             try {
                 messageServerUtil = new MessageServerUtil();
-                System.out.println("接到socket");
                 Thread thread = new Thread(new readThread(messageServerUtil));
                 thread.start();
             } catch (IOException e) {

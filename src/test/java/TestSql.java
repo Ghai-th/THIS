@@ -124,21 +124,11 @@ public class TestSql {
 
     @Test
     public void testInsertMessage() throws SQLException {
-        Message message = new Message("2222","李四","cnm","1","1","0");
         IMessageDao iMessageDao = new MessageDaoImpl();
-        if(iMessageDao.emptyMessage(message)){
-//            iMessageDao.addMessage(message);
-        }else{
-            System.out.println("不为空");
-            iMessageDao.updateMessage(message);
-        }
-        //iMessageDao.updateMessageSendNotice(message,"1");
-        List<Message> messageList = iMessageDao.selectMessage(message);
-        Iterator<Message> iterator = messageList.iterator();
-        while(iterator.hasNext()){
-            Message message1 = iterator.next();
-            System.out.println(message1.getSendId()+"对"+message1.getAcceptId()+"说"+message1.getText()+"...."+message1.getState());
-        }
+        Message message = new Message();
+        message.setSendId("u123457");
+        message.setAcceptId("u123490");
+        iMessageDao.selectAllMessage(message);
     }
     @Test
     public void testAttention(){

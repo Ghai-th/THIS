@@ -27,7 +27,7 @@ public class MessageDaoImpl implements IMessageDao {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,message.getSendId());
         preparedStatement.setString(2,message.getAcceptId());
-        preparedStatement.setString(3,"#"+message.getText());
+        preparedStatement.setString(3,message.getText());
         preparedStatement.setString(4,
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(message.getTime()));
         preparedStatement.setString(5,String.valueOf(n));
@@ -97,7 +97,8 @@ public class MessageDaoImpl implements IMessageDao {
         String sendId = message.getSendId();
         String sql = "select * from message where acceptid='"+acceptId+"'";
         messageList = DBUtil.executeGetMoreData(statement,sql,Message.class);
-        updateMessageState(message,"0",1);
+        System.out.println(messageList);
+        updateMessageState(message,"0",0);
         statement.close();
         connection.close();
         return messageList;
@@ -118,7 +119,7 @@ public class MessageDaoImpl implements IMessageDao {
         String sendId = message.getSendId();
         String sql = "select * from message where acceptid='"+acceptId+"' and sendid='"+sendId+"'";
         messageList = DBUtil.executeGetMoreData(statement,sql,Message.class);
-        updateMessageState(message,"0",1);
+        updateMessageState(message,"0",0);
         statement.close();
         connection.close();
         return messageList;
@@ -133,6 +134,7 @@ public class MessageDaoImpl implements IMessageDao {
     public HashMap<String, String> selectMapMessage(Message message) {
         HashMap<String,String> otherMap = new HashMap<String,String>();
         String sql = "select * from message where acceptid='"+message.getAcceptId()+"'";
+        //System.out.println(sql);
         try {
             connection = DBUtil.getConnection();
             Statement statement = connection.createStatement();
@@ -188,8 +190,9 @@ public class MessageDaoImpl implements IMessageDao {
     public void updateMessageState(Message message,String n,int judge) throws SQLException {
         String sql = null;
         if(judge==0){
-            sql = "update message set state='"+n+"' where sendid='"+message.getSendId()+"' and acceptid='"+message.getAcceptId()+"'";
+            sql = "update message set state='"+n+"' where acceptid='"+message.getAcceptId()+"'";
         }
+        System.out.println(sql);
         connection = DBUtil.getConnection();
         statement = connection.createStatement();
 
@@ -218,6 +221,7 @@ public class MessageDaoImpl implements IMessageDao {
                 DBUtil.closeResources(connection,statement);
             }
         }
+        //return false;
 
     }
 
