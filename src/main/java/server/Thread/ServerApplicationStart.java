@@ -66,6 +66,8 @@ class Listener<T> implements Runnable {
             new StoreOperate((Store)t,serverUtil);
         } else if (t instanceof User) {
             new UserOperate((User)t,serverUtil);
+        } else if(t instanceof Report) {
+            new ReportOperate((Report)t, serverUtil);
         }
     }
 }

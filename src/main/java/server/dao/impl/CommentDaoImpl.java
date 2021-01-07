@@ -185,6 +185,7 @@ public class CommentDaoImpl implements ICommentDao {
             String sql = "select * from comment";
             stmt = DBUtil.getStatement(conn);
             list = DBUtil.executeGetMoreData(stmt, sql, Comment.class);
+
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
