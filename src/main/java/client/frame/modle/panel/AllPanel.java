@@ -10,6 +10,7 @@ import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AllPanel extends JPanel{
@@ -62,11 +63,12 @@ public class AllPanel extends JPanel{
         User user = otherUser;
 
         Comment comment = new Comment();
-        comment.operate = ServerOperate.DELETE_COMMENT_BY_UID;
+        comment.operate = ServerOperate.QUERY_ALL_COMMENT_BY_UID;
         comment.setUid(user.getUid());
 
         try {
             ClientUtil.sendInfo(comment,Comment.class);
+            commentList = new ArrayList<>();
             commentList.addAll(ClientUtil.acceptList());
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,6 +79,7 @@ public class AllPanel extends JPanel{
         store.setUid(user.getUid());
         try {
             ClientUtil.sendInfo(store,Store.class);
+            storeList = new ArrayList<>();
             storeList.addAll(ClientUtil.acceptList());
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,6 +91,7 @@ public class AllPanel extends JPanel{
 
         try {
             ClientUtil.sendInfo(article,Article.class);
+            articleList = new ArrayList<>();
             articleList.addAll(ClientUtil.acceptList());
         } catch (Exception e) {
             e.printStackTrace();

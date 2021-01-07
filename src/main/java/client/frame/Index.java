@@ -86,12 +86,10 @@ public class Index extends JPanel implements IndexConf {
 
         //等级前十的用户
         ArrayList<User> userTopTenArrayList = new ArrayList<>();
-        User userTopTen = new User();
-        int x;
+        User userTopTen = new User();int x;
         userTopTen.operate = ServerOperate.SELECT_LIMIT_USERS;
         try {
-            ClientUtil.sendInfo(userTopTen, User.class);
-            x = 1;
+            ClientUtil.sendInfo(userTopTen, User.class);x = 1;
             userTopTenArrayList.addAll(ClientUtil.acceptList());
         } catch (Exception e) {
             e.printStackTrace();
