@@ -1,10 +1,12 @@
 package server.service.impl;
 
 import client.entity.Comment;
+import server.controller.ServerOperate;
 import server.dao.ICommentDao;
 import server.dao.impl.CommentDaoImpl;
 import server.service.ICommentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommentServiceImpl implements ICommentService {
@@ -55,15 +57,28 @@ public class CommentServiceImpl implements ICommentService {
     @Override
     public List<Comment> queryAllCommentByUid(String uid) {
         //返回用户的所有评论
-        List<Comment> commentList = commentDao.queryAllCommentByUid(uid);
-        return commentList;
+        List<Comment> list = commentDao.queryAllCommentByUid(uid);
+        if (list == null) {
+             Comment comment = new Comment();
+             comment.operate = ServerOperate.NULL;
+             list = new ArrayList<>();
+             list.add(comment);
+        }
+        return list;
     }
 
     @Override
     public List<Comment> queryAllCommentByAid(String aid) {
         //返回文章的所有评论
-        List<Comment> commentList = commentDao.queryAllCommentByAid(aid);
-        return commentList;
+        List<Comment> list = commentDao.queryAllCommentByAid(aid);
+        if (list == null) {
+            Comment comment = new Comment();
+            comment.operate = ServerOperate.NULL;
+            list = new ArrayList<>();
+            list.add(comment);
+        }
+        return list;
+
     }
 
     @Override
@@ -76,8 +91,14 @@ public class CommentServiceImpl implements ICommentService {
     @Override
     public List<Comment> selectCommentInfo() {
         //返回文章的所有评论
-        List<Comment> commentList = commentDao.selectCommentInfo();
-        return commentList;
+        List<Comment> list = commentDao.selectCommentInfo();
+        if (list == null) {
+            Comment comment = new Comment();
+            comment.operate = ServerOperate.NULL;
+            list = new ArrayList<>();
+            list.add(comment);
+        }
+        return list;
     }
 
 }

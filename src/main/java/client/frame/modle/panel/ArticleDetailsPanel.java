@@ -140,7 +140,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
 
     public void initCenter() {
         JPanel textSynopsisPanel, textPortPanel;
-        JLabel textSynopsisImageLabel, textSynopsisLabel;
+        JLabel  textSynopsisLabel;
         JTextPane textPortPane;
 
         articleDetailCenterPanel = new JPanel(new BorderLayout());
@@ -148,17 +148,14 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         textSynopsisPanel = new JPanel(new BorderLayout());
         textSynopsisPanel.setPreferredSize(new Dimension(1200, 225));
         textSynopsisPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-        textSynopsisImageLabel = new JLabel("图片");
         textSynopsisLabel = new JLabel("简介");
         textSynopsisLabel.setText(article.getSynopsis());
         textSynopsisLabel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
         textSynopsisLabel.setFont(new Font("宋体",Font.PLAIN,17));
         textSynopsisLabel.setForeground(Color.gray);
-        textSynopsisImageLabel.setPreferredSize(new Dimension(400, 225));
-        textSynopsisLabel.setPreferredSize(new Dimension(200, 225));
+        textSynopsisLabel.setPreferredSize(new Dimension(1200, 225));
         textSynopsisLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
         textSynopsisPanel.add(textSynopsisLabel, BorderLayout.WEST);
-        textSynopsisPanel.add(textSynopsisImageLabel, BorderLayout.EAST);
 
         textPortPanel = new JPanel();
         textPortPanel.setPreferredSize(new Dimension(1200, 500));
