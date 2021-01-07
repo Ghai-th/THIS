@@ -11,9 +11,7 @@ import server.util.ServerUtil;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MessageOperate {
     public Message message;
@@ -58,6 +56,13 @@ public class MessageOperate {
         User user = new User();
         user.setUid(message.getSendId());
         UserSocketGather.addUserServerUtilMap(user,messageServerUtil);
+        Iterator iterator = UserSocketGather.userMessageServerUtilMap.entrySet().iterator();
+        System.out.println("目前上线集合中的元素有:");
+        while(iterator.hasNext()){
+            Map.Entry<User,MessageServerUtil> entry = (Map.Entry<User, MessageServerUtil>) iterator.next();
+            System.out.println(entry.getKey());
+        }
+        System.out.println("到此结束");
     }
 
     /**
@@ -109,8 +114,11 @@ public class MessageOperate {
     /**
      * 拉取消息列表
      */
-    public void acceptMessage(){
+    public void acceptMessage() throws SQLException {
         List<Message> messageList = iMessageService.selectMessage(message);
+        if(messageList==null){
+            messageList = new ArrayList<Message>();
+        }
         try {
             messageServerUtil.sendMessageList(messageList);
         } catch (IOException e) {
@@ -123,6 +131,9 @@ public class MessageOperate {
      */
     public void acceptMapMessage(){
         HashMap<String,String> otherMap = iMessageService.selectMapMessage(message);
+        if(otherMap == null){
+            otherMap = new HashMap<String, String>();
+        }
         try {
             messageServerUtil.sendMessageHashMap(otherMap);
         } catch (IOException e) {

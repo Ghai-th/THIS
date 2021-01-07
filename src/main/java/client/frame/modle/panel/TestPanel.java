@@ -109,14 +109,12 @@ public class TestPanel extends JPanel {
                 message1.setOperate(ServerOperate.ACCEPT_MAP_MESSAGE);
                 try {
                     MessageClientUtil.sendInfo(message1);
-                    System.out.println("up");
                     HashMap<String,String> userMap = MessageClientUtil.accept();
-                    System.out.println("down");
-                    new ChatFrame(otherUser,myUser,userMap);
+                    Thread thread = new Thread(new ChatFrame(otherUser,myUser,userMap));
+                    thread.start();
                 } catch (IOException | ClassNotFoundException ex) {
                     ex.printStackTrace();
                 }
-                new ChatFrame(otherUser,myUser,null);
             }
 
             @Override
