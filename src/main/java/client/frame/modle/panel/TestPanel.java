@@ -16,7 +16,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -74,11 +73,11 @@ public class TestPanel extends JPanel {
         centerJPanel = new JPanel();
         southJlabel = new JLabel();
         northJlabel = new JLabel();
-        userJPanel = new TranslucenceJPanel();
-        userJPanel1 = new TranslucenceJPanel();
-        userJPanel2 = new TranslucenceJPanel();
-        userJPanel3 = new TranslucenceJPanel();
-        buttonJPanel = new TranslucenceJPanel();
+        userJPanel = new TranslucenceJPanel(new GridLayout(2, 1));
+        userJPanel1 = new TranslucenceJPanel(new GridLayout(2, 1));
+        userJPanel2 = new TranslucenceJPanel(new GridLayout(2, 1));
+        userJPanel3 = new TranslucenceJPanel(new GridLayout(2, 1));
+        buttonJPanel = new TranslucenceJPanel(new GridLayout(2, 1));
         textPanel = new JPanel();
         textRowone = new MemberArticlePanel("热门");
         textRowtwo = new MemberArticlePanel("走进java重写");

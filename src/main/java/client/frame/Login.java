@@ -344,7 +344,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
      */
     public void initCenter(){
         centerJPanel = new JPanel(null);
-        randomJPanel = new TranslucenceJPanel();
+        randomJPanel = new TranslucenceJPanel(new GridLayout(2, 1));
         randomJPanel.setOpaque(false);
         randomJPanel.setLayout(null);
         randomJPanel.setTransparent(0.5f);
@@ -393,7 +393,7 @@ public class Login extends JPanel implements ActionListener, IndexConf {
      * 初始化信息窗体
      */
     public void initInfo(){
-        infoJPanel = new TranslucenceJPanel();
+        infoJPanel = new TranslucenceJPanel(new GridLayout(2, 1));
         infoJPanel.setOpaque(false);
         infoJPanel.setLayout(null);
         infoJPanel.setTransparent(0.8f);

@@ -2,24 +2,21 @@ package client.frame.modle.panel;
 
 import client.entity.Article;
 import client.entity.User;
-import client.util.ClientUtil;
-import server.controller.ServerOperate;
 
-import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MyCenterc extends TranslucenceJPanel {
     List<Article> list  = new ArrayList();
     private User myUser,otherUser;
     public MyCenterc(User user){
+        super(new GridLayout(2, 1));
         this.myUser = myUser;
         init();
     }
     public MyCenterc(User myUser,User otherUser,List<Article>list){
+        super(new GridLayout(2, 1));
         this.myUser = myUser;
         this.otherUser = otherUser;
         this.list =list;
