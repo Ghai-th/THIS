@@ -168,7 +168,9 @@ public class ArticleOperate {
         List articles = articleService.selectArticleByUid(article.getUid());
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_BY_UID;
         try {
+            System.out.println("articles.size() = " + articles.size());
             serverUtil.sendInfoList(articles);
+            System.out.println("size has num");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -178,6 +180,7 @@ public class ArticleOperate {
      * 返回热度前十的文章
      */
     public void selectTopTenArticle() {
+        System.out.println("select by uid");
         List articles = articleService.selectTopLimitArticle(10);
         ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_TOP_TEN;
         try {

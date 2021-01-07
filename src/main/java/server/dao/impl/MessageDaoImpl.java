@@ -45,7 +45,7 @@ public class MessageDaoImpl implements IMessageDao {
     }
 
     /**
-     * 删除私信
+     * 根据发送者id删除私信
      * @param message
      * @throws SQLException
      */
@@ -106,7 +106,7 @@ public class MessageDaoImpl implements IMessageDao {
     /**
      * 拉取接收者对应发送者具体的聊天记录
      * @param message
-     * @return
+     * @return二者所有私信记录
      * @throws SQLException
      */
     @Override
@@ -124,6 +124,11 @@ public class MessageDaoImpl implements IMessageDao {
         return messageList;
     }
 
+    /**
+     * 根据接收者id查询其所有私信内容
+     * @param message
+     * @return私信内容
+     */
     @Override
     public HashMap<String, String> selectMapMessage(Message message) {
         HashMap<String,String> otherMap = new HashMap<String,String>();
@@ -142,6 +147,12 @@ public class MessageDaoImpl implements IMessageDao {
         }
     }
 
+    /**
+     * 根据发送者id和接收者id查询对应的私信内容
+     * @param message
+     * @return二者的私信内容
+     * @throws SQLException
+     */
     @Override
     public Message selectOneMessage(Message message) throws SQLException {
         connection = DBUtil.getConnection();
@@ -151,6 +162,12 @@ public class MessageDaoImpl implements IMessageDao {
         return message;
     }
 
+    /**
+     * 私信内容置空
+     * @param message
+     * @return返回true或者false
+     * @throws SQLException
+     */
     @Override
     public Boolean emptyMessage(Message message) throws SQLException {
         Message message1 = selectOneMessage(message);
@@ -160,6 +177,13 @@ public class MessageDaoImpl implements IMessageDao {
             return false;
     }
 
+    /**
+     *根据发送者和接收者的id更新私信内容
+     * @param message
+     * @param n
+     * @param judge
+     * @throws SQLException
+     */
     @Override
     public void updateMessageState(Message message,String n,int judge) throws SQLException {
         String sql = null;
@@ -173,6 +197,12 @@ public class MessageDaoImpl implements IMessageDao {
         DBUtil.closeResources(connection,statement);
     }
 
+    /**
+     * 根据发送者id更新发送者的窗口
+     * @param message
+     * @param n
+     * @return返回true或者false
+     */
     @Override
     public boolean updateMessageSendNotice(Message message,String n) {
         String sql = "update message set notice='"+n+"' where sendid='"+message.getSendId()+"'";
@@ -191,6 +221,12 @@ public class MessageDaoImpl implements IMessageDao {
 
     }
 
+    /**
+     * 根基接收者id更新接收者的窗口
+     * @param message
+     * @param n
+     * @return返回true或者false
+     */
     @Override
     public boolean updateMessageAcceptNotice(Message message,String n) {
         String sql = "update message set notice='"+n+"' where acceptid='"+message.getAcceptId()+"'";

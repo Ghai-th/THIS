@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class Index extends JPanel implements IndexConf {
 
-    public static  User MeUser;
+    public static User MeUser;
     public JPanel centerPanel, westPanel; // 三个大边界板块
     public static final String[] classification = new String[]
             {"C语言", "数据结构", "C++", "数据库", "Java", "Golang", "linux", "区块链", "人工智能", "软件安全"};
@@ -45,7 +45,8 @@ public class Index extends JPanel implements IndexConf {
         initWest();
         initCenter();
     }
-    public Index(int x){
+
+    public Index(int x) {
         User user = new User();
         user.setUid("0000");
         this.user = user;
@@ -53,7 +54,8 @@ public class Index extends JPanel implements IndexConf {
         initNorth();
 
     }
-    public Index(){
+
+    public Index() {
         User user = new User();
         user.setUid("0000");
         this.user = user;
@@ -85,16 +87,18 @@ public class Index extends JPanel implements IndexConf {
         //等级前十的用户
         ArrayList<User> userTopTenArrayList = new ArrayList<>();
         User userTopTen = new User();
+        int x;
         userTopTen.operate = ServerOperate.SELECT_LIMIT_USERS;
         try {
             ClientUtil.sendInfo(userTopTen, User.class);
+            x = 1;
             userTopTenArrayList.addAll(ClientUtil.acceptList());
         } catch (Exception e) {
             e.printStackTrace();
         }
         int i = 1;
-        for(User userTop : userTopTenArrayList) {
-            person = new RankLabel(i + "    " + userTop.getName(), JLabel.CENTER, this);
+        for (User userTop : userTopTenArrayList) {
+            person = new RankLabel(this, userTop, i + "    " + userTop.getName());
             person.setOpaque(true);
             person.addMouseListener(person);
             person.setFont(new Font("宋体", Font.BOLD, 15));
@@ -120,8 +124,8 @@ public class Index extends JPanel implements IndexConf {
             e.printStackTrace();
         }
         int j = 1;
-        for(Article articleTop : articleTopTenArrayList) {
-            article = new RankLabel(j + "    " + articleTop.getTitle(), JLabel.CENTER, this);
+        for (Article articleTop : articleTopTenArrayList) {
+            article = new RankLabel(this, articleTop, j + "    " + articleTop.getTitle());
             article.setOpaque(true);
             article.addMouseListener(article);
             article.setFont(new Font("宋体", Font.BOLD, 15));
@@ -185,12 +189,12 @@ public class Index extends JPanel implements IndexConf {
             article.setCid(aClass.getCid());
             article.operate = ServerOperate.GET_CLASS_HOT_ARTICLE_TOP_EIGHT;
             try {
-                ClientUtil.sendInfo(article,Article.class);
+                ClientUtil.sendInfo(article, Article.class);
                 articles.addAll(ClientUtil.acceptList());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            ClassPanel classPanel = new ClassPanel(articles,aClass,this);
+            ClassPanel classPanel = new ClassPanel(articles, aClass, this);
             classPanel.addMouseListener(classPanel);
             center.add(classPanel);
         }
