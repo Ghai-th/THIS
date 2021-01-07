@@ -3,6 +3,7 @@ package client.frame.modle.label;
 import client.entity.Article;
 import client.entity.User;
 import client.frame.Index;
+import client.frame.Login;
 import client.frame.modle.panel.AllPanel;
 import client.frame.modle.panel.ArticleDetailsPanel;
 
@@ -24,11 +25,20 @@ public class RankLabel extends JLabel implements MouseListener {
         index.mainPanel.removeAll();
         JPanel borderLimit = new JPanel(new BorderLayout());
         if (user != null) {
-            borderLimit.add(new AllPanel(index,User.copyUser(Index.MeUser),user));
+            if (Index.MeUser == null) {
+                index.removeAll();
+                index.add(new Login(index));
+            } else {
+                index.removeAll();
+                index.add(new AllPanel(index,user,User.copyUser(Index.MeUser)));
+                index.repaint();
+                index.updateUI();
+            }
         } else if (article != null){
             borderLimit.add(new ArticleDetailsPanel(article,index,borderLimit),BorderLayout.CENTER);
+            index.mainPanel.add(borderLimit,BorderLayout.CENTER);
         }
-        index.mainPanel.add(borderLimit,BorderLayout.CENTER);
+
         updateUI();
     }
 
