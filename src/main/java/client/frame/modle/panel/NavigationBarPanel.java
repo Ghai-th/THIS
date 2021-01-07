@@ -41,7 +41,6 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
     }
 
     public NavigationBarPanel(Index index) {
-        this.setBackground(new Color(255,255,255));
         this.index = index;
         init();
     }

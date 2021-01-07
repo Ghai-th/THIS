@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * 分类导航，用户排行榜，文章排行榜，分类概览
  */
 
-public class Index extends TranslucenceJPanel implements IndexConf {
+public class Index extends JPanel implements IndexConf {
 
     public static User MeUser;
     public JPanel centerPanel, westPanel; // 三个大边界板块
@@ -95,7 +95,6 @@ public class Index extends TranslucenceJPanel implements IndexConf {
         int i = 1;
         for (User userTop : userTopTenArrayList) {
             person = new RankLabel(this, userTop, i + "    " + userTop.getName());
-            person.setBackground(new Color(255,255,255));
             person.setOpaque(true);
             person.addMouseListener(person);
             person.setFont(new Font("宋体", Font.BOLD, 15));
@@ -123,7 +122,6 @@ public class Index extends TranslucenceJPanel implements IndexConf {
         int j = 1;
         for (Article articleTop : articleTopTenArrayList) {
             article = new RankLabel(this, articleTop, j + "    " + articleTop.getTitle());
-            article.setBackground(new Color(255,255,255));
             article.setOpaque(true);
             article.addMouseListener(article);
             article.setFont(new Font("宋体", Font.BOLD, 15));
@@ -131,8 +129,6 @@ public class Index extends TranslucenceJPanel implements IndexConf {
             j++;
         }
 
-        rankingListPerson.setBackground(new Color(255,255,255));
-        rankingListArticle.setBackground(new Color(255,255,255));
         westPanel.add(rankingListPerson);
         westPanel.add(rankingListArticle);
         westPanel.setPreferredSize(new Dimension(384, 1050));
@@ -153,22 +149,18 @@ public class Index extends TranslucenceJPanel implements IndexConf {
 
         JPanel center, west, east, north, south;
         east = new JPanel();
-        east.setBackground(new Color(255,255,255));
         east.setPreferredSize(new Dimension(WIDE * 5 / 64, (classification.length + 1) * RANK_HIGH));
         CCPanel.add(east, BorderLayout.EAST);
 
         south = new JPanel();
-        south.setBackground(new Color(255,255,255));
         south.setPreferredSize(new Dimension(WIDE * 4 / 5, HIGH / 21));
         CCPanel.add(south, BorderLayout.SOUTH);
 
         north = new JPanel();
-        north.setBackground(new Color(255,255,255));
         north.setPreferredSize(new Dimension(WIDE * 4 / 5, HIGH / 21));
         CCPanel.add(north, BorderLayout.NORTH);
 
         west = new JPanel();
-        west.setBackground(new Color(255,255,255));
         west.setPreferredSize(new Dimension(WIDE * 5 / 64, classification.length * RANK_HIGH));
         CCPanel.add(west, BorderLayout.WEST);
 
