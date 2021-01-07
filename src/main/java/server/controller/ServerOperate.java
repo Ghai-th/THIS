@@ -10,7 +10,7 @@ public interface ServerOperate {
      * 系统级 指令
      */
     int ERROR = 999999;
-
+    int NULL = 888888;
     /**
      * 评论功能对应操作
      */

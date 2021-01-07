@@ -3,6 +3,7 @@ package client.frame.modle.label;
 import client.entity.Article;
 import client.entity.User;
 import client.frame.Index;
+import client.frame.modle.panel.AllPanel;
 import client.frame.modle.panel.ArticleDetailsPanel;
 
 import javax.swing.*;
@@ -17,11 +18,16 @@ import java.awt.event.MouseListener;
 public class RankLabel extends JLabel implements MouseListener {
     public Index index;
     public User user;
+    public Article article;
 
     public void mouseClicked(MouseEvent e) {
         index.mainPanel.removeAll();
         JPanel borderLimit = new JPanel(new BorderLayout());
-        borderLimit.add(new ArticleDetailsPanel(Article.initArticle(),index,borderLimit),BorderLayout.CENTER);
+        if (user != null) {
+            borderLimit.add(new AllPanel(index,User.copyUser(Index.MeUser),user));
+        } else if (article != null){
+            borderLimit.add(new ArticleDetailsPanel(article,index,borderLimit),BorderLayout.CENTER);
+        }
         index.mainPanel.add(borderLimit,BorderLayout.CENTER);
         updateUI();
     }
@@ -66,5 +72,17 @@ public class RankLabel extends JLabel implements MouseListener {
     public RankLabel(String text, int horizontalAlignment,Index index) {
         super(text, horizontalAlignment);
         this.index = index;
+    }
+
+    public RankLabel(Index index, User user, String str) {
+        super(str,JLabel.CENTER);
+        this.index = index;
+        this.user = user;
+    }
+
+    public RankLabel(Index index, Article article ,String str) {
+        super(str,JLabel.CENTER);
+        this.index = index;
+        this.article = article;
     }
 }
