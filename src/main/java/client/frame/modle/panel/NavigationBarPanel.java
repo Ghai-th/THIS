@@ -7,6 +7,7 @@ import client.entity.Store;
 import client.entity.User;
 import client.frame.Index;
 import client.frame.Login;
+import client.frame.modle.border.RoundBorder;
 import client.frame.modle.label.ClassLabel;
 import client.util.ClientUtil;
 import server.controller.ServerOperate;
@@ -83,7 +84,7 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         searchTextField = new JTextField();
         searchTextField.setPreferredSize(new Dimension(WIDE * 5 / 32, HIGH / 35));
         searchPanel.add(searchTextField);
-        searchLabel = new JLabel("搜索");
+        searchLabel = new JLabel("搜索",JLabel.CENTER);
         searchLabel.setPreferredSize(new Dimension(WIDE * 5 / 192, HIGH * 29 / 1050));
         searchLabel.setOpaque(true);
         searchLabel.setBackground(new Color(188, 16, 3, 240));
