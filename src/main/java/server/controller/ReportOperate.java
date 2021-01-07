@@ -50,6 +50,7 @@ public class ReportOperate {
      */
     public void addReportArticle(){
         boolean success = false;
+        System.out.println(report);
         success = reportService.addReportArticle(report);
         if (!success){
             try {

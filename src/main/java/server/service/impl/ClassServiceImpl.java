@@ -5,6 +5,7 @@ import server.dao.IClassDao;
 import server.dao.impl.ClassDaoImpl;
 import server.service.IClassService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClassServiceImpl implements IClassService {
@@ -26,7 +27,12 @@ public class ClassServiceImpl implements IClassService {
     @Override
     public List selectAllClass() {
         IClassDao classDao = new ClassDaoImpl();
-        return classDao.selectAllClass();
+        List<Class> list = classDao.selectAllClass();
+        if (list == null) {
+            list = new ArrayList();
+            return list;
+        }
+        return list;
     }
 
 

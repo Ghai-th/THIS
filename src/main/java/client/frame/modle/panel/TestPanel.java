@@ -1,5 +1,6 @@
 package client.frame.modle.panel;
 
+import client.entity.Article;
 import client.entity.Attention;
 import client.entity.Message;
 import client.entity.User;
@@ -14,8 +15,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class TestPanel extends JPanel {
     JButton chatJbutton;//放入私信按钮
@@ -23,7 +26,7 @@ public class TestPanel extends JPanel {
 
     JLabel southJlabel;//设置背面空JLabel
     JLabel northJlabel;//设置南面空JLbale
-
+    public boolean panduan;
     JPanel centerJPanel;//放入总面板中部的JPanel
     TranslucenceJPanel userJPanel;//显示用户信息
     TranslucenceJPanel userJPanel1;//放入第一行的JPanel
@@ -165,6 +168,7 @@ public class TestPanel extends JPanel {
                 attentionJbutton.setBorder(BorderFactory.createLineBorder(new Color(196,196,196)));
             }
         };
+
         attentionJbutton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -172,37 +176,64 @@ public class TestPanel extends JPanel {
                 if(otherUser == null){
                     JOptionPane.showMessageDialog(TestPanel.this,"请您先登录！");
                 }else{
-                    myUser.setOperate(ServerOperate.UPDATE_FANS_NUM);
-                    Attention attention = new Attention();
-                    attention.setUid(myUser.getUid());
-                    attention.setFansId(otherUser.getUid());
-                    attention.operate = ServerOperate.ADD_ATTENTION;
+                    Attention attention1 = new Attention();
+                    attention1.operate = ServerOperate.SELECT_ATTENTION_IDOL;
+                    attention1.setFansId(otherUser.getUid());
+
+                    List<Attention> list1 = new ArrayList<>();
                     try {
-                        ClientUtil.sendInfo(myUser,User.class);
-                        myUser = ClientUtil.acceptInfo(User.class);
-                        ClientUtil.sendInfo(attention,Attention.class);
-                        attention = ClientUtil.acceptInfo(Attention.class);
-                        if(attention.operate!=ServerOperate.ERROR){
-                            JOptionPane.showMessageDialog(null,"关注成功");
+                        ClientUtil.sendInfo(attention1,Article.class);
+                        list1 .addAll(ClientUtil.acceptList());
+                        for (int i=0;i<list1.size();i++){
+                            if (myUser.getUid().equals(list1.get(i).getUid())){
+                                panduan = true;
+                            }else {
+                                panduan = false;
+                            }
                         }
-                    } catch (IOException | ClassNotFoundException ex) {
-                        ex.printStackTrace();
+                        if(panduan){
+                            attentionJbutton.setText("取消关注");
+                        }
+                    } catch (IOException | ClassNotFoundException ee) {
+                        ee.printStackTrace();
                     }
-                    Index.MeUser.setFansNum(Index.MeUser.getFansNum()+1);
-                    userJPanel3.removeAll();
-                    myUser.setFansNum(myUser.getFansNum()+1);
-                    fansMemberPanel3 = new MemberNoColorPanel(myUser.getFansNum()+"","粉丝");
-                    fansMemberPanel3.setOpaque(false);//设置全透明
-                    fansMemberPanel3.setTransparent(0.1f);//设置透明度
-                    userJPanel3.add(fansMemberPanel3);
-                    attentionMemberPanel3 = new MemberNoColorPanel(myUser.getAttentionNum()+"","关注");
-                    attentionMemberPanel3.up = myUser.getAttentionNum()+"";
-                    attentionMemberPanel3.down = "关注";
-                    attentionMemberPanel3.setOpaque(false);//设置全透明
-                    attentionMemberPanel3.setTransparent(0.1f);//设置透明度
-                    userJPanel3.add(attentionMemberPanel3);
-                    userJPanel3.updateUI();
-                    userJPanel3.repaint();
+                    if(panduan){
+
+
+                    }else{
+                        myUser.setOperate(ServerOperate.UPDATE_FANS_NUM);
+                        Attention attention = new Attention();
+                        attention.setUid(myUser.getUid());
+                        attention.setFansId(otherUser.getUid());
+                        attention.operate = ServerOperate.ADD_ATTENTION;
+                        try {
+                            ClientUtil.sendInfo(myUser,User.class);
+                            myUser = ClientUtil.acceptInfo(User.class);
+                            ClientUtil.sendInfo(attention,Attention.class);
+                            //attention = ClientUtil.acceptInfo(Attention.class);
+                            if(attention.operate!=ServerOperate.ERROR){
+                                JOptionPane.showMessageDialog(null,"关注成功");
+                            }
+                        } catch (IOException | ClassNotFoundException ex) {
+                            ex.printStackTrace();
+                        }
+                        Index.MeUser.setFansNum(Index.MeUser.getFansNum()+1);
+                        userJPanel3.removeAll();
+                        myUser.setFansNum(myUser.getFansNum()+1);
+                        fansMemberPanel3 = new MemberNoColorPanel(myUser.getFansNum()+"","粉丝");
+                        fansMemberPanel3.setOpaque(false);//设置全透明
+                        fansMemberPanel3.setTransparent(0.1f);//设置透明度
+                        userJPanel3.add(fansMemberPanel3);
+                        attentionMemberPanel3 = new MemberNoColorPanel(myUser.getAttentionNum()+"","关注");
+                        attentionMemberPanel3.up = myUser.getAttentionNum()+"";
+                        attentionMemberPanel3.down = "关注";
+                        attentionMemberPanel3.setOpaque(false);//设置全透明
+                        attentionMemberPanel3.setTransparent(0.1f);//设置透明度
+                        userJPanel3.add(attentionMemberPanel3);
+                        userJPanel3.updateUI();
+                        userJPanel3.repaint();
+                    }
+
                 }
 
             }
@@ -333,11 +364,29 @@ public class TestPanel extends JPanel {
 
 
         //热门文章的添加
+        List<Article> articleTopList = new ArrayList<>();
+        Article article = new Article();
+        article.operate = ServerOperate.GET_ARTICLE_TOP_TEN;
+        try {
+            ClientUtil.sendInfo(article,Article.class);
+            articleTopList.addAll(ClientUtil.acceptList());
+            System.out.println(articleTopList.size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         textPanel.add(textRowone);
+        textRowtwo = new MemberArticlePanel(articleTopList.get(0).getTitle());
         textPanel.add(textRowtwo);
+        textRowthree = new MemberArticlePanel(articleTopList.get(1).getTitle());
         textPanel.add(textRowthree);
+        textRowfour = new MemberArticlePanel(articleTopList.get(2).getTitle());
         textPanel.add(textRowfour);
+        textRowfive = new MemberArticlePanel(articleTopList.get(3).getTitle());
         textPanel.add(textRowfive);
+        textRowsix = new MemberArticlePanel(articleTopList.get(4).getTitle());
         textPanel.add(textRowsix);
     }
     //各种颜色以及透明度的设置

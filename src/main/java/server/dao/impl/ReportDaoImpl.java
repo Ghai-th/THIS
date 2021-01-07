@@ -23,17 +23,21 @@ public class ReportDaoImpl implements IReportDao {
      *添加举报文章
      */
     @Override
-    public void addReportArticle(Report report) {
-        try{
-            String sql = "insert into report values ('" + report.getAid()+ "' ,'" +report.getReportNum() + "')";
+    public void addReportArticle(Report report)  {
+        String sql = "insert into report values ('" + report.getAid()+ "' ,0)";
+        try {
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
-            DBUtil.executeChange(statement, sql);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            DBUtil.closeResources(connection, statement, re);
         }
+        try {
+            DBUtil.executeReportChange(statement, sql);
+        } catch (Exception e) {
+            updateReportArticle(report);
+        }
+
+        DBUtil.closeResources(connection, statement, re);
     }
     /**
      *根据文章id删除举报文章
@@ -57,8 +61,11 @@ public class ReportDaoImpl implements IReportDao {
      */
     @Override
     public void updateReportArticle(Report report) {
+        System.out.println("report.getAid() = " + report.getAid());
+        Report report1 = selectReportArticleByAid(report.getAid());
+
         try {
-            String sql = "update from report set reportNum  ='" + report.getReportNum() +"'where aid = '"+ report.getAid() + "'";
+            String sql = "update report set reportnum = " + (report1.getReportNum() + 1 )  + " where aid = '"+ report.getAid() + "'";
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
             DBUtil.executeChange(statement,sql);
@@ -74,7 +81,7 @@ public class ReportDaoImpl implements IReportDao {
     @Override
     public Report selectReportArticleByAid(String aid) {
         try {
-            String sql = "select from report where aid= '" + aid +"'";
+            String sql = "select * from report where aid= '" + aid +"'";
             connection = DBUtil.getConnection();
             statement = DBUtil.getStatement(connection);
             return DBUtil.executeGetData(statement,sql,Report.class);

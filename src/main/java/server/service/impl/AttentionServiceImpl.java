@@ -1,10 +1,13 @@
 package server.service.impl;
 
+import client.entity.Article;
 import client.entity.Attention;
+import server.controller.ServerOperate;
 import server.dao.IAttentionDao;
 import server.dao.impl.AttentionDaoImpl;
 import server.service.IAttentionService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AttentionServiceImpl implements IAttentionService {
@@ -21,11 +24,21 @@ public class AttentionServiceImpl implements IAttentionService {
 
     @Override
     public List<Attention> searchAttention(Attention attention)  {
-        return attentionDao.searchAttention(attention);
+        List<Attention> list = attentionDao.searchAttention(attention);
+        if (list == null) {
+            list = new ArrayList();
+            return list;
+        }
+        return list;
     }
 
     @Override
     public List<Attention> selectAttention(Attention attention)  {
-        return attentionDao.selectAttention(attention);
+        List<Attention> list = attentionDao.selectAttention(attention);
+        if (list == null) {
+            list = new ArrayList();
+            return list;
+        }
+        return list;
     }
 }

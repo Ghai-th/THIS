@@ -128,7 +128,8 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         searchPanel.add(searchLabel);
         this.add(searchPanel);
 
-        headImage = new JLabel("头像");
+        headImage = new JLabel("登录");
+        headImage.setFont(new Font("黑体",Font.PLAIN,19));
         if (Index.MeUser != null) {
             //// 头像改为用户的头像
             headImage.setText(Index.MeUser.getName());
@@ -173,6 +174,7 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                     } catch (IOException | ClassNotFoundException ee) {
                         ee.printStackTrace();
                     }
+                    //获取我的文章所有信息
                     Article article = new Article();
                     List<Article> articleList = new ArrayList<>();
                     article.operate = ServerOperate.GET_ARTICLE_BY_UID;

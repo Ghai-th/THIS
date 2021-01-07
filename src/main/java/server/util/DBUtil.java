@@ -72,6 +72,10 @@ public class DBUtil {
         return executeUpdate;
     }
 
+    public static int executeReportChange(Statement stat, String sql) throws SQLException {
+        return stat.executeUpdate(sql);
+    }
+
     /**
      * 通用DQL操作工具方法 查询单条
      * @param <T> 泛型
