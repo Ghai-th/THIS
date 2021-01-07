@@ -1,5 +1,6 @@
 package client.frame.modle.panel;
 
+import client.entity.Article;
 import client.entity.Attention;
 import client.entity.Message;
 import client.entity.User;
@@ -14,8 +15,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class TestPanel extends JPanel {
     JButton chatJbutton;//放入私信按钮
@@ -335,11 +338,29 @@ public class TestPanel extends JPanel {
 
 
         //热门文章的添加
+        List<Article> articleTopList = new ArrayList<>();
+        Article article = new Article();
+        article.operate = ServerOperate.GET_ARTICLE_TOP_TEN;
+        try {
+            ClientUtil.sendInfo(article,Article.class);
+            articleTopList.addAll(ClientUtil.acceptList());
+            System.out.println(articleTopList.size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         textPanel.add(textRowone);
+        textRowtwo = new MemberArticlePanel(articleTopList.get(0).getTitle());
         textPanel.add(textRowtwo);
+        textRowthree = new MemberArticlePanel(articleTopList.get(1).getTitle());
         textPanel.add(textRowthree);
+        textRowfour = new MemberArticlePanel(articleTopList.get(2).getTitle());
         textPanel.add(textRowfour);
+        textRowfive = new MemberArticlePanel(articleTopList.get(3).getTitle());
         textPanel.add(textRowfive);
+        textRowsix = new MemberArticlePanel(articleTopList.get(4).getTitle());
         textPanel.add(textRowsix);
     }
     //各种颜色以及透明度的设置
