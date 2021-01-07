@@ -20,6 +20,12 @@ public class UserDaoImpl implements IUserDao {
     Statement statement = null;
     PreparedStatement preparedStatement = null;
     List<User> users;
+
+    /**
+     * 增加用户
+     * @param user 用户
+     * @return返回true或者false
+     */
     @Override
     public boolean addUser(User user) {
         String sql = "insert into user values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -50,7 +56,11 @@ public class UserDaoImpl implements IUserDao {
 
     }
 
-
+    /**
+     * 根据用户id删除用户
+     * @param user 被删除的用户
+     * @return返回true或者false
+     */
     @Override
     public boolean deleteUser(User user) {
         String sql = "delete from user where uid = '" + user.getUid() + "'";
@@ -67,6 +77,11 @@ public class UserDaoImpl implements IUserDao {
 
     }
 
+    /**
+     * 根据用户id更新用户信息
+     * @param user 更新的用户
+     * @return返回true或者false
+     */
     @Override
     public boolean updateUserlevel(User user) {
         try {
@@ -83,6 +98,11 @@ public class UserDaoImpl implements IUserDao {
         }
     }
 
+    /**
+     * 根据用户id更新用户的粉丝数量
+     * @param user 更新的用户
+     * @return返回true或者false
+     */
     @Override
     public boolean updateUserFansNum(User user) {
         try {
@@ -98,6 +118,11 @@ public class UserDaoImpl implements IUserDao {
         }
     }
 
+    /**
+     * 根据用户id更新用户的关注数量
+     * @param user 更新的用户
+     * @return返回true或者false
+     */
     @Override
     public boolean updateUserAttentionnum(User user) {
         try {
@@ -113,6 +138,11 @@ public class UserDaoImpl implements IUserDao {
         }
     }
 
+    /**
+     * 根据用户id更新该用户的访问量
+     * @param user 更新的用户
+     * @return返回true或者false
+     */
     @Override
     public boolean updateUserVisitorNum(User user) {
         try {
@@ -128,6 +158,11 @@ public class UserDaoImpl implements IUserDao {
         }
     }
 
+    /**
+     * 根据用户id更新文章数量
+     * @param user 更新的用户
+     * @return
+     */
     @Override
     public boolean updateUserArticleNum(User user) {
         try {
@@ -143,6 +178,11 @@ public class UserDaoImpl implements IUserDao {
         }
     }
 
+    /**
+     * 根据用户id更新用户最后一次登录时间
+     * @param user 更新的用户
+     * @return返回true或者false
+     */
     @Override
     public boolean updateUserLastLogin(User user) {
         String sql = "update user set lastlogin = ? where uid = ?";
@@ -160,6 +200,11 @@ public class UserDaoImpl implements IUserDao {
         }
     }
 
+    /**
+     * 根据用户id更新用户活跃度
+     * @param user 更新的用户
+     * @return返回true或者false
+     */
     @Override
     public boolean updateUserActive(User user) {
         try {
@@ -175,6 +220,11 @@ public class UserDaoImpl implements IUserDao {
         }
     }
 
+    /**
+     * 根据用户id更新用户所有信息
+     * @param user 更新的用户
+     * @return返回true和false
+     */
     @Override
     public boolean updateUser(User user) {
         String sql = "update user set name = ?,password = ?,gender = ?,synopsis = ?,mykey = ? where uid = ?";
@@ -196,6 +246,11 @@ public class UserDaoImpl implements IUserDao {
         }
     }
 
+    /**
+     * 根据用户id查询用户所有信息
+     * @param user
+     * @return用户所有信息
+     */
     @Override
     public User selectUser(User user) {
         String sql = "select * from user where uid = '"+user.getUid()+"'";
@@ -212,6 +267,11 @@ public class UserDaoImpl implements IUserDao {
         return null;
     }
 
+    /**
+     * 根据用户活跃度查询前十用户所有信息
+     * @param limit 查询条数
+     * @return活跃度为前十的用户
+     */
     @Override
     public List<User> selectTopLimitUsers(int limit) {
         try {
@@ -228,6 +288,10 @@ public class UserDaoImpl implements IUserDao {
         }
     }
 
+    /**
+     * 查询所有用户
+     * @return所有用户信息
+     */
     @Override
     public List<User> selectUsers() {
         String sql = "select * from user";
@@ -244,6 +308,10 @@ public class UserDaoImpl implements IUserDao {
         return null;
     }
 
+    /**
+     *查询所有用户的部分信息
+     * @return用户的部分信息
+     */
     @Override
     public List<User> selectUsersInfo() {
         String sql = "select * from user";
