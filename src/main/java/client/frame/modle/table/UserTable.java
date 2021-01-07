@@ -21,6 +21,10 @@ public class UserTable extends JTable {
         this.userLength = init();
     }
 
+    /**
+     * 初始化表格表头
+     * @return
+     */
     private int init() {
         tableModel = (DefaultTableModel) table.getModel();
         tableModel.addColumn("账户");

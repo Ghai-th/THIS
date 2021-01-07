@@ -21,6 +21,9 @@ public class ArticleTable extends JTable {
         init();
     }
 
+    /**
+     * 初始化表格表头
+     */
     private void init() {
         tableModel = (DefaultTableModel) table.getModel();
         tableModel.addColumn("标题");
@@ -32,6 +35,7 @@ public class ArticleTable extends JTable {
         tableModel.addColumn("访问量");
         tableModel.addColumn("点赞数");
         tableModel.addColumn("收藏数");
+        tableModel.addColumn("被举报次数");
 
         table.getTableHeader().setReorderingAllowed(false); // 不可交换顺序
         table.getTableHeader().setResizingAllowed(false); // 不可拉动表格
