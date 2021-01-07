@@ -189,29 +189,31 @@ public class Administrate extends JPanel implements IndexConf {
             }
             @Override
             public void mouseClicked(MouseEvent e){
+                /////0到5行不能删除/////
                 if(table.getSelectedRow() >=0 && table.getSelectedRow() <=5){
                     JOptionPane.showMessageDialog(Administrate.this,"你在想屁吃！");
+                    changeListener0();
                 } else {
-                        if(row!=-1){
-                            user = new User();
-                            user.setUid((String)table.getValueAt(row, 0));
-                            user.operate = ServerOperate.DELETE_USER;
-                            try {
-                                ClientUtil.sendInfo(user,User.class);
-                                ClientUtil.acceptInfo(User.class);
-                                if (user.operate!=ServerOperate.ERROR){
-                                    JOptionPane.showMessageDialog(Administrate.this,"用户删除成功");
-                                    changeListener0();
-                                }
-                            } catch (IOException | ClassNotFoundException ex) {
-                                ex.printStackTrace();
+                    if(row!=-1) {
+                        user = new User();
+                        user.setUid((String)table.getValueAt(row, 0));
+                        user.operate = ServerOperate.DELETE_USER;
+                        try {
+                            ClientUtil.sendInfo(user,User.class);
+                            ClientUtil.acceptInfo(User.class);
+                            if (user.operate!=ServerOperate.ERROR){
+                                JOptionPane.showMessageDialog(Administrate.this,"用户删除成功");
+                                changeListener0();
                             }
-                        } else {
-                            JOptionPane.showMessageDialog(Administrate.this,"请选择有效的行！");
+                        } catch (IOException | ClassNotFoundException ex) {
+                            ex.printStackTrace();
                         }
-                        row = -1;
+                    } else {
+                        JOptionPane.showMessageDialog(Administrate.this,"请选择有效的行！");
                     }
+                    row = -1;
                 }
+            }
         };
         deleteUser.addMouseListener(userAdepter);
 
