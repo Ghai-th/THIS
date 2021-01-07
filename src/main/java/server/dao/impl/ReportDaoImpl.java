@@ -17,7 +17,7 @@ public class ReportDaoImpl implements IReportDao {
     private Connection connection = null;
     private Statement statement = null;
     ResultSet re = null;
-    List<Article> list;
+    List<Report> list;
 
     /**
      *添加举报文章
@@ -90,21 +90,19 @@ public class ReportDaoImpl implements IReportDao {
      *查找所有被举报的文章
      */
     @Override
-    public List selectReportArticle() {
+    public List<Report> selectReportArticle() {
         try {
-            String sql = "select * from report";
             connection = DBUtil.getConnection();
+            String sql = "select * from report";
             statement = DBUtil.getStatement(connection);
-            DBUtil.executeChange(statement,sql);
+            list = DBUtil.executeGetSomeReportData(statement,sql,Report.class);
             return list;
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             DBUtil.closeResources(connection,statement,re);
         }
         return null;
     }
-
-
 
 }

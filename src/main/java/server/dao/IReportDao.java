@@ -26,5 +26,5 @@ public interface IReportDao {
     /**
      * 查找所有被举报文章
      */
-    List selectReportArticle();
+    List<Report> selectReportArticle();
 }

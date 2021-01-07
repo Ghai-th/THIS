@@ -5,9 +5,9 @@ import data.Operate;
 
 public class Report extends Operate implements java.io.Serializable {
     private String aid;
-    private String reportNum;
+    private Integer reportNum;
 
-    public Report(String aid,String reportNum){
+    public Report(String aid,int reportNum){
         this.aid = aid;
         this.reportNum = reportNum;
     }
@@ -16,7 +16,7 @@ public class Report extends Operate implements java.io.Serializable {
     }
 
     public static Report initReport(){
-        return new Report("100002","2");
+        return new Report("100002",0);
     }
 
     public void setAid(String aid){
@@ -27,10 +27,10 @@ public class Report extends Operate implements java.io.Serializable {
         return aid;
     }
 
-    public void setReportNum(String reportNum ){
+    public void setReportNum(int reportNum ){
         this.reportNum = reportNum;
     }
-    public String getReportNum(){
+    public Integer getReportNum(){
         return reportNum;
     }
 

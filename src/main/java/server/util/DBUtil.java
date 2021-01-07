@@ -237,6 +237,36 @@ public class DBUtil {
         return list;
     }
 
+    public static <T> List<T> executeGetSomeReportData(Statement stat, String sql, Class<T> clz) {
+        List<T> list = new ArrayList<T>();
+        try {
+            Field[] fields = clz.getDeclaredFields();
+            ResultSet set = stat.executeQuery(sql);
+            while (set.next()) {
+                T t = clz.newInstance();
+                for (int i = 0; i < fields.length; i++) {
+                    Field field = fields[i];
+                    if (field.getName().equals("operate")) {
+                        continue;
+                    }
+                    if (field.getName().equals("serialVersionUID")) {
+                        continue;
+                    }
+                    if (field.getName().equals("aid")) {
+                        continue;
+                    }
+                    field.setAccessible(true);
+                    field.set(t, set.getObject(field.getName()));
+                }
+                list.add(t);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public static <T> List<T> executeGetSomeArticleData(Statement statement, String sql, Class<T> articleClass) {
         List<T> list = new ArrayList<T>();
         try {

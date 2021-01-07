@@ -15,7 +15,6 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     public boolean addComment(Comment comment) {
-        //某人评论
         /**
          * 判断评论人是否已经评论
          */

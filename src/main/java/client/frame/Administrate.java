@@ -27,7 +27,7 @@ public class Administrate extends JPanel implements IndexConf {
     public JLabel exitLable;
     public JLabel signLabel;
     public JPanel northLeft, northRight;
-    public JLabel deleteUser, deleteArticle, deleteComment, articleDetail, reportDetail, returnArticleTable;
+    public JLabel deleteUser, deleteArticle, deleteComment, articleDetail, returnArticleTable;
     public JLabel welcomeLable;
     public JScrollPane mainPane;
     public JTabbedPane tabbedPane;
@@ -119,8 +119,6 @@ public class Administrate extends JPanel implements IndexConf {
         deleteArticle.setFont(new Font("宋体", Font.BOLD, 20));
         articleDetail = new JLabel("文章详情");
         articleDetail.setFont(new Font("宋体", Font.BOLD, 20));
-        reportDetail = new JLabel("举报详情");
-        reportDetail.setFont(new Font("宋体", Font.BOLD, 20));
         deleteComment = new JLabel("删除评论");
         deleteComment.setFont(new Font("宋体", Font.BOLD, 20));
         returnArticleTable = new JLabel("返回上一级");
@@ -286,25 +284,7 @@ public class Administrate extends JPanel implements IndexConf {
             }
         };
 
-        /**
-         * 举报详情按钮事件
-         */
         deleteComment.addMouseListener(commentAdapter);
-        reportDetail.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                reportDetail.setForeground(Color.RED);
-                reportDetail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-                reportDetail.setForeground(Color.BLACK);
-            }
-            @Override
-            public void mouseClicked(MouseEvent e){
-                System.out.println("举报详情");
-            }
-        });
 
         /**
          * 文章详情按钮事件
@@ -343,6 +323,8 @@ public class Administrate extends JPanel implements IndexConf {
                 mainPane.getVerticalScrollBar().setUnitIncrement(20);
                 articleJpanel.setLayout(new GridLayout(1,1));
                 articleJpanel.add(mainPane);
+                deleteArticle.setVisible(false);
+                articleDetail.setVisible(false);
                 returnArticleTable.setVisible(true);
                 returnArticleTable.addMouseListener(new MouseAdapter() {
                     @Override
@@ -429,8 +411,9 @@ public class Administrate extends JPanel implements IndexConf {
         functionJPanel.removeAll();
         functionJPanel.add(deleteArticle);
         functionJPanel.add(articleDetail);
-        functionJPanel.add(reportDetail);
         functionJPanel.add(returnArticleTable);
+        deleteArticle.setVisible(true);
+        articleDetail.setVisible(true);
         returnArticleTable.setVisible(false);
 
         articleJpanel.removeAll();

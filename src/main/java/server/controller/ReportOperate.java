@@ -16,7 +16,7 @@ public class ReportOperate {
     public ReportOperate(){
     }
 
-    public ReportOperate(ReportOperate reportOperate,ServerUtil serverUtil){
+    public ReportOperate(Report report,ServerUtil serverUtil){
         reportService = new ReportServiceImpl();
         this.report= report;
         this.serverUtil = serverUtil;
@@ -91,7 +91,7 @@ public class ReportOperate {
      */
     public void selectReportArticleByAid(){
         report = reportService.selectReportArticleByAid(report.getAid());
-        report.operate = ServerOperate.ADD_REPORT_ARTICLE;
+        report.operate = ServerOperate.SELECT_REPORT_ARTICLE_BY_AID;
         try{
             serverUtil.sendInfo(report,Report.class);
         } catch (IOException e) {
@@ -104,7 +104,6 @@ public class ReportOperate {
      */
     public void selectReportArticle(){
         List reports = reportService.selectReportArticle();
-        ((Report)reports.get(0)).operate = ServerOperate.DELETE_REPORT_ARTICLE_BY_AID;
         try{
             serverUtil.sendInfoList(reports);
         } catch (IOException e) {
