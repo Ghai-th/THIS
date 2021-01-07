@@ -44,13 +44,6 @@ public class StoreOperate {
     public void addStore(){
         boolean success = false;
         success = storeService.addStore(store);
-        if (!success) {
-            try {
-                serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     /**
@@ -59,13 +52,7 @@ public class StoreOperate {
     public void deleteStore(){
         boolean success = false;
         success = storeService.deleteStore(store);
-        if (!success) {
-            try {
-                serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
     }
 
     /**

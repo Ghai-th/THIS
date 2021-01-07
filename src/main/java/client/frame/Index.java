@@ -3,6 +3,7 @@ package client.frame;
 import client.conf.IndexConf;
 import client.entity.Article;
 import client.entity.Class;
+import client.entity.Store;
 import client.entity.User;
 import client.frame.modle.label.RankLabel;
 import client.frame.modle.panel.ClassPanel;
@@ -14,6 +15,7 @@ import server.controller.ServerOperate;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 论坛首页界面
@@ -30,6 +32,7 @@ public class Index extends JPanel implements IndexConf {
     public JScrollPane scrollPane;
     public JPanel CCPanel;
     public User user;
+    public static List<Store> storeList;
 
     /**
      * 初始化界面
