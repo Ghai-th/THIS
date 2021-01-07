@@ -1,7 +1,9 @@
+import client.Client;
 import client.entity.*;
 import client.util.ClientUtil;
 //import com.sun.org.apache.xml.internal.security.keys.storage.StorageResolverException;
 import org.junit.Test;
+import server.controller.ServerOperate;
 import server.dao.IArticleDao;
 import server.dao.IUserDao;
 import server.dao.IMessageDao;
@@ -16,6 +18,7 @@ import server.service.impl.CommentServiceImpl;
 import server.service.impl.StoreServiceImpl;
 import server.service.impl.UserServiceImpl;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Statement;
@@ -176,4 +179,17 @@ public class TestSql {
         commentService.deleteComment(comment);
     }
 
+    @Test
+    public void testReport() {
+        Report report = new Report();
+        report.setAid("123");
+        report.setReportNum(1);
+        report.operate = ServerOperate.ADD_REPORT_ARTICLE;
+
+        try {
+            ClientUtil.sendInfo(report,Report.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

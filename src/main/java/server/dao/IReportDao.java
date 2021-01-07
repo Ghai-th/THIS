@@ -3,6 +3,7 @@ package server.dao;
 import client.entity.Class;
 import client.entity.Report;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface IReportDao {

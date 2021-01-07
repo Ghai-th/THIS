@@ -4,6 +4,8 @@ import client.entity.Report;
 import server.dao.IReportDao;
 import server.dao.impl.ReportDaoImpl;
 import server.service.IReportService;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public class ReportServiceImpl implements IReportService {
@@ -15,16 +17,13 @@ public class ReportServiceImpl implements IReportService {
     @Override
     public boolean addReportArticle(Report report) {
        //若该文章第一次被举报，则插入表中，若已经被举报，举报次数+1
-        try{
+        try {
             reportDao.addReportArticle(report);
-            return true;
-        }catch (Exception e){
-            String aid = report.getAid();
-            Report report1 = reportDao.selectReportArticleByAid(aid);
-            report1.setReportNum(report1.getReportNum() + 1);
-            reportDao.addReportArticle(report1);
-            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return true;
+
     }
     /**
      *根据文章id删除举报文章

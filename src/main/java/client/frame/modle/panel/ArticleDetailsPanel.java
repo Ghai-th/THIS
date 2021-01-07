@@ -1,12 +1,10 @@
 package client.frame.modle.panel;
 
 import client.conf.IndexConf;
-import client.entity.Article;
-import client.entity.Comment;
-import client.entity.Store;
-import client.entity.User;
+import client.entity.*;
 import client.frame.Index;
 import client.util.ClientUtil;
+import data.Operate;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
@@ -79,25 +77,34 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         initLabel(articleClassLabel);
 
         writeTimeLabel.setPreferredSize(new Dimension(240, 50));
-        authorNameLabel.setFont(new Font("宋体", Font.BOLD, 22));
+        authorNameLabel.setFont(new Font("黑体", Font.BOLD, 22));
         authorNameLabel.setForeground(new Color(121, 86, 102));
 
         reportLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ///////  举报文章对应的事件
-                super.mouseClicked(e);
+                Report report = new Report();
+                report.operate = ServerOperate.ADD_REPORT_ARTICLE;
+                report.setAid(article.getAid());
+                report.setReportNum(0);
+                try {
+                    ClientUtil.sendInfo(report,Report.class);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(null,"举报成功");
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                reportLabel.setBackground(new Color(255, 77, 77));
+                reportLabel.setForeground(new Color(255, 77, 77));
                 super.mouseEntered(e);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                reportLabel.setBackground(new Color(252, 25, 68));
+                reportLabel.setForeground(new Color(252, 25, 68));
                 super.mouseExited(e);
             }
         });
@@ -132,7 +139,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         articleDetailNorthPanel.add(collectionIconLabel);
         articleDetailNorthPanel.add(collectionLabel);
         articleDetailNorthPanel.add(articleClassLabel);
-        articleDetailNorthPanel.add(classLabel);
+//        articleDetailNorthPanel.add(classLabel);
         articleDetailNorthPanel.add(reportLabel);
 
         this.add(articleDetailNorthPanel, BorderLayout.NORTH);
@@ -312,6 +319,9 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         this.borderLimit = borderLimit;
         this.index = index;
         this.article = article;
+
+
+
         init();
     }
 
