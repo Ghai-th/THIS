@@ -115,15 +115,14 @@ public class ArticleDetailPanel extends JPanel {
         textSynopsisPanel.add(textSynopsisImageLabel, BorderLayout.EAST);
 
         textPortPanel = new JPanel();
-        textPortPanel.setPreferredSize(new Dimension(1000, 500));
+        textPortPanel.setPreferredSize(new Dimension(1000, 0));
         textPortPane = new JTextPane();
         textPortPane.setText(this.article.getText());
-        textPortPane.setPreferredSize(new Dimension(1000, 500));
+        textPortPane.setPreferredSize(new Dimension(1000, 1887));
         textPortPane.setEditable(false);
         textPortPane.setBackground(new Color(238, 238, 238));
         textPortPane.setFont(new Font("宋体", Font.BOLD, 22));
 
-        textPortPane.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, Color.BLACK));
         textPortPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         textPortPanel.add(textPortPane, BorderLayout.CENTER);
 
