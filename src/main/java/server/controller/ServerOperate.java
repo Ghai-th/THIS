@@ -50,6 +50,7 @@ public interface ServerOperate {
     int DELETE_USER = 200005;
     int UPDATE_USER_LEVEL = 200006;
     int UPDATE_FANS_NUM = 200007;
+    int UPDATE_FAN_NUM = 2000018;
     int UPDATE_ATTENTION_NUM = 200008;
     int UPDATE_VISITOR_NUM = 200009;
     int UPDATE_ARTICLE_NUM = 200010;

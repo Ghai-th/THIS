@@ -118,6 +118,21 @@ public class UserDaoImpl implements IUserDao {
         }
     }
 
+    @Override
+    public boolean updateUserFanNum(User user) {
+        try {
+            connection = DBUtil.getConnection();
+            statement = connection.createStatement();
+            String sql = "update user set fansnum = '"+(user.getFansNum()+-1)+"' where uid = '"+user.getUid() +"'";
+            return DBUtil.executeChange(statement,sql) != 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }finally {
+            DBUtil.closeResources(connection,statement);
+        }
+    }
+
     /**
      * 根据用户id更新用户的关注数量
      * @param user 更新的用户

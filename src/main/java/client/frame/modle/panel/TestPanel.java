@@ -179,10 +179,11 @@ public class TestPanel extends JPanel {
                     Attention attention1 = new Attention();
                     attention1.operate = ServerOperate.SELECT_ATTENTION_IDOL;
                     attention1.setFansId(otherUser.getUid());
+                    System.out.println(attention1.getFansId());
 
                     List<Attention> list1 = new ArrayList<>();
                     try {
-                        ClientUtil.sendInfo(attention1,Article.class);
+                        ClientUtil.sendInfo(attention1,Attention.class);
                         list1 .addAll(ClientUtil.acceptList());
                         for (int i=0;i<list1.size();i++){
                             if (myUser.getUid().equals(list1.get(i).getUid())){
@@ -198,7 +199,25 @@ public class TestPanel extends JPanel {
                         ee.printStackTrace();
                     }
                     if(panduan){
+                        myUser.setOperate(ServerOperate.UPDATE_FAN_NUM);
+                        Attention attention = new Attention();
+                        attention.setFansId(otherUser.getUid());
+                        attention.operate = ServerOperate.DELETE_COMMENT;
+                        try {
+                            ClientUtil.sendInfo(myUser,User.class);
+                            myUser = ClientUtil.acceptInfo(User.class);
+                            ClientUtil.sendInfo(attention,Attention.class);
+                            attention = ClientUtil.acceptInfo(Attention.class);
+                            if(attention.operate!=ServerOperate.ERROR){
+                                JOptionPane.showMessageDialog(TestPanel.this,"取消成功");
+                            }
 
+                        } catch (IOException | ClassNotFoundException ex) {
+                            ex.printStackTrace();
+                        }
+                        Index.MeUser.setFansNum(Index.MeUser.getFansNum()-1);
+                        userJPanel3.removeAll();
+                        myUser.setFansNum(myUser.getFansNum()-1);
 
                     }else{
                         myUser.setOperate(ServerOperate.UPDATE_FANS_NUM);
@@ -220,19 +239,20 @@ public class TestPanel extends JPanel {
                         Index.MeUser.setFansNum(Index.MeUser.getFansNum()+1);
                         userJPanel3.removeAll();
                         myUser.setFansNum(myUser.getFansNum()+1);
-                        fansMemberPanel3 = new MemberNoColorPanel(myUser.getFansNum()+"","粉丝");
-                        fansMemberPanel3.setOpaque(false);//设置全透明
-                        fansMemberPanel3.setTransparent(0.1f);//设置透明度
-                        userJPanel3.add(fansMemberPanel3);
-                        attentionMemberPanel3 = new MemberNoColorPanel(myUser.getAttentionNum()+"","关注");
-                        attentionMemberPanel3.up = myUser.getAttentionNum()+"";
-                        attentionMemberPanel3.down = "关注";
-                        attentionMemberPanel3.setOpaque(false);//设置全透明
-                        attentionMemberPanel3.setTransparent(0.1f);//设置透明度
-                        userJPanel3.add(attentionMemberPanel3);
-                        userJPanel3.updateUI();
-                        userJPanel3.repaint();
+
                     }
+                    fansMemberPanel3 = new MemberNoColorPanel(myUser.getFansNum()+"","粉丝");
+                    fansMemberPanel3.setOpaque(false);//设置全透明
+                    fansMemberPanel3.setTransparent(0.1f);//设置透明度
+                    userJPanel3.add(fansMemberPanel3);
+                    attentionMemberPanel3 = new MemberNoColorPanel(myUser.getAttentionNum()+"","关注");
+                    attentionMemberPanel3.up = myUser.getAttentionNum()+"";
+                    attentionMemberPanel3.down = "关注";
+                    attentionMemberPanel3.setOpaque(false);//设置全透明
+                    attentionMemberPanel3.setTransparent(0.1f);//设置透明度
+                    userJPanel3.add(attentionMemberPanel3);
+                    updateUI();
+                    repaint();
 
                 }
 

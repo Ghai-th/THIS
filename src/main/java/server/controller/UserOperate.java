@@ -49,6 +49,9 @@ public class UserOperate {
             case ServerOperate.UPDATE_FANS_NUM:
                 updateUserFansNum();
                 break;
+            case ServerOperate.UPDATE_FAN_NUM:
+                updateUserFanNum();
+                break;
             case ServerOperate.UPDATE_ATTENTION_NUM:
                 updateUserAttentionnum();
                 break;
@@ -130,6 +133,9 @@ public class UserOperate {
      */
     public void updateUserFansNum() {
         isSuccess(userServiceImpl.updateUserFansNum(user));
+    }
+    public void updateUserFanNum(){
+        isSuccess(userServiceImpl.updateUserFanNum(user));
     }
 
     /**
