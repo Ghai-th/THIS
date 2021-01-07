@@ -189,7 +189,6 @@ public class Administrate extends JPanel implements IndexConf {
             }
             @Override
             public void mouseClicked(MouseEvent e){
-                /////0到5行不能删除/////
                 if(table.getSelectedRow() >=0 && table.getSelectedRow() <=5){
                     JOptionPane.showMessageDialog(Administrate.this,"你在想屁吃！");
                     changeListener0();
