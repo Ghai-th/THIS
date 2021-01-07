@@ -19,7 +19,6 @@ public class ArticleDetailPanel extends JPanel {
     public ArrayList<Comment> commentArrayList;
     public Comment comment;
     private List commentList;
-    private JLabel reportLabel;
     public JPanel commentListPanel;
 
     public ArticleDetailPanel(Article article, JPanel articleDetailPanel){
@@ -66,14 +65,12 @@ public class ArticleDetailPanel extends JPanel {
         JLabel collectionIconLabel = new JLabel(new ImageIcon("src/main/resources/tobarCollectionActive.png"));
         JLabel articleClassLabel = new JLabel(Index.classification[Integer.parseInt(article.getCid()) - 1000]);
 
-        reportLabel = new JLabel("举报");
 
         initLabel(authorNameLabel);
         initLabel(writeTimeLabel);
         initLabel(viewNumLabel);
         initLabel(collectionLabel);
         initLabel(classLabel);
-        initLabel(reportLabel);
         initLabel(articleClassLabel);
 
         writeTimeLabel.setPreferredSize(new Dimension(240, 50));
@@ -87,15 +84,13 @@ public class ArticleDetailPanel extends JPanel {
         articleDetailNorthPanel.add(collectionIconLabel);
         articleDetailNorthPanel.add(collectionLabel);
         articleDetailNorthPanel.add(articleClassLabel);
-        articleDetailNorthPanel.add(classLabel);
-        articleDetailNorthPanel.add(reportLabel);
 
         this.articleDetailPanel.add(articleDetailNorthPanel, BorderLayout.NORTH);
     }
 
     public void initCenter() {
         JPanel textSynopsisPanel, textPortPanel;
-        JLabel textSynopsisImageLabel, textSynopsisLabel;
+        JLabel textSynopsisLabel;
         JTextPane textPortPane;
 
         articleDetailCenterPanel = new JPanel(new BorderLayout());
@@ -103,27 +98,22 @@ public class ArticleDetailPanel extends JPanel {
         textSynopsisPanel = new JPanel(new BorderLayout());
         textSynopsisPanel.setPreferredSize(new Dimension(1000, 225));
         textSynopsisPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-        textSynopsisImageLabel = new JLabel("图片");
         textSynopsisLabel = new JLabel("简介");
         textSynopsisLabel.setText(this.article.getSynopsis());
         textSynopsisLabel.setFont(new Font("宋体",Font.PLAIN,17));
         textSynopsisLabel.setForeground(Color.gray);
-        textSynopsisImageLabel.setPreferredSize(new Dimension(300, 225));
         textSynopsisLabel.setPreferredSize(new Dimension(700, 225));
-        textSynopsisLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
-        textSynopsisPanel.add(textSynopsisLabel, BorderLayout.WEST);
-        textSynopsisPanel.add(textSynopsisImageLabel, BorderLayout.EAST);
+        textSynopsisPanel.add(textSynopsisLabel, BorderLayout.CENTER);
 
         textPortPanel = new JPanel();
-        textPortPanel.setPreferredSize(new Dimension(1000, 500));
+        textPortPanel.setPreferredSize(new Dimension(1000, 0));
         textPortPane = new JTextPane();
         textPortPane.setText(this.article.getText());
-        textPortPane.setPreferredSize(new Dimension(1000, 500));
+        textPortPane.setPreferredSize(new Dimension(1000, 1887));
         textPortPane.setEditable(false);
         textPortPane.setBackground(new Color(238, 238, 238));
         textPortPane.setFont(new Font("宋体", Font.BOLD, 22));
 
-        textPortPane.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, Color.BLACK));
         textPortPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         textPortPanel.add(textPortPane, BorderLayout.CENTER);
 

@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class UserSocketGather {
     public static Map<User, MessageServerUtil> userMessageServerUtilMap = new HashMap<User,MessageServerUtil>();
-    public static Iterator iterator = userMessageServerUtilMap.entrySet().iterator();
+    public static Iterator iterator;
     /**
      * 插入新的元素
      * @param user
@@ -26,6 +26,7 @@ public class UserSocketGather {
      * @param user
      */
     public static void deleteUserServerUtilMap(User user){
+        iterator = userMessageServerUtilMap.entrySet().iterator();
         while(iterator.hasNext()){
             Map.Entry<User,ServerUtil> entry = (Map.Entry<User, ServerUtil>) iterator.next();
             if(entry.getKey().getUid().equals(user.getUid())){
@@ -41,6 +42,7 @@ public class UserSocketGather {
      * @return
      */
     public static Map.Entry<User,MessageServerUtil> getUserMessageServerUtil(User user){
+        iterator = userMessageServerUtilMap.entrySet().iterator();
         while(iterator.hasNext()){
             Map.Entry<User,MessageServerUtil> entry = (Map.Entry<User, MessageServerUtil>) iterator.next();
             if(entry.getKey().getUid().equals(user.getUid())){
