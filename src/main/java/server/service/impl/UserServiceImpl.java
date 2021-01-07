@@ -95,6 +95,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public boolean updateUserFanNum(User user) {
+        return dao.updateUserFanNum(user);
+    }
+
+    @Override
     public boolean updateUserAttentionnum(User user) {
         return dao.updateUserAttentionnum(user);
     }

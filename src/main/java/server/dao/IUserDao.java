@@ -29,11 +29,18 @@ public interface IUserDao {
     boolean updateUserlevel(User user);
 
     /**
-     * 更新用户粉丝数量
+     * 更新用户粉丝数量，使粉丝数量加一
      * @param user 更新的用户
      * @return 返回更新结果
      */
     boolean updateUserFansNum(User user);
+
+    /**
+     * 更新粉丝数量，使粉丝数量减一
+     * @param user 更新的用户
+     * @return 返回更新结果
+     */
+    boolean updateUserFanNum(User user);
 
     /**
      * 更新用户关注数量
