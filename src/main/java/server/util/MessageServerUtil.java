@@ -33,7 +33,6 @@ public class MessageServerUtil {
     }
 
     public MessageServerUtil() throws IOException {
-        System.out.println("到了到了");
         socket = serverSocket.accept();
         outputStream = socket.getOutputStream();
         inputStream = socket.getInputStream();
