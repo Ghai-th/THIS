@@ -8,6 +8,7 @@ import server.service.impl.StoreServiceImpl;
 import server.util.ServerUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StoreOperate {
@@ -50,9 +51,7 @@ public class StoreOperate {
      * 删除收藏
      */
     public void deleteStore(){
-        boolean success = false;
-        success = storeService.deleteStore(store);
-
+        storeService.deleteStore(store);
     }
 
     /**
@@ -60,6 +59,9 @@ public class StoreOperate {
      */
     public void selectStore(){
         List<Store> attentions = storeService.selectStore(store);
+        if (attentions == null) {
+            attentions = new ArrayList<>();
+        }
         try {
             serverUtil.sendInfoList(attentions);
         } catch (IOException e) {

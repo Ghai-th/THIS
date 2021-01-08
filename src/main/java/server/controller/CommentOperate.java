@@ -118,6 +118,9 @@ public class CommentOperate {
      */
     public void clientQueryAllCommentByUid() {
         List allComment = commentService.queryAllCommentByUid(comment.getUid());
+        if (allComment == null) {
+            allComment = new ArrayList();
+        }
         try {
             serverUtil.sendInfoList(allComment);
         } catch (IOException e) {
@@ -130,7 +133,9 @@ public class CommentOperate {
      */
     public void clientQueryAllCommentByAid() {
         List allComment = commentService.queryAllCommentByAid(comment.getAid());
-        ((Comment)allComment.get(0)).operate = ServerOperate.QUERY_ALL_COMMENT_BY_AID;
+        if (allComment == null) {
+            allComment = new ArrayList();
+        }
         try {
             serverUtil.sendInfoList(allComment);
         } catch (IOException e) {

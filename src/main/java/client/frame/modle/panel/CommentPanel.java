@@ -32,6 +32,7 @@ public class CommentPanel extends JPanel {
         jTextArea.setForeground(new Color(242,242,242));
         jTextArea.setEditable(false);
         add(jTextArea);
+
         System.out.println(commentList.size());
         setPreferredSize(new Dimension(800,250*commentList.size()));
         System.out.println("高为"+250*commentList.size());

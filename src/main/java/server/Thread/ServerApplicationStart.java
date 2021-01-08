@@ -1,9 +1,9 @@
 package server.Thread;
 
+import client.entity.Class;
 import client.entity.*;
 import server.controller.*;
 import server.util.ServerUtil;
-import client.entity.Class;
 
 import java.io.IOException;
 
@@ -51,19 +51,14 @@ class Listener<T> implements Runnable {
 
     public void selectClass() {
         if (t instanceof Article) {
-            System.out.println("article" + ( (Article) t).operate + t.toString());
             new ArticleOperate((Article) t, serverUtil);
         } else if (t instanceof Attention) {
-            System.out.println(((Attention) t).operate);
             new AttentionOperate((Attention)t,serverUtil);
         } else if (t instanceof Class) {
             new ClassOperate((client.entity.Class) t,serverUtil);
         } else if (t instanceof Comment) {
             new CommentOperate((Comment) t, serverUtil);
-        } else if (t instanceof Message) {
-
         } else if (t instanceof Store) {
-            System.out.println(((Store) t).operate + t.toString());
             new StoreOperate((Store)t,serverUtil);
         } else if (t instanceof User) {
             new UserOperate((User)t,serverUtil);

@@ -73,12 +73,4 @@ public class ArticleDetailsCommentPanel extends JPanel {
         init();
     }
 
-    public static void main(String[] args) {
-        JFrame jFrame = new JFrame();
-        jFrame.setSize(1216,139);
-        jFrame.add(new ArticleDetailsCommentPanel(Comment.initComment()));
-        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jFrame.setLocationRelativeTo(null);
-        jFrame.setVisible(true);
-    }
 }

@@ -10,6 +10,7 @@ import client.frame.modle.panel.ClassPanel;
 import client.frame.modle.panel.NavigationBarPanel;
 import client.frame.modle.panel.TranslucenceJPanel;
 import client.util.ClientUtil;
+import client.util.MessageClientUtil;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
@@ -210,4 +211,17 @@ public class Index extends JPanel implements IndexConf {
 
         this.add(centerPanel, BorderLayout.CENTER);
     }
+
+    public static void startApplication() {
+        new MessageClientUtil();
+        JFrame jFrame = new JFrame("test");
+        jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Index index = new Index();
+        jFrame.add(index);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        jFrame.setVisible(true);
+    }
+
 }

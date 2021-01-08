@@ -6,7 +6,6 @@ import client.entity.User;
 import client.util.ClientUtil;
 import server.controller.ServerOperate;
 
-import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
