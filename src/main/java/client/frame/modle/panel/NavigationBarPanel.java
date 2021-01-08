@@ -156,9 +156,6 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                     java.util.List<Comment> commentList = null;
                     try {
                         commentList= (List) ClientUtil.acceptList();
-                        if (commentList.size() == 0) {
-                            commentList = null;
-                        }
                     } catch (IOException | ClassNotFoundException ex) {
                         ex.printStackTrace();
                     }
