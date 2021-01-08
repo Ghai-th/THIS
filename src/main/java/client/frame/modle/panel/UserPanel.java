@@ -184,6 +184,7 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
                 clear();
                 resource.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
                 centerc.removeAll();
+                centerc.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-50,1280));
                 centerc.add(new WritePanel(myUser));
                 centerc.updateUI();
                 repaint();
@@ -195,7 +196,10 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
                 resource.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
         };
-        resource.addMouseListener(adapter2);
+        if(Index.MeUser.getUid().equals(myUser.getUid())){
+            resource.addMouseListener(adapter2);
+        }
+
         centerup.add(resource);
         topic = new JLabel("我的收藏("+cnum+")",JLabel.CENTER);
         topic.setFont(new Font("宋体",Font.PLAIN,30));
