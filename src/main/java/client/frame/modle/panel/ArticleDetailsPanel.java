@@ -3,6 +3,7 @@ package client.frame.modle.panel;
 import client.conf.IndexConf;
 import client.entity.*;
 import client.frame.Index;
+import client.frame.Login;
 import client.util.ClientUtil;
 import data.Operate;
 import server.controller.ServerOperate;
@@ -61,12 +62,43 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         reportLabel = new JLabel("举报");
         authorNameLabel = new JLabel(author.getName());
         writeTimeLabel = new JLabel(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(article.getCreate()));
-        viewNumLabel = new JLabel(String.valueOf(article.getVisitorNum()));
-        collectionLabel = new JLabel(String.valueOf(article.getCollectNum()));
-        classLabel = new JLabel(article.getCid()); // 数据库查询
+        viewNumLabel = new JLabel(String.valueOf(article.getVisitorNum())); int x = 0;
+        collectionLabel = new JLabel("收藏");
+        classLabel = new JLabel(article.getCid()); x = 1;// 数据库查询
+
+
         JLabel viewEyeLabel = new JLabel(new ImageIcon("src/main/resources/articleReadEyes.png"));
-        JLabel collectionIconLabel = new JLabel(new ImageIcon("src/main/resources/tobarCollectionActive.png"));
+        final JLabel collectionIconLabel = new JLabel(new ImageIcon("src/main/resources/tobarCollectionActive.png"));
         JLabel articleClassLabel = new JLabel(Index.classification[Integer.parseInt(article.getCid()) - 1000]);
+
+        if (Index.MeUser != null) {
+            Store store = new Store();
+            store.operate = ServerOperate.SELECT_STORE;
+            store.setUid(Index.MeUser.getUid());
+            store.setTime(new Date());
+            try {
+                ClientUtil.sendInfo(store, Store.class);
+                Index.storeList = ClientUtil.acceptList();
+            } catch (IOException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+
+            System.out.println("Index.storeList = " + Index.storeList);
+
+            boolean flag = false;
+            for (Store o : Index.storeList) {
+                if (o.getAid() == article.getAid()) {
+                    collectionIconLabel.setIcon(new ImageIcon("src/main/resources/tobarCollectionActive1.png"));
+                    collectionLabel.setText("取消收藏");
+                    flag = true;
+                }
+            }
+            if (!flag) {
+                collectionLabel.setText("收藏");
+                collectionIconLabel.setIcon(new ImageIcon("src/main/resources/tobarCollectionActive.png"));
+            }
+        }
+
 
         initLabel(authorNameLabel);
         initLabel(writeTimeLabel);
@@ -89,11 +121,11 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
                 report.setAid(article.getAid());
                 report.setReportNum(0);
                 try {
-                    ClientUtil.sendInfo(report,Report.class);
+                    ClientUtil.sendInfo(report, Report.class);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                JOptionPane.showMessageDialog(null,"举报成功");
+                JOptionPane.showMessageDialog(null, "举报成功");
             }
 
             @Override
@@ -113,7 +145,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
             @Override
             public void mouseClicked(MouseEvent e) {
                 index.removeAll();
-                index.add(new AllPanel(author,User.copyUser(Index.MeUser),index,commentList,storeList,articleList));
+                index.add(new AllPanel(author, User.copyUser(Index.MeUser), index, commentList, storeList, articleList));
                 index.repaint();
                 index.updateUI();
                 super.mouseClicked(e);
@@ -128,6 +160,57 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
             @Override
             public void mouseExited(MouseEvent e) {
                 authorNameLabel.setForeground(new Color(121, 86, 102));
+                super.mouseExited(e);
+            }
+        });
+
+        collectionIconLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (Index.MeUser == null) {
+                    index.removeAll();
+                    index.add(new Login(index));
+                    return;
+                }
+
+                Store store = new Store();
+                if ("取消收藏".equals(collectionLabel.getText())) {
+                    System.out.println("yes");
+                    collectionIconLabel.setIcon(new ImageIcon("src/main/resources/tobarCollectionActive.png"));
+                    collectionLabel.setText("收藏");
+                    repaint();
+                    store.operate = ServerOperate.DELETE_STORE;
+                    store.setUid(Index.MeUser.getUid());
+                    store.setAid(article.getAid());
+                    try {
+//                        ClientUtil.sendInfo(store,Store.class);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                    return;
+                }
+                store.operate = ServerOperate.ADD_STORE;
+                store.setUid(Index.MeUser.getUid());
+                store.setAid(article.getAid());
+                store.setTime(new Date());
+                try {
+//                    ClientUtil.sendInfo(store,Store.class);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                System.out.println("collectionLabel.getText() = " + collectionLabel.getText());
+                collectionIconLabel.setIcon(new ImageIcon("src/main/resources/tobarCollectionActive1.png"));
+                collectionLabel.setText("取消收藏");
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
             }
         });
@@ -147,7 +230,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
 
     public void initCenter() {
         JPanel textSynopsisPanel, textPortPanel;
-        JLabel  textSynopsisLabel;
+        JLabel textSynopsisLabel;
         JTextPane textPortPane;
 
         articleDetailCenterPanel = new JPanel(new BorderLayout());
@@ -158,7 +241,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         textSynopsisLabel = new JLabel("简介");
         textSynopsisLabel.setText(article.getSynopsis());
         textSynopsisLabel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
-        textSynopsisLabel.setFont(new Font("宋体",Font.PLAIN,17));
+        textSynopsisLabel.setFont(new Font("宋体", Font.PLAIN, 17));
         textSynopsisLabel.setForeground(Color.gray);
         textSynopsisLabel.setPreferredSize(new Dimension(1200, 225));
         textSynopsisLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
@@ -232,8 +315,8 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
 
                 commentListPanel.removeAll();
                 commentListPanel.setVisible(false);
-                commentListPanel = new JPanel(new GridLayout(commentArray.size(),1));
-                commentListPanel.setPreferredSize(new Dimension(1200,commentArray.size() * 105));
+                commentListPanel = new JPanel(new GridLayout(commentArray.size(), 1));
+                commentListPanel.setPreferredSize(new Dimension(1200, commentArray.size() * 105));
                 for (Comment comments : commentArray) {
                     ArticleDetailsCommentPanel articleDetailsCommentPanel = new ArticleDetailsCommentPanel(comments);
                     commentListPanel.add(articleDetailsCommentPanel);
@@ -241,7 +324,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
                 commentListPanel.setVisible(true);
                 commentListPanel.repaint();
                 updateUI();
-                articleDetailSouthPanel.add(commentListPanel,BorderLayout.CENTER);
+                articleDetailSouthPanel.add(commentListPanel, BorderLayout.CENTER);
                 borderLimit.add(articleDetailSouthPanel, BorderLayout.SOUTH);
 
             }
@@ -261,18 +344,19 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         JPanel writePanel = new JPanel(new BorderLayout());
         writePanel.add(writeCommentPane, BorderLayout.CENTER);
         writePanel.add(publishLabel, BorderLayout.EAST);
-        articleDetailSouthPanel.add(writePanel,BorderLayout.NORTH);
+        articleDetailSouthPanel.add(writePanel, BorderLayout.NORTH);
 
-        commentListPanel = new JPanel(new GridLayout(commentArrayList.size(),1));int x;
-        commentListPanel.setPreferredSize(new Dimension(1200,commentArrayList.size() * 105));
+        commentListPanel = new JPanel(new GridLayout(commentArrayList.size(), 1));
+        int x;
+        commentListPanel.setPreferredSize(new Dimension(1200, commentArrayList.size() * 105));
         for (Comment comments : commentArrayList) {
             System.out.println(comments);
             ArticleDetailsCommentPanel articleDetailsCommentPanel = new ArticleDetailsCommentPanel(comments);
             commentListPanel.add(articleDetailsCommentPanel);
         }
-        articleDetailSouthPanel.add(commentListPanel,BorderLayout.CENTER);
+        articleDetailSouthPanel.add(commentListPanel, BorderLayout.CENTER);
         this.add(articleDetailSouthPanel, BorderLayout.SOUTH);
-}
+    }
 
     public void initInfo() {
         // 从根据作者的id从数据库拉去作者信息
@@ -280,7 +364,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         author.setUid(article.getUid());
         author.operate = ServerOperate.SELECT_USER;
         try {
-            ClientUtil.sendInfo(author,User.class);
+            ClientUtil.sendInfo(author, User.class);
             author = ClientUtil.acceptInfo(User.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -289,7 +373,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         article.setUid(this.article.getUid());
         article.operate = ServerOperate.GET_ARTICLE_BY_UID;
         try {
-            ClientUtil.sendInfo(article,Article.class);
+            ClientUtil.sendInfo(article, Article.class);
             articleList = ClientUtil.acceptList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -299,7 +383,7 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         store.operate = ServerOperate.SELECT_STORE;
         store.setUid(article.getUid());
         try {
-            ClientUtil.sendInfo(store,Store.class);
+            ClientUtil.sendInfo(store, Store.class);
             storeList = ClientUtil.acceptList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -319,9 +403,6 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         this.borderLimit = borderLimit;
         this.index = index;
         this.article = article;
-
-
-
         init();
     }
 

@@ -166,7 +166,9 @@ public class ArticleOperate {
      */
     public void selectArticleByUid() {
         List articles = articleService.selectArticleByUid(article.getUid());
-        ((Article)articles.get(0)).operate = ServerOperate.GET_ARTICLE_BY_UID;
+        if (articles == null) {
+            articles = new ArrayList();
+        }
         try {
             System.out.println("articles.size() = " + articles.size());
             serverUtil.sendInfoList(articles);

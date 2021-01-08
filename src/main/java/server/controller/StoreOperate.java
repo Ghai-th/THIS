@@ -8,6 +8,7 @@ import server.service.impl.StoreServiceImpl;
 import server.util.ServerUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StoreOperate {
@@ -44,28 +45,13 @@ public class StoreOperate {
     public void addStore(){
         boolean success = false;
         success = storeService.addStore(store);
-        if (!success) {
-            try {
-                serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     /**
      * 删除收藏
      */
     public void deleteStore(){
-        boolean success = false;
-        success = storeService.deleteStore(store);
-        if (!success) {
-            try {
-                serverUtil.sendOperate(new Operate(ServerOperate.ERROR));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        storeService.deleteStore(store);
     }
 
     /**
@@ -73,6 +59,9 @@ public class StoreOperate {
      */
     public void selectStore(){
         List<Store> attentions = storeService.selectStore(store);
+        if (attentions == null) {
+            attentions = new ArrayList<>();
+        }
         try {
             serverUtil.sendInfoList(attentions);
         } catch (IOException e) {

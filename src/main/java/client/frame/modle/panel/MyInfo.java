@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
 
 public class MyInfo extends JFrame {
     User user;
-    JLabel headJLabel,idJLabel,nameJLabel,passwordJLabel,genderJLabel,synopsisJLabel,mykeyJLabel,bkgJLabel;
+    JLabel headJLabel,idJLabel,nameJLabel,passwordJLabel,genderJLabel,synopsisJLabel,mykeyJLabel,bkgJLabel,profileJLabel;
     JButton okJButton,cleanJButton;
     JTextField idJTextField,nameJTextField,mykeyJTextField,genderJTextField;
     JTextPane synopsisJTextPane;
@@ -45,6 +45,7 @@ public class MyInfo extends JFrame {
         //组件初始化
         headJLabel = new JLabel("头像");
         initJLabel(headJLabel);
+        profileJLabel = new JLabel(new ImageIcon("src/main/resources/头像 .png"));
         idJLabel = new JLabel("账号");
         initJLabel(idJLabel);
         nameJLabel = new JLabel("姓名");
@@ -78,10 +79,12 @@ public class MyInfo extends JFrame {
         setCenter();
         okJPanel = new JPanel(null);
         //组件放置
-        bkgJLabel.setBounds(0,0,550,150);
+        bkgJLabel.setBounds(0,0,600,150);
         this.add(bkgJLabel);
         headJLabel.setBounds(30,200,50,25);
         this.add(headJLabel);
+        profileJLabel.setBounds(130,155,120,120);
+        this.add(profileJLabel);
         idJLabel.setBounds(310,200,50,25);
         this.add(idJLabel);
         nameJLabel.setBounds(30,300,50,25);

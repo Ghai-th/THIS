@@ -3,24 +3,27 @@ package client.frame;
 import client.conf.IndexConf;
 import client.entity.Article;
 import client.entity.Class;
+import client.entity.Store;
 import client.entity.User;
 import client.frame.modle.label.RankLabel;
 import client.frame.modle.panel.ClassPanel;
 import client.frame.modle.panel.NavigationBarPanel;
 import client.frame.modle.panel.TranslucenceJPanel;
 import client.util.ClientUtil;
+import client.util.MessageClientUtil;
 import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 论坛首页界面
  * 分类导航，用户排行榜，文章排行榜，分类概览
  */
 
-public class Index extends TranslucenceJPanel implements IndexConf {
+public class Index extends JPanel implements IndexConf {
 
     public static User MeUser;
     public JPanel centerPanel, westPanel; // 三个大边界板块
@@ -30,6 +33,7 @@ public class Index extends TranslucenceJPanel implements IndexConf {
     public JScrollPane scrollPane;
     public JPanel CCPanel;
     public User user;
+    public static List<Store> storeList;
 
     /**
      * 初始化界面
@@ -95,7 +99,6 @@ public class Index extends TranslucenceJPanel implements IndexConf {
         int i = 1;
         for (User userTop : userTopTenArrayList) {
             person = new RankLabel(this, userTop, i + "    " + userTop.getName());
-            person.setBackground(new Color(255,255,255));
             person.setOpaque(true);
             person.addMouseListener(person);
             person.setFont(new Font("宋体", Font.BOLD, 15));
@@ -123,7 +126,6 @@ public class Index extends TranslucenceJPanel implements IndexConf {
         int j = 1;
         for (Article articleTop : articleTopTenArrayList) {
             article = new RankLabel(this, articleTop, j + "    " + articleTop.getTitle());
-            article.setBackground(new Color(255,255,255));
             article.setOpaque(true);
             article.addMouseListener(article);
             article.setFont(new Font("宋体", Font.BOLD, 15));
@@ -131,8 +133,6 @@ public class Index extends TranslucenceJPanel implements IndexConf {
             j++;
         }
 
-        rankingListPerson.setBackground(new Color(255,255,255));
-        rankingListArticle.setBackground(new Color(255,255,255));
         westPanel.add(rankingListPerson);
         westPanel.add(rankingListArticle);
         westPanel.setPreferredSize(new Dimension(384, 1050));
@@ -153,22 +153,18 @@ public class Index extends TranslucenceJPanel implements IndexConf {
 
         JPanel center, west, east, north, south;
         east = new JPanel();
-        east.setBackground(new Color(255,255,255));
         east.setPreferredSize(new Dimension(WIDE * 5 / 64, (classification.length + 1) * RANK_HIGH));
         CCPanel.add(east, BorderLayout.EAST);
 
         south = new JPanel();
-        south.setBackground(new Color(255,255,255));
         south.setPreferredSize(new Dimension(WIDE * 4 / 5, HIGH / 21));
         CCPanel.add(south, BorderLayout.SOUTH);
 
         north = new JPanel();
-        north.setBackground(new Color(255,255,255));
         north.setPreferredSize(new Dimension(WIDE * 4 / 5, HIGH / 21));
         CCPanel.add(north, BorderLayout.NORTH);
 
         west = new JPanel();
-        west.setBackground(new Color(255,255,255));
         west.setPreferredSize(new Dimension(WIDE * 5 / 64, classification.length * RANK_HIGH));
         CCPanel.add(west, BorderLayout.WEST);
 
@@ -215,4 +211,17 @@ public class Index extends TranslucenceJPanel implements IndexConf {
 
         this.add(centerPanel, BorderLayout.CENTER);
     }
+
+    public static void startApplication() {
+        new MessageClientUtil();
+        JFrame jFrame = new JFrame("test");
+        jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Index index = new Index();
+        jFrame.add(index);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        jFrame.setVisible(true);
+    }
+
 }

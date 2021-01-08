@@ -373,7 +373,7 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
                 //播放音乐
                 music[++i] = new Thread("music"){
                     public void run(){
-                            String filename="src/main/resources/祖海 - 好运来.mp3";
+                            String filename="src/main/resources/Roger Subirana - Between Worlds.mp3";
                             try {
                                 BufferedInputStream buffer = new BufferedInputStream(new FileInputStream(filename));
                                 Player player = new Player(buffer);
@@ -424,7 +424,6 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
                 imageJPanelthree.add(imageJLabelthree);
                 imageJPanelthree.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//设置鼠标移入是光标变成手指
                 imageJPanelthree.validate();
-                //System.out.println("111");
             }
 
             @Override

@@ -5,14 +5,11 @@ import client.entity.Article;
 import client.entity.Class;
 import client.frame.Index;
 import client.frame.modle.label.ArticleTittleLabel;
-import client.util.ClientUtil;
-import server.controller.ServerOperate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
