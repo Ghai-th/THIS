@@ -102,7 +102,9 @@ public class TestPanel extends JPanel {
                 message.setSendId(otherUser.getUid());
                 message.setOperate(ServerOperate.ONLINE_MESSAGE);
                 try {
+                    System.out.println("第一次连接");
                     MessageClientUtil.sendInfo(message);
+                    System.out.println("第一次连接成功");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

@@ -2,7 +2,7 @@ package client;
 
 import client.conf.IndexConf;
 import client.frame.Index;
-import client.frame.modle.panel.JframeBackGround;
+//import client.frame.modle.panel.JframeBackGround;
 import client.util.MessageClientUtil;
 
 import javax.swing.*;

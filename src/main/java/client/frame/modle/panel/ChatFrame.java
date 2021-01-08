@@ -21,6 +21,7 @@ public class ChatFrame extends JFrame implements Runnable {
     JPanel leftJPanel,upJPanel,downupJPanel;
     JTextPane centerJTextPanel,downJTextPanel;
     JButton sendJButton;
+    public static int liupi = 0;
 
     public ChatFrame(final User sendUser, final User acceptUser, HashMap<String,String> userMap){
         this.userMap = userMap;
@@ -95,6 +96,7 @@ public class ChatFrame extends JFrame implements Runnable {
         listPanel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                liupi = 1;
                 listPanel1.setBackground(Color.black);
                 acceptUser.setUid(listPanel1.nameJLabel.getText());
                 centerJTextPanel.setText("");
@@ -106,6 +108,7 @@ public class ChatFrame extends JFrame implements Runnable {
                     message.setAcceptId(sendUser.getUid());
                     MessageClientUtil.sendInfo(message);
                     List messageList = MessageClientUtil.acceptList2();
+                    liupi = 0;
                     if(message!=null){
                         System.out.println(messageList);
                         Iterator<Message> iterator = messageList.iterator();
@@ -151,10 +154,15 @@ public class ChatFrame extends JFrame implements Runnable {
             while(iterator.hasNext()){
                 final Map.Entry<String,String> entry = (Map.Entry<String, String>) iterator.next();
                 final ListPanel listPanel2 = new ListPanel(entry.getKey());
-                leftJPanel.add(listPanel2);
+                if(listPanel2.nameJLabel.getText().equals(acceptUser.getUid())){
+
+                }else {
+                    leftJPanel.add(listPanel2);
+                }
                 listPanel2.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        liupi = 1;
                         listPanel2.setBackground(Color.black);
                         acceptUser.setUid(entry.getKey());
                         centerJTextPanel.setText("");
@@ -165,14 +173,17 @@ public class ChatFrame extends JFrame implements Runnable {
                             message.setSendId(acceptUser.getUid());
                             message.setAcceptId(sendUser.getUid());
                             MessageClientUtil.sendInfo(message);
+                            System.out.println("得到消息前");
                             List<Message> messageList = MessageClientUtil.acceptList2();
                             System.out.println("拿到"+messageList);
-                            if(message!=null){
+                            liupi = 0;
+                            if(messageList!=null){
                                 System.out.println(messageList);
                                 Iterator<Message> iterator = messageList.iterator();
                                 while(iterator.hasNext()){
                                     Message message2 = iterator.next();
                                     centerJTextPanel.setText(centerJTextPanel.getText()+acceptUser.getName()+":"+message2.getText()+"\n");
+                                    System.out.println("已经放到了center中");
                                     centerJTextPanel.repaint();
                                     centerJTextPanel.updateUI();
                                 }
@@ -220,7 +231,9 @@ public class ChatFrame extends JFrame implements Runnable {
             public void mouseClicked(MouseEvent e) {
                 Message message = new Message();
                 message.setSendId(sendUser.getUid());
+                System.out.println("关闭发出前");
                 message.setOperate(ServerOperate.WINDING_MESSAGE);
+                System.out.println("关闭发出后");
                 try {
                     MessageClientUtil.sendInfo(message);
                 } catch (IOException ex) {
@@ -252,7 +265,7 @@ public class ChatFrame extends JFrame implements Runnable {
             }
         });
         upJPanel.setLayout(null);
-        upJPanel.setBounds(320,0,1920*3/5-1920/6,1080/12);
+        upJPanel.setBounds(320,0,1920*3/5-1920/6,50);
         imagJLabel.setBounds(780,15,30,21);
         upJPanel.setBackground(Color.white);
         upJPanel.add(imagJLabel);
@@ -265,12 +278,14 @@ public class ChatFrame extends JFrame implements Runnable {
         centerJTextPanel.setBounds(320,72,832,534);
         centerJTextPanel.setBackground(Color.white);
         centerJTextPanel.setBorder(BorderFactory.createMatteBorder(0,0,1,0,Color.LIGHT_GRAY));
+        centerJTextPanel.setFont(new Font("宋体",Font.PLAIN,16));
         allJpanel.add(centerJTextPanel);
     }
     public void init4(){
         downJTextPanel = new JTextPane();
         downJTextPanel.setBackground(Color.white);
         downJTextPanel.setBounds(320,636,832,180);
+        downJTextPanel.setFont(new Font("宋体",Font.PLAIN,16));
         allJpanel.add(downJTextPanel);
     }
     public void init5(){
@@ -289,15 +304,20 @@ public class ChatFrame extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        while(true){
+        /*while(true){
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1000000);
+                System.out.println("接错了");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             Message message = null;
             try {
-                message = MessageClientUtil.acceptInfo();
+
+                if(liupi==0){
+                    message = MessageClientUtil.acceptInfo();
+                }
+                System.out.println("我接错了");
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -306,6 +326,6 @@ public class ChatFrame extends JFrame implements Runnable {
             if(message!=null){
                 centerJTextPanel.setText(centerJTextPanel.getText()+message.getSendId()+message.getText());
             }
-        }
+        }*/
     }
 }

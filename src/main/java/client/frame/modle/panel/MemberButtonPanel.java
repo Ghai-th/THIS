@@ -16,9 +16,9 @@ public class MemberButtonPanel extends JPanel {
         this.myUser = myUser;
         init();
     }
-    public MemberButtonPanel(User myUser,User otherUser){
-        this.myUser = myUser;
-        this.otherUser = otherUser;
+    public MemberButtonPanel(String text,String imag){
+        this.text = text;
+        this.imag = imag;
     }
     public void init(){
         setLayout(new GridLayout(1,2));

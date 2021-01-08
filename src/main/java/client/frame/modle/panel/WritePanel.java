@@ -127,11 +127,11 @@ public class WritePanel extends JPanel {
 
         //中部的中面面板的设置
         ccenterJPanel = new JPanel();
-        ccenterJPanel.setLayout(new FlowLayout(0));//设置中部的中面面板为流式布局
-        fileJpanel = new MemberButtonPanel(myUser,otherUser);
-        pictureJPanel = new MemberButtonPanel(myUser,otherUser);
-        expressionJPanel = new MemberButtonPanel(myUser,otherUser);
-        mp4JPanel = new MemberButtonPanel(myUser,otherUser);
+        ccenterJPanel.setLayout(new FlowLayout(0));//设置中部的中面面板 为流式布局
+        fileJpanel = new MemberButtonPanel("图标:","表情");
+        pictureJPanel = new MemberButtonPanel("图标:","表情");
+        expressionJPanel = new MemberButtonPanel("图标:","表情");
+        mp4JPanel = new MemberButtonPanel("图标:","表情");
 
         fileJpanel.setPreferredSize(new Dimension(100,40));
         pictureJPanel.setPreferredSize(new Dimension(100,40));
