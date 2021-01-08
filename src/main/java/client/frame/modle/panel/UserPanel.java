@@ -184,6 +184,7 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
                 clear();
                 resource.setBorder(BorderFactory.createMatteBorder(0,0,3,0,new Color(255,69,0)));
                 centerc.removeAll();
+                centerc.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-50,1280));
                 centerc.add(new WritePanel(myUser));
                 centerc.updateUI();
                 repaint();
