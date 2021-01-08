@@ -196,7 +196,10 @@ public class UserPanel extends TranslucenceJPanel implements Runnable {
                 resource.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
         };
-        resource.addMouseListener(adapter2);
+        if(Index.MeUser.getUid().equals(myUser.getUid())){
+            resource.addMouseListener(adapter2);
+        }
+
         centerup.add(resource);
         topic = new JLabel("我的收藏("+cnum+")",JLabel.CENTER);
         topic.setFont(new Font("宋体",Font.PLAIN,30));
