@@ -1,7 +1,5 @@
 package client.frame.modle.panel;
 
-import client.entity.User;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -10,17 +8,7 @@ import java.awt.event.MouseListener;
 public class MemberButtonPanel extends JPanel {
     JLabel imagJLabel;
     JLabel textJLabel;
-    String text,imag;
-    User myUser,otherUser;
-    public MemberButtonPanel(User myUser){
-        this.myUser = myUser;
-        init();
-    }
-    public MemberButtonPanel(User myUser,User otherUser){
-        this.myUser = myUser;
-        this.otherUser = otherUser;
-    }
-    public void init(){
+    public MemberButtonPanel(String imag, String text){
         setLayout(new GridLayout(1,2));
         imagJLabel = new JLabel(imag);
         textJLabel = new JLabel(text);
