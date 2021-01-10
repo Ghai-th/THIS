@@ -66,14 +66,6 @@ public class MessagePanel extends JPanel {
 
         centerPanel = new JPanel();
         centerPanel.setPreferredSize(new Dimension(300,userList.size() * 70));
-
-
-
-        //// 随运行定义长度， 放入滚动面板
-
-
-
-
         this.add(centerPanel,BorderLayout.CENTER);
     }
 
