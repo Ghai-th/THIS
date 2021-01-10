@@ -109,9 +109,9 @@ public class ArticleDetailPanel extends JPanel {
         textPortPanel.setPreferredSize(new Dimension(1000, 0));
         textPortPane = new JTextPane();
         textPortPane.setText(this.article.getText());
+        textPortPane.setBackground(new Color(242,242,242));
         textPortPane.setPreferredSize(new Dimension(1000, 1887));
         textPortPane.setEditable(false);
-        textPortPane.setBackground(new Color(238, 238, 238));
         textPortPane.setFont(new Font("宋体", Font.BOLD, 22));
 
         textPortPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
