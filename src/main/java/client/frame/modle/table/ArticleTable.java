@@ -82,7 +82,7 @@ public class ArticleTable extends JTable {
             e.printStackTrace();
         }
 
-        Object[][] o = new Object[articleArrayList.size()][10];
+        Object[][] o = new Object[articleArrayList.size()][11];
         boolean flag = true;
         while(flag){
             int i = 0;

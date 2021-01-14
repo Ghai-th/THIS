@@ -144,6 +144,11 @@ public class ArticleDetailsPanel extends JPanel implements IndexConf {
         authorNameLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if(Index.MeUser == null) {
+                    super.mousePressed(e);
+                    index.removeAll();
+                    index.add(new Login(index));
+                }
                 index.removeAll();
                 index.add(new AllPanel(author, User.copyUser(Index.MeUser), index, commentList, storeList, articleList));
                 index.repaint();

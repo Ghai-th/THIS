@@ -186,31 +186,41 @@ public class TestPanel extends JPanel {
                     try {
                         ClientUtil.sendInfo(attention1,Attention.class);
                         list1 .addAll(ClientUtil.acceptList());
+                        System.out.println(123123123);
                         for (int i=0;i<list1.size();i++){
                             if (myUser.getUid().equals(list1.get(i).getUid())){
-                                panduan = true;
+                                System.out.println(8888883);
+                                attentionJbutton.setText("取消关注");
+                                userJPanel.updateUI();
+                                System.out.println("第一步");
                             }else {
-                                panduan = false;
+                                attentionJbutton.setText("关注");
+                                userJPanel.updateUI();
                             }
                         }
-                        if(panduan){
-                            attentionJbutton.setText("取消关注");
-                        }
+
                     } catch (IOException | ClassNotFoundException ee) {
                         ee.printStackTrace();
                     }
-                    if(panduan){
+                    if("取消关注".equals(attentionJbutton.getText())){
+                        System.out.println("第二步");
                         myUser.setOperate(ServerOperate.UPDATE_FAN_NUM);
                         Attention attention = new Attention();
                         attention.setFansId(otherUser.getUid());
                         attention.operate = ServerOperate.DELETE_COMMENT;
+                        System.out.println("第三步");
                         try {
+                            System.out.println("第四步");
                             ClientUtil.sendInfo(myUser,User.class);
                             myUser = ClientUtil.acceptInfo(User.class);
+                            System.out.println("第五步");
                             ClientUtil.sendInfo(attention,Attention.class);
-                            attention = ClientUtil.acceptInfo(Attention.class);
+                            System.out.println("第六步");
+                            //attention = ClientUtil.acceptInfo(Attention.class);
                             if(attention.operate!=ServerOperate.ERROR){
                                 JOptionPane.showMessageDialog(TestPanel.this,"取消成功");
+                                attentionJbutton.setText("关注");
+                                userJPanel.updateUI();
                             }
 
                         } catch (IOException | ClassNotFoundException ex) {
@@ -233,6 +243,8 @@ public class TestPanel extends JPanel {
                             //attention = ClientUtil.acceptInfo(Attention.class);
                             if(attention.operate!=ServerOperate.ERROR){
                                 JOptionPane.showMessageDialog(null,"关注成功");
+                                attentionJbutton.setText("取消关注");
+                                userJPanel.updateUI();
                             }
                         } catch (IOException | ClassNotFoundException ex) {
                             ex.printStackTrace();
@@ -252,8 +264,8 @@ public class TestPanel extends JPanel {
                     attentionMemberPanel3.setOpaque(false);//设置全透明
                     attentionMemberPanel3.setTransparent(0.1f);//设置透明度
                     userJPanel3.add(attentionMemberPanel3);
-                    updateUI();
-                    repaint();
+                    userJPanel3.updateUI();
+                    userJPanel3.repaint();
 
                 }
 

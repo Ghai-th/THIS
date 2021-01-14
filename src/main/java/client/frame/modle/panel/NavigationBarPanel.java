@@ -22,7 +22,7 @@ import java.util.List;
 
 public class NavigationBarPanel extends JPanel implements IndexConf {
 
-    public final String[] personAction = new String[]{"收藏", "消息", "发表文章"};
+//    public final String[] personAction = new String[]{"收藏", "消息", "发表文章"};
     public JTextField searchTextField;
     public JLabel searchLabel;
     public JLabel headImage;
@@ -58,6 +58,9 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 10));
 
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(WIDE * 1 / 50, HIGH / 35));
+
         final JLabel iconLabel = new JLabel();
         iconLabel.setText("图片THIS");
         iconLabel.addMouseListener(new MouseAdapter() {
@@ -70,11 +73,14 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
             }
         });
         this.add(iconLabel);
+        this.add(panel);
 
         ClassLabel classLabel;
         for (String string : Index.classification) {
             classLabel = new ClassLabel(index);
             classLabel.setText(string);
+            classLabel.setHorizontalAlignment(JLabel.CENTER);
+            classLabel.setPreferredSize(new Dimension(WIDE * 1 / 18, HIGH / 35));
             this.add(classLabel);
         }
 
@@ -129,6 +135,10 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         searchPanel.add(searchLabel);
         this.add(searchPanel);
 
+//        JPanel pane = new JPanel();
+//        pane.setPreferredSize(new Dimension(WIDE * 5 / 32, HIGH / 35));
+//        this.add(pane);
+
         headImage = new JLabel("登录");
         headImage.setFont(new Font("黑体",Font.PLAIN,19));
         if (Index.MeUser != null) {
@@ -156,9 +166,6 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
                     java.util.List<Comment> commentList = null;
                     try {
                         commentList= (List) ClientUtil.acceptList();
-                        if (commentList.size() == 0) {
-                            commentList = null;
-                        }
                     } catch (IOException | ClassNotFoundException ex) {
                         ex.printStackTrace();
                     }
@@ -207,11 +214,11 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         headImage.setBorder(BorderFactory.createEmptyBorder(0, 60, 0, 20));
         this.add(headImage);
 
-        for (String string : personAction) {
-            classLabel = new ClassLabel(index);
-            classLabel.setText(string);
-            this.add(classLabel);
-        }
+//        for (String string : personAction) {
+//            classLabel = new ClassLabel(index);
+//            classLabel.setText(string);
+//            this.add(classLabel);
+//        }
     }
 
     public void showMessage(String str) {
