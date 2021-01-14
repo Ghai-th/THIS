@@ -62,7 +62,7 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
         panel.setPreferredSize(new Dimension(WIDE * 1 / 50, HIGH / 35));
 
         final JLabel iconLabel = new JLabel();
-        iconLabel.setText("图片THIS");
+        iconLabel.setIcon(new ImageIcon("src/main/resources/logo.png"));
         iconLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
