@@ -74,7 +74,8 @@ public class CommentOperate {
             e.printStackTrace();
         }
         int num = commentService.selectAllCommentNum();
-        com.setCid(String.valueOf(num + 10000));
+        System.out.println("num" + num);
+        com.setCid(String.valueOf(num + 10033));
         commentService.addComment(com);
     }
 
