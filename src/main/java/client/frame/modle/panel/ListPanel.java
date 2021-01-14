@@ -5,9 +5,10 @@ import java.awt.*;
 
 public class ListPanel extends JPanel {
     JLabel imagJLabel,nameJLabel;
-    String id;
-    public ListPanel(String id){
+    String id,name;
+    public ListPanel(String id,String name){
         this.id = id;
+        this.name = name;
         setPreferredSize(new Dimension(1920/6,100));
         this.setLayout(null);
         setBackground(new Color(61,61,61));
@@ -16,7 +17,7 @@ public class ListPanel extends JPanel {
     }
 
     public void init(){
-        imagJLabel = new JLabel("头像");
+        imagJLabel = new JLabel(name);
         nameJLabel = new JLabel(id);
 
         imagJLabel.setFont(new Font("宋体",Font.PLAIN,20));
@@ -28,8 +29,8 @@ public class ListPanel extends JPanel {
         /*imagJLabel.setBackground(new Color(61,61,61));
         nameJLabel.setBackground(new Color(61,61,61));*/
 
-        imagJLabel.setBounds(0,30,50,30);
-        nameJLabel.setBounds(120,0,80,30);
+        imagJLabel.setBounds(0,30,150,30);
+        nameJLabel.setBounds(120,0,150,30);
 
         add(imagJLabel);
         add(nameJLabel);

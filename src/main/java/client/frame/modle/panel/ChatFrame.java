@@ -2,6 +2,7 @@ package client.frame.modle.panel;
 
 import client.entity.Message;
 import client.entity.User;
+import client.util.ClientUtil;
 import client.util.MessageClientUtil;
 import server.controller.ServerOperate;
 
@@ -97,9 +98,9 @@ public class ChatFrame extends JFrame implements Runnable {
         f.setVgap(0);//组件垂直间距
         leftJPanel.setLayout(f);
 
-        ListPanel listPanel = new ListPanel(sendUser.getUid());
+        ListPanel listPanel = new ListPanel(sendUser.getUid(),sendUser.getName());
         leftJPanel.add(listPanel);
-        final ListPanel listPanel1 = new ListPanel(acceptUser.getUid());
+        final ListPanel listPanel1 = new ListPanel(acceptUser.getUid(),acceptUser.getName());
 
         listPanel1.addMouseListener(new MouseListener() {
             @Override
@@ -145,7 +146,17 @@ public class ChatFrame extends JFrame implements Runnable {
             Iterator iterator = userMap.entrySet().iterator();
             while(iterator.hasNext()){
                 final Map.Entry<String,String> entry = (Map.Entry<String, String>) iterator.next();
-                final ListPanel listPanel2 = new ListPanel(entry.getKey());
+                User user = new User();
+                user.setUid(entry.getKey());
+                user.setOperate(ServerOperate.SELECT_USER);
+                try {
+                    ClientUtil.sendInfo(user,User.class);
+                    user = ClientUtil.acceptInfo(User.class);
+                    System.out.println("得到的user为"+user);
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                final ListPanel listPanel2 = new ListPanel(entry.getKey(),user.getName());
                 if(listPanel2.nameJLabel.getText().equals(acceptUser.getUid())){
 
                 }else {
