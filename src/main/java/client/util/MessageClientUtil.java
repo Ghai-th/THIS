@@ -52,10 +52,22 @@ public class MessageClientUtil {
         return (Message) objectInputStream.readObject();
     }
 
+    /**
+     * 接收服务端发送的hashmap类型的对象
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static HashMap accept() throws IOException, ClassNotFoundException {
         return (HashMap) objectInputStream.readObject();
     }
 
+    /**
+     * 接收服务器端发送的list类型的对象
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static List acceptList2 () throws IOException, ClassNotFoundException {
         return (List)objectInputStream.readObject();
     }
