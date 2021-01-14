@@ -117,7 +117,9 @@ public class MessageDaoImpl implements IMessageDao {
         statement = connection.createStatement();
         String acceptId = message.getAcceptId();
         String sendId = message.getSendId();
-        String sql = "select * from message where acceptid='"+acceptId+"' and sendid='"+sendId+"'";
+        String sql = "select * from message where (acceptid='"+acceptId+"' and sendid='"+sendId+"') or (acceptid='"+sendId+"' and sendid='"+acceptId+"')";
+        System.out.println("输出的sql语句为");
+        System.out.println(sql);
         messageList = DBUtil.executeGetMoreData(statement,sql,Message.class);
         updateMessageState(message,"0",0);
         statement.close();

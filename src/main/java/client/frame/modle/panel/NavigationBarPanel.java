@@ -22,7 +22,7 @@ import java.util.List;
 
 public class NavigationBarPanel extends JPanel implements IndexConf {
 
-//    public final String[] personAction = new String[]{"收藏", "消息", "发表文章"};
+
     public JTextField searchTextField;
     public JLabel searchLabel;
     public JLabel headImage;
@@ -56,13 +56,13 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
     public void init() {
         this.setPreferredSize(new Dimension(WIDE, HIGH * 53 / 1050));
         this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
-        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 10));
+        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 5));
 
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(WIDE * 1 / 50, HIGH / 35));
 
         final JLabel iconLabel = new JLabel();
-        iconLabel.setText("图片THIS");
+        iconLabel.setIcon(new ImageIcon("src/main/resources/logo.png"));
         iconLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -80,13 +80,13 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
             classLabel = new ClassLabel(index);
             classLabel.setText(string);
             classLabel.setHorizontalAlignment(JLabel.CENTER);
-            classLabel.setPreferredSize(new Dimension(WIDE * 1 / 18, HIGH / 35));
+            classLabel.setPreferredSize(new Dimension(WIDE * 1 / 19, HIGH / 35));
             this.add(classLabel);
         }
 
         JPanel searchPanel;
         searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        searchPanel.setPreferredSize(new Dimension(WIDE * 5 / 16, HIGH / 35));
+        searchPanel.setPreferredSize(new Dimension(WIDE * 5 / 18, HIGH / 35));
         searchTextField = new JTextField();
         searchTextField.setPreferredSize(new Dimension(WIDE * 5 / 32, HIGH / 35));
         searchPanel.add(searchTextField);
@@ -140,6 +140,10 @@ public class NavigationBarPanel extends JPanel implements IndexConf {
 //        this.add(pane);
 
         headImage = new JLabel("登录");
+
+        if (Index.MeUser != null) {
+            headImage.setText(Index.MeUser.getName());
+        }
         headImage.setFont(new Font("黑体",Font.PLAIN,19));
         if (Index.MeUser != null) {
             //// 头像改为用户的头像

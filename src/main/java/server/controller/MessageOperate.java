@@ -42,9 +42,11 @@ public class MessageOperate {
                 sendMessage();break;
 
             case ServerOperate.ACCEPT_MAP_MESSAGE:
+                System.out.println("客户端接收到拉去用户哈希的指令");
                 acceptMapMessage();break;
 
             case  ServerOperate.ACCEPT_LIST_MESSAGE:
+                //System.out.println("服务器开始寻找历史记录");
                 acceptMessage();break;
         }
     }
@@ -101,7 +103,9 @@ public class MessageOperate {
             n = 0;
             //调用entry里的socket向客户端发送消息
             try {
-                entry.getValue().sendMessage(message);
+                List<Message> messageList = new ArrayList<Message>();
+                messageList.add(message);
+                entry.getValue().sendMessageList(messageList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -116,6 +120,7 @@ public class MessageOperate {
      */
     public void acceptMessage() throws SQLException {
         List<Message> messageList = iMessageService.selectMessage(message);
+        System.out.println("已经拿到历史记录");
         if(messageList==null){
             messageList = new ArrayList<Message>();
         }
@@ -148,6 +153,14 @@ public class MessageOperate {
         User user = new User();
         user.setUid(message.getSendId());
         UserSocketGather.deleteUserServerUtilMap(user);
+        System.out.println("用户已下线");
+        System.out.println("目前上线集合中的元素有:");
+        Iterator iterator = UserSocketGather.userMessageServerUtilMap.entrySet().iterator();
+        while(iterator.hasNext()){
+            Map.Entry<User,MessageServerUtil> entry = (Map.Entry<User, MessageServerUtil>) iterator.next();
+            System.out.println(entry.getKey());
+        }
+        System.out.println("到此结束");
     }
 
 }
