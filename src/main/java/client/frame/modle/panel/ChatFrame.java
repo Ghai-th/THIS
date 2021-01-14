@@ -86,6 +86,10 @@ public class ChatFrame extends JFrame implements Runnable {
         setBackground(Color.white);
         setVisible(true);
     }
+
+    /**
+     * 对聊天窗体的左边进行初始化
+     */
     public void init1(){
         leftJPanel = new JPanel();
         FlowLayout f=new FlowLayout(0);
@@ -191,6 +195,10 @@ public class ChatFrame extends JFrame implements Runnable {
         leftJPanel.setBackground(new Color(61,61,61));
         allJpanel.add(leftJPanel);
     }
+
+    /**
+     * 对聊天窗体的北边进行初始化
+     */
     public void init2(){
         upJPanel = new JPanel();
         ImageIcon Imageone = new ImageIcon("src/main/resources/关闭.png");
@@ -242,6 +250,10 @@ public class ChatFrame extends JFrame implements Runnable {
         upJPanel.setBorder(BorderFactory.createMatteBorder(0,0,1,0,Color.red));
         add(upJPanel);
     }
+
+    /**
+     * 对聊天窗体的右面的中间进行布局
+     */
     public void init3(){
         centerJTextPanel = new JTextPane();
         centerJTextPanel.setEditable(false);
@@ -253,6 +265,10 @@ public class ChatFrame extends JFrame implements Runnable {
         jScrollPane.setBounds(320,72,832,534);
         allJpanel.add(jScrollPane);
     }
+
+    /**
+     * 对聊天窗体的右面的南边进行初始化
+     */
     public void init4(){
         downJTextPanel = new JTextPane();
         downJTextPanel.setBackground(Color.white);
@@ -260,6 +276,10 @@ public class ChatFrame extends JFrame implements Runnable {
         downJTextPanel.setFont(new Font("宋体",Font.PLAIN,16));
         allJpanel.add(downJTextPanel);
     }
+
+    /**
+     * 对聊天窗体的右面的南面的背面进行初始化
+     */
     public void init5(){
         downupJPanel = new JPanel();
         JLabel jLabel = new JLabel("表情");
