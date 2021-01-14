@@ -102,9 +102,9 @@ public class TestPanel extends JPanel {
                 message.setSendId(otherUser.getUid());
                 message.setOperate(ServerOperate.ONLINE_MESSAGE);
                 try {
-                    System.out.println("第一次连接");
+                    System.out.println("第一次上线");
                     MessageClientUtil.sendInfo(message);
-                    System.out.println("第一次连接成功");
+                    System.out.println("第一次上线成功");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -113,7 +113,9 @@ public class TestPanel extends JPanel {
                 message1.setOperate(ServerOperate.ACCEPT_MAP_MESSAGE);
                 try {
                     MessageClientUtil.sendInfo(message1);
+                    System.out.println("已发送获取用户哈希表的请求");
                     HashMap<String,String> userMap = MessageClientUtil.accept();
+                    System.out.println("认错地了");
                     Thread thread = new Thread(new ChatFrame(otherUser,myUser,userMap));
                     thread.start();
                 } catch (IOException | ClassNotFoundException ex) {

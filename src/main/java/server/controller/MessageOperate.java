@@ -42,10 +42,11 @@ public class MessageOperate {
                 sendMessage();break;
 
             case ServerOperate.ACCEPT_MAP_MESSAGE:
+                System.out.println("客户端接收到拉去用户哈希的指令");
                 acceptMapMessage();break;
 
             case  ServerOperate.ACCEPT_LIST_MESSAGE:
-                System.out.println("服务器开始寻找历史记录");
+                //System.out.println("服务器开始寻找历史记录");
                 acceptMessage();break;
         }
     }
@@ -102,7 +103,9 @@ public class MessageOperate {
             n = 0;
             //调用entry里的socket向客户端发送消息
             try {
-                entry.getValue().sendMessage(message);
+                List<Message> messageList = new ArrayList<Message>();
+                messageList.add(message);
+                entry.getValue().sendMessageList(messageList);
             } catch (IOException e) {
                 e.printStackTrace();
             }

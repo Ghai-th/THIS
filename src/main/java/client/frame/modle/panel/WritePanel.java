@@ -95,7 +95,7 @@ public class WritePanel extends JPanel {
         //中部的北面面板的设置
         cnorthPanel = new JPanel();
         cnorthPanel.setLayout(new FlowLayout(0));
-        //cnorthPanel.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-60,100));
+        //cnorthPanel.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-60,1000));
         final JTextArea summaryJtextArea = new JTextArea();
         summaryJtextArea.setFont(new Font("宋体",Font.PLAIN,20));
         summaryJtextArea.setLineWrap(true);//设置为自动换行
@@ -139,12 +139,14 @@ public class WritePanel extends JPanel {
         expressionJPanel.setPreferredSize(new Dimension(100,40));
         mp4JPanel.setPreferredSize(new Dimension(100,40));
 
+        //ccenterJPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        ccenterJPanel.setPreferredSize(new Dimension(GetWH.getWidth()*3/5-60,45));
         ccenterJPanel.add(fileJpanel);
         ccenterJPanel.add(pictureJPanel);
         ccenterJPanel.add(expressionJPanel);
         ccenterJPanel.add(mp4JPanel);
 
-        ccenterJPanel.setPreferredSize(new Dimension(GetWH.getWidth()*3/5,45));
         centerJPanel.add(ccenterJPanel,BorderLayout.CENTER);
         centerJPanel.add(cnorthPanel,BorderLayout.NORTH);
 

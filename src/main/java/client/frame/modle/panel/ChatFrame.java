@@ -22,7 +22,9 @@ public class ChatFrame extends JFrame implements Runnable {
     JPanel allJpanel;
     JPanel leftJPanel,upJPanel,downupJPanel;
     JTextPane centerJTextPanel,downJTextPanel;
+    JScrollPane jScrollPane;
     JButton sendJButton;
+    public volatile boolean exit = false;
     public static int liupi = 0;
 
     public ChatFrame(final User sendUser, final User acceptUser, HashMap<String,String> userMap){
@@ -98,32 +100,16 @@ public class ChatFrame extends JFrame implements Runnable {
         listPanel1.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                liupi = 1;
                 listPanel1.setBackground(Color.black);
                 acceptUser.setUid(listPanel1.nameJLabel.getText());
                 centerJTextPanel.setText("");
-
                 try {
                     Message message = new Message();
                     message.setOperate(ServerOperate.ACCEPT_LIST_MESSAGE);
                     message.setSendId(acceptUser.getUid());
                     message.setAcceptId(sendUser.getUid());
                     MessageClientUtil.sendInfo(message);
-                    List messageList = MessageClientUtil.acceptList2();
-                    liupi = 0;
-                    if(message!=null){
-                        System.out.println(messageList);
-                        Iterator<Message> iterator = messageList.iterator();
-                        while(iterator.hasNext()){
-                            Message message2 = iterator.next();
-                            centerJTextPanel.setText(centerJTextPanel.getText()+acceptUser.getName()+":"+message2.getText()+"\n");
-                            centerJTextPanel.repaint();
-                            centerJTextPanel.updateUI();
-                        }
-                    }
                 } catch (IOException a) {
-                    a.printStackTrace();
-                } catch (ClassNotFoundException a) {
                     a.printStackTrace();
                 }
             }
@@ -164,10 +150,9 @@ public class ChatFrame extends JFrame implements Runnable {
                 listPanel2.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        liupi = 1;
                         listPanel2.setBackground(Color.black);
                         acceptUser.setUid(entry.getKey());
-                        centerJTextPanel.setText("");
+                        centerJTextPanel.setText("\n");
 
                         try {
                             Message message = new Message();
@@ -175,27 +160,9 @@ public class ChatFrame extends JFrame implements Runnable {
                             message.setSendId(acceptUser.getUid());
                             message.setAcceptId(sendUser.getUid());
                             MessageClientUtil.sendInfo(message);
-                            System.out.println("得到消息前");
-                            List<Message> messageList = MessageClientUtil.acceptList2();
-                            System.out.println("拿到"+messageList);
-                            liupi = 0;
-                            if(messageList!=null){
-                                System.out.println(messageList);
-                                Iterator<Message> iterator = messageList.iterator();
-                                while(iterator.hasNext()){
-                                    Message message2 = iterator.next();
-                                    centerJTextPanel.setText(centerJTextPanel.getText()+acceptUser.getName()+":"+message2.getText()+"\n");
-                                    System.out.println("已经放到了center中");
-                                    centerJTextPanel.repaint();
-                                    centerJTextPanel.updateUI();
-                                }
-                            }
                         } catch (IOException a) {
                             a.printStackTrace();
-                        } catch (ClassNotFoundException a) {
-                            a.printStackTrace();
                         }
-
                     }
 
                     @Override
@@ -241,6 +208,7 @@ public class ChatFrame extends JFrame implements Runnable {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+                exit = true;
                 dispose();
             }
 
@@ -281,7 +249,9 @@ public class ChatFrame extends JFrame implements Runnable {
         centerJTextPanel.setBackground(Color.white);
         centerJTextPanel.setBorder(BorderFactory.createMatteBorder(0,0,1,0,Color.LIGHT_GRAY));
         centerJTextPanel.setFont(new Font("宋体",Font.PLAIN,16));
-        allJpanel.add(centerJTextPanel);
+        jScrollPane = new JScrollPane(centerJTextPanel);
+        jScrollPane.setBounds(320,72,832,534);
+        allJpanel.add(jScrollPane);
     }
     public void init4(){
         downJTextPanel = new JTextPane();
@@ -306,28 +276,32 @@ public class ChatFrame extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        /*while(true){
-            try {
-                Thread.sleep(1000000);
-                System.out.println("接错了");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Message message = null;
-            try {
-
-                if(liupi==0){
-                    message = MessageClientUtil.acceptInfo();
-                }
-                System.out.println("我接错了");
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            if(message!=null){
-                centerJTextPanel.setText(centerJTextPanel.getText()+message.getSendId()+message.getText());
-            }
-        }*/
+       while(!exit){
+           try {
+               System.out.println("拿到结果之前");
+               List<Message> messageList = MessageClientUtil.acceptList2();
+               System.out.println("拿到结果之后");
+               if(messageList!=null){
+                   System.out.println(messageList);
+                   Iterator<Message> iterator = messageList.iterator();
+                   while(iterator.hasNext()){
+                       Message message2 = iterator.next();
+                       //centerJTextPanel.setText(centerJTextPanel.get);
+                       if(message2.getSendId().equals(sendUser.getUid())){
+                           centerJTextPanel.setText(centerJTextPanel.getText()+"              "+message2.getTime()+"\n"+"我："+":"+message2.getText()+"\n\n");
+                       }else {
+                           centerJTextPanel.setText(centerJTextPanel.getText()+"              "+message2.getTime()+"\n"+acceptUser.getName()+":"+message2.getText()+"\n\n");
+                       }
+                       centerJTextPanel.repaint();
+                       centerJTextPanel.updateUI();
+                   }
+                   System.out.println("已经到最后了");
+               }
+           } catch (IOException a) {
+               a.printStackTrace();
+           } catch (ClassNotFoundException a) {
+               a.printStackTrace();
+           }
+       }
     }
 }
