@@ -214,7 +214,7 @@ public class Index extends JPanel implements IndexConf {
 
     public static void startApplication() {
         new MessageClientUtil();
-        JFrame jFrame = new JFrame("test");
+        JFrame jFrame = new JFrame("THIS");
         jFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Index index = new Index();
         jFrame.add(index);

@@ -31,7 +31,6 @@ public class ArticleOperate {
      * 执行对应操作
      */
     public void selectOperate() {
-        System.out.println(article.operate);
         switch (article.operate) {
             case ServerOperate.ADD_ARTICLE:
                 addArticle();
