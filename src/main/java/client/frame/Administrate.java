@@ -3,6 +3,7 @@ package client.frame;
 import client.conf.IndexConf;
 import client.entity.Article;
 import client.entity.Comment;
+import client.entity.Report;
 import client.entity.User;
 import client.frame.modle.panel.ArticleDetailPanel;
 import client.frame.modle.table.ArticleTable;
@@ -39,6 +40,7 @@ public class Administrate extends JPanel implements IndexConf {
     public JPanel articleDetailPanel;
     public JPanel aJPanel;
     public Article article;
+    public Report report;
     public User user;
     public Comment comment ;
     int row = -1;
@@ -233,10 +235,14 @@ public class Administrate extends JPanel implements IndexConf {
             public void mouseClicked(MouseEvent e){
                 if(row!=-1){
                     article = new Article();
+                    report = new Report();
                     article.setAid((String)table.getValueAt(row, 1));
+                    report.setAid((String)table.getValueAt(row, 1));
                     article.operate = ServerOperate.DELETE_ARTICLE;
+                    report.operate = ServerOperate.DELETE_REPORT_ARTICLE_BY_AID;
                     try {
                         ClientUtil.sendInfo(article,Article.class);
+                        ClientUtil.sendInfo(report,Report.class);
                         if (article.operate!=ServerOperate.ERROR){
                             JOptionPane.showMessageDialog(Administrate.this,"文章删除成功");
                             changeListener1();
