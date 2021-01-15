@@ -67,7 +67,8 @@ public class UserTable extends JTable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Object[][] o = new Object[userList.size()][12];
+        int count = userList.size() * 10;
+        Object[][] o = new Object[count][12];
         int n = 0;
         for(User userTop : userList) {
             if(userTop.getPassword().equals("admin")){
